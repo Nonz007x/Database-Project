@@ -15,9 +15,37 @@
     padding: 0 20px;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
-img{
+#logo{
     height: 53px;
 }
-
+.left{
+    width: 33.33%;
+}
+.middle{
+    width: 33.33%;
+    display: flex;
+    justify-content: center;
+}
+.right{
+    width: 33.33%;
+    display: flex;
+    justify-content: end;
+}
+.search{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.search input{
+    height: 32px;
+}
+.search #img{
+    position: absolute;
+}
 
