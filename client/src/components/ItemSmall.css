@@ -6,3 +6,6 @@
     height: 230px;
     aspect-ratio: 9/16;
 }
+.bg .Bottom button{
+    background-color: green;
+}

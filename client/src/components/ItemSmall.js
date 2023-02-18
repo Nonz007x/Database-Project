@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import "./ItemSmall.css"
 
 function ItemSmall(props){
@@ -10,7 +11,7 @@ function ItemSmall(props){
             </div>
             <div className="Bottom">
                 <h4>{title}</h4>
-                <h6>{price}</h6>
+                <Button variant="contained" size="small"><h6>{price}</h6></Button>
             </div>
         </div>
         
