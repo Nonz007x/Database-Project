@@ -11,7 +11,7 @@ function Navbar(){
                 <Button  variant="contained" size="small">ล็อคอินเข้าระบบ/สมัครสมาชิก</Button>
             </div>
             <div>
-                <img src={picUrl} />
+                <img id="logo" src={picUrl} />
             </div>
             <div>
                 <div className="right">

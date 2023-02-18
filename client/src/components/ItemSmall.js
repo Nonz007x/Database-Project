@@ -3,6 +3,7 @@ import "./ItemSmall.css"
 function ItemSmall(props){
     const { title,src,price} = props;
     return(
+        
         <div className="bg">
             <div className="Top">
                 <img src={src}/>
@@ -12,6 +13,7 @@ function ItemSmall(props){
                 <h6>{price}</h6>
             </div>
         </div>
+        
     );
 }
 export default ItemSmall;
