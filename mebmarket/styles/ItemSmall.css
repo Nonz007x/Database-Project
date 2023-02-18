@@ -1,11 +1,11 @@
 .bg {
-  background-color: contain;
-  width: 6;
+  background-color: red;
+  width:fit-content;
 }
 
 .Top img {
   height: 230px;
-  aspect-ratio: 9/16;
+  aspect-ratio: 1/1.414;
 
   object-fit: cover;
   background-position: center;
