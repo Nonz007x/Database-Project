@@ -1,14 +1,16 @@
-.bg{
-    background-color: contain;
-    width: 6;
+.bg {
+  background-color: contain;
+  width: 6;
 }
-.Top img{
-    height: 230px;
-    aspect-ratio: 9/16;
 
-    object-fit: cover;
-    background-position: center;
+.Top img {
+  height: 230px;
+  aspect-ratio: 9/16;
+
+  object-fit: cover;
+  background-position: center;
 }
-.bg .Bottom button{
-    background-color: green;
+
+.bg .Bottom button {
+  background-color: green;
 }
