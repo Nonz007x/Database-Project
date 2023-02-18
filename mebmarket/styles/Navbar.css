@@ -1,0 +1,51 @@
+:root {
+    --main-bg-color: linear-gradient(to bottom, #00af70, #37c13d);
+    --main-color: #00bf6c;
+    --font-color-menu: #5a5a5a;
+    --font-color: #1d6548;
+    --font-color-gray: #5a5a5a;
+    --link-color: #00bf6c;
+}
+
+.BG{
+    height: 58px;
+    width: 100%;
+    background: var(--main-bg-color);
+    box-sizing: border-box;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#logo{
+    height: 53px;
+}
+.left{
+    width: 33.33%;
+}
+.middle{
+    width: 33.33%;
+    display: flex;
+    justify-content: center;
+}
+.right{
+    width: 33.33%;
+    display: flex;
+    justify-content: end;
+}
+.search{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.search input{
+    height: 32px;
+}
+.search #img{
+    position: absolute;
+}
+
