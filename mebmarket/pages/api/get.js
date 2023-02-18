@@ -1,8 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import excuteQuery from '@/shared/database';
 
-export default function handler(req, res) {
-    const sqlSelect = 'SELECT * FROM movie_table'
-    db.query(sqlSelect, (err, result) => {
-        res.send(result)
-    })
+export default async function handler(req, res) {
+    const sqlSelect = await excuteQuery({ query: 'SELECT * FROM movie_table;' });
+    res.send(sqlSelect);
 }
