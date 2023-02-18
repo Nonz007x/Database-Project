@@ -35,6 +35,6 @@ app.post("/api/insert",(req,res)=>{
     })
 })
 
-app.listen(9753,()=>{
+app.listen(3001,()=>{
     console.log("running on port http://localhost:9753")
 })
