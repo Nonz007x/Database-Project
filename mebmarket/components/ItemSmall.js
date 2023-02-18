@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import "./ItemSmall.css"
+
 
 function ItemSmall(props){
     const { title,src,price} = props;
