@@ -5,6 +5,9 @@
 .Top img{
     height: 230px;
     aspect-ratio: 9/16;
+
+    object-fit: cover;
+    background-position: center;
 }
 .bg .Bottom button{
     background-color: green;
