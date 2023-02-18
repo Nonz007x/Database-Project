@@ -31,7 +31,7 @@
 .right{
     width: 33.33%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .search{
     display: flex;
