@@ -7,7 +7,7 @@ function Navbar(){
     const [Search,setSearch]= useState("");
     return(
         <div className="BG">
-            <div>
+            <div id="left">
                 <Button  variant="contained" size="small">ล็อคอินเข้าระบบ/สมัครสมาชิก</Button>
             </div>
             <div>
