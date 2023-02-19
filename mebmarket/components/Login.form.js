@@ -11,7 +11,7 @@ function LoginPage(){
                     <div className={style.loginForm}>
                         <h2>Login</h2>
                         <form>
-                            <input type="text" className={style.loginForm_input} placeholder=""></input>
+                            <input type="text" className={style.loginForm_input} placeholder=""></input><br></br>
                             <input type="password" className={style.loginForm_input} placeholder=""></input>
                             <Button type='submit' className={style.loginForm_button}>Login</Button>
                         </form>
