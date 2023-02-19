@@ -5,7 +5,7 @@ function LoginPage(){
     const [isLoginFormVisible,setIsLoginFormVisible]=useState(false);
     return(
         <div>
-            <Button  variant="contained" size="small" onClick={() => setIsLoginFormVisible(true)}>ล็อคอิน/สมัครสมาชิก</Button>
+            <Button variant="contained" size="small" onClick={() => setIsLoginFormVisible(true)}>ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก</Button>
             {isLoginFormVisible && (
                 <div className={style.overlay}>
                     <div className={style.loginForm}>
