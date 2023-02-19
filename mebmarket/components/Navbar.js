@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
 import LoginPage from "./Login.form";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -20,10 +19,10 @@ function Navbar() {
             </div>
                 <div id="right">
                     <FavoriteIcon/>
-                    <ShoppingCartIcon/>
+                    <ShoppingCartIcon id="addShoppingCartIconMargin"/>
                     <form>
                         <SearchIcon id="SearchIcon"/>
-                        <input id="SearchBar"  value={Search} onChange={e => { setSearch(e.target.value) }} />
+                        <input id="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value) }} />
                     </form>
                 </div>
             </div>

@@ -1,0 +1,24 @@
+#GotoMiddleOfTheScreen{
+    z-index: 11;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto auto;
+    width: 30vw;
+    background-color: white;
+    height: 80vh;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
+}
+#TransparentBg{
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}

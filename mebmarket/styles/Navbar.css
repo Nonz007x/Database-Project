@@ -18,7 +18,7 @@
 }
 
 #logo {
-  height: 30px;
+  height: 24px;
 }
 #left{
     display: flex;
@@ -41,14 +41,26 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
+
 
 }
 #right #SearchBar{
   height: 32px;
   padding-left: 36px;
   border: none;
+  border-radius: 5px;
+  width: 238px;
+  font-size: 16px;
+}
+#SearchBar:focus{
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
 }
 #right  #SearchIcon{
   position: absolute;
   height: 32px;
+}
+#addShoppingCartIconMargin{
+  margin: 0 1em;
 }
