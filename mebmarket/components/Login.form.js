@@ -1,11 +1,11 @@
 import style from '../styles/loginForm.module.css';
 import Button from "@mui/material/Button";
-
+import { useState } from 'react';
 function LoginPage(){
     const [isLoginFormVisible,setIsLoginFormVisible]=useState(false);
     return(
         <div>
-            <Button onClick={() => setIsLoginFormVisible(true)}>Login</Button>
+            <Button  variant="contained" size="small" onClick={() => setIsLoginFormVisible(true)}>ล็อคอิน/สมัครสมาชิก</Button>
             {isLoginFormVisible && (
                 <div className={style.overlay}>
                     <div className={style.loginForm}>

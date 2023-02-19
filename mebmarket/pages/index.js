@@ -1,8 +1,7 @@
 import Head from 'next/head'
-
 import Navbar from '@/components/Navbar'
 import ItemSmall from '@/components/ItemSmall'
-
+import LoginPage from '@/components/Login.form'
 import styles from '@/styles/Home.module.css'
 
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <div className="App">
         <Navbar />
         <ItemSmall title="Bocchi" price="123" src="https://pbs.twimg.com/media/E9Tnm67VgAgqUS4?format=jpg&name=4096x4096" />
