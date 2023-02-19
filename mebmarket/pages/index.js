@@ -3,6 +3,8 @@ import Navbar from '@/components/Navbar'
 import ItemSmall from '@/components/ItemSmall'
 import LoginPage from '@/components/Login.form'
 import styles from '@/styles/Home.module.css'
+import '@fontsource/roboto/400.css';
+
 
 export default function Home() {
   return (

@@ -18,7 +18,7 @@
 }
 
 #logo {
-  height: 53px;
+  height: 30px;
 }
 #left{
     display: flex;
@@ -26,10 +26,27 @@
 }
 #midle{
   width: 33.33%;
+  position:   relative;
   display: flex;
   justify-content: center;
 }
 #right{
   width: 33.33%;
-  background-color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+#right form{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+}
+#right #SearchBar{
+  height: 32px;
+  padding-left: 36px;
+}
+#right  #SearchIcon{
+  position: absolute;
+  height: 32px;
 }
