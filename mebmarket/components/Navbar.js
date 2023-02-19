@@ -7,18 +7,16 @@ function Navbar() {
     const [Search, setSearch] = useState("");
     return (
         <div className="BG">
-            <div>
+            <div id="left">
                 <LoginPage/>
             </div>
-            <div>
+            <div id="midle">
                 <img id="logo" src={picUrl} />
             </div>
-            <div>
-                <div className="right">
+                <div id="right">
                     <input value={Search} onChange={e => { setSearch(e.target.value) }} />
                 </div>
             </div>
-        </div>
 
     );
 }
