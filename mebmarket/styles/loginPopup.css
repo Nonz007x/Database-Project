@@ -1,16 +1,43 @@
 #GotoMiddleOfTheScreen{
     z-index: 11;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto auto;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    /* margin: auto auto; */
     width: 30vw;
     background-color: white;
     height: 80vh;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
+    display: flex;
+}
+#CloseLogin{
+    margin-top: 2%;
+}
+#HeaderLoginZone{
+    /* right:50%;
+    transform: translateX(50%); */
+    display: flex;
+    /* align-items:center; */
+    justify-content: center;
+    height: fit-content;
+}
+
+#loginBar{
+    height: 10%;
+    left:50%;
+    transform: translateX(-50%);
+    margin-top: 20%;
+    margin-bottom: 10px;
+}
+#UsernameZone{
+    right:50%;
+    transform:translateX(50%);
+}
+#setPasswordElementPosition{
+    right: 50%;
+    transform: translateX(50%);
 }
 #TransparentBg{
     z-index: 10;
