@@ -4,7 +4,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import UnderLine from "./UnderLine";
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
@@ -33,7 +32,6 @@ function LoginPage() {
               <CloseIcon  onClick={handleClick} />    
             </div>
               <h2 id="HeadLogin">Login</h2>
-              <UnderLine/>
           <div id="loginBar">
             <div id="UsernameZone">
             <TextField className="TextField"

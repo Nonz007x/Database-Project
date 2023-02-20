@@ -67,3 +67,6 @@
 .NavbarButton{
   background-color: rgba(0, 0, 0, .12);
 }
+.NavbarButton:hover{
+  background-color: rgba(0, 0, 0, .45)
+}
