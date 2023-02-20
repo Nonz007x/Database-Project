@@ -34,7 +34,7 @@
   width: 33.33%;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   align-content: center;
 }
 #right form{
@@ -63,4 +63,7 @@
 }
 #addShoppingCartIconMargin{
   margin: 0 1em;
+}
+.NavbarButton{
+  background-color: rgba(0, 0, 0, .12);
 }

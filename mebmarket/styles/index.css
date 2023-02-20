@@ -1,0 +1,11 @@
+.CenterChild{
+    display: flex;
+    justify-content: center;
+}
+.ItemsBox{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

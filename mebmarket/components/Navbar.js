@@ -3,6 +3,7 @@ import LoginPage from "./Login.form";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Button } from "@mui/material";
 
 function Navbar() {
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
@@ -18,8 +19,13 @@ function Navbar() {
                 </a>
             </div>
                 <div id="right">
-                    <FavoriteIcon/>
-                    <ShoppingCartIcon id="addShoppingCartIconMargin"/>
+                    <Button variant="contained" className="NavbarButton">
+                        <FavoriteIcon/>
+                    </Button>
+
+                    <Button variant="contained" className="NavbarButton" id="addShoppingCartIconMargin">
+                        <ShoppingCartIcon />
+                    </Button>
                     <form>
                         <SearchIcon id="SearchIcon"/>
                         <input id="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value) }} />

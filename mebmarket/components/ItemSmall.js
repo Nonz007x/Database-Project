@@ -2,18 +2,18 @@ import { Button } from "@mui/material";
 
 
 function ItemSmall(props) {
-    const { title, src, price } = props;
+    const { property } = props;
     return (
         
-        <div className="bg">
+        <section className="bg">
             <div className="Top">
-                <img src={src} />
+                <img src={property.src} />
             </div>
             <div className="Bottom">
-                <h4>{title}</h4>
-                <Button variant="contained" size="small"><h6>฿ {price}</h6></Button>
+                <h4>{property.title}</h4>
+                <Button variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
             </div>
-        </div>
+        </section>
 
     );
 }
