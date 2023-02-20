@@ -29,12 +29,13 @@ function LoginPage() {
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
             <div id="HeaderLoginZone">
-            <h2 id="HeaderLogin">Login</h2>
-            <CloseIcon id="CloseLogin" onClick={handleClick} />
+            <CloseIcon id="CloseLogin" onClick={handleClick} />    
+            <h2 id="HeadLogin">Login</h2>
+
             </div>
           <div id="loginBar">
             <div id="UsernameZone">
-            <TextField
+            <TextField 
               type="text"
               size="small"
               label="User Name"
@@ -44,8 +45,8 @@ function LoginPage() {
               }}
             />
             </div>
-            <div id="setPasswordElementPosition">
-                <TextField
+            <div id="PasswordZone">
+                <TextField 
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => {

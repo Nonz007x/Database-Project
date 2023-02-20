@@ -11,34 +11,48 @@
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
     display: flex;
+    flex-direction: column;
 }
 #CloseLogin{
+    margin-left: 90%;
     margin-top: 2%;
 }
 #HeaderLoginZone{
     /* right:50%;
     transform: translateX(50%); */
-    display: flex;
+    /* display: flex; */
     /* align-items:center; */
     justify-content: center;
     height: fit-content;
 }
-
+#HeadLogin{
+    margin-left: 40%;
+    right:50%;  
+}
 #loginBar{
     height: 10%;
     left:50%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
     margin-top: 20%;
     margin-bottom: 10px;
 }
 #UsernameZone{
-    right:50%;
-    transform:translateX(50%);
+    /* margin-left: 40%; */
+    /* margin-left:50%; */
+    /* transform:translateX(50%); */
+    width: fit-content;
+    margin-left: 25%;
+    margin-bottom: 3%;
 }
-#setPasswordElementPosition{
-    right: 50%;
-    transform: translateX(50%);
+
+.TransparentBg .GotoMiddleOfTheScreen .loginBar .UsernameZone .textfield{
+    justify-content: center;
 }
+#PasswordZone{
+    margin-top: 5%;
+    margin-left: 25%;
+}
+
 #TransparentBg{
     z-index: 10;
     position: fixed;
