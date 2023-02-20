@@ -60,6 +60,7 @@
 #right  #SearchIcon{
   position: absolute;
   height: 32px;
+  left: 6px;
 }
 #addShoppingCartIconMargin{
   margin: 0 1em;

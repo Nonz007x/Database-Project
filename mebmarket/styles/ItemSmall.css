@@ -15,6 +15,6 @@
 }
 
 .bg .Bottom button {
-  background-color: green;
+  background-color: var(--main-color);
   font-size: 18px;
 }
