@@ -1,58 +1,52 @@
 #GotoMiddleOfTheScreen{
+    padding: 1em;
     z-index: 11;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     /* margin: auto auto; */
-    width: 30vw;
+    min-width: 400px;
     background-color: white;
     height: 80vh;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 #CloseLogin{
-    margin-left: 90%;
-    margin-top: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 #HeaderLoginZone{
-    /* right:50%;
-    transform: translateX(50%); */
-    /* display: flex; */
-    /* align-items:center; */
-    justify-content: center;
-    height: fit-content;
+    display: flex;
 }
 #HeadLogin{
-    margin-left: 40%;
-    right:50%;  
+    display: flex;
+    justify-content: center;
 }
 #loginBar{
-    height: 10%;
-    left:50%;
-    /* transform: translateX(-50%); */
-    margin-top: 20%;
-    margin-bottom: 10px;
+    width: 60%;
 }
-#UsernameZone{
-    /* margin-left: 40%; */
-    /* margin-left:50%; */
-    /* transform:translateX(50%); */
-    width: fit-content;
-    margin-left: 25%;
-    margin-bottom: 3%;
+.TextField{
+    margin: 10px 0;
+    width: 100%;
 }
 
 .TransparentBg .GotoMiddleOfTheScreen .loginBar .UsernameZone .textfield{
     justify-content: center;
 }
 #PasswordZone{
-    margin-top: 5%;
-    margin-left: 25%;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
-
+#PasswordField{
+    position: relative;
+}
 #TransparentBg{
     z-index: 10;
     position: fixed;
@@ -62,4 +56,8 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
 
+}
+.eye{
+    position: absolute;
+    right: 10px;
 }

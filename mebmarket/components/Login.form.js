@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import UnderLine from "./UnderLine";
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
@@ -28,14 +29,14 @@ function LoginPage() {
       {isLoginFormVisible && 1 ? (
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
-            <div id="HeaderLoginZone">
-            <CloseIcon id="CloseLogin" onClick={handleClick} />    
-            <h2 id="HeadLogin">Login</h2>
-
+            <div id="CloseLogin">
+              <CloseIcon  onClick={handleClick} />    
             </div>
+              <h2 id="HeadLogin">Login</h2>
+              <UnderLine/>
           <div id="loginBar">
             <div id="UsernameZone">
-            <TextField 
+            <TextField className="TextField"
               type="text"
               size="small"
               label="User Name"
@@ -46,14 +47,14 @@ function LoginPage() {
             />
             </div>
             <div id="PasswordZone">
-                <TextField 
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => {
+                <TextField className="TextField" id="PasswordField" 
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => {
                     setPassword(e.target.value);
-                }}
-                size="small"
-                label="Password"
+                  }}
+                  size="small"
+                  label="Password"
                 />
                 {!showPassword ? (
                 <VisibilityIcon className="eye" onClick={handleClickPassword} />
@@ -72,3 +73,5 @@ function LoginPage() {
   );
 }
 export default LoginPage;
+
+
