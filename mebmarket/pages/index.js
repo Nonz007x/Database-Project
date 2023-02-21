@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import ItemSmall from '@/components/ItemSmall'
 import '@fontsource/roboto/400.css';
 import { display } from '@mui/system';
-
+import RegisterPage from '@/components/Register.form';
 
 
 
@@ -42,6 +42,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+      <RegisterPage/>
       <div className='CenterChild'>
         <div className="App">
           <div className='ItemsBox'>
