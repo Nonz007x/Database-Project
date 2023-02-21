@@ -5,6 +5,7 @@ import '@fontsource/roboto/400.css'
 import { display } from '@mui/system';
 import RegisterPage from '@/components/Register.form';
 import { useEffect, useState } from 'react';
+import '@fontsource/roboto/400.css';
 
 
 export default function Home() {
@@ -28,6 +29,10 @@ export default function Home() {
       title:"Chainsaw man Vol.12",
       src:"https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
       price:"95"
+    },{
+      title:"ก้าวแรกอ่านงบการเงิน กับ Mr.Likestock",
+      src:"https://images-se-ed.com/ws/Storage/Originals/978616/084/9786160845088L.jpg?h=21ef3a52bbaa4c18b563a50b0f28ba77",
+      price:"200"
     }
   ];
   const mapping = items.map((property,index)=>{
@@ -58,13 +63,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <RegisterPage/>
       <div className='CenterChild'>
         <div className="App">
           <div className='ItemsBox'>
 
             {mapping}
-            {}
+
           </div>
         </div>
       </div>
