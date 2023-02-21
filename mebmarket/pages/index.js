@@ -4,7 +4,6 @@ import ItemSmall from '@/components/ItemSmall'
 import '@fontsource/roboto/400.css'
 import { display } from '@mui/system';
 import RegisterPage from '@/components/Register.form';
-import Foo from '@/pages/api/foo';
 import { useEffect, useState } from 'react';
 
 
