@@ -5,7 +5,6 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    /* margin: auto auto; */
     min-width: 400px;
     background-color: white;
     height: 80vh;
@@ -44,9 +43,7 @@
     display: flex;
     align-items: center;
 }
-#PasswordField{
-    position: relative;
-}
+
 #TransparentBg{
     z-index: 10;
     position: fixed;
@@ -60,4 +57,9 @@
 .eye{
     position: absolute;
     right: 10px;
+}
+.LoginButtonZone{
+    display: flex;
+    flex-direction: column;
+
 }
