@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
 
-
 function ItemSmall(props) {
     const { property } = props;
     console.log(property)
@@ -18,7 +17,6 @@ function ItemSmall(props) {
                 <Button  variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
             </div>
         </section>
-
     );
 }
 export default ItemSmall;

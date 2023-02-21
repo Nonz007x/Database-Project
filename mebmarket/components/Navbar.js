@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button } from "@mui/material";
+import CustomizedRating from "./CustomRating";
 
 function Navbar() {
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
@@ -12,6 +13,7 @@ function Navbar() {
         <div className="BG">
             <div id="left">
                 <LoginPage/>
+                <CustomizedRating/>
             </div>
             <div id="midle">
                 <a href="localhost:3000">
