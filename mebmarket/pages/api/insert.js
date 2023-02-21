@@ -2,11 +2,11 @@
 import excuteQuery from "@/shared/database";
 
 export default function handler(req, res) {
-    const MovieName = req.body.MovieName;
-    const MovieReview = req.body.MovieReview;
+    const username = req.body.Username;
+    const password = req.body.Password;
     const result = excuteQuery({
         query: 'INSERT INTO user (username,password) VALUE (?,?)',
-        values: [MovieName, MovieReview]
+        values: [username, password]
     });
     console.log(result);
 }

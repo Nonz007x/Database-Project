@@ -100,7 +100,19 @@ export default function RegisterPage() {
               <label for="Accept">{" I accept term and condition"}</label>
             </div>
             <div className="LoginButtonZone">
-              <Button className="GoDoit" variant="contained" size="small">Register</Button>
+              <Button className="GoDoit" variant="contained" size="small" onClick={()=>{
+                fetch('/api/insert', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: new URLSearchParams({
+                      Username:UserName,
+                      Password:password,
+                  })
+              });
+              alert("สมัครสมาชิก สำเร็จ")
+              }}>Register</Button>
             </div>
           </div>
           </div>

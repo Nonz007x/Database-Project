@@ -16,6 +16,8 @@ function LoginPage() {
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
+  const [LoginStatus,setLoginStatus] = useState(null);
+ 
   return (
     <div>
       <Button
@@ -26,6 +28,7 @@ function LoginPage() {
       >
         ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก
       </Button>
+      <div>{LoginStatus}</div>
       {isLoginFormVisible && 1 ? (
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
