@@ -1,7 +1,9 @@
 -- 1)
 CREATE DATABASE meb_bookstore
 -- 2)
-CREATE TABLE `meb_bookstore`.`user` ( `uid` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(30) NOT NULL , 
+CREATE TABLE `meb_bookstore`.`user` ( `uid` INT NOT NULL AUTO_INCREMENT , 
+`username` VARCHAR(30) NOT NULL , 
+`password` VARCHAR(255) NOT NULL , 
 `firstname` VARCHAR(50) NOT NULL , `lastname` VARCHAR(50) NOT NULL , 
 `userlevel` CHAR(1) NOT NULL DEFAULT 'm' , 
 `valid` TINYINT(1) NOT NULL DEFAULT '1' , 
