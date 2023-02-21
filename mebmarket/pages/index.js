@@ -3,14 +3,15 @@ import Navbar from '@/components/Navbar'
 import ItemSmall from '@/components/ItemSmall'
 import '@fontsource/roboto/400.css'
 import { fetcher } from './api/fetcher'
-import '@fontsource/roboto/400.css';
 import { useEffect, useState } from 'react'
+
 
 export default function Home() {
   const [Data,SetData] = useState([])
   useEffect(()=>{
-    fetcher().then((e)=>{
+    fetcher('http://localhost:3000/api/get').then((e)=>{
       SetData(e);
+      console.log(Data)
     })
   },[])
   const mapping = Data.map((property,index)=>{
@@ -32,6 +33,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
     </>
   )
 }
