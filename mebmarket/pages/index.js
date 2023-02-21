@@ -25,9 +25,9 @@ export default function Home() {
       src:"https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
       price:"95"
     },{
-      title:"ก้าวแรกอ่านงบการเงิน",
+      title:"ก้าวแรกอ่านงบการเงิน กับ Mr.Likestock",
       src:"https://images-se-ed.com/ws/Storage/Originals/978616/084/9786160845088L.jpg?h=21ef3a52bbaa4c18b563a50b0f28ba77",
-      print:"200"
+      price:"200"
     }
   ];
   const mapping = items.map((property,index)=>{
