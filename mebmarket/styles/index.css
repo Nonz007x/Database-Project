@@ -3,7 +3,7 @@
     justify-content: center;
 }
 .ItemsBox{
-    margin: 2em 0.5em;
+    margin: 2em 1em;
     width: 80vw;
     display: flex;
     flex-direction: row;

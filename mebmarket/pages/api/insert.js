@@ -6,7 +6,7 @@ export default function handler(req, res) {
     const MovieReview = req.body.MovieReview;
 
     const result = excuteQuery({
-        query: 'INSERT INTO movie_table (MovieName,MovieReview) VALUE (?,?)',
+        query: 'INSERT INTO user (username,password) VALUE (?,?)',
         values: [MovieName, MovieReview]
 
     });
