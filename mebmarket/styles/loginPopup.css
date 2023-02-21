@@ -44,9 +44,7 @@
     display: flex;
     align-items: center;
 }
-#PasswordField{
-    position: relative;
-}
+
 #TransparentBg{
     z-index: 10;
     position: fixed;

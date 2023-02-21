@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import RegisterPage from "./Register.form";
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
@@ -45,7 +46,7 @@ function LoginPage() {
             />
             </div>
             <div id="PasswordZone">
-                <TextField className="TextField" id="PasswordField" 
+                <TextField className="TextField" 
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
@@ -62,6 +63,9 @@ function LoginPage() {
                   onClick={handleClickPassword}
                 />
               )}
+            </div>
+            <div id="LoginButtonZone">
+                <RegisterPage />
             </div>
           </div>
           </div>
