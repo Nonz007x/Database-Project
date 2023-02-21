@@ -1,13 +1,20 @@
 .book_list {
   width: 210px;
-  height: 400px;
+  height: 420px;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   background-color:#fefefe;
-  border-style:groove;
+  border: 1px solid darkgrey;
   border-radius: 5px;
   justify-content: space-between;
+  margin: .3rem;
+}
+
+.book_list:hover {
+  /* box-shadow: 0 0 10px 1px #00bf6c; */
+  border: 1px solid #00bf6c;
+  box-shadow: 1px 1px 10px 1px darkgray;
 }
 
 .book_cover {
@@ -16,7 +23,7 @@
 }
 
 .book_cover img {
-  height: calc(190px * 1.414);
+  height: calc(210px * 1.414);
   aspect-ratio: 1/1.414;
   overflow-clip-margin: 5px;
   object-fit: cover;
@@ -37,13 +44,19 @@
 }
 
 .bottom_section {
+  padding-left: 8px;
+  padding-right: 8px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 8px;
 }
 
 .bottom_section button {
   background-color: var(--main-color);
-  font-size: 20px;
+  font-size: 24px;
+}
+
+.bottom_section button:hover {
+  background-color: rgb(61, 61, 61);
 }
