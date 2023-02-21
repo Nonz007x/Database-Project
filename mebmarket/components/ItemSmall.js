@@ -19,7 +19,7 @@ function ItemSmall(props) {
             <div className="bottom_section">
                 <div className="authur_rating">
                     <div><h6>{property.author}</h6></div>
-                    <div><CustomizedRating/></div>
+                    <div><CustomizedRating rate={property.rating}/></div>
                 </div>
                 <Button  variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
             </div>
