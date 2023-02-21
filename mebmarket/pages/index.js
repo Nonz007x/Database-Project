@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Navbar from '@/components/Navbar'
 import ItemSmall from '@/components/ItemSmall'
-import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/400.css'
 import { display } from '@mui/system';
 import RegisterPage from '@/components/Register.form';
-
+import Foo from '@/pages/api/foo';
+import { useEffect, useState } from 'react';
 
 
 export default function Home() {
@@ -33,6 +34,22 @@ export default function Home() {
   const mapping = items.map((property,index)=>{
     return <ItemSmall key={index} property={property}/>
   });
+  
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function showData() {
+      const response = await fetch('http://localhost:3000/api/get');
+      const res = await response.json();
+      
+      if (response.status !== 200) {
+        throw new Error(res.message);
+      }
+      setData(res);
+    }
+    showData();
+  }, []);
+
   return (
     <>
       <Head>
@@ -46,7 +63,9 @@ export default function Home() {
       <div className='CenterChild'>
         <div className="App">
           <div className='ItemsBox'>
+
             {mapping}
+            {}
           </div>
         </div>
       </div>
