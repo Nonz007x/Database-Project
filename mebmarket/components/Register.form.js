@@ -26,11 +26,10 @@ export default function RegisterPage() {
   const [acceptTnC,setacceptTnC] = useState(false);
   const handleCheck = (e) =>{
     setacceptTnC(e.target.checked)
-    console.log(acceptTnC)
   }
 
   return (
-    <div>
+    <>
       <Button
         className="RegisterOpenButton"
         variant="contained"
@@ -98,14 +97,16 @@ export default function RegisterPage() {
             </div>
             <div>
               <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck}/>
-              <label for="Accept">I accept term and condition</label>
+              <label for="Accept">{" I accept term and condition"}</label>
             </div>
-            <Button variant="contained" size="small">Register</Button>
+            <div className="LoginButtonZone">
+              <Button className="GoDoit" variant="contained" size="small">Register</Button>
+            </div>
           </div>
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 }
 

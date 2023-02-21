@@ -64,8 +64,9 @@ function LoginPage() {
                 />
               )}
             </div>
-            <div id="LoginButtonZone">
-                <RegisterPage />
+            <div className="LoginButtonZone">
+              <Button className="GoDoit" variant="contained" size="small">Login</Button>
+              <RegisterPage className="PleaseGoToCenter" />
             </div>
           </div>
           </div>
