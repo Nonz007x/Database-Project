@@ -7,10 +7,10 @@ function ItemSmall(props) {
         
         <section className="bg">
             <div className="Top">
-                <img src={property.src} />
+                <img src={property.cover} />
             </div>
             <div className="Bottom">
-                <h4>{property.title}</h4>
+                <h4>{property.bookname}</h4>
                 <Button variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
             </div>
         </section>
