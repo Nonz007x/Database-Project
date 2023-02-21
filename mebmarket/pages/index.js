@@ -6,13 +6,11 @@ import { fetcher } from './api/fetcher'
 import '@fontsource/roboto/400.css';
 import { useEffect, useState } from 'react'
 
-
 export default function Home() {
   const [Data,SetData] = useState([])
   useEffect(()=>{
     fetcher().then((e)=>{
       SetData(e);
-      console.log(Data)
     })
   },[])
   const mapping = Data.map((property,index)=>{
@@ -34,7 +32,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
     </>
   )
 }

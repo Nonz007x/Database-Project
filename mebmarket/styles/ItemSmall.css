@@ -1,24 +1,9 @@
-.bg {
-  background-color:#fefefe;
-  width:fit-content;
-  box-shadow: 0px 2px 2px;
-  border-radius: 5px;
-  overflow: clip;
-
-}
-
-.Top img {
-  height: 230px;
+.bg{
+  width: 240px;
   aspect-ratio: 1/1.414;
-  overflow-clip-margin: 5px;
-  object-fit: cover;
-  background-position: center;
 }
-
-.bg .Bottom button {
-  background-color: var(--main-color);
-  font-size: 18px;
-}
-.Bottom{
-  flex-wrap: wrap;
+.top img{
+  max-width: 240px;
+  height: auto;
+  aspect-ratio: 1/1.414;
 }
