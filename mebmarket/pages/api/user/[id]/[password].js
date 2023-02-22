@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     values: [id, password]
 });
 //  if (response.status !== 200) {
-//     throw new Error(res.message);
-//   }
+    //     throw new Error(res.message);
+    //   }
     res.send(sqlSelect);
 }
