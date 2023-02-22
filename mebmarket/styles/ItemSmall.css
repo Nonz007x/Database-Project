@@ -12,7 +12,6 @@
 }
 
 .book_list:hover {
-  /* box-shadow: 0 0 10px 1px #00bf6c; */
   border: 1px solid #00bf6c;
   box-shadow: 1px 1px 10px 1px darkgray;
 }
@@ -31,30 +30,39 @@
 
 .book_name {
   width: 100%;
-  max-height: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .book_name h4 {
   margin: 0 6px;
-  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  white-space: pre-wrap;
 }
 
 .cate {
-  padding-left: 8px;
+  width: 100%;
+  padding-left: 11px;
 }
 
 .bottom_section {
-  padding-left: 8px;
-  padding-right: 8px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .bottom_section button {
   background-color: var(--main-color);
   font-size: 24px;
+  width: 70px;
+  height: 40px;
 }
 
 .bottom_section button:hover {
