@@ -20,7 +20,7 @@ function LoginPage() {
     setShowPassword(!showPassword);
   };
   const [LoginStatus,setLoginStatus] = useState(null);
- 
+
   return (
     <div>
       <div className="Flexrow">
@@ -75,24 +75,19 @@ function LoginPage() {
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small"
                 onClick={()=>{
-                  console.log("/api/user/"+UserName+"/"+password.toString());
                   fetcher("/api/user/"+UserName+"/"+password.toString()).then((e)=>{
                     const obj =e;
                     console.log(obj)
                     if (e.length === 0) {
                       alert("ไม่มีข้อมูล")
                     }
-                    else{
-                      console.log("password",password)
-                    if(  !!(UserName===e[0].username) && !!(password ==e[0].password)){
+                    else if(  !!(UserName===e[0].username) && !!(password ==e[0].password)){
                       alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username.toString())
                       setLoginStatus("ผู้ใช้ : "+e[0].username.toString())
                     }
                     else{
-                      alert("รหัสผ่านผิดไอเก");
-                    }
-                    }
-                    
+                      alert("รหัสผ่านผิด");
+                    } 
                   })}}
               >Login</Button>
               <RegisterPage className="PleaseGoToCenter" />
