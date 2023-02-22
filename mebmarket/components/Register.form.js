@@ -110,7 +110,7 @@ export default function RegisterPage() {
                       Username:UserName,
                       Password:password,
                   })
-              });
+              })
               alert("สมัครสมาชิก สำเร็จ")
               }}>Register</Button>
             </div>

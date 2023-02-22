@@ -11,7 +11,6 @@ export default function Home() {
   useEffect(()=>{
     fetcher('http://localhost:3000/api/get').then((e)=>{
       SetData(e);
-      // console.log(Data)
     })
   },[])
   const mapping = Data.map((property,index)=>{

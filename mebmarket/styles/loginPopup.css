@@ -63,3 +63,8 @@
     flex-direction: column;
 
 }
+.Flexrow{
+    display: flex;
+    flex-direction: row;
+
+}

@@ -1,10 +1,13 @@
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RegisterPage from "./Register.form";
+import { fetcher } from "@/pages/api/fetcher";
+import { Password } from "@mui/icons-material";
+
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
@@ -20,6 +23,7 @@ function LoginPage() {
  
   return (
     <div>
+      <div className="Flexrow">
       <Button
         className="NavbarButton"
         variant="contained"
@@ -28,7 +32,8 @@ function LoginPage() {
       >
         ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก
       </Button>
-      <div>{LoginStatus}</div>
+      <h2>{LoginStatus}</h2>
+      </div>
       {isLoginFormVisible && 1 ? (
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
@@ -68,7 +73,27 @@ function LoginPage() {
               )}
             </div>
             <div className="LoginButtonZone">
-              <Button className="GoDoit" variant="contained" size="small">Login</Button>
+              <Button className="GoDoit" variant="contained" size="small"
+                onClick={()=>{
+                  fetcher("/api/user/"+UserName.toString()).then((e)=>{
+                    const obj =e;
+                    console.log(obj)
+                    if (e.length === 0) {
+                      alert("ไม่มีข้อมูล")
+                    }
+                    else{
+                      console.log("password",password)
+                    if(  !!(UserName===e[0].username) && !!(password ==e[0].password)){
+                      alert("ล็อตอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username.toString())
+                      setLoginStatus("ผู้ใข้ : "+e[0].username.toString())
+                    }
+                    else{
+                      alert("รหัสผ่านผิด");
+                    }
+                    }
+                    
+                  })}}
+              >Login</Button>
               <RegisterPage className="PleaseGoToCenter" />
             </div>
           </div>
