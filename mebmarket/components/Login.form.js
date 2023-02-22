@@ -85,11 +85,11 @@ function LoginPage() {
                     else{
                       console.log("password",password)
                     if(  !!(UserName===e[0].username) && !!(password ==e[0].password)){
-                      alert("ล็อตอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username.toString())
-                      setLoginStatus("ผู้ใข้ : "+e[0].username.toString())
+                      alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username.toString())
+                      setLoginStatus("ผู้ใช้ : "+e[0].username.toString())
                     }
                     else{
-                      alert("รหัสผ่านผิด");
+                      alert("รหัสผ่านผิดไอเก");
                     }
                     }
                     
