@@ -6,8 +6,8 @@ export default async function handler(req, res) {
     const sqlSelect = await excuteQuery({ query: 'SELECT username,password FROM user WHERE username = ? AND password = ?',
     values: [id, password]
 });
-//  if (response.status !== 200) {
+    // if (res.status !== 200) {
     //     throw new Error(res.message);
-    //   }
+    // }
     res.send(sqlSelect);
 }
