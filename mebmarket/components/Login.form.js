@@ -89,7 +89,7 @@ function LoginPage() {
                       setLoginStatus("ผู้ใช้ : "+e[0].username.toString())
                     }
                     else{
-                      alert("รหัสผ่านผิดไอเก");
+                      alert("รหัสผ่านผิด");
                     }
                     }
                     
