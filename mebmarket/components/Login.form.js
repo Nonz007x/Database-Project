@@ -75,7 +75,8 @@ function LoginPage() {
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small"
                 onClick={()=>{
-                  fetcher("/api/user/"+UserName.toString()).then((e)=>{
+                  console.log("/api/user/"+UserName+"/"+password.toString());
+                  fetcher("/api/user/"+UserName+"/"+password.toString()).then((e)=>{
                     const obj =e;
                     console.log(obj)
                     if (e.length === 0) {
