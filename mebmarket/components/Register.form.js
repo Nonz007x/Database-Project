@@ -101,17 +101,27 @@ export default function RegisterPage() {
             </div>
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small" onClick={()=>{
-                fetch('/api/insert', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                  },
-                  body: new URLSearchParams({
-                      Username:UserName,
-                      Password:password,
-                  })
-              })
-              alert("สมัครสมาชิก สำเร็จ")
+                if(password!==repassword){
+                  alert("รหัสผ่านไม่ตรงกัน")
+                }
+                else if(!acceptTnC){
+                  alert("Please accept term and condition")
+                }
+                else{
+                  fetch('/api/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        Username:UserName,
+                        Password:password,
+                    })
+                })
+                  alert("สมัครสามชิก สำเร็จ")  
+              }
+                
+              
               }}>Register</Button>
             </div>
           </div>
