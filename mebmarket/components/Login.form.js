@@ -6,12 +6,15 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RegisterPage from "./Register.form";
 import { fetcher } from "@/pages/api/fetcher";
-import { Password } from "@mui/icons-material";
+import { Login, Password } from "@mui/icons-material";
 
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
-    setIsLoginFormVisible(!isLoginFormVisible);
+    if(LoginStatus === "ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก"){
+      setIsLoginFormVisible(!isLoginFormVisible);
+    }
+
   };
   const [showPassword, setShowPassword] = useState(false);
   const [UserName, setUserName] = useState("");
@@ -19,8 +22,8 @@ function LoginPage() {
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
-  const [LoginStatus,setLoginStatus] = useState(null);
- 
+  const [LoginStatus,setLoginStatus] = useState("ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก");
+// todo: เปลี่ยนปุ่มล็อกอินเป็นปุ่ม profile**
   return (
     <div>
       <div className="Flexrow">
@@ -29,12 +32,11 @@ function LoginPage() {
         variant="contained"
         size="small"
         onClick={handleClick}
-      >
-        ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก
+      >                 
+        {LoginStatus}
       </Button>
-      <h2>{LoginStatus}</h2>
       </div>
-      {isLoginFormVisible && 1 ? (
+      {isLoginFormVisible && 1 ? ( // <---- Why && 1 
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
             <div id="CloseLogin">
@@ -46,7 +48,7 @@ function LoginPage() {
             <TextField className="TextField"
               type="text"
               size="small"
-              label="User Name"
+              label="Username"
               value={UserName}
               onChange={(e) => {
                 setUserName(e.target.value);
@@ -75,21 +77,18 @@ function LoginPage() {
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small"
                 onClick={()=>{
-                  fetcher("/api/user/"+UserName.toString()).then((e)=>{
-                    const obj =e;
-                    console.log(obj)
+                  if(UserName === '' || password === ''){
+                    alert("กรุณากรอกข้อมูลให้ครบ")
+                    return;
+                  }
+                  fetcher("/api/user/"+UserName+"/"+password).then((e)=>{
                     if (e.length === 0) {
-                      alert("ไม่มีข้อมูล")
+                      alert("username หรือ รหัสผ่านผิด")
                     }
                     else{
-                      console.log("password",password)
-                    if(  !!(UserName===e[0].username) && !!(password ==e[0].password)){
-                      alert("ล็อตอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username.toString())
-                      setLoginStatus("ผู้ใช้ : "+e[0].username.toString())
-                    }
-                    else{
-                      alert("รหัสผ่านผิด");
-                    }
+                      alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username)
+                      setLoginStatus("ผู้ใช้ : "+e[0].username)
+                      setIsLoginFormVisible(false)
                     }
                   })}}
               >Login</Button>
@@ -103,5 +102,3 @@ function LoginPage() {
   );
 }
 export default LoginPage;
-
-
