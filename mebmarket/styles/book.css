@@ -37,7 +37,7 @@
 }
 #Detail{
     width: 100%;
-    padding: 10px;
+    padding: 0 1.5em;
 }
 #TryAndBuyDiv{
     margin: 1.5em 0;
@@ -47,6 +47,7 @@
 }
 #Detail h4{
     line-height: 2.5em;
+
 }
 #RatingZone{
     width: 100%;

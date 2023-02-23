@@ -38,12 +38,12 @@ export default function Page(){
                                 <h4>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></h4>
                                 <h4>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></h4>
                                 <div id="TryAndBuyDiv">
-                                    <Button variant="contained" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
+                                    <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
+                                    <Button variant="contained" size="large" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
+                                    <h5>{Data.rating}</h5>
                                     <RatingAbleCustomizedRating  rate={Data.rating}/>
-                                    <h4>{Data.rating}</h4>
                                 </div>
                             </div>
                         </div>
