@@ -8,5 +8,5 @@ export default function handler(req, res) {
         query: 'INSERT INTO user (username,password) VALUE (?,?)',
         values: [username, password]
     });
-    console.log(result);
+    // console.log(result);
 }

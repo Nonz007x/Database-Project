@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 function ItemSmall(props) {
     const { property } = props;
-    console.log(property)
+    // console.log(property)
     return (
         
         <section className="bg">

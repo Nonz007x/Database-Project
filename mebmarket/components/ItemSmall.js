@@ -6,7 +6,9 @@ function ItemSmall(props) {
     const { property } = props;
     return (
         
-        <div className="book_list">
+        <div className="book_list" onClick={()=>{
+            window.open("./book/"+property.bookname)
+        }}>
             <div className="book_cover">
                 <img src={property.cover} />
             </div>
