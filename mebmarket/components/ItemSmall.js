@@ -23,7 +23,9 @@ function ItemSmall(props) {
                     <div><h6>{property.author}</h6></div>
                     <div><CustomizedRating rate={property.rating}/></div>
                 </div>
-                <Button  variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
+                <Button  variant="contained" size="small" onClick={()=>{
+                    // เอาไว้ใส่คำสั่งซื้อของ
+                }}><h6>฿ {property.price}</h6></Button>
             </div>
         </div>
 

@@ -3,23 +3,21 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetcher } from "../api/fetcher";
 import Head from 'next/head'
+import { Button } from "@mui/material";
+import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
 
 export default function Page(){
     const router = useRouter();
     // console.log(router.query.bookname)
     const bookname = router.query.bookname;
-    // console.log("bookname is "+bookname)
-    // console.log("router.query.bookname is "+router.query.bookname)
     const [Data,SetData] = useState(null);
     useEffect(()=>{
-        // console.log("bookname is"+bookname)
         fetcher('../api/getbook/'+bookname).then((e)=>{
-          SetData(e)
+            SetData(e[0])
+            console.log(Data)
         })
-      },[bookname])
+    },[bookname])
 
-  
-    // console.log(Data);
     return (
         <>
             <Head>
@@ -29,6 +27,31 @@ export default function Page(){
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png"/>
             </Head>
             <Navbar/>
+            {(Data != null)?
+                <div id="book_bookname_Container">
+                    <div id="book_bookname_PageAdjust">
+                        <h1 id="book_bookname_Bookname">{Data.bookname}</h1>
+                        <div id="book_book_ItemAndDetail">
+                            <img src={Data.cover} id="book_bookname_Img"/>
+                            <div id="Detail">
+                                <h4>โดย <a href="">{Data.author}</a></h4>
+                                <h4>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></h4>
+                                <h4>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></h4>
+                                <div id="TryAndBuyDiv">
+                                    <Button variant="contained" id="Try_Button">ทดลองอ่าน</Button>
+                                    <Button variant="contained" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
+                                </div>
+                                <div id="RatingZone" >
+                                    <RatingAbleCustomizedRating  rate={Data.rating}/>
+                                    <h4>{Data.rating}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            :null}
+            
+
             {/* {Data} */}
         </>
     )
