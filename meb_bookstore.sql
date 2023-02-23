@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 21, 2023 at 07:58 PM
+-- Generation Time: Feb 23, 2023 at 10:30 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -87,7 +87,6 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `user` (
-  `uid` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(50) NOT NULL,
@@ -100,8 +99,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`uid`, `username`, `password`, `firstname`, `lastname`, `userlevel`, `valid`) VALUES
-(5, 'Gay Lord', '123', '', '', 'm', 1);
+INSERT INTO `user` (`username`, `password`, `firstname`, `lastname`, `userlevel`, `valid`) VALUES
+('nitid', '123', '', '', 'm', 1);
 
 --
 -- Indexes for dumped tables
@@ -117,54 +116,14 @@ ALTER TABLE `book`
 -- Indexes for table `categorized`
 --
 ALTER TABLE `categorized`
-  ADD PRIMARY KEY (`bookId`,`categoryId`),
-  ADD KEY `categoryId` (`categoryId`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`categoryId`);
+  ADD PRIMARY KEY (`bookId`,`categoryId`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`uid`),
+  ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `book`
---
-ALTER TABLE `book`
-  MODIFY `bookId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `categorized`
---
-ALTER TABLE `categorized`
-  ADD CONSTRAINT `categorized_ibfk_1` FOREIGN KEY (`bookId`) REFERENCES `book` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `categorized_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
