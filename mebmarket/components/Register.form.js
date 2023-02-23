@@ -67,7 +67,7 @@ export default function RegisterPage() {
                   size="small"
                   label="Password"
                 />
-                {!showPassword ? (
+                {!!!showPassword ? (
                 <VisibilityIcon className="eye" onClick={handleClickPassword} />
               ) : (
                 <VisibilityOffIcon

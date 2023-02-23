@@ -7,17 +7,19 @@ import { Button } from "@mui/material";
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
 
 export default function Page(){
-    const router = useRouter();
-    // console.log(router.query.bookname)
-    const bookname = router.query.bookname;
     const [Data,SetData] = useState(null);
+    const router = useRouter();
+    const bookname = router.query.bookname;
     useEffect(()=>{
         fetcher('../api/getbook/'+bookname).then((e)=>{
             SetData(e[0])
-            console.log(Data)
-        })
+            console.log("how : "+Data)
+            return Data;
+        }).then((e=>{console.log("last one "+Data)}))
     },[bookname])
+    
 
+    
     return (
         <>
             <Head>

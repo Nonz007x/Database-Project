@@ -7,15 +7,28 @@ import { useEffect, useState } from 'react'
 
 
 export default function Home() {
+  //get most recent item from api/getRecentAdded
+  const [RecentItems,SetItems] =useState([])
+  useEffect(()=>{
+    fetcher("api/getRecentAdded").then((e)=>{
+      SetItems(e);
+    })
+  },[])
+  //get most recent item from api/getRecentAdded
   const [Data,SetData] = useState([])
   useEffect(()=>{
-    fetcher('http://localhost:3000/api/get').then((e)=>{
+    fetcher('/api/get').then((e)=>{
+      console.log(e)
       SetData(e);
     })
   },[])
+
   const mapping = Data.map((property,index)=>{
     return <ItemSmall key={index} property={property}/>
   });
+  const RecentItemsMapped = RecentItems.map((property,index)=>{
+    return <ItemSmall key={index} property={property}/>
+  })
   return (
     <>
       <Head>
@@ -27,9 +40,19 @@ export default function Home() {
       <Navbar />
       <div className='CenterChild'>
         <div className="App">
-          <div className='ItemsBox'>
+          
+            <div className='ItemsBox'>
+            <div className='NewestText'>
+              <h2>มาใหม่</h2>
+              <div className="recentlyadded">
+                {RecentItemsMapped}
+              </div>
+            </div>
             {mapping}
           </div>
+          
+
+
         </div>
       </div>
       
