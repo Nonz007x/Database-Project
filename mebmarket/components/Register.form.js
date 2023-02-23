@@ -114,13 +114,12 @@ export default function RegisterPage() {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                     body: new URLSearchParams({
-                        Username:UserName,
-                        Password:password,
+                        username:UserName,
+                        password:password,
                     })
-                })
-                  alert("สมัครสามชิก สำเร็จ")  
-              }
-                
+                }).then(e => e.json()).then(data => {
+                  alert(JSON.stringify(data))
+                })}
               
               }}>Register</Button>
             </div>
