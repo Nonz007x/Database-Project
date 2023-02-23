@@ -120,7 +120,6 @@ export default function RegisterPage() {
                 }).then(e => e.json()).then(data => {
                   alert(JSON.stringify(data))
                 })}
-              
               }}>Register</Button>
             </div>
           </div>
