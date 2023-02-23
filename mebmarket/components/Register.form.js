@@ -58,7 +58,7 @@ export default function RegisterPage() {
             />
             </div>
             <div id="PasswordZone">
-                <TextField className="TextField" Id="PasswordField" 
+                <TextField className="TextField" id="PasswordField" 
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
