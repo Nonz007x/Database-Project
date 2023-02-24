@@ -10,3 +10,23 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+.recentlyadded{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    max-height: calc(420px + 0.5em);
+    overflow: hidden;
+    justify-content: center;
+    width: 100%;
+    /* display: grid;
+    width: 100%; */
+}
+.NewestText{
+    width: 100%;
+    margin: 0 0 12em 0;
+}
+.NewestText h2{
+    border-bottom: 2px solid #8e918f;
+    margin-bottom: 0.5em;
+    font-weight: 300;
+}

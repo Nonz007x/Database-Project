@@ -9,7 +9,7 @@ export default function PasswordInput() {
         <div id='setPasswordElementPosition'>
             <TextField type={showPassword? "text":"password"} size="small" label="Password"/>
             <div>
-                {!showPassword?<VisibilityIcon className="eye" onClick={handleClick}/>:<VisibilityOffIcon className="eye" onClick={handleClickPassword}/>}
+                {!!!showPassword?<VisibilityIcon className="eye" onClick={handleClick}/>:<VisibilityOffIcon className="eye" onClick={handleClickPassword}/>}
             </div>
         </div>
     );

@@ -14,7 +14,7 @@ function Navbar() {
                 <LoginPage/>
             </div>
             <div id="midle">
-                <a href="localhost:3000">
+                <a href="http://localhost:3000/">
                     <img id="logo" src={picUrl} />
                 </a>
             </div>

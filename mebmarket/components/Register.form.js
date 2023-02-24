@@ -58,7 +58,7 @@ export default function RegisterPage() {
             />
             </div>
             <div id="PasswordZone">
-                <TextField className="TextField" Id="PasswordField" 
+                <TextField className="TextField" id="PasswordField" 
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => {
@@ -67,7 +67,7 @@ export default function RegisterPage() {
                   size="small"
                   label="Password"
                 />
-                {!showPassword ? (
+                {!!!showPassword ? (
                 <VisibilityIcon className="eye" onClick={handleClickPassword} />
               ) : (
                 <VisibilityOffIcon
@@ -101,17 +101,25 @@ export default function RegisterPage() {
             </div>
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small" onClick={()=>{
-                fetch('/api/insert', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded',
-                  },
-                  body: new URLSearchParams({
-                      Username:UserName,
-                      Password:password,
-                  })
-              })
-              alert("สมัครสมาชิก สำเร็จ")
+                if(password!==repassword){
+                  alert("รหัสผ่านไม่ตรงกัน")
+                }
+                else if(!acceptTnC){
+                  alert("Please accept term and condition")
+                }
+                else{
+                  fetch('/api/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        username:UserName,
+                        password:password,
+                    })
+                }).then(e => e.json()).then(data => {
+                  alert(JSON.stringify(data))
+                })}
               }}>Register</Button>
             </div>
           </div>

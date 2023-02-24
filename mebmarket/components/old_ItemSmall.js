@@ -1,23 +1,28 @@
 import { Button } from "@mui/material";
-
-
-function ItemSmall(props) {
-    const { property } = props;
-    console.log(property)
+import CustomizedRating from "@/components/CustomRating"
+function ItemSmall() {
     return (
         
-        <section className="bg">
-            <div className="Top">
-                <img src={property.cover} />
+        <div className="book_list">
+            <div className="book_cover">
+                <img src="https://upload.wikimedia.org/wikipedia/en/d/db/Actageshonenjump.jpg"/>
             </div>
-            <div className="Bottom">
-                <h4 className="BookName">{property.bookname}</h4>
+            <div className="book_name">
+                <h4>Act-Age</h4>
             </div>
-            <div className="ButtonColor">
-                <div>Cid</div>
-                <Button  variant="contained" size="small"><h6>฿ {property.price}</h6></Button>
+            <div className="cate">
+                <h6>Good</h6>
             </div>
-        </section>
+            <div className="bottom_section">
+                <div className="authur_rating">
+                    <div><h6>Cid</h6></div>
+                    <div><CustomizedRating rate="3"/></div>
+                </div>
+                <Button  variant="contained" size="small" onClick={()=>{
+                    // เอาไว้ใส่คำสั่งซื้อของ
+                }}><h6>฿ 60</h6></Button>
+            </div>
+        </div>
 
     );
 }
