@@ -34,11 +34,13 @@ export default function Page(){
                     <div id="book_bookname_PageAdjust">
                         <h1 id="book_bookname_Bookname">{Data.bookname}</h1>
                         <div id="book_book_ItemAndDetail">
-                            <img src={Data.cover} id="book_bookname_Img"/>
+                            <img src={Data.cover} id="book_Img"/>
                             <div id="Detail">
-                                <h4>โดย <a href="">{Data.author}</a></h4>
-                                <h4>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></h4>
-                                <h4>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></h4>
+                                <div id="data_author_publisher_category">
+                                    <p>โดย <a href="">{Data.author}</a></p>
+                                    <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
+                                    <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
+                                </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
                                     <Button variant="contained" size="large" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
@@ -47,7 +49,16 @@ export default function Page(){
                                     <h5>{Data.rating}</h5>
                                     <RatingAbleCustomizedRating  rate={Data.rating}/>
                                 </div>
+                                <div id="release_date">
+                                    <p>วันที่วางขาย</p>
+                                    <p>// test</p>
+                                </div>
                             </div>
+                        </div>
+                        <div id="synopsis">
+                            <p>
+                                เนื้อเรื่องย่อ
+                            </p>
                         </div>
                     </div>
                 </div>
