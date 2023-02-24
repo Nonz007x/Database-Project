@@ -4,7 +4,7 @@ import ItemSmall from '@/components/ItemSmall'
 import '@fontsource/roboto/400.css'
 import { fetcher } from './api/fetcher'
 import { useEffect, useState } from 'react'
-
+import { Skeleton } from '@mui/material'
 
 export default function Home() {
   //get most recent item from api/getRecentAdded

@@ -27,6 +27,12 @@
   overflow-clip-margin: 5px;
   object-fit: cover;
 }
+.book_cover_skeleton {
+  height: calc(210px * 1.414);
+  aspect-ratio: 1/1.414;
+  overflow-clip-margin: 5px;
+  object-fit: cover;
+}
 
 .book_name {
   width: 100%;
