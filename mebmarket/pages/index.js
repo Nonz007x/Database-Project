@@ -4,7 +4,7 @@ import ItemSmall from '@/components/ItemSmall'
 import '@fontsource/roboto/400.css'
 import { fetcher } from './api/fetcher'
 import { useEffect, useState } from 'react'
-import { Skeleton } from '@mui/material'
+import { Button } from '@mui/material'
 
 export default function Home() {
   //get most recent item from api/getRecentAdded
@@ -40,14 +40,16 @@ export default function Home() {
       <Navbar />
       <div className='CenterChild'>
         <div className="App">
-          
             <div className='ItemsBox'>
-            <div className='NewestText'>
-              <h2>มาใหม่</h2>
-              <div className="recentlyadded">
-                {RecentItemsMapped}
+              <div className='NewItem_Box'>
+                <div className='NewestText'>
+                    <h2>มาใหม่</h2>
+                    <Button className='Index_Button' >ดูทั้งหมด</Button>
+                </div>
+                <div className="recentlyadded">
+                  {RecentItemsMapped}
+                </div>
               </div>
-            </div>
             {mapping}
           </div>
           
