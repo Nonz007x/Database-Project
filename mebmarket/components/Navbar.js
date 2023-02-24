@@ -3,6 +3,7 @@ import LoginPage from "./Login.form";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { fetcher } from "@/pages/api/fetcher";
 import { Button } from "@mui/material";
 
 function Navbar() {
@@ -28,7 +29,9 @@ function Navbar() {
                     </Button>
                     <form>
                         <SearchIcon id="SearchIcon"/>
-                        <input id="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value) }} />
+                        <input id="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)
+                            fetcher("/api/search/"+From+"/"+Search)
+                        }} />
                     </form>
                 </div>
             </div>
