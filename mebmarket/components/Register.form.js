@@ -97,7 +97,7 @@ export default function RegisterPage() {
             </div>
             <div>
               <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck}/>
-              <label for="Accept">{" I accept term and condition"}</label>
+              <label htmlFor="Accept">{" I accept term and condition"}</label>
             </div>
             <div className="LoginButtonZone">
               <Button className="GoDoit" variant="contained" size="small" onClick={()=>{
