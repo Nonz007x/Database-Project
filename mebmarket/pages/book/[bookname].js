@@ -9,7 +9,7 @@ import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating"
 export default function Page(){
     const [Data,SetData] = useState(null);
     const router = useRouter();
-    const bookname = router.query.bookname;
+    const bookname = router.query.z;
     useEffect(()=>{
         fetcher('../api/getbook/'+bookname).then((e)=>{
             SetData(e[0])
