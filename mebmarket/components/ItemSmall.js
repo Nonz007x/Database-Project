@@ -1,13 +1,14 @@
 import { Button } from "@mui/material";
 import CustomizedRating from "@/components/CustomRating"
-
+import { useRouter } from "next/router";
 
 function ItemSmall(props) {
     const { property } = props;
+    const router = useRouter();
     return (
         
         <div className="book_list" onClick={()=>{
-            window.open("./book/"+property.bookname)
+            router.push("./book/"+property.bookname) // มันเร็วกว่า Added by Nonz007x
         }}>
             <div className="book_cover">
                 <img src={property.cover} />
