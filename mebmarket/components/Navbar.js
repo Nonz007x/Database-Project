@@ -27,9 +27,14 @@ function Navbar() {
                     <Button variant="contained" className="NavbarButton" id="addShoppingCartIconMargin">
                         <ShoppingCartIcon />
                     </Button>
-                    <form onSubmit={()=>{alert(Search)}}>
-                        <SearchIcon id="SearchIcon"/>
-                        <input id="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)
+                    <form onSubmit={(e)=>{
+                        alert(Search);
+                        e.preventDefault();
+                    }}>
+                        <SearchIcon id="SearchIcon" onClick={()=>{
+                            window.open("http://localhost:3000/search/iconClicked")
+                        }}/>
+                        <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)
                             // fetcher("/api/search/"+From+"/"+Search)
                         }} />
                     </form>

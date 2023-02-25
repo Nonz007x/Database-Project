@@ -1,17 +1,22 @@
-import { useRouter } from "next/router";
+import { useRouter,Router } from "next/router";
 import Head from "next/head";
 import { useState,useEffect } from "react";
 import Navbar from "@/components/Navbar";
-
-export default function Search(){
-    const [Search,setSearch] = useState(null);
+import SearchIcon from '@mui/icons-material/Search';
+export default function SearchPage(){
+    const [RouterConst,setRouterConst] = useState(null);
+    const [Search,setSearch] = useState("");
     const router = useRouter();
-    console.log(router.query)
+    // const 
+    // console.log(router.query)
     useEffect(()=>{
-        setSearch(router.query.search);
-    },[])
-    // const router = useRouter();
-    // console.log(router.query);
+        if(router.query.search!=="iconClicked"){
+            setRouterConst(router.query.search);
+        }
+    },[router])
+    useEffect(()=>{
+
+    },[RouterConst])
     return (
         <>
             <Head>
@@ -21,6 +26,24 @@ export default function Search(){
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png"/>
             </Head> 
                 <Navbar/>
+                <div className='CenterChild'>
+                    <div className="App">
+                        <div className='ItemsBox'>
+                            <div className="NewestText">
+                                <h2>
+                                    ค้นหาในร้านหนังสือ
+                                </h2>
+                            </div>
+                        <form className="formInSearchPage" onSubmit={(e)=>{
+                            alert("hi");
+                            e.preventDefault();
+                        }}>
+                            <input type="text" placeholder="ค้นหา" className="SearchBarInSearchPage"/>
+                        </form>
+
+                        </div>
+                    </div>
+                </div>
         </>
     );
 }

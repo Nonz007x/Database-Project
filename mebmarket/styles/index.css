@@ -4,7 +4,7 @@
 }
 .ItemsBox{
     margin: 5em 1em;
-    width: 80vw;
+    width: 75vw;
     display: flex;
     /* flex-direction: column; */
     flex-wrap: wrap;
