@@ -32,7 +32,7 @@ function Navbar() {
                         alert(Search);
                         e.preventDefault();
                     }}>
-                        <Link href = "http://localhost:3000/search/iconClicked">
+                        <Link className="NavbarLink" href = "http://localhost:3000/search/iconClicked">
                         <SearchIcon id="SearchIcon"/>
                         </Link>
                         <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)

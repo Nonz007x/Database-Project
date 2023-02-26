@@ -24,13 +24,10 @@
 }
 .NewestText{
     width: 100%;
-    /* margin-bottom: 2em; */
-    /* max-height: calc(420px + 2em); */
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    /* border: 1px solid yellow; */
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
     padding: 0.5em;
     margin-bottom: 0.5em;
 }
@@ -48,6 +45,5 @@
 .NewItem_Box{
     margin-bottom: 1em;
     width: 100%;
-    border: 1px solid purple;
     height: auto;
 }
