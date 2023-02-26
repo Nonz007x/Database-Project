@@ -5,6 +5,7 @@ import "@/styles/PasswordInput.css"
 import "@/styles/loginPopup.css"
 import "@/styles/index.css"
 import "@/styles/book.css"
+import "@/styles/searchbar.css"
 
 export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />
