@@ -1,23 +1,36 @@
 .SearchBarInSearchPage{
     /* width: 100%; */
-    min-width: 500px;
+    width: 20vw;
     font-size:16px;
-    height: 32px;
+    height: 42px;
     border: 1px solid rgb(156, 156, 156);
     border-radius: 5px;
     padding-left: 0.25em;
     position: relative;
-}
-.formInSearchPage{
-    
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    /* border: 10px solid blue; */
 }
 .SearchBarInSearchPage:focus{
     border:1px solid var(--main-color);
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
 
-  }
+}
+.Searchline{
+    width: 1.5px;
+    height: 75%;
+    background-color: gray;
+    margin: 0 1em;
+}
+.SearchArea{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    /* border: 1px solid red; */
+    align-items: center;
+}
+.TypeSearch{
+    /* border: 1px solid rgb(156, 156, 156); */
+    border-radius: 5px;
+}
+.TypeSearch:focus{
+    border: 1px solid yellow;
+}

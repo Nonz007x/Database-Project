@@ -10,16 +10,19 @@ export default function Page(){
     const [Data,SetData] = useState(null);
     const router = useRouter();
     const bookname = router.query.bookname;
-    useEffect(()=>{
-        fetcher('../api/getbook/'+bookname).then((e)=>{
-            SetData(e[0])
-            console.log("how : "+Data)
-            return Data;
-        }).then((e=>{console.log("last one "+Data)}))
-    },[bookname])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const e = await fetcher('../api/getbook/'+bookname);
+            SetData(e[0]);
+        };
+        if (bookname) {
+            fetchData();
+        }
+    }, [bookname]);
     
 
-    
+
     return (
         <>
             <Head>
@@ -37,7 +40,7 @@ export default function Page(){
                             <img src={Data.cover} id="book_Img"/>
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
-                                    <p>โดย <a href="">{Data.author}</a></p>
+                                    <p>โดย <a href="">{Data.authorName}</a></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>

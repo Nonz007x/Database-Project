@@ -1,10 +1,10 @@
 export async function fetcher(url) {
-    const response = await fetch(url);
-    const res = await response.json();
+  const response = await fetch(url);
 
-    if (response.status !== 200) {
-      throw new Error(res.message);
-    }
-    const result = res
-    return result;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data;
 }
