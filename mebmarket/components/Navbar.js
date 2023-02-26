@@ -3,7 +3,7 @@ import LoginPage from "./Login.form";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { fetcher } from "@/pages/api/fetcher";
+import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import Link from 'next/link'
 
@@ -29,10 +29,12 @@ function Navbar() {
                         <ShoppingCartIcon />
                     </Button>
                     <form onSubmit={(e)=>{
-                        alert(Search);
                         e.preventDefault();
+                        // console.log(e)
+
+                        window.open("/search/bookname/"+Search);
                     }}>
-                        <Link className="NavbarLink" href = "http://localhost:3000/search/iconClicked">
+                        <Link className="NavbarLink" href = "http://localhost:3000/search/bookname/default">
                         <SearchIcon id="SearchIcon"/>
                         </Link>
                         <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)
