@@ -12,7 +12,7 @@ export default function Home() {
   const [RecentItems,SetItems] =useState([])
   const [Data,SetData] = useState([])
 
-  useEffect(() => {
+  useEffect(() => { 
     Promise.all([
       fetcher('/api/getRecentAdded'),
       fetcher('/api/get'),
@@ -24,13 +24,13 @@ export default function Home() {
 
   const mapping = useMemo(() => {
     return Data.map((property,index)=>{
-      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
+      return <ItemSmall key={index} property={property}/>
     });
   }, [RecentItems]);
 
   const RecentItemsMapped = useMemo(() => {
     return RecentItems.map((property,index)=>{
-      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
+      return <ItemSmall key={index} property={property}/>
     });
   }, [RecentItems]);
   
