@@ -24,13 +24,13 @@ export default function Home() {
 
   const mapping = useMemo(() => {
     return Data.map((property,index)=>{
-      return <ItemSmall key={index} property={property}/>
+      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
     });
   }, [RecentItems]);
 
   const RecentItemsMapped = useMemo(() => {
     return RecentItems.map((property,index)=>{
-      return <ItemSmall key={index} property={property}/>
+      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
     });
   }, [RecentItems]);
   
