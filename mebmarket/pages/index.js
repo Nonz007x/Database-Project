@@ -5,30 +5,35 @@ import '@fontsource/roboto/400.css'
 import { fetcher } from './api/fetcher'
 import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
+import React, { useMemo } from 'react';
 
 export default function Home() {
   //get most recent item from api/getRecentAdded
   const [RecentItems,SetItems] =useState([])
-  useEffect(()=>{
-    fetcher("api/getRecentAdded").then((e)=>{
-      SetItems(e);
-    })
-  },[])
-  //get most recent item from api/getRecentAdded
   const [Data,SetData] = useState([])
-  useEffect(()=>{
-    fetcher('/api/get').then((e)=>{
-      console.log(e)
-      SetData(e);
-    })
-  },[])
 
-  const mapping = Data.map((property,index)=>{
-    return <ItemSmall key={index} property={property}/>
-  });
-  const RecentItemsMapped = RecentItems.map((property,index)=>{
-    return <ItemSmall key={index} property={property}/>
-  })
+  useEffect(() => {
+    Promise.all([
+      fetcher('/api/getRecentAdded'),
+      fetcher('/api/get'),
+    ]).then(([recentItems, data]) => {
+      SetItems(recentItems);
+      SetData(data);
+    });
+  }, []);
+
+  const mapping = useMemo(() => {
+    return Data.map((property,index)=>{
+      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
+    });
+  }, [RecentItems]);
+
+  const RecentItemsMapped = useMemo(() => {
+    return RecentItems.map((property,index)=>{
+      return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
+    });
+  }, [RecentItems]);
+  
   return (
     <>
       <Head>
