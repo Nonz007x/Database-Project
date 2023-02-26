@@ -5,6 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { fetcher } from "@/pages/api/fetcher";
 import { Button } from "@mui/material";
+import Link from 'next/link'
 
 function Navbar() {
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
@@ -15,9 +16,9 @@ function Navbar() {
                 <LoginPage/>
             </div>
             <div id="midle">
-                <a href="http://localhost:3000/">
-                    <img id="logo" src={picUrl} />
-                </a>
+                <Link href = "/">
+                        <img id="logo" src={picUrl} />
+                </Link>
             </div>
                 <div id="right">
                     <Button variant="contained" className="NavbarButton">
@@ -31,9 +32,9 @@ function Navbar() {
                         alert(Search);
                         e.preventDefault();
                     }}>
-                        <SearchIcon id="SearchIcon" onClick={()=>{
-                            window.open("http://localhost:3000/search/iconClicked")
-                        }}/>
+                        <Link href = "http://localhost:3000/search/iconClicked">
+                        <SearchIcon id="SearchIcon"/>
+                        </Link>
                         <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => { setSearch(e.target.value)
                             // fetcher("/api/search/"+From+"/"+Search)
                         }} />
