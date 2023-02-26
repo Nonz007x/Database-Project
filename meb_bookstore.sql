@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2023 at 11:27 AM
+-- Generation Time: Feb 26, 2023 at 06:52 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -21,6 +21,17 @@ SET time_zone = "+00:00";
 --
 -- Database: `meb_bookstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `author`
+--
+
+CREATE TABLE `author` (
+  `authorId` varchar(11) NOT NULL,
+  `authorName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -84,6 +95,25 @@ CREATE TABLE `category` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `creditcard`
+--
+
+CREATE TABLE `creditcard` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cardNumber` varchar(16) NOT NULL,
+  `cardHolderName` varchar(255) NOT NULL,
+  `expiry_month` int(11) NOT NULL,
+  `expiry_year` int(11) NOT NULL,
+  `cvv` varchar(4) NOT NULL,
+  `billingAddress` varchar(255) NOT NULL,
+  `createDate` date NOT NULL,
+  `updatedDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -101,6 +131,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `firstname`, `lastname`, `userlevel`, `valid`) VALUES
+('nit', '123', '', '', 'm', 1),
 ('nitid', '123', '', '', 'm', 1),
 ('test', '12344', '', '', 'm', 1);
 
@@ -121,11 +152,28 @@ ALTER TABLE `categorized`
   ADD PRIMARY KEY (`bookId`,`categoryId`);
 
 --
+-- Indexes for table `creditcard`
+--
+ALTER TABLE `creditcard`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `creditcard`
+--
+ALTER TABLE `creditcard`
+  ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
