@@ -2,8 +2,25 @@
 import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
-    const { username, password } = req.body;
+    const { username, password , repassword, acceptTnC} = req.body;
     try {
+        let errorMessage = '';
+
+        if (username === '' || password === '') {
+            errorMessage = 'Please fill in all fields';
+        } else if (/\W/.test(username)) {
+            errorMessage = 'Username must not contain special characters';
+        } else if (password !== repassword) {
+            errorMessage = 'Passwords do not match';
+        } else if (!acceptTnC) {
+            errorMessage = 'Please accept the terms and conditions';
+        }
+
+        if (errorMessage !== '') {
+            res.json(errorMessage)
+            console.log(res.json(errorMessage))
+            return;
+        }
         const sqlSelect = await excuteQuery({
             query: 'SELECT username FROM user WHERE username = ?',
             values: [username]
