@@ -3,8 +3,11 @@ import { TextField } from "@mui/material";
 import { fontSize } from "@mui/system";
 import Head from "next/head";
 import Button from "@mui/material";
+import AuthorAutocomplete from "@/components/AuthorAutocomplete.js";
+import { useState } from "react";
 
-export default function addbookpage() {
+export default function addbook() {
+    const [testValue,setTestValue] = useState([])
     
     return (
         <>
@@ -25,7 +28,14 @@ export default function addbookpage() {
                                 <div id="data_author_publisher_category">
                                     <div className="addbook_input_feild">
                                         <p>ภาพหน้าปก</p>
-                                        <TextField size="small" label="Url ภาพ" sx={{float:"right"}} />
+                                        <TextField size="small" label="Url ภาพ" />
+                                        <p>นักเขียน</p>
+                                        <AuthorAutocomplete 
+                                            onChange={(e)=>{
+                                                setTestValue(e)
+                                                // console.log(SelectedValue)
+                                            }}
+                                        />  
                                     </div>
                                     {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p> */}
