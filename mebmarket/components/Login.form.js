@@ -22,6 +22,23 @@ function LoginPage() {
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if(UserName === '' || password === ''){
+      alert("กรุณากรอกข้อมูลให้ครบ")
+      return;
+    }
+    fetcher("/api/user/"+UserName+"/"+password).then((e)=>{
+      if (e.length === 0) {
+        alert("username หรือ รหัสผ่านผิด")
+      }
+      else{
+        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username)
+        setLoginStatus("ผู้ใช้ : "+e[0].username)
+        setIsLoginFormVisible(false)
+      }
+    })}
+  
   const [LoginStatus,setLoginStatus] = useState("ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก");
 // todo: เปลี่ยนปุ่มล็อกอินเป็นปุ่ม profile**
   return (
@@ -43,7 +60,7 @@ function LoginPage() {
               <CloseIcon  onClick={handleClick} />    
             </div>
               <h2 id="HeadLogin">Login</h2>
-          <div id="loginBar">
+          <form onSubmit={handleFormSubmit}>
             <div id="UsernameZone">
             <TextField className="TextField"
               type="text"
@@ -75,26 +92,10 @@ function LoginPage() {
               )}
             </div>
             <div className="LoginButtonZone">
-              <Button className="GoDoit" variant="contained" size="small"
-                onClick={()=>{
-                  if(UserName === '' || password === ''){
-                    alert("กรุณากรอกข้อมูลให้ครบ")
-                    return;
-                  }
-                  fetcher("/api/user/"+UserName+"/"+password).then((e)=>{
-                    if (e.length === 0) {
-                      alert("username หรือ รหัสผ่านผิด")
-                    }
-                    else{
-                      alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username)
-                      setLoginStatus("ผู้ใช้ : "+e[0].username)
-                      setIsLoginFormVisible(false)
-                    }
-                  })}}
-              >Login</Button>
+              <Button className="GoDoit" variant="contained" size="small"type="submit">Login</Button>
               <RegisterPage className="PleaseGoToCenter" />
             </div>
-          </div>
+          </form>
           </div>
         </div>
       ) : null}
