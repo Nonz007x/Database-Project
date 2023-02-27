@@ -24,20 +24,36 @@ function LoginPage() {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     if(UserName === '' || password === ''){
       alert("กรุณากรอกข้อมูลให้ครบ")
       return;
     }
-    fetcher("/api/user/"+UserName+"/"+password).then((e)=>{
-      if (e.length === 0) {
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        username: UserName,
+        password: password,
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
         alert("username หรือ รหัสผ่านผิด")
-      }
-      else{
-        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ "+e[0].username)
-        setLoginStatus("ผู้ใช้ : "+e[0].username)
+      } else {
+        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data[0].username)
+        setLoginStatus("ผู้ใช้ : " + data[0].username)
         setIsLoginFormVisible(false)
       }
-    })}
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
   
   const [LoginStatus,setLoginStatus] = useState("ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก");
 // todo: เปลี่ยนปุ่มล็อกอินเป็นปุ่ม profile**
