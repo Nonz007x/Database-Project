@@ -3,12 +3,12 @@ import { TextField } from "@mui/material";
 import { fontSize } from "@mui/system";
 import Head from "next/head";
 import Button from "@mui/material";
-import AuthorAutocomplete from "@/components/AuthorAutocomplete.js";
+import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useState } from "react";
 
 export default function addbook() {
-    const [testValue,setTestValue] = useState([])
-    
+    const [author,setAuthor] = useState([]) //นักเขียน
+
     return (
         <>
             <Head>
@@ -30,12 +30,8 @@ export default function addbook() {
                                         <p>ภาพหน้าปก</p>
                                         <TextField size="small" label="Url ภาพ" />
                                         <p>นักเขียน</p>
-                                        <AuthorAutocomplete 
-                                            onChange={(e)=>{
-                                                setTestValue(e)
-                                                // console.log(SelectedValue)
-                                            }}
-                                        />  
+                                        <AuthorAutocomplete onChange={e=>setAuthor(e)}
+                                        /> 
                                     </div>
                                     {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p> */}

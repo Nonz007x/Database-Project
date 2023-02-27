@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import {fetcher}  from "../pages/api/fetcher"
 
-export default function AuthorAutocomplete(){
+export default function AuthorAutocomplete(props){
+    // console.log(props)
     const [Option,setOption] = useState([])
     const [SelectedValue,setSelectedValue] = useState(null)
     useEffect(()=>{
@@ -15,12 +16,14 @@ export default function AuthorAutocomplete(){
     return (
         <>
             <Autocomplete
+                id="testAutocomplete"
+                sx={{width:300}}
                 options={Option}
-                renderInput={(params)=> <TextField {...params} />}
+                renderInput={(params)=> <TextField {...params} label="นักเขียน" size="small"/>}
+                value={SelectedValue}
                 freeSolo
                 onChange={(e,newValue)=>{
-                    setSelectedValue(newValue)
-                    // console.log(SelectedValue)
+                    props.onChange(newValue)
                 }}
             />
         </>
