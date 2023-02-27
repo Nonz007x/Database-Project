@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { TextField } from "@mui/material";
+import { alertClasses, TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
@@ -23,9 +23,27 @@ export default function RegisterPage() {
     setShowrePassword(!showrePassword);
   };
 
-  const [acceptTnC,setacceptTnC] = useState(false);
-  const handleCheck = (e) =>{
+  const [acceptTnC, setacceptTnC] = useState(false);
+  const handleCheck = (e) => {
     setacceptTnC(e.target.checked)
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/insert', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        username: UserName,
+        password: password,
+        repassword: repassword,
+        acceptTnC: acceptTnC,
+      })
+    }).then(e => e.json()).then(data => {
+      alert(JSON.stringify(data));
+    });
   }
 
   return (
@@ -42,92 +60,70 @@ export default function RegisterPage() {
         <div div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
             <div id="CloseLogin">
-              <CloseIcon  onClick={handleClick} />    
+              <CloseIcon onClick={handleClick} />
             </div>
-              <h2 id="HeadLogin">Register</h2>
-          <div id="loginBar">
-            <div id="UsernameZone">
-            <TextField className="TextField"
-              type="text"
-              size="small"
-              label="User Name"
-              value={UserName}
-              onChange={(e) => {
-                setUserName(e.target.value);
-              }}
-            />
-            </div>
-            <div id="PasswordZone">
-                <TextField className="TextField" id="PasswordField" 
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  size="small"
-                  label="Password"
-                />
-                {!!!showPassword ? (
-                <VisibilityIcon className="eye" onClick={handleClickPassword} />
-              ) : (
-                <VisibilityOffIcon
-                  className="eye"
-                  onClick={handleClickPassword}
-                />
-              )}
-            </div>
-            <div id="PasswordZone">
-                <TextField className="TextField"  
-                  type={showrePassword ? "text" : "password"}
-                  value={repassword}
-                  onChange={(e) => {
-                    setrePassword(e.target.value);
-                  }}
-                  size="small"
-                  label="Retype-Password"
-                />
-                {!showrePassword ? (
-                <VisibilityIcon className="eye" onClick={handleClickrePassword} />
-              ) : (
-                <VisibilityOffIcon
-                  className="eye"
-                  onClick={handleClickrePassword}
-                />
-              )}
-            </div>
-            <div>
-              <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck}/>
-              <label htmlFor="Accept">{" I accept term and condition"}</label>
-            </div>
-            <div className="LoginButtonZone">
-              <Button className="GoDoit" variant="contained" size="small" onClick={()=>{
-                if(password!==repassword){
-                  alert("รหัสผ่านไม่ตรงกัน")
-                }
-                else if(!acceptTnC){
-                  alert("Please accept term and condition")
-                }
-                else{
-                  fetch('/api/insert', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        username:UserName,
-                        password:password,
-                    })
-                }).then(e => e.json()).then(data => {
-                  alert(JSON.stringify(data))
-                })}
-              }}>Register</Button>
-            </div>
-          </div>
+            <h2 id="HeadLogin">Register</h2>
+            <form onSubmit={handleFormSubmit}>
+                <div id="UsernameZone">
+                  <TextField className="TextField"
+                    type="text"
+                    size="small"
+                    label="Username"
+                    value={UserName}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                  />
+                </div>
+                <div id="PasswordZone">
+                  <TextField className="TextField" id="PasswordField"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    size="small"
+                    label="Password"
+                  />
+                  {!!!showPassword ? (
+                    <VisibilityIcon className="eye" onClick={handleClickPassword} />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="eye"
+                      onClick={handleClickPassword}
+                    />
+                  )}
+                </div>
+                <div id="PasswordZone">
+                  <TextField className="TextField"
+                    type={showrePassword ? "text" : "password"}
+                    value={repassword}
+                    onChange={(e) => {
+                      setrePassword(e.target.value);
+                    }}
+                    size="small"
+                    label="Retype-Password"
+                  />
+                  {!showrePassword ? (
+                    <VisibilityIcon className="eye" onClick={handleClickrePassword} />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="eye"
+                      onClick={handleClickrePassword}
+                    />
+                  )}
+                </div>
+                <div>
+                  <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck} />
+                  <label htmlFor="Accept">{" I accept term and condition"}</label>
+                </div>
+                <div className="LoginButtonZone">
+                  <Button className="GoDoit" variant="contained" size="small" type="submit">Register</Button>
+                </div>
+            </form>
           </div>
         </div>
       ) : null}
     </>
   );
 }
-
-

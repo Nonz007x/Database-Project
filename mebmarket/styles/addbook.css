@@ -1,0 +1,14 @@
+.flex_direction_row{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+.addbook_input_feild{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    /* background-color: #2196F3; */
+    padding: 0.5em;
+    border: 1px solid green;
+}
