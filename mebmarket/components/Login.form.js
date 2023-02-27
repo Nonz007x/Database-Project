@@ -7,7 +7,6 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import RegisterPage from "./Register.form";
 import { fetcher } from "@/pages/api/fetcher";
 import { Login, Password } from "@mui/icons-material";
-
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
