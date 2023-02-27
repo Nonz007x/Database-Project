@@ -33,11 +33,11 @@ export default function Page(){
             </Head>
             <Navbar/>
             {(Data != null)?
-                <div id="book_bookname_Container">
-                    <div id="book_bookname_PageAdjust">
-                        <h1 id="book_bookname_Bookname">{Data.bookname}</h1>
-                        <div id="book_book_ItemAndDetail">
-                            <img src={Data.cover} id="book_Img"/>
+                <div className="book_bookname_Container">
+                    <div className="book_bookname_PageAdjust">
+                        <h1 className="book_bookname_Bookname">{Data.bookname}</h1>
+                        <div className="book_book_ItemAndDetail">
+                            <img src={Data.cover} className="book_Img"/>
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
                                     <p>โดย <a href="">{Data.authorName}</a></p>
