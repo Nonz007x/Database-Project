@@ -7,7 +7,7 @@ import "@/styles/index.css"
 import "@/styles/book.css"
 import "@/styles/searchbar.css"
 import "@/styles/addbook.css"
-
+import "@/styles/deletebook.css"
 export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
