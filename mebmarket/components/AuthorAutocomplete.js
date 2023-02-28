@@ -8,7 +8,7 @@ export default function AuthorAutocomplete(props){
     const [SelectedValue,setSelectedValue] = useState(null)
     useEffect(()=>{
         fetcher("http://localhost:3000/api/get").then(e=>{
-            const authorNameMapped = e.map(Object=>Object.authorName)
+            const authorNameMapped = e.map(Object=>Object.author)
             const authorFilter = [...new Set(authorNameMapped)]
             setOption(authorFilter)
         })
