@@ -30,6 +30,7 @@
     width: 60%;
 }
 .TextField{
+    /* position: relative; */
     margin: 10px 0;
     width: 100%;
 }
@@ -56,7 +57,8 @@
 }
 .eye{
     position: absolute;
-    right: 10px;
+    right: 16px;
+    top: 16px;
 }
 .LoginButtonZone{
     display: flex;

@@ -92,6 +92,7 @@ function LoginPage() {
               <CloseIcon onClick={handleClick} />
             </div>
             <h2 id="HeadLogin">Login</h2>
+            <div>
             <form onSubmit={handleFormSubmit}>
               <div id="UsernameZone">
                 <TextField className="TextField"
@@ -128,6 +129,7 @@ function LoginPage() {
               </div>
             </form>
             <RegisterPage className="PleaseGoToCenter" />
+            </div>
           </div>
         </div>
       ) : null}
