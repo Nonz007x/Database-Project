@@ -26,7 +26,7 @@ export default function Home() {
     return Data.map((property,index)=>{
       return <ItemSmall key={`${property.bookId}-${index}`} property={property}/>
     });
-  }, [RecentItems]);
+  }, [Data]);
 
   const RecentItemsMapped = useMemo(() => {
     return RecentItems.map((property,index)=>{
