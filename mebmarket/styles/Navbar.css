@@ -44,9 +44,8 @@
   flex-direction: row;
   position: relative;
   align-items: center;
-
-
 }
+
 #right .SearchBar{
   height: 32px;
   padding-left: 36px;
@@ -76,4 +75,11 @@
 .NavbarLink{
   position: absolute;
   height: 32px;
+}
+#left{
+  font-display: flex ;
+  justify-content: space-between;
+}
+.LinkWithOutUnderLine{
+  text-decoration: none;
 }

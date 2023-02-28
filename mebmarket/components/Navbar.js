@@ -3,9 +3,10 @@ import LoginPage from "./Login.form";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useRouter } from "next/router";
+import EditIcon from '@mui/icons-material/Edit';
 import { Button } from "@mui/material";
 import Link from 'next/link'
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 function Navbar() {
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
@@ -14,7 +15,20 @@ function Navbar() {
         <div className="BG">
             <div id="left">
                 <LoginPage/>
+                <Link href="http://localhost:3000/admin" className="LinkWithOutUnderLine">
+                    <Button className="NavbarButton" variant="contained">
+                        <EditIcon/>
+                        Admin
+                    </Button>
+                </Link>
+                <Link href="http://localhost:3000/addbook" className="LinkWithOutUnderLine">
+                    <Button className="NavbarButton" variant="contained">
+                        <AutoStoriesIcon/>
+                        เพิ่มหนังสือ
+                    </Button>
+                </Link>
             </div>
+            
             <div id="midle">
                 <Link href = "/">
                         <img id="logo" src={picUrl} />
@@ -24,7 +38,6 @@ function Navbar() {
                     <Button variant="contained" className="NavbarButton">
                         <FavoriteIcon/>
                     </Button>
-
                     <Button variant="contained" className="NavbarButton" id="addShoppingCartIconMargin">
                         <ShoppingCartIcon />
                     </Button>
