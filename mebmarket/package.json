@@ -21,6 +21,7 @@
     "eslint-config-next": "13.1.6",
     "iron-session": "^6.3.1",
     "mebmarket": "file:",
+    "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "next": "13.1.6",
     "next-auth": "^4.19.2",

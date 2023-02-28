@@ -38,6 +38,7 @@ export default function RegisterPage() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
     if (!acceptTnC) {
       alert('Please accept the terms and conditions')
       return
