@@ -6,6 +6,7 @@ import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { getdate } from "@/shared/getdate";
+import CheckIcon from '@mui/icons-material/Check';
 
 export default function addbook() {
     const Date = getdate()
@@ -36,7 +37,7 @@ export default function addbook() {
     const [BookId, setBookId] = useState([])
     const [Bookname, setBookname] = useState([])
     const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
-    const [Author, setAuthor] = useState([]) //นักเขียน
+    const [Author, setAuthor] = useState(0) //นักเขียน
     const [Price, setPrice] = useState([])
     const [Synopsis, setSynopsis] = useState([])
     const TempImg = useRef(0)
@@ -66,16 +67,17 @@ export default function addbook() {
                                             (TempImg.current && 1) ? setImgLink(TempImg.current) :
                                                 setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
                                         }}
-                                        > {/*ใส่ภาพลงใน useState ImgLink*/}
-
+                                        >
                                             <TextField size="small" label="Url Image" onChange={(e) => { TempImg.current = e.target.value }} />
                                             <Button variant="contained" type="submit" className="Submit_Button">ยืนยัน</Button>
                                         </form>
                                         <p>รหัสหนังสือ</p>
                                         <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ไอดีหนังสือ" value={BookId} onChange={e => { setBookId(e.target.value) }} />
                                         <p>นักเขียน</p>
-                                        <AuthorAutocomplete onChange={e => setAuthor(e)} />
-                                        {Author}
+                                        <div>
+                                            <AuthorAutocomplete onChange={e => setAuthor(e)} />
+                                            {(Author) && 1 ? <CheckIcon /> : <div />}
+                                        </div>
                                         <p>ราคา</p>
                                         <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={Price} onChange={e => { setPrice(e.target.value) }} />
                                     </div>
