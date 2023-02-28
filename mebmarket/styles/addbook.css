@@ -82,3 +82,9 @@
     justify-content: center;
     padding: 10px;
 }
+
+.AnchorAuthor{
+    text-decoration: none;
+    font-weight: lighter;
+    color: var(--main-color);
+}

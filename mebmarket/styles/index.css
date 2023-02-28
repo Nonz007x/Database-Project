@@ -47,3 +47,11 @@
     width: 100%;
     height: auto;
 }
+.AddWidthToShowAll{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid gray;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
