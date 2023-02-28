@@ -30,6 +30,7 @@ export default function RegisterPage() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    console.log(e);
     fetch('http://localhost:3000/api/insert', {
       method: 'POST',
       headers: {

@@ -16,10 +16,8 @@ export default function SearchPage(){
     const [Searchword,setSearchword] = useState(router.query.search)
     const [Result,setResult] = useState([])
     useEffect(()=>{
-        // const tempQuery = router
-
+        setSelectTab(router.query.type)
         setSearchword(router.query.search)
-        console.log(router.query.search)
     },[router])
     useEffect(()=>{
         fetcher("http://localhost:3000/api/search/"+SelectTab+"/"+Searchword).then((e)=>{
