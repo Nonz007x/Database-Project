@@ -51,6 +51,9 @@ export default function addbook() {
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
             <Navbar />
+            <div className='CenterChild'>
+            <div className="App">
+            <div className='ItemsBox'>
             <div className="addbook_container">
                 <div className="addbook_name_container">
                     <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={Bookname} onChange={(e) => {
@@ -101,6 +104,9 @@ export default function addbook() {
                     <Button onClick={handleFormSubmit}
                     variant="contained" className="Submit_Button"><LocalLibraryIcon />เพิ่มหนังสือ</Button>
                 </div>
+            </div>
+            </div>
+            </div>
             </div>
         </>
     )

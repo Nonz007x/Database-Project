@@ -1,11 +1,11 @@
 .addbook_container {
     width: 60vw;
-    height: 100vh;
+    /* height: 100vh; */
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding: 10vh 0;
+    /* padding: 10vh 0; */
     justify-content: center;
     align-items: center;
 }
@@ -51,11 +51,12 @@
 }
 
 .add_cover_submit {
-    right: 0;
+    /* right: 0; */
     background-color: var(--main-color);
     font-weight: 600;
     border-radius: 30px;
-    margin-left: 2rem;
+    /* padding: 0 auto; */
+    /* width: 100%; */
 }
 
 .addbook_detail {
