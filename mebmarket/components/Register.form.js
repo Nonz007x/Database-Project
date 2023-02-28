@@ -1,9 +1,10 @@
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { alertClasses, TextField } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 
 export default function RegisterPage() {
@@ -14,22 +15,34 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setShowrePassword] = useState(false);
   const [UserName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setrePassword] = useState("");
+  const [acceptTnC, setacceptTnC] = useState(false);
+
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const handleClickrePassword = () => {
     setShowrePassword(!showrePassword);
   };
 
-  const [acceptTnC, setacceptTnC] = useState(false);
   const handleCheck = (e) => {
     setacceptTnC(e.target.checked)
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (!acceptTnC) {
+      alert('Please accept the terms and conditions')
+      return
+    }
+
     fetch('/api/insert', {
       method: 'POST',
       headers: {
@@ -38,13 +51,50 @@ export default function RegisterPage() {
       body: new URLSearchParams({
         username: UserName,
         password: password,
+        email: email,
         repassword: repassword,
         acceptTnC: acceptTnC,
       })
     }).then(e => e.json()).then(data => {
-      alert(JSON.stringify(data));
+      JSON.stringify(data);
+      if (data === 0){
+        setUsernameError('Username นี้ถูกใช้งานแล้ว')
+      } else if (data === 1) {
+        setEmailError('Email นี้ถูกใช้งานแล้ว')
+      }
     });
   }
+
+  useEffect(() => {
+    const containRestricted = /\W/.test(UserName);
+    if (containRestricted) {
+      setUsernameError("Username must not contain special characters");
+    } else if (UserName === "") {
+      setUsernameError("Please enter username");
+    } else {
+      setUsernameError("");
+    }
+  }, [UserName]);
+
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(email)
+    if (isValidEmail) {
+      setEmailError("");
+    } else {
+      setEmailError("Invalid email format");
+    }
+  }, [email])
+
+  useEffect(() => {
+    if (password === '') {
+      setPasswordError("Please enter password");
+    } else if(password !== repassword) {
+      setPasswordError("Passwords do not match");
+    } else {
+      setPasswordError('')
+    }
+  }, [password, repassword])
 
   return (
     <>
@@ -57,69 +107,80 @@ export default function RegisterPage() {
         สมัครสมาชิก
       </Button>
       {isLoginFormVisible && 1 ? (
-        <div div id="TransparentBg">
+        <div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
             <div id="CloseLogin">
               <CloseIcon onClick={handleClick} />
             </div>
             <h2 id="HeadLogin">Register</h2>
             <form onSubmit={handleFormSubmit}>
-                <div id="UsernameZone">
-                  <TextField className="TextField"
-                    type="text"
-                    size="small"
-                    label="Username"
-                    value={UserName}
-                    onChange={(e) => {
-                      setUserName(e.target.value);
-                    }}
+              <div id="UsernameZone">
+                <TextField className="TextField"
+                  type="text"
+                  size="small"
+                  label="Username"
+                  value={UserName}
+                  onChange={(e) => { setUserName(e.target.value) }}
+                  error={Boolean(usernameError)}
+                  helperText={usernameError}
+                />
+              </div>
+              <div>
+                <TextField className="TextField"
+                  size="small"
+                  label="Email"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value) }}
+                  error={Boolean(emailError)}
+                  helperText={emailError}
+                />
+              </div>
+              <div id="PasswordZone">
+                <TextField className="TextField"
+                  type={showPassword ? "text" : "password"}
+                  size="small"
+                  label="Password"
+                  value={password}
+                  onChange={(e) => { setPassword(e.target.value) }}
+                  error={Boolean(passwordError)}
+                  helperText={passwordError}
+                />
+                {!!!showPassword ? (
+                  <VisibilityIcon className="eye" onClick={handleClickPassword} />
+                ) : (
+                  <VisibilityOffIcon
+                    className="eye"
+                    onClick={handleClickPassword}
                   />
-                </div>
-                <div id="PasswordZone">
-                  <TextField className="TextField" id="PasswordField"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                    size="small"
-                    label="Password"
+                )}
+              </div>
+
+              <div id="PasswordZone">
+                <TextField className="TextField"
+                  type={showrePassword ? "text" : "password"}
+                  value={repassword}
+                  size="small"
+                  label="Retype-Password"
+                  onChange={(e) => {setrePassword(e.target.value);}}
+                  error={Boolean(passwordError)}
+                  helperText={passwordError}
+                />
+                {!!!showrePassword ? (
+                  <VisibilityIcon className="eye" onClick={handleClickrePassword} />
+                ) : (
+                  <VisibilityOffIcon
+                    className="eye"
+                    onClick={handleClickrePassword}
                   />
-                  {!!!showPassword ? (
-                    <VisibilityIcon className="eye" onClick={handleClickPassword} />
-                  ) : (
-                    <VisibilityOffIcon
-                      className="eye"
-                      onClick={handleClickPassword}
-                    />
-                  )}
-                </div>
-                <div id="PasswordZone">
-                  <TextField className="TextField"
-                    type={showrePassword ? "text" : "password"}
-                    value={repassword}
-                    onChange={(e) => {
-                      setrePassword(e.target.value);
-                    }}
-                    size="small"
-                    label="Retype-Password"
-                  />
-                  {!showrePassword ? (
-                    <VisibilityIcon className="eye" onClick={handleClickrePassword} />
-                  ) : (
-                    <VisibilityOffIcon
-                      className="eye"
-                      onClick={handleClickrePassword}
-                    />
-                  )}
-                </div>
-                <div>
-                  <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck} />
-                  <label htmlFor="Accept">{" I accept term and condition"}</label>
-                </div>
-                <div className="LoginButtonZone">
-                  <Button className="GoDoit" variant="contained" size="small" type="submit">Register</Button>
-                </div>
+                )}
+              </div>
+              <div>
+                <input type="checkbox" id="Accept" value={acceptTnC} onChange={handleCheck} />
+                <label htmlFor="Accept">{" I accept term and condition"}</label>
+              </div>
+              <div className="LoginButtonZone">
+                <Button className="GoDoit" variant="contained" size="small" type="submit">Register</Button>
+              </div>
             </form>
           </div>
         </div>
