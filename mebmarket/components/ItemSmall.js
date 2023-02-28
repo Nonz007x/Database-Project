@@ -8,7 +8,7 @@ function ItemSmall(props) {
     return (
         
         <div className="book_list" onClick={()=>{
-            router.push("./book/"+property.bookname) // มันเร็วกว่า Added by Nonz007x
+            router.push("http://localhost:3000/book/"+property.bookname) // มันเร็วกว่า Added by Nonz007x
         }}>
             <div className="book_cover">
                 <img title={property.bookname} src={property.cover} />

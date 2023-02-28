@@ -46,7 +46,7 @@ export default function Page(){
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button">ซื้อ {Data.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{Data.rating}</h5>
@@ -58,9 +58,12 @@ export default function Page(){
                                 </div>
                             </div>
                         </div>
-                        <div id="synopsis">
+                        <div className="synopsis">
                             <p>
                                 เนื้อเรื่องย่อ
+                            </p>
+                            <p>
+                                {Data.synopsis}
                             </p>
                         </div>
                     </div>

@@ -1,14 +1,13 @@
 import Navbar from "@/components/Navbar";
 import { TextField } from "@mui/material";
-import { fontSize } from "@mui/system";
 import Head from "next/head";
-import Button from "@mui/material";
+import {Button} from "@mui/material";
 import AuthorAutocomplete from "@/components/AuthorAutocomplete";
-import { useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 export default function addbook() {
+    const [ImgLink,setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
     const [author,setAuthor] = useState([]) //นักเขียน
-
+    const TempImg = useRef(0)
     return (
         <>
             <Head>
@@ -22,13 +21,21 @@ export default function addbook() {
                 <div className="book_bookname_Container">
                     <div className="book_bookname_PageAdjust">
                         <TextField size="large" label="ชื่อหนังสือ" sx={{width:500}} />
-                        <div className="book_book_ItemAndDetail">
-                            <img src="https://upload.wikimedia.org/wikipedia/th/f/fe/Tokidoki_Bosotto_Russia-go_de_Dereru_Tonari_no_Aalya-san.jpg" className="book_Img"/>
+                        <div    className="book_book_ItemAndDetail">
+                            <img src={ImgLink} className="book_Img"/>
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
                                     <div className="addbook_input_feild">
                                         <p>ภาพหน้าปก</p>
-                                        <TextField size="small" label="Url ภาพ" />
+                                        <form onSubmit={(e)=>{
+                                            e.preventDefault();
+                                            (TempImg.current && 1)? setImgLink(TempImg.current):
+                                            setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")}}
+                                            > {/*ใส่ภาพลงใน useState ImgLink*/}
+                                            
+                                            <TextField size="small" label="Url Image" onChange={(e)=>{TempImg.current = e.target.value }}/>
+                                            <Button variant="contained" type="submit" className="Submit_Button">ยืนยัน</Button>
+                                        </form>
                                         <p>นักเขียน</p>
                                         <AuthorAutocomplete onChange={e=>setAuthor(e)}
                                         /> 
@@ -50,10 +57,14 @@ export default function addbook() {
                                 </div> */}
                             </div>
                         </div>
-                        <div id="synopsis">
-                            <p>
-                                เนื้อเรื่องย่อ
-                            </p>
+                        <div className="synopsis">
+                            <TextField
+                                className="MultilineTextFeild"
+                                id="outlined-multiline-flexible"
+                                label="เนื้อเรื่องย่อ"
+                                multiline
+                                maxRows={6}
+                            />
                         </div>
                     </div>
                 </div>
