@@ -8,7 +8,7 @@ function ItemSmall(props) {
     return (
         
         <div className="book_list" onClick={()=>{
-            router.push("./book/"+property.bookname) // มันเร็วกว่า Added by Nonz007x
+            router.push("http://localhost:3000/book/"+property.bookname) // มันเร็วกว่า Added by Nonz007x
         }}>
             <div className="book_cover">
                 <img title={property.bookname} src={property.cover} />
@@ -21,7 +21,7 @@ function ItemSmall(props) {
             </div>
             <div className="bottom_section">
                 <div className="authur_rating">
-                    <div><h6>{property.authorName}</h6></div>
+                    <div><h6>{property.author}</h6></div>
                     <div><CustomizedRating rate={property.rating}/></div>
                 </div>
                 <Button  variant="contained" size="small" onClick={()=>{

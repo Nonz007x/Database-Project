@@ -34,3 +34,9 @@
 .TypeSearch:focus{
     border: 1px solid yellow;
 }
+.width100{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

@@ -5,6 +5,7 @@ import { fetcher } from "../api/fetcher";
 import Head from 'next/head'
 import { Button } from "@mui/material";
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
+import Link from "next/link";
 
 export default function Page(){
     const [Data,SetData] = useState(null);
@@ -40,13 +41,13 @@ export default function Page(){
                             <img src={Data.cover} className="book_Img"/>
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
-                                    <p>โดย <a href="">{Data.authorName}</a></p>
+                                    <p>โดย <a href={"http://localhost:3000/search/author/"+Data.author}>{Data.author}</a></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" id="Buy_Button">ซื้อ {Data.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button">ซื้อ {Data.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{Data.rating}</h5>
@@ -58,9 +59,12 @@ export default function Page(){
                                 </div>
                             </div>
                         </div>
-                        <div id="synopsis">
+                        <div className="synopsis">
                             <p>
                                 เนื้อเรื่องย่อ
+                            </p>
+                            <p>
+                                {Data.synopsis}
                             </p>
                         </div>
                     </div>

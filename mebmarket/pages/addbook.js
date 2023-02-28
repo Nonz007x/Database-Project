@@ -1,14 +1,37 @@
 import Navbar from "@/components/Navbar";
 import { TextField } from "@mui/material";
-import { fontSize } from "@mui/system";
 import Head from "next/head";
-import Button from "@mui/material";
-import AuthorAutocomplete from "@/components/AuthorAutocomplete.js";
-import { useState } from "react";
+import {Button} from "@mui/material";
+import AuthorAutocomplete from "@/components/AuthorAutocomplete";
+import { useEffect, useRef, useState } from "react";
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+
 
 export default function addbook() {
-    const [testValue,setTestValue] = useState([])
-    
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
+        fetch('http://localhost:3000/api/addbook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            bookname: Bookname,
+            cover:ImgLink,
+            author:author,
+            // repassword: repassword,
+            // acceptTnC: acceptTnC,
+          })
+        }).then(e => e.json()).then(data => {
+          alert(JSON.stringify(data));
+        });
+      }
+    const [Bookname,setBookname] = useState([])
+    const [ImgLink,setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
+    const [author,setAuthor] = useState([]) //นักเขียน
+    const [Price,setPrice] = useState([])
+    const TempImg = useRef(0)
     return (
         <>
             <Head>
@@ -21,43 +44,47 @@ export default function addbook() {
                 <Navbar/>
                 <div className="book_bookname_Container">
                     <div className="book_bookname_PageAdjust">
-                        <TextField size="large" label="ชื่อหนังสือ" sx={{width:500}} />
-                        <div className="book_book_ItemAndDetail">
-                            <img src="https://upload.wikimedia.org/wikipedia/th/f/fe/Tokidoki_Bosotto_Russia-go_de_Dereru_Tonari_no_Aalya-san.jpg" className="book_Img"/>
+                        <TextField size="large" label="ชื่อหนังสือ" sx={{width:500}} value={Bookname} onChange={(e)=>{
+                            setBookname(e.target.value)
+                        }}/>
+                        <div    className="book_book_ItemAndDetail">
+                            <img src={ImgLink} className="book_Img"/>
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
                                     <div className="addbook_input_feild">
                                         <p>ภาพหน้าปก</p>
-                                        <TextField size="small" label="Url ภาพ" />
+                                        <form onSubmit={(e)=>{
+                                            e.preventDefault();
+                                            (TempImg.current && 1)? setImgLink(TempImg.current):
+                                            setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")}}
+                                            > {/*ใส่ภาพลงใน useState ImgLink*/}
+                                            
+                                            <TextField size="small" label="Url Image" onChange={(e)=>{TempImg.current = e.target.value }}/>
+                                            <Button variant="contained" type="submit" className="Submit_Button">ยืนยัน</Button>
+                                        </form>
                                         <p>นักเขียน</p>
-                                        <AuthorAutocomplete 
-                                            onChange={(e)=>{
-                                                setTestValue(e)
-                                                // console.log(SelectedValue)
-                                            }}
-                                        />  
+                                        <AuthorAutocomplete onChange={e=>setAuthor(e)}/>
+                                        <p>ราคา</p>
+                                        <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={Price} onChange={e=>{setPrice(e.target.value)}}/>
+                                        {Number(Price)}
                                     </div>
                                     {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p> */}
                                 </div>
-                                {/* <div id="TryAndBuyDiv">
-                                    <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" id="Buy_Button">บาท</Button>
-                                </div> */}
-                                {/* <div id="RatingZone" >
-                                    <h5>{Data.rating}</h5>
-                                    <RatingAbleCustomizedRating  rate={Data.rating}/>
-                                </div> */}
-                                {/* <div id="release_date">
-                                    <p>วันที่วางขาย</p>
-                                    <p>// test</p>
-                                </div> */}
                             </div>
                         </div>
-                        <div id="synopsis">
-                            <p>
-                                เนื้อเรื่องย่อ
-                            </p>
+                        <div className="synopsis">
+                            <TextField
+                                className="MultilineTextFeild"
+                                id="outlined-multiline-flexible"
+                                label="เนื้อเรื่องย่อ"
+                                multiline
+                                maxRows={6}
+                            />
+                            <div className="Bottom_Submit_warp">
+                                <Button onClick={handleFormSubmit}
+                                variant="contained" className="Submit_Button"><LocalLibraryIcon/>เพิ่มหนังสือ</Button>
+                            </div>
                         </div>
                     </div>
                 </div>
