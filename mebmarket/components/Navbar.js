@@ -16,12 +16,12 @@ function Navbar() {
             <div id="left">
                 <LoginPage/>
                 <Link href="http://localhost:3000/admin" className="LinkWithOutUnderLine">
-                    <Button className="NavbarButton" variant="contained">
+                    <Button className="NavbarButton" size="small" variant="contained">
                         <EditIcon/>
                         Admin
                     </Button>
                 </Link>
-                <Link href="http://localhost:3000/addbook" className="LinkWithOutUnderLine">
+                <Link href="http://localhost:3000/addbook" size="small" className="LinkWithOutUnderLine">
                     <Button className="NavbarButton" variant="contained">
                         <AutoStoriesIcon/>
                         เพิ่มหนังสือ
@@ -35,10 +35,10 @@ function Navbar() {
                 </Link>
             </div>
                 <div id="right">
-                    <Button variant="contained" className="NavbarButton">
+                    <Button variant="contained" size="small" className="NavbarButton">
                         <FavoriteIcon/>
                     </Button>
-                    <Button variant="contained" className="NavbarButton" id="addShoppingCartIconMargin">
+                    <Button variant="contained" size="small" className="NavbarButton" id="addShoppingCartIconMargin">
                         <ShoppingCartIcon />
                     </Button>
                     <form onSubmit={(e)=>{
