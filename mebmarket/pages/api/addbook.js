@@ -1,4 +1,5 @@
 import excuteQuery from "@/shared/database";
+
 export default async function handler(req,res){
     const {bookId,bookname,author,price,cover,synopsis,date} = req.body;
     try{
