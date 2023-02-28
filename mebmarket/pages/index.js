@@ -11,6 +11,11 @@ export default function Home() {
   //get most recent item from api/getRecentAdded
   const [RecentItems,SetItems] =useState([])
   const [Data,SetData] = useState([])
+  const [OpenAll,setOpenAll] = useState(0)
+  const handleClick = ()=>{
+    setOpenAll(!OpenAll)
+  }
+
 
   useEffect(() => { 
     Promise.all([
@@ -55,7 +60,11 @@ export default function Home() {
                   {RecentItemsMapped}
                 </div>
               </div>
-            {mapping}
+                <div className='AddWidthToShowAll'>
+                  <Button variant='contained' className="EditButton" onClick={e=>{handleClick()}}>Show ทั้งหมด</Button>
+                </div>
+                {OpenAll&&1?mapping:null}
+              
           </div>
           
 

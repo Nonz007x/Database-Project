@@ -46,7 +46,7 @@ function Deletebook(props) {
             </div>
             <div className="Trashzone">
                 <Button variant="contained" size="large" className="EditButton" onClick={()=>{
-                    window.open("http://localhost:3000/edit"+property.bookname)
+                    window.open("http://localhost:3000/edit/"+property.bookname)
                 }}><EditIcon/></Button>
                 <Button variant="contained" size="large" className="DelButton" onClick={handleDelete}><DeleteIcon/></Button>
             </div>

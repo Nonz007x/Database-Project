@@ -52,13 +52,16 @@
 .Trashzone .DelButton{
     background-color: red;
 }
-.Trashzone .EditButton{
+.EditButton{
     background-color: var(--main-color);
 }
-.Trashzone Button:hover {
+.EditButton:hover {
     background-color: rgb(61, 61, 61);
 }
 .detailbook h4{
     font-weight:200 ;
     color: rgb(102, 102, 102);
+}
+.Trashzone .DelButton:hover{
+    background-color: rgb(61, 61, 61);
 }
