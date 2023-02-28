@@ -97,12 +97,6 @@
 .Submit_Button:hover{
     background-color: rgb(61, 61, 61);
 }
-.Bottom_Submit_warp{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
 
 #RatingZone{
     /* border: 1px solid red; */
@@ -136,8 +130,3 @@
         color: var(--font-color-gray);
         word-wrap: break-word;
     }
-
-
-.MultilineTextFeild{
-    width: 100%;
-}

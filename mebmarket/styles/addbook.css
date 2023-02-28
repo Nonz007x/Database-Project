@@ -1,14 +1,83 @@
-.flex_direction_row{
+.addbook_container {
+    width: 60vw;
+    height: 100vh;
+    /* border: 1px solid red; */
     display: flex;
-    flex-direction: row;
-    width: fit-content;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 10vh 0;
+    justify-content: center;
+    align-items: center;
 }
-.addbook_input_feild{
+
+.addbook_name_container {
+    /* border: 1px solid purple; */
     width: 100%;
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 10px;
-    /* background-color: #2196F3; */
-    padding: 0.5em;
-    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addbook_img_and_detail {
+    display: flex;
+    padding: 4rem;
+    /* border: 1px solid orange; */
+    align-items: center;
+}
+
+.addbook_cover_preview {
+    /* border: 1px solid red; */
+    display: flex;
+    width: 25vw;
+}
+
+.cover_preview {
+    height: calc(330px * 1.414);
+    aspect-ratio: 1/1.414;
+}
+
+.addbook_input_field {
+    padding: 3rem 5rem;
+    width: 100%;
+    /* border: 1px solid red; */
+    line-height: 2.5em;
+}
+
+/* .addbook_cover_container {
+    border: 1px solid purple;
+} */
+.fix-width-field {
+    width: 25rem;
+}
+
+.add_cover_submit {
+    right: 0;
+    background-color: var(--main-color);
+    font-weight: 600;
+    border-radius: 30px;
+    margin-left: 2rem;
+}
+
+.addbook_detail {
+    /* border: 1px solid red; */
+    height: 100%;
+}
+
+.author_verify {
+    display: flex;
+    align-items: center;
+}
+
+.add_synopsis {
+    /* border: 1px solid red; */
+    width: 90%;
+    max-width: 60vw;
+    margin: 25px;
+}
+
+.Bottom_Submit_warp{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
