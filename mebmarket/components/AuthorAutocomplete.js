@@ -16,7 +16,8 @@ export default function AuthorAutocomplete(props) {
         <>
             <Autocomplete
                 id="testAutocomplete"
-                sx={{ width: 300 }}
+                className="fix-width-field"
+                // sx={{width:300}}
                 options={Option}
                 renderInput={(params) => <TextField {...params} label="นักเขียน" size="small" onChange={e => {
                     props.onChange(e.target.value)
