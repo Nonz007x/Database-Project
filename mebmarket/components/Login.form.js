@@ -18,15 +18,32 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [UserName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (UserName === '' || password === '') {
-      alert("กรุณากรอกข้อมูลให้ครบ")
-      return;
+    if (UserName === '') {
+      setUsernameError("กรุณากรอก username");
+      if (password === '') {
+        setPasswordError("กรุณากรอก password");
+        return;
+      }
+    } else if (password === '') {
+      setPasswordError("กรุณากรอก password");
+      if (UserName === '') {
+        setUsernameError("กรุณากรอก username");
+        return;
+      }
+    } else {
+      setUsernameError("");
+      setPasswordError("");
     }
 
     fetch('/api/login', {
@@ -82,20 +99,20 @@ function LoginPage() {
                   size="small"
                   label="Username"
                   value={UserName}
-                  onChange={(e) => {
-                    setUserName(e.target.value);
-                  }}
+                  onChange={(e) => { setUserName(e.target.value) }}
+                  error={Boolean(usernameError)}
+                  helperText={usernameError}
                 />
               </div>
               <div id="PasswordZone">
                 <TextField className="TextField"
                   type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
                   size="small"
                   label="Password"
+                  value={password}
+                  onChange={(e) => { setPassword(e.target.value) }}
+                  error={Boolean(passwordError)}
+                  helperText={passwordError}
                 />
                 {!showPassword ? (
                   <VisibilityIcon className="eye" onClick={handleClickPassword} />
@@ -110,7 +127,7 @@ function LoginPage() {
                 <Button className="GoDoit" variant="contained" size="small" type="submit">Login</Button>
               </div>
             </form>
-                <RegisterPage className="PleaseGoToCenter" />
+            <RegisterPage className="PleaseGoToCenter" />
           </div>
         </div>
       ) : null}
