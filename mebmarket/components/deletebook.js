@@ -46,7 +46,7 @@ function Deletebook(props) {
             </div>
             <div className="Trashzone">
                 <Button variant="contained" size="large" className="EditButton"><EditIcon/></Button>
-                <Button variant="contained" size="large" className="DelButton"><DeleteIcon/></Button>
+                <Button variant="contained" size="large" className="DelButton" onClick={handleDelete}><DeleteIcon/></Button>
             </div>
         </div>
     )
