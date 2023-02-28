@@ -8,18 +8,29 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { getdate } from "@/shared/getdate";
 import CheckIcon from '@mui/icons-material/Check';
 import { useRouter } from "next/router";
+import { fetcher } from "../api/fetcher";
 
 export default function EditBook() {
     const router = useRouter();
     const DateData = getdate()
     const [Date, setDate] = useState([])
+    const [Data,SetData] = useState([])
+    const [BookId, setBookId] = useState([])
+    const [Bookname, setBookname] = useState()
+    const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
+    const [Author, setAuthor] = useState(0) //นักเขียน
+    const [Price, setPrice] = useState([])
+    const [Synopsis, setSynopsis] = useState([])
+    const [prevAuthor,setprevAuthor] = useState([])
+    const TempImg = useRef(0)
     useEffect(()=>{
-        setBookname[router.query.bookName]
+        setBookname(router.query.bookName)
+        // console.log("router.query.bookName is",router.query.bookName)
     },[router])
     useEffect(() => { setDate(DateData) }, [DateData])
     useEffect(()=>{
         const fetchData = async () => {
-            const e = await fetcher('../api/getbook/'+Bookname);
+            const e = await fetcher('http://localhost:3000/api/getbook/'+Bookname);
             SetData(e[0]);
         };
         if (Bookname) {
@@ -27,50 +38,37 @@ export default function EditBook() {
             console.log(Data)
         }
     },[Bookname])
-
-
-
-
-
-
+    useEffect(()=>{
+        if (!!Data) {
+            setAuthor(Data.author)
+            setImgLink(Data.cover)
+            setPrice(Data.price)
+            setSynopsis(Data.synopsis)
+            setprevAuthor(Data.author)
+        }
+    },[Data])
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
-        fetch('http://localhost:3000/api/addbook', {
+        fetch('http://localhost:3000/api/editbook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: new URLSearchParams({
-                bookId: BookId,
                 bookname: Bookname,
                 cover: ImgLink,
                 author: Author,
                 price: Price,
                 synopsis: Synopsis,
-                date: Date
+                date: Date,
+                bookId: BookId,
             })
         }).then(e => e.json()).then(data => {
             alert(JSON.stringify(data));
         });
     }
-
-    const [Data,SetData] = useState([])
-    const [BookId, setBookId] = useState([])
-    const [Bookname, setBookname] = useState([])
-    const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
-    const [Author, setAuthor] = useState(0) //นักเขียน
-    const [Price, setPrice] = useState([])
-    const [Synopsis, setSynopsis] = useState([])
-    const TempImg = useRef(0)
-    
-
-
-
-
-
 
 
     return (
@@ -87,7 +85,7 @@ export default function EditBook() {
             <div className='ItemsBox'>
             <div className="addbook_container">
                 <div className="addbook_name_container">
-                    <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={Bookname} onChange={(e) => {
+                    <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={Bookname||""} onChange={(e) => {
                             setBookname(e.target.value)
                     }} />
                 </div>
@@ -98,7 +96,7 @@ export default function EditBook() {
                     <div className="addbook_input_field">
                         <div className="addbook_cover_container">
                             <p>ภาพหน้าปก</p>
-                            <form onSubmit={(e) => {
+                            <form className="" onSubmit={(e) => {
                                 e.preventDefault();
                                 (TempImg.current && 1) ? setImgLink(TempImg.current) :
                                     setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
@@ -109,15 +107,13 @@ export default function EditBook() {
                             </form>
                         </div>
                         <div className="addbook_detail">
-                            <p>รหัสหนังสือ</p>
-                            <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ไอดีหนังสือ" className="fix-width-field" value={BookId} onChange={e => { setBookId(e.target.value) }} />
-                            <p>นักเขียน</p>
+                            <p>นักเขียน</p><p>เดิม : {prevAuthor}</p>
                             <div className="author_verify">
-                                <AuthorAutocomplete onChange={e => setAuthor(e)} />
+                                <AuthorAutocomplete  onChange={e => setAuthor(e)} />
                                 {(Author) && 1 ? <CheckIcon /> : <div />}
                             </div>
                             <p>ราคา</p>
-                            <TextField size="small" className="fix-width-field" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={Price} onChange={e => { setPrice(e.target.value) }} />
+                            <TextField size="small" className="fix-width-field" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={Price || ""} onChange={e => { setPrice(e.target.value) }} />
                         </div>
                     </div>
                 </div>
