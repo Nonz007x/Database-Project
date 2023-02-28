@@ -4,11 +4,6 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5em;
-    z-index: 11;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
     min-width: 600px;
     background-color: #fefefe;
     height: 25vh;

@@ -31,6 +31,8 @@
     "serverless-mysql": "^1.5.4"
   },
   "browser": {
-    "net": false
+    "net": false,
+    "tls": false,
+    "fs": false
   }
 }

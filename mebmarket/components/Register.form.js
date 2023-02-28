@@ -36,15 +36,15 @@ export default function RegisterPage() {
     setacceptTnC(e.target.checked)
   }
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (!acceptTnC) {
-      alert('Please accept the terms and conditions')
-      return
+      alert('Please accept the terms and conditions');
+      return;
     }
 
-    fetch('/api/insert', {
+    const response = await fetch('/api/insert', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -56,14 +56,16 @@ export default function RegisterPage() {
         repassword: repassword,
         acceptTnC: acceptTnC,
       })
-    }).then(e => e.json()).then(data => {
-      JSON.stringify(data);
-      if (data === 0){
-        setUsernameError('Username นี้ถูกใช้งานแล้ว')
-      } else if (data === 1) {
-        setEmailError('Email นี้ถูกใช้งานแล้ว')
-      }
     });
+
+    const data = await response.json();
+    JSON.stringify(data);
+
+    if (data === 0) {
+      setUsernameError('Username นี้ถูกใช้งานแล้ว');
+    } else if (data === 1) {
+      setEmailError('Email นี้ถูกใช้งานแล้ว');
+    }
   }
 
   useEffect(() => {
@@ -90,7 +92,7 @@ export default function RegisterPage() {
   useEffect(() => {
     if (password === '') {
       setPasswordError("Please enter password");
-    } else if(password !== repassword) {
+    } else if (password !== repassword) {
       setPasswordError("Passwords do not match");
     } else {
       setPasswordError('')
@@ -162,7 +164,7 @@ export default function RegisterPage() {
                   value={repassword}
                   size="small"
                   label="Retype-Password"
-                  onChange={(e) => {setrePassword(e.target.value);}}
+                  onChange={(e) => { setrePassword(e.target.value); }}
                   error={Boolean(passwordError)}
                   helperText={passwordError}
                 />
