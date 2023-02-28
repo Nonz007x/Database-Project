@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-function Deletebook(){
-
+function Deletebook(props){
+    
     return (
         <div className="delete_book">
             <div className="img-and-detail">

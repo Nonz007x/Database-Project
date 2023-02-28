@@ -5,9 +5,13 @@ import {Button} from "@mui/material";
 import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-
+import { getdate } from "@/shared/getdate";
 
 export default function addbook() {
+    const Date = getdate()
+    const [DateData,setDateData] = useState([])
+    useEffect(()=>{setDateData(Date)},[Date])
+    
     const handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(e);
@@ -17,20 +21,24 @@ export default function addbook() {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: new URLSearchParams({
+            bookId :BookId,
             bookname: Bookname,
             cover:ImgLink,
             author:author,
-            // repassword: repassword,
-            // acceptTnC: acceptTnC,
+            price:Price,
+            synopsis: Synopsis,
+            date:DateData
           })
         }).then(e => e.json()).then(data => {
           alert(JSON.stringify(data));
         });
       }
+    const [BookId,setBookId] = useState([])
     const [Bookname,setBookname] = useState([])
     const [ImgLink,setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
-    const [author,setAuthor] = useState([]) //นักเขียน
+    const [Author,setAuthor] = useState([]) //นักเขียน
     const [Price,setPrice] = useState([])
+    const [Synopsis,setSynopsis] = useState([])
     const TempImg = useRef(0)
     return (
         <>
@@ -62,11 +70,13 @@ export default function addbook() {
                                             <TextField size="small" label="Url Image" onChange={(e)=>{TempImg.current = e.target.value }}/>
                                             <Button variant="contained" type="submit" className="Submit_Button">ยืนยัน</Button>
                                         </form>
+                                        <p>รหัสหนังสือ</p>
+                                        <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ไอดีหนังสือ" value={BookId} onChange={e=>{setBookId(e.target.value)}}/>
                                         <p>นักเขียน</p>
                                         <AuthorAutocomplete onChange={e=>setAuthor(e)}/>
+                                        {Author}
                                         <p>ราคา</p>
                                         <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={Price} onChange={e=>{setPrice(e.target.value)}}/>
-                                        {Number(Price)}
                                     </div>
                                     {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p> */}
@@ -80,6 +90,10 @@ export default function addbook() {
                                 label="เนื้อเรื่องย่อ"
                                 multiline
                                 maxRows={6}
+                                value={Synopsis}
+                                onChange={(e)=>{
+                                    setSynopsis(e.target.value)
+                                }}
                             />
                             <div className="Bottom_Submit_warp">
                                 <Button onClick={handleFormSubmit}

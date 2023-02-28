@@ -24,6 +24,7 @@ export default function AuthorAutocomplete(props){
                 freeSolo
                 onChange={(e,newValue)=>{
                     props.onChange(newValue)
+                    setSelectedValue(newValue)
                 }}
             />
         </>
