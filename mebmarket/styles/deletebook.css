@@ -3,20 +3,19 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.5em;
+    padding: 0.75em;
     z-index: 11;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
     min-width: 600px;
     background-color: #fefefe;
-    height: 25vh;
     border-radius: 5px;
     border: 1px solid darkgrey;
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
     align-items: center;
     margin: .3rem;
+}
+.H4displayflex{
+    display: flex;
+    flex-direction: row;
 }
 .delete_book:hover {
     border: 1px solid #00bf6c;
@@ -33,24 +32,28 @@
     overflow-clip-margin: 5px;
     object-fit: cover;
     border-radius: 5px;
-    /* border: 1px solid red; */
+    box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
     object-fit: cover;
 }
 .delete_book .detailzone{
     display: flex;
     flex-direction: column;
-    /* border: 1px solid red; */
 }
-/* .delete_book .trashzone{
-    
-} */
 .img-and-detail {
     display: flex;
-    /* border: 1px solid red; */
-    width: 500px;
+    max-width: 500px;
 }
-.Trashzone Button{
+.Trashzone{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.Trashzone .DelButton{
     background-color: red;
+}
+.Trashzone .EditButton{
+    background-color: var(--main-color);
 }
 .Trashzone Button:hover {
     background-color: rgb(61, 61, 61);
