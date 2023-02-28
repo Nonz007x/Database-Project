@@ -4,10 +4,10 @@ export default async function handler(req, res) {
     try {
         const sql = await excuteQuery({
             query:
-                "UPDATE `book` SET `bookname` = ?, `author` = ?, `price` = ?, `cover` = ?, `synopsis` = ?, `date` = ? WHERE `bookId` = ?",
+                "UPDATE `book` SET `bookname` = '?', `author` = '?', `price` = '?', `cover` = '?', `synopsis` = '?', `date` = '?' WHERE `bookId` = ?",
             values: [bookname, author, price, cover, synopsis, date, bookId],
         });
-        return res.status(201).json('แก้ไขสำเร็จ', sql);
+        return res.status(201).json(sql);
     } catch (error) {
         console.log(error);
         return res.status(500).json('Internal Server Error');
