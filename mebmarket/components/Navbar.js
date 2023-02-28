@@ -18,11 +18,11 @@ function Navbar() {
                 <Link href="http://localhost:3000/admin" className="LinkWithOutUnderLine">
                     <Button className="NavbarButton" size="small" variant="contained">
                         <EditIcon/>
-                        Admin (Experimental)
+                        Admin
                     </Button>
                 </Link>
                 <Link href="http://localhost:3000/addbook" size="small" className="LinkWithOutUnderLine">
-                    <Button className="NavbarButton" variant="contained">
+                    <Button className="NavbarButton" size="small" variant="contained">
                         <AutoStoriesIcon/>
                         เพิ่มหนังสือ
                     </Button>

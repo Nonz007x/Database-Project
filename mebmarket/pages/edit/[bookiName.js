@@ -7,11 +7,33 @@ import { useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { getdate } from "@/shared/getdate";
 import CheckIcon from '@mui/icons-material/Check';
+import { useRouter } from "next/router";
 
-export default function addbook() {
-    const Date = getdate()
-    const [DateData, setDateData] = useState([])
-    useEffect(() => { setDateData(Date) }, [Date])
+export default function EditBook() {
+    const router = useRouter();
+    const DateData = getdate()
+    const [Date, setDate] = useState([])
+    useEffect(()=>{
+        setBookname[router.query.bookName]
+    },[router])
+    useEffect(() => { setDate(DateData) }, [DateData])
+    useEffect(()=>{
+        const fetchData = async () => {
+            const e = await fetcher('../api/getbook/'+Bookname);
+            SetData(e[0]);
+        };
+        if (Bookname) {
+            fetchData();
+            console.log(Data)
+        }
+    },[Bookname])
+
+
+
+
+
+
+
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -28,12 +50,14 @@ export default function addbook() {
                 author: Author,
                 price: Price,
                 synopsis: Synopsis,
-                date: DateData
+                date: Date
             })
         }).then(e => e.json()).then(data => {
             alert(JSON.stringify(data));
         });
     }
+
+    const [Data,SetData] = useState([])
     const [BookId, setBookId] = useState([])
     const [Bookname, setBookname] = useState([])
     const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
@@ -42,6 +66,13 @@ export default function addbook() {
     const [Synopsis, setSynopsis] = useState([])
     const TempImg = useRef(0)
     
+
+
+
+
+
+
+
     return (
         <>
             <Head>
