@@ -26,7 +26,7 @@ function LoginPage() {
     setShowPassword(!showPassword);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (UserName === '') {
@@ -45,30 +45,30 @@ function LoginPage() {
       setUsernameError("");
       setPasswordError("");
     }
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          username: UserName,
+          password: password,
+        })
+      })
+      const data = await response.json();
+      JSON.stringify(data);
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        username: UserName,
-        password: password,
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.length === 0) {
-          alert("username หรือ รหัสผ่านผิด")
-        } else {
-          alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data[0].username)
-          setLoginStatus("ผู้ใช้ : " + data[0].username)
-          setIsLoginFormVisible(false)
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      if (data.length === 0) {
+        alert("username หรือ รหัสผ่านผิด")
+      } else {
+        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data[0].username)
+        setLoginStatus("ผู้ใช้ : " + data[0].username)
+        setIsLoginFormVisible(false)
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    };
   }
 
   const [LoginStatus, setLoginStatus] = useState("ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก");
