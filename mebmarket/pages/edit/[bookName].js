@@ -45,6 +45,7 @@ export default function EditBook() {
             setPrice(Data.price)
             setSynopsis(Data.synopsis)
             setprevAuthor(Data.author)
+            setBookId(Data.bookId)
         }
     },[Data])
 
