@@ -55,7 +55,7 @@ export default function Page(){
                                 </div>
                                 <div id="release_date">
                                     <p>วันที่วางขาย</p>
-                                    <p>{Data.date}</p>
+                                    <p>{Data.date.substring(0, 10)}</p>
                                 </div>
                             </div>
                         </div>

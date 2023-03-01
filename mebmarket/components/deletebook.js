@@ -40,7 +40,7 @@ function Deletebook(props) {
                         <h4>Author : {property.author}</h4>
                         <h4 className="H4displayflex">Rating : <CustomizedRating rate={property.rating}/></h4>
                         <h4>Price : ฿ {property.price}</h4>
-                        <h4>Date : {property.date}</h4>
+                        <h4>Date : {property.date.substring(0, 10)}</h4>
                     </div>
                 </div>
             </div>
