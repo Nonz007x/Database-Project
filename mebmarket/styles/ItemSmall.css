@@ -67,8 +67,15 @@
 .bottom_section button {
   background-color: var(--main-color);
   font-size: 24px;
+  overflow: hidden;
+  white-space: nowrap;
   width: 90px;
   height: 40px;
+  
+}
+
+.bottom_section button h6 {
+  text-overflow: ellipsis;
 }
 
 .bottom_section button:hover {
