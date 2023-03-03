@@ -11,7 +11,7 @@ export default async function handler(req, res) {
                 { password: password }
             ]
         },
-        take: 1 // take only the first result
+        take: 1
     });
     res.json(user[0]);
 }

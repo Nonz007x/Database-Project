@@ -18,10 +18,8 @@ export default async function handler(req, res) {
                 date: new Date(date),
             },
         });
-        console.log(Date(date))
         res.send({ success: true, message: 'แก้ไขสำเร็จ', updatedBook });
     } catch (error) {
-        console.log(error);
         res.send({ success: false, message: 'query error', error: error });
     }
 }

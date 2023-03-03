@@ -10,7 +10,6 @@ export default function Adminpage() {
             fetcher('api/get'),
         ]).then(([data]) => {
             SetData(data);
-            console.log(data)
         });
     }, []);
 

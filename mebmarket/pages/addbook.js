@@ -10,7 +10,6 @@ import CheckIcon from '@mui/icons-material/Check';
 export default function addbook() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
         fetch('http://localhost:3000/api/addbook', {
             method: 'POST',
             headers: {

@@ -58,8 +58,7 @@ function LoginPage() {
         })
       })
       const data = await response.json();
-      // JSON.stringify(data);
-      console.log(data)
+
       if (data.length === 0) {
         alert("username หรือ รหัสผ่านผิด")
       } else {

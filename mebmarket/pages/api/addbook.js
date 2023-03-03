@@ -4,7 +4,6 @@ export default async function handler(req, res) {
     const { bookId, bookname, author, price, cover, synopsis} = req.body;
     const newDate = new Date();
     newDate.setHours(newDate.getHours() + 7);
-    console.log(typeof(newDate))
     try {
         const existingBook = await prisma.book.findFirst({
             where: {
@@ -28,7 +27,6 @@ export default async function handler(req, res) {
         return res.status(201).json('เพิ่มหนังสือสำเร็จ');
     }
     catch (error) {
-        console.log(error)
         return res.status(500).json('Internal Server Error')
     }
 

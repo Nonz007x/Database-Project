@@ -41,7 +41,6 @@ export default async function handler(req, res) {
             }
         });
 
-        console.log('User added to database:', { username, email, password });
         return res.status(201).json('สมัครสมาชิกสำเร็จ');
     } catch (error) {
         console.error(error);
