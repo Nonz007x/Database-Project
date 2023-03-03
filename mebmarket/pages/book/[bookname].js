@@ -5,7 +5,6 @@ import { fetcher } from "../api/fetcher";
 import Head from 'next/head'
 import { Button } from "@mui/material";
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
-import Link from "next/link";
 
 export default function Page(){
     const [Data,SetData] = useState(null);
@@ -14,8 +13,8 @@ export default function Page(){
 
     useEffect(() => {
         const fetchData = async () => {
-            const e = await fetcher('../api/getbook/'+bookname);
-            SetData(e[0]);
+            const e = await fetcher('../api/getBookByName/'+bookname);
+            SetData(e);
         };
         if (bookname) {
             fetchData();

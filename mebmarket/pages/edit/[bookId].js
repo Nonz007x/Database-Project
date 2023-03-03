@@ -26,8 +26,8 @@ export default function EditBook() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const e = await fetcher('http://localhost:3000/api/getbook/' + router.query.bookId);
-            const data = e.sqlSelect[0]
+            const e = await fetcher('http://localhost:3000/api/getBookById/' + router.query.bookId);
+            const data = e
             setBookname(data.bookname);
             setAuthor(data.author);
             setImgLink(data.cover);

@@ -20,7 +20,6 @@ function Navbar() {
         } else {
             setTest("/search/bookname/default")
         }
-        console.log(test)
 }, [Search])
 
 return (

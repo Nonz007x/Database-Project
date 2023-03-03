@@ -3,16 +3,11 @@ import { TextField } from "@mui/material";
 import Head from "next/head";
 import { Button } from "@mui/material";
 import AuthorAutocomplete from "@/components/AuthorAutocomplete";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import { getdate } from "@/shared/getdate";
 import CheckIcon from '@mui/icons-material/Check';
 
 export default function addbook() {
-    const Date = getdate()
-    const [DateData, setDateData] = useState([])
-    useEffect(() => { setDateData(Date) }, [Date])
-
     const handleFormSubmit = (e) => {
         e.preventDefault();
         console.log(e);
@@ -28,7 +23,7 @@ export default function addbook() {
                 author: Author,
                 price: Price,
                 synopsis: Synopsis,
-                date: DateData
+                date: date
             })
         }).then(e => e.json()).then(data => {
             alert(JSON.stringify(data));

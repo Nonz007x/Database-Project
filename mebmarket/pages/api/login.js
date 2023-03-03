@@ -1,13 +1,17 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import excuteQuery from '@/shared/database';
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-    const {username, password} = req.body
-    const sqlSelect = await excuteQuery({ query: 'SELECT username,password FROM user WHERE username = ? AND password = ?',
-    values: [username, password]
-});
-    // if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    // }
-    res.send(sqlSelect);
+    const { username, password } = req.body;
+    const user = await prisma.user.findMany({
+        where: {
+            AND: [
+                { username: username },
+                { password: password }
+            ]
+        },
+        take: 1 // take only the first result
+    });
+    res.json(user[0]);
 }

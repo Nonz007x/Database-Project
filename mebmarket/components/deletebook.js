@@ -38,6 +38,7 @@ function Deletebook(props) {
                 </div>
                 <div className="Detailzone">
                     <div className="detailbook">
+                        <h3>id:{property.bookId}</h3>
                         <h3>{property.bookname}</h3>
                         <h4>Author : {property.author}</h4>
                         <h4 className="H4displayflex">Rating : <CustomizedRating rate={property.rating} /></h4>
