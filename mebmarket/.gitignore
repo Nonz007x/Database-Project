@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+.prisma
 *.pem
 
 # debug
