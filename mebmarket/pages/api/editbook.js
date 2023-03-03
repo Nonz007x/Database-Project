@@ -1,16 +1,25 @@
-import excuteQuery from "@/shared/database";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
     const { bookId, bookname, author, price, cover, synopsis, date } = req.body;
     try {
-        const sql = await excuteQuery({
-            query:
-                "UPDATE `book` SET `bookname` = ?, `author` = ?, `price` = ?, `cover` = ?, `synopsis` = ?, `date` = ? WHERE `bookId` = ?",
-            values: [bookname, author, price, cover, synopsis, date, bookId],
+        const updatedBook = await prisma.book.update({
+            where: {
+                bookId: parseInt(bookId),
+            },
+            data: {
+                bookname: bookname,
+                author: author,
+                price: parseFloat(price),
+                cover: cover,
+                synopsis: synopsis,
+                date: new Date(date),
+            },
         });
-        res.send({ success: true, message: 'แก้ไขสำเร็จ', sql});
+        res.send({ success: true, message: 'แก้ไขสำเร็จ', updatedBook });
     } catch (error) {
-        console.log(error);
-        res.send({ success: false, message: 'query error', error: err });;
+        res.send({ success: false, message: 'query error', error: error });
     }
 }

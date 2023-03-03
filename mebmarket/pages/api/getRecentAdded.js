@@ -1,10 +1,25 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import excuteQuery from '@/shared/database';
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export default async function handler(req, res) {
-    const sqlSelect = await excuteQuery(
-        { query: 
-            'SELECT bookname,author,cover,rating,price FROM book ORDER BY date DESC LIMIT 0,6;' 
-        });
-    res.send(sqlSelect);
+    try {
+        const books = await prisma.book.findMany({
+            select: {
+                bookname: true,
+                author: true,
+                cover: true,
+                rating: true,
+                price: true,
+            },
+            orderBy: {
+                date: 'desc',
+            },
+            take: 6,
+        })
+        res.json(books)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send('Internal Server Error')
+    }
 }

@@ -63,9 +63,12 @@ export default function RegisterPage() {
 
     if (data === 0) {
       setUsernameError('Username นี้ถูกใช้งานแล้ว');
+      return;
     } else if (data === 1) {
       setEmailError('Email นี้ถูกใช้งานแล้ว');
+      return;
     }
+    alert(data)
   }
 
   useEffect(() => {

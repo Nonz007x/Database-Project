@@ -1,12 +1,12 @@
+import { signIn } from "next-auth/react"
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
 import { TextField } from "@mui/material";
+import RegisterPage from "./Register.form";
+import { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import RegisterPage from "./Register.form";
-import { fetcher } from "@/pages/api/fetcher";
-import { Login, Password } from "@mui/icons-material";
+
 function LoginPage() {
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
@@ -15,6 +15,7 @@ function LoginPage() {
     }
 
   };
+
   const [showPassword, setShowPassword] = useState(false);
   const [UserName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -57,13 +58,12 @@ function LoginPage() {
         })
       })
       const data = await response.json();
-      JSON.stringify(data);
 
       if (data.length === 0) {
         alert("username หรือ รหัสผ่านผิด")
       } else {
-        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data[0].username)
-        setLoginStatus("ผู้ใช้ : " + data[0].username)
+        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data.username)
+        setLoginStatus("ผู้ใช้ : " + data.username)
         setIsLoginFormVisible(false)
       }
     } catch (error) {
@@ -93,42 +93,42 @@ function LoginPage() {
             </div>
             <h2 id="HeadLogin">Login</h2>
             <div>
-            <form onSubmit={handleFormSubmit}>
-              <div id="UsernameZone">
-                <TextField className="TextField"
-                  type="text"
-                  size="small"
-                  label="Username"
-                  value={UserName}
-                  onChange={(e) => { setUserName(e.target.value) }}
-                  error={Boolean(usernameError)}
-                  helperText={usernameError}
-                />
-              </div>
-              <div id="PasswordZone">
-                <TextField className="TextField"
-                  type={showPassword ? "text" : "password"}
-                  size="small"
-                  label="Password"
-                  value={password}
-                  onChange={(e) => { setPassword(e.target.value) }}
-                  error={Boolean(passwordError)}
-                  helperText={passwordError}
-                />
-                {!showPassword ? (
-                  <VisibilityIcon className="eye" onClick={handleClickPassword} />
-                ) : (
-                  <VisibilityOffIcon
-                    className="eye"
-                    onClick={handleClickPassword}
+              <form onSubmit={handleFormSubmit}>
+                <div id="UsernameZone">
+                  <TextField className="TextField"
+                    type="text"
+                    size="small"
+                    label="Username"
+                    value={UserName}
+                    onChange={(e) => { setUserName(e.target.value) }}
+                    error={Boolean(usernameError)}
+                    helperText={usernameError}
                   />
-                )}
-              </div>
-              <div className="LoginButtonZone">
-                <Button className="GoDoit" variant="contained" size="small" type="submit">Login</Button>
-              </div>
-            </form>
-            <RegisterPage className="PleaseGoToCenter" />
+                </div>
+                <div id="PasswordZone">
+                  <TextField className="TextField"
+                    type={showPassword ? "text" : "password"}
+                    size="small"
+                    label="Password"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value) }}
+                    error={Boolean(passwordError)}
+                    helperText={passwordError}
+                  />
+                  {!showPassword ? (
+                    <VisibilityIcon className="eye" onClick={handleClickPassword} />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="eye"
+                      onClick={handleClickPassword}
+                    />
+                  )}
+                </div>
+                <div className="LoginButtonZone">
+                  <Button className="GoDoit" variant="contained" size="small" type="submit">Login</Button>
+                </div>
+              </form>
+              <RegisterPage className="PleaseGoToCenter" />
             </div>
           </div>
         </div>

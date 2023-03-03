@@ -12,15 +12,14 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 function Navbar() {
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
     const [Search, setSearch] = useState("");
-    const [test, setTest] = useState("/search/bookname/default")
+    const [tempSearch, setTempSearch] = useState("/search/bookname/default")
     const router = useRouter();
     useEffect(() => {
         if (Search !== ''){
-            setTest("/search/bookname/" + Search)
+            setTempSearch("/search/bookname/" + Search)
         } else {
-            setTest("/search/bookname/default")
+            setTempSearch("/search/bookname/default")
         }
-        console.log(test)
 }, [Search])
 
 return (
@@ -56,9 +55,9 @@ return (
             <form onSubmit={(e) => {
                 e.preventDefault();
                 setSearch(Search);
-                router.push(test);
+                router.push(tempSearch);
             }}>
-                <Link className="NavbarLink" href={test}>
+                <Link className="NavbarLink" href={tempSearch}>
                     <SearchIcon id="SearchIcon" />
                 </Link>
                 <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => {setSearch(e.target.value)}} />
