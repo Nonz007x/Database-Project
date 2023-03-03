@@ -8,9 +8,9 @@ export default async function handler(req, res) {
                 "UPDATE `book` SET `bookname` = ?, `author` = ?, `price` = ?, `cover` = ?, `synopsis` = ?, `date` = ? WHERE `bookId` = ?",
             values: [bookname, author, price, cover, synopsis, date, bookId],
         });
-        return res.status(201).json("แก้ไขสำเร็จ",sql);
+        res.send({ success: true, message: 'แก้ไขสำเร็จ', sql});
     } catch (error) {
         console.log(error);
-        return res.status(500).json('Internal Server Error');
+        res.send({ success: false, message: 'query error', error: err });;
     }
 }
