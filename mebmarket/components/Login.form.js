@@ -8,93 +8,99 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function LoginPage() {
-  const {data: session, loading} = useSession();
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
     if (!session) {
       setIsLoginFormVisible(!isLoginFormVisible);
     }
-    if (session){
+    if (session) {
       alert(session.user.name)
     }
-    
+
   };
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [UserName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  
+
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
-  
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     signIn('github');
     // const result = await signIn('credentials',{
-      //   username: UserName,
-      //   password: password,
-      //   redirect: false
-      // });
+    //   username: UserName,
+    //   password: password,
+    //   redirect: false
+    // });
 
-      // if (result?.error) {
-        //   setUsernameError(result.error);
-      //   return;
-      // }
-    }
-    
-    const handleSignOut = async (e) => {
-      e.preventDefault();
-      signOut();
-    }
-    
-    const handleFormSubmit = async (e) => {
-      e.preventDefault();
-      
-      try {
-        const result = await signIn('credentials', {
-          username: UserName,
-          password: password,
-          redirect: false
-        });
-        
-        if (result.error) {
-          setUsernameError(result.error);
-        } else {
-          setUsernameError("");
-          setIsLoginFormVisible(false);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      };
-    }
+    // if (result?.error) {
+    //   setUsernameError(result.error);
+    //   return;
+    // }
+  }
 
-    useEffect(() => {
-      console.log({session, loading})
-    },[session])
-    
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    signOut();
+  }
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const result = await signIn('credentials', {
+        username: UserName,
+        password: password,
+        redirect: false
+      });
+
+      if (result.error) {
+        setUsernameError(result.error);
+      } else {
+        setUsernameError("");
+        setIsLoginFormVisible(false);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    };
+  }
+
+  useEffect(() => {
+    console.log({ session, loading })
+  }, [session])
+
   return (
-    <div> 
+    <>
       <div className="Flexrow">
-        <Button
-          className="NavbarButton"
-          variant="contained"
-          size="small"
-          onClick={handleClick}
-        >
-          {!session ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก'): session.user.name}
-        </Button>
-        <Button
-          className="NavbarButton"
-          variant="contained"
-          size="small"
-          onClick={handleSignOut}
+        {!loading && (
+          <Button
+            className="NavbarButton"
+            variant="contained"
+            size="small"
+            onClick={handleClick}
           >
-          Sign out
-        </Button>
+            {!session ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก') : session.user.name}
+          </Button>
+        )}
+        {session && (
+          <Button
+            className="NavbarButton"
+            variant="contained"
+            size="small"
+            onClick={handleSignOut}
+          >
+            Sign out
+          </Button>
+        )}
       </div>
+
       {isLoginFormVisible ? (
         <div id="TransparentBg">
           <div id="GotoMiddleOfTheScreen">
@@ -143,7 +149,7 @@ function LoginPage() {
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 }
 export default LoginPage;

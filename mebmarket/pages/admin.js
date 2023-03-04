@@ -1,9 +1,13 @@
 import Head from "next/head"
 import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
+import { useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
 
 export default function Adminpage() {
+    const { data: session, status } = useSession()
+    const loading = status === "loading"
+    console.log(session)
     const [Data, SetData] = useState([])
     const DeletebookMemoized = React.memo(Deletebook);
     useEffect(() => {
