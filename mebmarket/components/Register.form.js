@@ -38,7 +38,10 @@ export default function RegisterPage() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    if (usernameError || emailError || passwordError){
+      return;
+    }
+    
     if (!acceptTnC) {
       alert('Please accept the terms and conditions');
       return;
@@ -73,10 +76,8 @@ export default function RegisterPage() {
 
   useEffect(() => {
     const containRestricted = /\W/.test(UserName);
-    if (containRestricted) {
+    if (UserName && containRestricted) {
       setUsernameError("Username must not contain special characters");
-    } else if (UserName === "") {
-      setUsernameError("Please enter username");
     } else {
       setUsernameError("");
     }
@@ -85,17 +86,15 @@ export default function RegisterPage() {
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail = emailRegex.test(email)
-    if (isValidEmail) {
-      setEmailError("");
-    } else {
+    if (!isValidEmail && email) {
       setEmailError("Invalid email format");
+    } else {
+      setEmailError("");
     }
   }, [email])
 
   useEffect(() => {
-    if (password === '') {
-      setPasswordError("Please enter password");
-    } else if (password !== repassword) {
+    if (password !== repassword) {
       setPasswordError("Passwords do not match");
     } else {
       setPasswordError('')
