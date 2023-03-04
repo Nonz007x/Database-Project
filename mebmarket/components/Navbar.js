@@ -9,7 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
-function Navbar() {
+export default function Navbar() {
     const router = useRouter();
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
     const LoginPageMemoized = React.memo(LoginPage);
@@ -21,51 +21,42 @@ function Navbar() {
         } else {
             setTempSearch("/search/bookname/default")
         }
-}, [Search])
+    }, [Search]);
 
-return (
-    <div className="BG">
-        <div id="left">
-            <LoginPageMemoized />
-            <Link href="http://localhost:3000/admin" className="LinkWithOutUnderLine">
-                <Button className="NavbarButton" size="small" variant="contained">
-                    <EditIcon />
-                    Admin
-                </Button>
-            </Link>
-            <Link href="http://localhost:3000/addbook" size="small" className="LinkWithOutUnderLine">
-                <Button className="NavbarButton" size="small" variant="contained">
-                    <AutoStoriesIcon />
-                    เพิ่มหนังสือ
-                </Button>
-            </Link>
-        </div>
+    return (
+        <>
+            <div className="navbar-container">
+                <div className="main-navbar">
+                    <div id="nav-left">
+                        <LoginPageMemoized />
+                    </div>
+                    
+                    <div id="nav-middle">
+                        <Link href="/">
+                        <img id="logo" src={ picUrl } alt="logo_store" />
+                        </Link>
+                    </div>
 
-        <div id="midle">
-            <Link href="/">
-                <img id="logo" src={picUrl} />
-            </Link>
-        </div>
-        <div id="right">
-            <Button variant="contained" size="small" className="NavbarButton">
-                <FavoriteIcon />
-            </Button>
-            <Button variant="contained" size="small" className="NavbarButton" id="addShoppingCartIconMargin">
-                <ShoppingCartIcon />
-            </Button>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                setSearch(Search);
-                router.push(tempSearch);
-            }}>
-                <Link className="NavbarLink" href={tempSearch}>
-                    <SearchIcon id="SearchIcon" />
-                </Link>
-                <input className="SearchBar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => {setSearch(e.target.value)}} />
-            </form>
-        </div>
-    </div>
-
-);
+                    <div id="nav-right">
+                        <Button variant="contained" size="small" className="favoriteButton-navbar">
+                            <FavoriteIcon />
+                        </Button>
+                        <Button variant="contained" size="small" className="shoppingCart-navbar">
+                            <ShoppingCartIcon />
+                        </Button>
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            setSearch(Search);
+                            router.push(tempSearch);
+                        }}>
+                            <Link className="searchIcon-navbar" href={tempSearch}>
+                                <SearchIcon />
+                            </Link>
+                            <input className="searchBar-navbar" placeholder="ค้นหาหนังสือ" value={Search} onChange={e => {setSearch(e.target.value)}} />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
 }
-export default Navbar;

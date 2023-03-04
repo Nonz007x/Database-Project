@@ -70,3 +70,15 @@
     flex-direction: row;
 
 }
+
+.login-register-button {
+    min-height: 32px;
+    max-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, .15);
+}
+
+.login-register-button:hover {
+    background-color: rgba(0, 0, 0, .50);
+}
