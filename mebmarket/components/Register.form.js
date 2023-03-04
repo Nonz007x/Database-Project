@@ -122,9 +122,10 @@ export default function RegisterPage() {
             <form onSubmit={handleFormSubmit}>
               <div id="UsernameZone">
                 <TextField className="TextField"
+                  required
                   type="text"
                   size="small"
-                  label="Username"
+                  label="User name"
                   value={UserName}
                   onChange={(e) => { setUserName(e.target.value) }}
                   error={Boolean(usernameError)}
@@ -133,6 +134,7 @@ export default function RegisterPage() {
               </div>
               <div>
                 <TextField className="TextField"
+                  required
                   size="small"
                   label="Email"
                   value={email}
@@ -143,6 +145,7 @@ export default function RegisterPage() {
               </div>
               <div id="PasswordZone">
                 <TextField className="TextField"
+                  required
                   type={showPassword ? "text" : "password"}
                   size="small"
                   label="Password"
@@ -163,6 +166,7 @@ export default function RegisterPage() {
 
               <div id="PasswordZone">
                 <TextField className="TextField"
+                  required
                   type={showrePassword ? "text" : "password"}
                   value={repassword}
                   size="small"
