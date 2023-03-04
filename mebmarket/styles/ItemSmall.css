@@ -1,48 +1,41 @@
-.book_list {
+.book-list-container {
   width: 210px;
   height: 420px;
   display: flex;
-  overflow: hidden;
   flex-direction: column;
-  background-color:#fefefe;
-  border: 1px solid darkgrey;
-  border-radius: 5px;
   justify-content: space-between;
-  margin: .3rem;
+  overflow: hidden;
+  background: #fefefe;
+  border-radius: 5px;
+  border: 1px solid darkgrey;
+  margin: 0.4rem;
 }
 
-.book_list:hover {
+.book-list-container:hover {
   border: 1px solid #00bf6c;
   box-shadow: 1px 1px 10px 1px darkgray;
 }
 
-.book_cover {
+.book-cover {
   display: flex;
-  justify-content: center;
+  justify-content: center
 }
 
-.book_cover img {
+.book-cover img {
   height: calc(210px * 1.414);
-  aspect-ratio: 1/1.414;
-  overflow-clip-margin: 5px;
   object-fit: cover;
-}
-.book_cover_skeleton {
-  height: calc(210px * 1.414);
   aspect-ratio: 1/1.414;
-  overflow-clip-margin: 5px;
-  object-fit: cover;
 }
 
-.book_name {
+.bookname-container {
   width: 100%;
-  height: 40px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.book_name h4 {
+.bookname-container h5 {
   margin: 0 6px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -51,33 +44,36 @@
   white-space: pre-wrap;
 }
 
-.cate {
+.category-container {
   width: 100%;
-  padding-left: 11px;
 }
 
-.bottom_section {
+.category-container h6 {
+  padding-left: 10px;
+}
+
+.buttom-section {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 0 10px;
+  margin-bottom: 10px;
 }
 
-.bottom_section button {
+.buy-button Button{
   background-color: var(--main-color);
   font-size: 24px;
   overflow: hidden;
   white-space: nowrap;
   width: 90px;
   height: 40px;
-  
 }
 
-.bottom_section button h6 {
+.buy-button Button h6 {
   text-overflow: ellipsis;
 }
 
-.bottom_section button:hover {
+.buy-button Button:hover {
   background-color: rgb(61, 61, 61);
 }

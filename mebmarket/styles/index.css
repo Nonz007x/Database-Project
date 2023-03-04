@@ -1,52 +1,38 @@
-.CenterChild{
-    display: flex;
-    justify-content: center;
-}
-.ItemsBox{
-    margin: 5em 1em;
-    width: 75vw;
-    display: flex;
-    /* flex-direction: column; */
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.recentlyadded{
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    max-height: calc(420px + 0.5em);
-    overflow: hidden;
-    justify-content: center;
+.main-container {
     width: 100%;
-    /* border  : 1px solid green; */
-    /* display: grid;
-    width: 100%; */
+    padding-top: 60px;
+    /* border: 1px solid red; */
 }
-.NewestText{
-    width: 100%;
+
+.content-container {
+    width: 80%;
+    /* height: 100vh; */
+    margin: 0 auto;
+    padding: 40px;
+    /* border: 1px solid blue; */
+}
+
+.header-recent-container {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    border-bottom: 2px solid gray;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
+    padding-bottom: 10px;
+    /* border: 1px solid blue; */
 }
-.NewestText h2{
-    /* border-bottom: 2px solid #8e918f; */
-    margin-bottom: 0.5em;
-    font-weight: 300;
-   
-}
-.Index_Button {
-    /* background-color: var(--main-color); */
+
+.view-recent-button {
     color: var(--main-color);
-    font-size: 600;
 }
-.NewItem_Box{
-    margin-bottom: 1em;
+
+.content-recent-container {
+    display: flex;
     width: 100%;
-    height: auto;
+    justify-content: center;
+    border-top: 2px solid grey;
+    padding-top: 5px;
+    flex-wrap: wrap;
+    /* border: 1px solid blue; */
 }
+
 .AddWidthToShowAll{
     width: 100%;
     display: flex;

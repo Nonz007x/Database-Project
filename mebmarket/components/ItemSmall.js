@@ -6,27 +6,29 @@ export default function ItemSmall(props) {
     const { property } = props;
     return (
         <>
-            <Link className="book_list" href={{
+            <Link className="book-list-container" href={{
                 pathname: 'http://localhost:3000/book/[bookname]',
                 query: { bookname: property.bookname}
-            }}>
-                    <div className="book_cover">
-                        <img title={property.bookname} src={property.cover} />
+                }}>
+                    <div className="book-cover">
+                        <img src={property.cover} title={property.bookname} />
                     </div>
-                    <div className="book_name">
-                        <h4>{property.bookname}</h4>
+                    <div className="bookname-container">
+                        <h5>{property.bookname}</h5>
                     </div>
-                    <div className="cate">
-                        <h6>cate</h6>
+                    <div className="category-container">
+                        <h6>{property.categoryname}</h6>
                     </div>
-                    <div className="bottom_section">
-                        <div className="authur_rating">
+                    <div className="buttom-section">
+                        <div className="author-rating">
                             <div><h6>{property.author}</h6></div>
-                            <div><CustomizedRating rate={property.rating} /></div>
+                            <div><h6><CustomizedRating rate={property.rating} /></h6></div>
                         </div>
-                        <Button variant="contained" size="small" onClick={() => {
-                            // เอาไว้ใส่คำสั่งซื้อของ
-                        }}><h6>฿ {property.price}</h6></Button>
+                        <div className="buy-button">
+                            <Button variant="contained" size="small">
+                                <h6>฿ {property.price}</h6>
+                            </Button>
+                        </div>
                     </div>
             </Link>
         </>
