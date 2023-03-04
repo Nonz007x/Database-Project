@@ -9,16 +9,8 @@ export default async function handler(req, res) {
         const existingUser = await prisma.user.findFirst({
             where: {
                 OR: [
-                    {
-                        username: {
-                            equals: username
-                        }
-                    },
-                    {
-                        email: {
-                            equals: email
-                        }
-                    }
+                    { username: { equals: username } },
+                    { email: { equals: email } }
                 ]
             }
         });

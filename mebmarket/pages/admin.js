@@ -1,21 +1,31 @@
 import Head from "next/head"
 import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
-import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { getSession, useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
 
 export default function Adminpage() {
-    const { data: session, status } = useSession()
-    const loading = status === "loading"
-    console.log(session)
+    const router = useRouter();
+    const [loading, setLoading] = useState(true)
     const [Data, SetData] = useState([])
     const DeletebookMemoized = React.memo(Deletebook);
     useEffect(() => {
         const fetchData = async () => {
             const [data] = await Promise.all([fetcher("api/get")]);
             SetData(data);
+            setLoading(false)
         };
-        fetchData();
+        const securePage = async () => {
+            const session = await getSession()
+            if(!session){
+                router.replace("/")
+            } else {
+                await fetchData().then(
+                )
+            }
+        }
+        securePage();
     }, []);
 
     const mapping = useMemo(() => {
@@ -24,6 +34,22 @@ export default function Adminpage() {
         });
     }, [Data]);
 
+    if (loading) {
+        return (
+            <>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+            </>
+        )
+    }
     return (
         <>
             <Head>

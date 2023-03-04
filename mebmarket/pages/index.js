@@ -7,8 +7,12 @@ import { Button } from "@mui/material";
 import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { Collapse } from "@mui/material";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
+
   const ItemSmallMemoized = React.memo(ItemSmall);
   const [RecentItems, SetItems] = useState([]);
   const [Data, SetData] = useState([]);
@@ -57,6 +61,36 @@ export default function Home() {
     });
   }, [RecentItems]);
 
+  if (loading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
   return (
     <>
       <Head>
