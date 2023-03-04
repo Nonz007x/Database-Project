@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import { TextField } from "@mui/material";
 import Head from "next/head";
 import { Button } from "@mui/material";
@@ -22,7 +21,6 @@ export default function addbook() {
                 author: Author,
                 price: Price,
                 synopsis: Synopsis,
-                date: date
             })
         }).then(e => e.json()).then(data => {
             alert(JSON.stringify(data));
@@ -44,7 +42,6 @@ export default function addbook() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <Navbar />
             <div className='CenterChild'>
             <div className="App">
             <div className='ItemsBox'>

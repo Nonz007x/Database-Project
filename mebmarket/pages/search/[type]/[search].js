@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -46,7 +45,6 @@ export default function SearchPage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <Navbar />
             <div className='CenterChild'>
                 <div className="App">
                     <div className='ItemsBox'>

@@ -3,11 +3,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import CustomizedRating from "./CustomRating";
 import { useRouter } from "next/router"
+import { useCallback } from "react";
 
 function Deletebook(props) {
-    const { property } = props;
     const router = useRouter();
-    const handleDelete = async () => {
+    const { property } = props;
+    const handleDelete = useCallback(async () => {
         try {
             const response = await fetch('/api/deletebook', {
                 method: 'POST',
@@ -28,7 +29,7 @@ function Deletebook(props) {
         } catch (error) {
             console.error(error);
         }
-    };
+    }, [property.bookId]);
 
     return (
         <div className="delete_book">

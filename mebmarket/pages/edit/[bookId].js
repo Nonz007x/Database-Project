@@ -1,19 +1,15 @@
-import Navbar from "@/components/Navbar";
 import { TextField } from "@mui/material";
 import Head from "next/head";
 import { Button } from "@mui/material";
 import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useEffect, useRef, useState } from "react";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import { getdate } from "@/shared/getdate";
 import CheckIcon from '@mui/icons-material/Check';
 import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 
 export default function EditBook() {
     const router = useRouter();
-    const DateData = getdate()
-    const [Date, setDate] = useState([])
     const [Bookname, setBookname] = useState()
     const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
     const [Author, setAuthor] = useState(0)
@@ -21,8 +17,6 @@ export default function EditBook() {
     const [Synopsis, setSynopsis] = useState([])
     const [prevAuthor, setprevAuthor] = useState([])
     const TempImg = useRef(0)
-
-    useEffect(() => { setDate(DateData) }, [DateData])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,7 +64,6 @@ export default function EditBook() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <Navbar />
             <div className='CenterChild'>
                 <div className="App">
                     <div className='ItemsBox'>

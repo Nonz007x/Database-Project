@@ -1,80 +1,82 @@
-import { signIn } from "next-auth/react"
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import RegisterPage from "./Register.form";
-import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { signIn, signOut, useSession } from "next-auth/react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function LoginPage() {
+  const {data: session, loading} = useSession();
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
-    if (LoginStatus === "ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก") {
+    if (!session) {
       setIsLoginFormVisible(!isLoginFormVisible);
     }
-
+    if (session){
+      alert(session.user.name)
+    }
+    
   };
-
+  
   const [showPassword, setShowPassword] = useState(false);
   const [UserName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
+  
   const handleClickPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  const handleFormSubmit = async (e) => {
+  
+  const handleSignIn = async (e) => {
     e.preventDefault();
+    signIn('github');
+    // const result = await signIn('credentials',{
+      //   username: UserName,
+      //   password: password,
+      //   redirect: false
+      // });
 
-    if (UserName === '') {
-      setUsernameError("กรุณากรอก username");
-      if (password === '') {
-        setPasswordError("กรุณากรอก password");
-        return;
-      }
-    } else if (password === '') {
-      setPasswordError("กรุณากรอก password");
-      if (UserName === '') {
-        setUsernameError("กรุณากรอก username");
-        return;
-      }
-    } else {
-      setUsernameError("");
-      setPasswordError("");
+      // if (result?.error) {
+        //   setUsernameError(result.error);
+      //   return;
+      // }
     }
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
+    
+    const handleSignOut = async (e) => {
+      e.preventDefault();
+      signOut();
+    }
+    
+    const handleFormSubmit = async (e) => {
+      e.preventDefault();
+      
+      try {
+        const result = await signIn('credentials', {
           username: UserName,
           password: password,
-        })
-      })
-      const data = await response.json();
+          redirect: false
+        });
+        
+        if (result.error) {
+          setUsernameError(result.error);
+        } else {
+          setUsernameError("");
+          setIsLoginFormVisible(false);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      };
+    }
 
-      if (data.length === 0) {
-        alert("username หรือ รหัสผ่านผิด")
-      } else {
-        alert("ล็อกอินสำเร็จ ยินดีต้อนรับ คุณ " + data.username)
-        setLoginStatus("ผู้ใช้ : " + data.username)
-        setIsLoginFormVisible(false)
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    };
-  }
-
-  const [LoginStatus, setLoginStatus] = useState("ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก");
-
+    useEffect(() => {
+      console.log({session, loading})
+    },[session])
+    
   return (
-    <div>
+    <div> 
       <div className="Flexrow">
         <Button
           className="NavbarButton"
@@ -82,7 +84,15 @@ function LoginPage() {
           size="small"
           onClick={handleClick}
         >
-          {LoginStatus}
+          {!session ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก'): session.user.name}
+        </Button>
+        <Button
+          className="NavbarButton"
+          variant="contained"
+          size="small"
+          onClick={handleSignOut}
+          >
+          Sign out
         </Button>
       </div>
       {isLoginFormVisible ? (
@@ -93,7 +103,7 @@ function LoginPage() {
             </div>
             <h2 id="HeadLogin">Login</h2>
             <div>
-              <form onSubmit={handleFormSubmit}>
+              <form onSubmit={handleSignIn}>
                 <div id="UsernameZone">
                   <TextField className="TextField"
                     type="text"

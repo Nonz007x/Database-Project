@@ -8,6 +8,14 @@ import "@/styles/book.css"
 import "@/styles/searchbar.css"
 import "@/styles/addbook.css"
 import "@/styles/deletebook.css"
+import Navbar from '@/components/Navbar'
+import { SessionProvider } from 'next-auth/react';
+
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <SessionProvider session={pageProps.session}>
+      <Navbar />
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
