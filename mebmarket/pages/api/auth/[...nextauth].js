@@ -17,7 +17,7 @@ export const authOptions = {
         }),
         CredentialsProvider({
             type: "credentials",
-            credentials: {},
+            // credentials: {},
             async authorize(credentials, req) {
                 const { username, password } = credentials;
 
@@ -30,9 +30,10 @@ export const authOptions = {
                 if (!isValid) {
                     return null;
                 }
-                return { };
+
+                return user;
             },
-        })
+        })  
     ],
     pages: {
     }

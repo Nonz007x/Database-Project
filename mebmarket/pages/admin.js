@@ -1,21 +1,26 @@
-import Navbar from "@/components/Navbar"
 import Head from "next/head"
-import { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
+import { useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
+
 export default function Adminpage() {
+    const { data: session, status } = useSession()
+    const loading = status === "loading"
+    console.log(session)
     const [Data, SetData] = useState([])
+    const DeletebookMemoized = React.memo(Deletebook);
     useEffect(() => {
-        Promise.all([
-            fetcher('api/get'),
-        ]).then(([data]) => {
+        const fetchData = async () => {
+            const [data] = await Promise.all([fetcher("api/get")]);
             SetData(data);
-        });
+        };
+        fetchData();
     }, []);
 
     const mapping = useMemo(() => {
         return Data.map((property, index) => {
-            return <Deletebook key={`${property.bookId}-${index}`} property={property} />
+            return <DeletebookMemoized key={property.bookId} property={property} />
         });
     }, [Data]);
 
@@ -27,7 +32,6 @@ export default function Adminpage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <Navbar />
             <div className='CenterChild'>
                 <div className="App">
                     <div className='ItemsBox'>

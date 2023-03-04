@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import Link from 'next/link'
 import LoginPage from "./Login.form";
-import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import EditIcon from '@mui/icons-material/Edit';
 import { Button } from "@mui/material";
 import { useRouter } from "next/router"
-import Link from 'next/link'
+import React, { useEffect, useState } from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 function Navbar() {
+    const router = useRouter();
     const picUrl = "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
+    const LoginPageMemoized = React.memo(LoginPage);
     const [Search, setSearch] = useState("");
     const [tempSearch, setTempSearch] = useState("/search/bookname/default")
-    const router = useRouter();
     useEffect(() => {
         if (Search !== ''){
             setTempSearch("/search/bookname/" + Search)
@@ -25,7 +26,7 @@ function Navbar() {
 return (
     <div className="BG">
         <div id="left">
-            <LoginPage />
+            <LoginPageMemoized />
             <Link href="http://localhost:3000/admin" className="LinkWithOutUnderLine">
                 <Button className="NavbarButton" size="small" variant="contained">
                     <EditIcon />
