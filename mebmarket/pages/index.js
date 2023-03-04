@@ -5,15 +5,26 @@ import { fetcher } from './api/fetcher'
 import { useEffect, useState } from 'react'
 import { Button } from '@mui/material'
 import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
+
 
 export default function Home() {
+  const ItemSmallMemoized = React.memo(ItemSmall);
   const [RecentItems, SetItems] = useState([])
   const [Data, SetData] = useState([])
-  const [OpenAll, setOpenAll] = useState(0)
+  const [OpenAll, setOpenAll] = useState(false)
+  const router = useRouter();
+
   const handleClick = () => {
-    setOpenAll(!OpenAll)
+    setOpenAll((prevState) => !prevState);
+    router.replace({ query: { openAll: !OpenAll }});
   }
 
+  useEffect(() => {
+    if (router.query.openAll === 'true') {
+      setOpenAll(true);
+    }
+  }, [router.query]);
 
   useEffect(() => {
     Promise.all([
@@ -27,13 +38,13 @@ export default function Home() {
 
   const mapping = useMemo(() => {
     return Data.map((property, index) => {
-      return <ItemSmall key={`${property.bookId}-${index}`} property={property} />
+      return <ItemSmallMemoized key={`${property.bookId}-${index}`} property={property} />
     });
   }, [Data]);
 
   const RecentItemsMapped = useMemo(() => {
     return RecentItems.map((property, index) => {
-      return <ItemSmall key={`${property.bookId}-${index}`} property={property} />
+      return <ItemSmallMemoized key={`${property.bookId}-${index}`} property={property} />
     });
   }, [RecentItems]);
 
@@ -58,7 +69,7 @@ export default function Home() {
               </div>
             </div>
             <div className='AddWidthToShowAll'>
-              <Button variant='contained' className="EditButton" onClick={e => { handleClick() }}>Show ทั้งหมด</Button>
+              <Button variant='contained' className="EditButton" onClick={() => { handleClick() }}>Show ทั้งหมด</Button>
             </div>
             {OpenAll && 1 ? mapping : null}
 
