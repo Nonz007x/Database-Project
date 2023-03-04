@@ -1,0 +1,23 @@
+.FooterParent{
+    width: 100%;
+    background-color: var(--font-color-gray);
+    min-height: 20vh;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    ;
+
+}
+.FooterChild{
+    /* width: 75%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-color);
+    flex-direction: column;
+}
+.FooterChild a{
+    color: var(--main-color);
+    font-weight: 500;
+
+}
