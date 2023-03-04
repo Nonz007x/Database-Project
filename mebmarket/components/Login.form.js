@@ -81,7 +81,7 @@ function LoginPage() {
       <div className="Flexrow">
         {!loading && (
           <Button
-            className="NavbarButton"
+            className="login-register-button"
             variant="contained"
             size="small"
             onClick={handleClick}
@@ -91,7 +91,7 @@ function LoginPage() {
         )}
         {session && (
           <Button
-            className="NavbarButton"
+            className="login-register-button"
             variant="contained"
             size="small"
             onClick={handleSignOut}

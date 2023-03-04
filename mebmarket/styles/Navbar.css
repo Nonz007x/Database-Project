@@ -1,91 +1,106 @@
-:root {
-  --main-bg-color: linear-gradient(to bottom, #00af70, #37c13d);
-  --main-color: #00bf6c;
-  --font-color-menu: #5a5a5a;
-  --font-color: #1d6548;
-  --font-color-gray: #5a5a5a;
-  --link-color: #00bf6c;
+.navbar-container {
+  width: 100%;
+  position: fixed;
+  z-index: 999;
 }
 
-.BG {
-  height: 58px;
-  width: 100%;
+.main-navbar {
   background: var(--main-bg-color);
-  box-sizing: border-box;
+  height: 60px;
+  position: relative;
   padding: 0 20px;
   display: flex;
   align-items: center;
-  position: fixed;
-  /* position: relative; */
-  z-index: 1000;
+  justify-content: space-between;
+  /* border: 1px solid red; */
 }
 
+#nav-left {
+  float: left;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+#nav-middle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: max-content;
+  max-width: 150px;
+  margin: auto;
+  /* border: 1px solid red; */
+}
+
+.logo {
+  position: relative;
+  width: 60px;
+  display: inline-block;
+  margin: auto;
+}
 #logo {
-  height: 24px;
+  width: 100%;
+  vertical-align: center;
+  border-style: none;
 }
-#left{
-    display: flex;
-    width: 33.33%;
-}
-#midle{
-  width: 33.33%;
-  position:   relative;
+
+#nav-right {
+  float: right;
   display: flex;
-  justify-content: center;
+  height: 100%;
+  align-items: center;
+  /* border: 1px solid red; */
 }
-#right{
-  width: 33.33%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
+
+.favoriteButton-navbar {
+  height: 32px;
+  background-color: rgba(0, 0, 0, .15);
 }
-#right form{
+
+.favoriteButton-navbar:hover {
+  background-color: rgba(0, 0, 0, .50);
+}
+
+.shoppingCart-navbar {
+  margin-left: 10px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, .15);
+}
+
+.shoppingCart-navbar:hover {
+  background-color: rgba(0, 0, 0, .50);
+}
+
+#nav-right form {
+  margin-left: 10px;
   display: flex;
-  flex-direction: row;
   position: relative;
   align-items: center;
 }
 
-#right .SearchBar{
+.searchBar-navbar {
   height: 32px;
-  padding-left: 36px;
+  padding-left: 15%;
   border: none;
   border-radius: 5px;
-  width: 238px;
+  width: 240px;
   font-size: 16px;
 }
-.SearchBar:focus{
+
+.searchBar-navbar:focus {
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
 }
-.SearchBar:focus::placeholder {
+
+.searchBar-navbar:focus::placeholder {
   color: var(--main-color);
 }
 
-
-#right  #SearchIcon{
+.searchIcon-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  height: 32px;
-  left: 6px;
-}
-#addShoppingCartIconMargin{
-  margin: 0 1em;
-}
-.NavbarButton{
-  background-color: rgba(0, 0, 0, .12);
-}
-.NavbarButton:hover{
-  background-color: rgba(0, 0, 0, .45)
-}
-.NavbarLink{
-  position: absolute;
-  height: 32px;
-}
-#left{
-  font-display: flex ;
-  justify-content: space-between;
-}
-.LinkWithOutUnderLine{
-  text-decoration: none;
+  left: 10px;
 }

@@ -1,3 +1,12 @@
+:root {
+  --main-bg-color: linear-gradient(to bottom, #00af70, #37c13d);
+  --main-color: #00bf6c;
+  --font-color-menu: #5a5a5a;
+  --font-color: #1d6548;
+  --font-color-gray: #5a5a5a;
+  --link-color: #00bf6c;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

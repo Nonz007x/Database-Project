@@ -8,7 +8,9 @@ import "@/styles/book.css"
 import "@/styles/searchbar.css"
 import "@/styles/addbook.css"
 import "@/styles/deletebook.css"
+import "@/styles/footer.css"
 import Navbar from '@/components/Navbar'
+import Footer from "@/components/footer";
 import { SessionProvider } from 'next-auth/react';
 
 export default function App({ Component, pageProps }) {
@@ -16,6 +18,7 @@ export default function App({ Component, pageProps }) {
     <SessionProvider session={pageProps.session}>
       <Navbar />
       <Component {...pageProps} />
+      <Footer/>
     </SessionProvider>
   );
 }
