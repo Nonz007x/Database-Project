@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import "@/styles/ItemSmall.css";
 import "@/styles/Navbar.css";
 import "@/styles/AdminNavbar.css"
+import "@/styles/admin.css"
 import "@/styles/PasswordInput.css"
 import "@/styles/loginPopup.css"
 import "@/styles/index.css"
