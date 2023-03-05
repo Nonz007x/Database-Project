@@ -1,4 +1,6 @@
 # SETUP
 
 ##Clone the repository:
-git <p style="color:orange">clone</p> https://github.com/your-username/your-repo.git
+git <p style="color:orange">clone</p>
+
+Some of these words <ins>will be underlined</ins>.
