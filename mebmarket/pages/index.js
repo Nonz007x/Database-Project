@@ -8,7 +8,7 @@ import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-export default function test() {
+export default function Home() {
 
     const { data: session, status } = useSession()
     const loading = status === "loading"
@@ -106,7 +106,7 @@ export default function test() {
             </Head>
             <div className="main-container">
                 <div className="content-container">
-                    <div className="recent-container">
+                    <div className="sub-content-container">
                         <div className="header-recent-container">
                             <h2>สินค้ามาใหม่</h2>
                             <Button className="view-recent-button">ดูทั้งหมด</Button>

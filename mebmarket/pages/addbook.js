@@ -43,59 +43,57 @@ export default function addbook() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <div className='CenterChild'>
-                <div className="App">
-                    <div className='ItemsBox'>
-                        <div className="addbook_container">
-                            <div className="addbook_name_container">
-                                <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={bookname} onChange={(e) => {
-                                    setBookname(e.target.value)
-                                }} />
+            <div className="main-container">
+                <div className="content-container">
+                    <div className="addbook_container">
+                        <div className="addbook_name_container">
+                            <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={bookname} onChange={(e) => {
+                                setBookname(e.target.value)
+                            }} />
+                        </div>
+                        <div className="addbook_img_and_detail">
+                            <div className="addbook_cover_preview">
+                                <img src={imgLink} className="cover_preview" />
                             </div>
-                            <div className="addbook_img_and_detail">
-                                <div className="addbook_cover_preview">
-                                    <img src={imgLink} className="cover_preview" />
+                            <div className="addbook_input_field">
+                                <div className="addbook_cover_container">
+                                    <p>ภาพหน้าปก</p>
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault();
+                                        (tempImg.current && 1) ? setImgLink(tempImg.current) :
+                                            setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
+                                    }}
+                                    >
+                                        <TextField size="small" label="Url Image" className="fix-width-field" onChange={(e) => { tempImg.current = e.target.value }} />
+                                        <Button variant="contained" type="submit" className="add_cover_submit">ยืนยัน</Button>
+                                    </form>
                                 </div>
-                                <div className="addbook_input_field">
-                                    <div className="addbook_cover_container">
-                                        <p>ภาพหน้าปก</p>
-                                        <form onSubmit={(e) => {
-                                            e.preventDefault();
-                                            (tempImg.current && 1) ? setImgLink(tempImg.current) :
-                                                setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
-                                        }}
-                                        >
-                                            <TextField size="small" label="Url Image" className="fix-width-field" onChange={(e) => { tempImg.current = e.target.value }} />
-                                            <Button variant="contained" type="submit" className="add_cover_submit">ยืนยัน</Button>
-                                        </form>
+                                <div className="addbook_detail">
+                                    <p>รหัสหนังสือ</p>
+                                    <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ไอดีหนังสือ" className="fix-width-field" value={bookId} onChange={e => { setBookId(e.target.value) }} />
+                                    <p>นักเขียน</p>
+                                    <div className="author_verify">
+                                        <AuthorAutocomplete onChange={e => setAuthor(e)} />
+                                        {(author) && 1 ? <CheckIcon /> : <div />}
                                     </div>
-                                    <div className="addbook_detail">
-                                        <p>รหัสหนังสือ</p>
-                                        <TextField size="small" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ไอดีหนังสือ" className="fix-width-field" value={bookId} onChange={e => { setBookId(e.target.value) }} />
-                                        <p>นักเขียน</p>
-                                        <div className="author_verify">
-                                            <AuthorAutocomplete onChange={e => setAuthor(e)} />
-                                            {(author) && 1 ? <CheckIcon /> : <div />}
-                                        </div>
-                                        <p>ราคา</p>
-                                        <TextField size="small" className="fix-width-field" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={price} onChange={e => { setPrice(e.target.value) }} />
-                                    </div>
+                                    <p>ราคา</p>
+                                    <TextField size="small" className="fix-width-field" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} label="ราคา" value={price} onChange={e => { setPrice(e.target.value) }} />
                                 </div>
                             </div>
-                            <TextField
-                                className="add_synopsis"
-                                label="เนื้อเรื่องย่อ"
-                                multiline
-                                maxRows={3}
-                                value={synopsis}
-                                onChange={(e) => {
-                                    setSynopsis(e.target.value)
-                                }}
-                            />
-                            <div className="Bottom_Submit_warp">
-                                <Button onClick={handleFormSubmit}
-                                    variant="contained" className="Submit_Button"><LocalLibraryIcon />เพิ่มหนังสือ</Button>
-                            </div>
+                        </div>
+                        <TextField
+                            className="add_synopsis"
+                            label="เนื้อเรื่องย่อ"
+                            multiline
+                            maxRows={3}
+                            value={synopsis}
+                            onChange={(e) => {
+                                setSynopsis(e.target.value)
+                            }}
+                        />
+                        <div className="Bottom_Submit_warp">
+                            <Button onClick={handleFormSubmit}
+                                variant="contained" className="Submit_Button"><LocalLibraryIcon />เพิ่มหนังสือ</Button>
                         </div>
                     </div>
                 </div>

@@ -3,11 +3,9 @@ import LoginPage from "./Login.form";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react";
-import EditIcon from '@mui/icons-material/Edit';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 export default function Navbar() {
     const router = useRouter();

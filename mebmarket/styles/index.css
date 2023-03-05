@@ -12,6 +12,13 @@
     /* border: 1px solid blue; */
 }
 
+.sub-content-container {
+    width: 100%;
+    position: relative;
+    padding: 20px;
+    /* border: 1px solid red; */
+}
+
 .header-recent-container {
     display: flex;
     justify-content: space-between;
