@@ -1,6 +1,4 @@
 # SETUP
 
-##Clone the repository:
-git <p style="color:orange">clone</p>
+<h2>Clone the repository:</h2>
 
-<p style="color:blue">Make this text blue.</p>
