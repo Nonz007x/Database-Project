@@ -4,6 +4,9 @@ import { fetcher } from "../api/fetcher";
 import Head from 'next/head'
 import { Button } from "@mui/material";
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { TextField } from "@mui/material";
+import RecentComment from "@/components/RecentComment";
 
 export default function Page() {
     const router = useRouter();
@@ -58,16 +61,43 @@ export default function Page() {
                         </div>
                         <div className="synopsis">
                             <p>
-                                เนื้อเรื่องย่อ
-                            </p>
-                            <p>
                                 {Data.synopsis}
                             </p>
+                        </div>
+                        <div className="comment-section">
+                            <div>
+                                <h3>คอมเมนต์และให้เรตติ้ง</h3>
+                            </div>
+                            <div className="comment-profile-user">
+                                <AccountCircleIcon fontSize="large" />
+                                <div className="comment-show-username">
+                                    <p>username</p>
+                                </div>
+                            </div>
+                            <div className="rating-and-comment">
+                                <div className="give-rate-zone">
+                                    <RatingAbleCustomizedRating rate={0} />
+                                </div>
+                                <div>
+                                    <TextField type="text" fullWidth className="comment-zone" 
+                                    multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
+                                </div>
+                            </div>
+                            <div className="comment-button">
+                                <Button variant="contained" className="comment-submit">คอมเมนต์</Button>
+                            </div>
+                            <div className="all-comment">
+                                <div className="all-comment-header">
+                                    <h3>คอมเมนต์ทั้งหมด</h3>
+                                </div>
+                                <div className="recent-comment">
+                                    <RecentComment />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 : null}
-
 
             {/* {Data} */}
         </>
