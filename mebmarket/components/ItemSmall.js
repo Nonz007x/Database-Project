@@ -17,7 +17,7 @@ export default function ItemSmall(props) {
                         <h5>{property.bookname}</h5>
                     </div>
                     <div className="category-container">
-                        <h6>{property.categoryname}</h6>
+                        <h6>category</h6>
                     </div>
                     <div className="buttom-section">
                         <div className="author-rating">

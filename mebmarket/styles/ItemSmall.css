@@ -1,79 +1,91 @@
 .book-list-container {
-  width: 210px;
-  height: 420px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  background: #fefefe;
-  border-radius: 5px;
-  border: 1px solid darkgrey;
-  margin: 0.4rem;
+	width: 210px;
+	height: 420px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: hidden;
+	background: #fefefe;
+	border-radius: 5px;
+	border: 1px solid darkgrey;
+	margin: 0.4rem;
 }
 
 .book-list-container:hover {
-  border: 1px solid #00bf6c;
-  box-shadow: 1px 1px 10px 1px darkgray;
+	border: 1px solid #00bf6c;
+	box-shadow: 1px 1px 10px 1px darkgray;
 }
 
 .book-cover {
-  display: flex;
-  justify-content: center
+	display: flex;
+	justify-content: center
 }
 
 .book-cover img {
-  height: calc(210px * 1.414);
-  object-fit: cover;
-  aspect-ratio: 1/1.414;
+	height: calc(210px * 1.414);
+	object-fit: cover;
+	aspect-ratio: 1/1.414;
 }
 
 .bookname-container {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .bookname-container h5 {
-  margin: 0 6px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  white-space: pre-wrap;
+	margin: 0 6px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	white-space: pre-wrap;
 }
 
 .category-container {
-  width: 100%;
+	width: 100%;
 }
 
 .category-container h6 {
-  padding-left: 10px;
+	padding-left: 10px;
 }
 
 .buttom-section {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  margin-bottom: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 10px;
+	margin-bottom: 10px;
 }
 
 .buy-button Button{
-  background-color: var(--main-color);
-  font-size: 24px;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 90px;
-  height: 40px;
+	background-color: var(--main-color);
+	font-size: 24px;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 85px;
+	height: 40px;
 }
 
 .buy-button Button h6 {
-  text-overflow: ellipsis;
+	text-overflow: ellipsis;
 }
 
 .buy-button Button:hover {
-  background-color: rgb(61, 61, 61);
+	background-color: rgb(61, 61, 61);
+}
+
+.author-rating {
+	width: 55%;
+	/* border: 1px solid red; */
+}
+
+.author-rating div h6 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
 }
