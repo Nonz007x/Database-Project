@@ -1,12 +1,11 @@
 import Head from "next/head"
 import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
-import { useRouter } from "next/router";
 import { getSession, useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
 
-export default function Adminpage() {
-    const router = useRouter();
+export default function Adminpage({ authenticate, session }) {
+    const { data: clientSession, status } = useSession();
     const [loading, setLoading] = useState(true)
     const [Data, SetData] = useState([])
     const DeletebookMemoized = React.memo(Deletebook);
@@ -16,16 +15,9 @@ export default function Adminpage() {
             SetData(data);
             setLoading(false)
         };
-        const securePage = async () => {
-            const session = await getSession()
-            if(!session){
-                router.replace("/")
-            } else {
-                await fetchData().then(
-                )
-            }
+        if (session) {
+            fetchData();
         }
-        securePage();
     }, []);
 
     const mapping = useMemo(() => {
@@ -34,9 +26,42 @@ export default function Adminpage() {
         });
     }, [Data]);
 
+    if (!session) {
+        return (
+            <>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+                <h1>Access denied</h1>
+            </>
+        )
+    }
+
     if (loading) {
         return (
             <>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
+                <h1>Loading</h1>
                 <h1>Loading</h1>
                 <h1>Loading</h1>
                 <h1>Loading</h1>
@@ -67,4 +92,13 @@ export default function Adminpage() {
             </div>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+    return {
+        props: {
+            session,
+        },
+    }
 }

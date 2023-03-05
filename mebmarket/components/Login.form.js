@@ -8,15 +8,15 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function LoginPage() {
-  const { data: session, status } = useSession()
+  const { data: clientSession, status } = useSession()
   const loading = status === "loading"
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const handleClick = () => {
-    if (!session) {
+    if (!clientSession) {
       setIsLoginFormVisible(!isLoginFormVisible);
     }
-    if (session) {
-      alert(session.user.name)
+    if (clientSession) {
+      alert(clientSession.user.name)
     }
 
   };
@@ -33,7 +33,7 @@ function LoginPage() {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    signIn('github');
+    signIn();
     // const result = await signIn('credentials',{
     //   username: UserName,
     //   password: password,
@@ -73,8 +73,8 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    console.log({ session, loading })
-  }, [session])
+    console.log({ clientSession, loading })
+  }, [clientSession])
 
   return (
     <>
@@ -86,10 +86,10 @@ function LoginPage() {
             size="small"
             onClick={handleClick}
           >
-            {!session ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก') : session.user.name}
+            {!clientSession ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก') : clientSession.user.name}
           </Button>
         )}
-        {session && (
+        {clientSession && (
           <Button
             className="login-register-button"
             variant="contained"
