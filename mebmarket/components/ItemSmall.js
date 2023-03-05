@@ -7,7 +7,7 @@ export default function ItemSmall(props) {
     return (
         <>
             <Link className="book-list-container" href={{
-                pathname: 'http://localhost:3000/book/[bookname]',
+                pathname: '/book/[bookname]',
                 query: { bookname: property.bookname}
                 }}>
                     <div className="book-cover">

@@ -17,7 +17,7 @@ export default function addbook() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/api/addbook', {
+        fetch('/api/addbook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

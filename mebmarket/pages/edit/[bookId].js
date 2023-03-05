@@ -20,7 +20,7 @@ export default function EditBook() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const e = await fetcher('http://localhost:3000/api/getBookById/' + router.query.bookId);
+            const e = await fetcher('/api/getBookById/' + router.query.bookId);
             const data = e
             setBookname(data.bookname);
             setAuthor(data.author);
@@ -36,7 +36,7 @@ export default function EditBook() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/api/editbook', {
+        fetch('/api/editbook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -91,7 +91,7 @@ export default function EditBook() {
                                         </form>
                                     </div>
                                     <div className="addbook_detail">
-                                        <p>นักเขียน</p><p>เดิม : <a className="AnchorAuthor" href={"http://localhost:3000/search/author/" + { prevAuthor }}>{prevAuthor}</a></p>
+                                        <p>นักเขียน</p><p>เดิม : <a className="AnchorAuthor" href={"/search/author/" + { prevAuthor }}>{prevAuthor}</a></p>
                                         <div className="author_verify">
                                             <AuthorAutocomplete onChange={e => setAuthor(e)} />
                                             {(Author) && 1 ? <CheckIcon /> : <div />}

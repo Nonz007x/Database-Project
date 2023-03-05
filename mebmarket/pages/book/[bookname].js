@@ -38,7 +38,7 @@ export default function Page() {
                             <img src={Data.cover} className="book_Img" />
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
-                                    <p>โดย <a href={"http://localhost:3000/search/author/" + Data.author}>{Data.author}</a></p>
+                                    <p>โดย <a href={"/search/author/" + Data.author}>{Data.author}</a></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>
