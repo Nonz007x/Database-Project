@@ -45,10 +45,9 @@ export default function SearchPage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <div className='CenterChild'>
-                <div className="App">
-                    <div className='ItemsBox'>
-                        <div className="NewestText">
+            <div className='main-container'>
+                <div className="content-container">
+                        <div className="heading-search-page">
                             <h2>
                                 ค้นหาในร้านหนังสือ
                             </h2>
@@ -81,7 +80,6 @@ export default function SearchPage() {
                             {ResultElement.length? ResultElement : <h3>ไม่มีผลการค้นหา</h3>}
                         </div>
                         {/* add here */}
-                    </div>
                 </div>
             </div>
         </>

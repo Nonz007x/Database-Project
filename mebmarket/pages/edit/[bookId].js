@@ -64,9 +64,8 @@ export default function EditBook() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <div className='CenterChild'>
-                <div className="App">
-                    <div className='ItemsBox'>
+                <div className="main-container">
+                    <div className="content-container">
                         <div className="addbook_container">
                             <div className="addbook_name_container">
                                 <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={Bookname || ""} onChange={(e) => {
@@ -83,7 +82,7 @@ export default function EditBook() {
                                         <form className="" onSubmit={(e) => {
                                             e.preventDefault();
                                             (TempImg.current && 1) ? setImgLink(TempImg.current) :
-                                                setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
+                                            setImgLink("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
                                         }}
                                         >
                                             <TextField size="small" label="Url Image" className="fix-width-field" onChange={(e) => { TempImg.current = e.target.value }} />
@@ -111,10 +110,9 @@ export default function EditBook() {
                                     setSynopsis(e.target.value)
                                 }}
                             />
-                            <div className="Bottom_Submit_warp">
-                                <Button onClick={handleFormSubmit}
-                                    variant="contained" className="Submit_Button"><LocalLibraryIcon />แก้ไข</Button>
-                            </div>
+                        <div className="Bottom_Submit_warp">
+                            <Button onClick={handleFormSubmit}
+                                variant="contained" className="Submit_Button"><LocalLibraryIcon />แก้ไข</Button>
                         </div>
                     </div>
                 </div>
