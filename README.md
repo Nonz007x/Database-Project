@@ -16,6 +16,6 @@ npm install
 npm run dev
 
 <h2>6. Access the application by opening a web browser and navigating to</h2>
-<ins>http://localhost:3000/</ins>
-<br>
+<ins>http://localhost:3000/</ins>  
+
  📝**Note:** The project configurations are located in the package.json file. You can modify them to suit your needs.
