@@ -10,12 +10,13 @@ cd your-repo/mebmarket
 npm install
 
 <h2>4. Setup Prisma and connect to your database by following the instructions provided in the Prisma documentation:</h2>
-https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-postgres
+<ins>https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-postgres</ins>
 
 <h2>5. Start the development server:</h2>
 npm run dev
 
 <h2>6. Access the application by opening a web browser and navigating to</h2>
-http://localhost:3000/
+<ins>http://localhost:3000/</ins>
+
 
  📝**Note:** The project configurations are located in the package.json file. You can modify them to suit your needs.
