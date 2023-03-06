@@ -1,11 +1,12 @@
 import Head from "next/head"
 import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
+import { requireAuthentication } from "@/utils/requireAuthentication";
 
-export default function Adminpage({ authenticate, session }) {
-    const { data: clientSession, status } = useSession();
+export default function Adminpage() {
+    const { data: clientSession } = useSession();
     const [loading, setLoading] = useState(true)
     const [Data, SetData] = useState([])
     const DeletebookMemoized = React.memo(Deletebook);
@@ -15,10 +16,10 @@ export default function Adminpage({ authenticate, session }) {
             SetData(data);
             setLoading(false)
         };
-        if (session) {
+        if (clientSession) {
             fetchData();
         }
-    }, []);
+    }, [clientSession]);
 
     const mapping = useMemo(() => {
         return Data.map((property, index) => {
@@ -26,7 +27,7 @@ export default function Adminpage({ authenticate, session }) {
         });
     }, [Data]);
 
-    if (!session) {
+    if (!clientSession) {
         return (
             <>
                 <h1>Access denied</h1>
@@ -95,10 +96,9 @@ export default function Adminpage({ authenticate, session }) {
 }
 
 export async function getServerSideProps(context) {
-    const session = await getSession(context)
-    return {
-        props: {
-            session,
-        },
-    }
-}
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { session },
+        };
+    })
+}   
