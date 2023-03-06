@@ -16,7 +16,7 @@ export default function trendingpage() {
     }
 
     useEffect(() => {
-        fetchData().then(([data]) => {
+        fetchData().then((data) => {
             setTrendingItems(data);
             setLoading(false)
         });
