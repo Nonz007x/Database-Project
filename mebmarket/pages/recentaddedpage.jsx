@@ -11,14 +11,14 @@ export default function recentaddedpage() {
     const [loading, setLoading] = useState(true);
     const [Count, setCount] = useState([]);
     const [Page, setPage] = useState(1)
+
     const fetchData = async () => {
-        const data = await Promise.all([fetcher("/api/SortByRating/" + Page.toString())]);
-        console.log(data)
-        return data;
+        const books = await fetcher("/api/SortByRating/" + Page.toString());
+        return [books];
     }
     const fetchCount = async () => {
-        const res = await Promise.all([fetcher("/api/getcount")]);
-        return res;
+        const count = await fetcher("/api/getcount");
+        return count;
     }
     const handleChange = (event, value) => {
         window.scrollTo(0, 0)
@@ -26,15 +26,16 @@ export default function recentaddedpage() {
     };
 
     useEffect(() => {
-        fetchCount().then(([res]) => {
-            setCount(Math.ceil(res * 0.1))
-            console.log(Math.ceil(res * 0.1))
-        })
-        fetchData().then(([data]) => {
-            setNewProduct(data);
+        Promise.all([
+            fetchCount(),
+            fetchData(),
+        ]).then(([count, [books]]) => {
+            setCount(Math.ceil(count * 0.1))
+            setNewProduct(books);
             setLoading(false)
-        });
+        })
     }, []);
+
     const newProductMapped = useMemo(() => {
         return newProduct.map((property, index) => {
             return (
@@ -42,11 +43,13 @@ export default function recentaddedpage() {
             );
         });
     }, [newProduct]);
+
     useEffect(() => {
         fetchData().then(([data]) => {
             setNewProduct(data);
         })
     }, [Page])
+
     if (loading) {
         return <Loading />;
     }
