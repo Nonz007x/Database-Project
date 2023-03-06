@@ -11,12 +11,12 @@ export default function recentaddedpage() {
     const [loading, setLoading] = useState(true);
 
     const fetchData = async () => {
-        const data = await Promise.all([fetcher("http://localhost:3000/api/getRecentAddedpage")]);
+        const data = await fetcher("api/getRecentAddedpage")
         return data;
     }
-
+    
     useEffect(() => {
-        fetchData().then(([data]) => {
+        fetchData().then((data) => {
             setNewProduct(data);
             setLoading(false)
         });
