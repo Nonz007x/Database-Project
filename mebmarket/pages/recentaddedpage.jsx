@@ -12,7 +12,7 @@ export default function recentaddedpage() {
     const [Count, setCount] = useState([]);
     const [Page, setPage] = useState(1)
     const fetchData = async () => {
-        const data = await Promise.all([fetcher("http://localhost:3000/api/Iteminpages/" + Page.toString())]);
+        const data = await Promise.all([fetcher("/api/SortByRating/" + Page.toString())]);
         console.log(data)
         return data;
     }
