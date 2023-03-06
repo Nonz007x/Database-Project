@@ -84,7 +84,7 @@ function LoginPage() {
             size="small"
             onClick={handleClick}
           >
-            {!clientSession ? ('ล็อคอินเข้าสู่ระบบ/สมัครสมาชิก') : clientSession.user.name}
+            {!clientSession ? ('ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก') : clientSession.user.name}
           </Button>
         )}
         {clientSession && (
