@@ -16,13 +16,13 @@ export default function AdminNavbar() {
                     <div id="nav-right">
                         <Link href="./admin" className="admin-nav-button">
                             <Button variant="contained" className="admin-button">
-                                <EditIcon className="admin-icon" fontSize="large"/>
+                                <EditIcon className="admin-icon" fontSize="large" />
                                 Admin
                             </Button>
                         </Link>
                         <Link href="./addbook" className="admin-nav-button">
                             <Button variant="contained" className="admin-button">
-                                <AutoStoriesIcon className="admin-icon" fontSize="large"/>
+                                <AutoStoriesIcon className="admin-icon" fontSize="large" />
                                 เพิ่มหนังสือ
                             </Button>
                         </Link>

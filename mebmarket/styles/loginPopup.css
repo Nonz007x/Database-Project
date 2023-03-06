@@ -1,4 +1,4 @@
-#GotoMiddleOfTheScreen{
+#GotoMiddleOfTheScreen {
     padding: 1em;
     z-index: 11;
     position: absolute;
@@ -14,38 +14,38 @@
     flex-direction: column;
     align-items: center;
 }
-#CloseLogin{
+#CloseLogin {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
-#HeaderLoginZone{
+#HeaderLoginZone {
     display: flex;
 }
-#HeadLogin{
+#HeadLogin {
     display: flex;
     justify-content: center;
 }
-#loginBar{
+#loginBar {
     width: 60%;
 }
-.TextField{
+.TextField {
     /* position: relative; */
     margin: 10px 0;
     width: 100%;
 }
 
-.TransparentBg .GotoMiddleOfTheScreen .loginBar .UsernameZone .textfield{
+.TransparentBg .GotoMiddleOfTheScreen .loginBar .UsernameZone .textfield {
     justify-content: center;
 }
-#PasswordZone{
+#PasswordZone {
     position: relative;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-#TransparentBg{
+#TransparentBg {
     z-index: 10;
     position: fixed;
     top: 0;
@@ -53,22 +53,19 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-
 }
-.eye{
+.eye {
     position: absolute;
     right: 16px;
     top: 16px;
 }
-.LoginButtonZone{
+.LoginButtonZone {
     display: flex;
     flex-direction: column;
-
 }
-.Flexrow{
+.Flexrow {
     display: flex;
     flex-direction: row;
-
 }
 
 .login-register-button {
@@ -76,9 +73,9 @@
     max-height: 100%;
     display: flex;
     flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, .15);
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 .login-register-button:hover {
-    background-color: rgba(0, 0, 0, .50);
+    background-color: rgba(0, 0, 0, 0.5);
 }

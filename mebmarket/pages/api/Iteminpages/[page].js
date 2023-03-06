@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-    const {page} = req.query;
+    const { page } = req.query;
     const itemsPerPage = 10;
     try {
         const books = await prisma.book.findMany({
@@ -15,14 +15,14 @@ export default async function handler(req, res) {
                 price: true,
             },
             orderBy: {
-                date: 'desc',
+                date: "desc",
             },
-            skip: (itemsPerPage*(page-1)) ,                                                                                                                                                                                                                                                                                                                                                              
+            skip: itemsPerPage * (page - 1),
             take: itemsPerPage,
-        })
-        res.json(books)
+        });
+        res.json(books);
     } catch (error) {
-        console.error(error)
-        res.status(500).send('Internal Server Error')
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
 }

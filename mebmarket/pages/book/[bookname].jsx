@@ -7,6 +7,7 @@ import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { TextField } from "@mui/material";
 import RecentComment from "@/components/RecentComment";
+import CustomizedRating from "@/components/CustomRating";
 
 export default function Page() {
     const router = useRouter();
@@ -51,7 +52,7 @@ export default function Page() {
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{Data.rating}</h5>
-                                    <RatingAbleCustomizedRating rate={Data.rating} />
+                                    <CustomizedRating size="large" rate={Data.rating} />
                                 </div>
                                 <div id="release_date">
                                     <p>วันที่วางขาย</p>
