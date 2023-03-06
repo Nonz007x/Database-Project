@@ -34,6 +34,7 @@
 .cover_preview {
     height: calc(330px * 1.414);
     aspect-ratio: 1/1.414;
+    box-shadow: 0 0 6px var(--font-color-gray);
 }
 
 .addbook_input_field {
