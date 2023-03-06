@@ -93,10 +93,10 @@ export default function Adminpage() {
   );
 }
 
-export async function getServerSideProps(context) {
-  return requireAuthentication(context, ({ session }) => {
-    return {
-      props: { session },
-    };
-  });
-}
+// export async function getServerSideProps(context) {
+//   return requireAuthentication(context, ({ session }) => {
+//     return {
+//       props: { session },
+//     };
+//   });
+// }

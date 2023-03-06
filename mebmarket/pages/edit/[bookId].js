@@ -65,8 +65,6 @@ export default function EditBook() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-                <div className="main-container">
-                    <div className="content-container">
                         <div className="addbook_container">
                             <div className="addbook_name_container">
                                 <TextField size="large" label="ชื่อหนังสือ" sx={{ width: 500 }} value={Bookname || ""} onChange={(e) => {
@@ -116,16 +114,14 @@ export default function EditBook() {
                                 variant="contained" className="Submit_Button"><LocalLibraryIcon />แก้ไข</Button>
                         </div>
                     </div>
-                </div>
-            </div>
         </>
     )
 }
 
-export async function getServerSideProps(context) {
-    return requireAuthentication(context, ({ session }) => {
-        return {
-            props: { session },
-        };
-    })
-}   
+// export async function getServerSideProps(context) {
+//     return requireAuthentication(context, ({ session }) => {
+//         return {
+//             props: { session },
+//         };
+//     })
+// }   
