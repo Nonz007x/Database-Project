@@ -17,7 +17,7 @@ export default function recentaddedpage() {
         return data;
     }
     const fetchCount = async () => {
-        const res = await Promise.all([fetcher("api/getcount")]);
+        const res = await fetcher("api/getcount");
         return res;
     }
     const handleChange = (event, value) => {

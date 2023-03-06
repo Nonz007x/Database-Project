@@ -12,12 +12,11 @@ export default function recentaddedpage() {
     const [Count, setCount] = useState([]);
     const [Page, setPage] = useState(1)
     const fetchData = async () => {
-        const data = await Promise.all([fetcher("/api/SortByRating/" + Page.toString())]);
-        console.log(data)
+        const data = await fetcher("/api/SortByRating/" + Page.toString());
         return data;
     }
     const fetchCount = async () => {
-        const res = await Promise.all([fetcher("api/getcount")]);
+        const res = await fetcher("api/getcount");
         return res;
     }
     const handleChange = (event, value) => {
