@@ -16,9 +16,7 @@ export default function newproductpage() {
     }
 
     useEffect(() => {
-        console.log("fetching")
         fetchData().then(([data]) => {
-            console.log(data)
             setNewProduct(data);
             setLoading(false)
         });
