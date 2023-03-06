@@ -1,6 +1,7 @@
 .main-container {
     width: 100%;
     padding-top: 60px;
+    min-height: 100vh;
     /* border: 1px solid red; */
 }
 

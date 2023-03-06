@@ -14,26 +14,48 @@
     box-shadow: rgba(0, 0, 0, 0.12) 2px 2px 20px;
 
 }
+
+.heading-search-page {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border-bottom: 2px solid gray;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    justify-content: center;
+}
+
+.heading-search-page h2 {
+    margin-bottom: 0.5em;
+    font-weight: 300;
+}
+
 .Searchline{
     width: 1.5px;
     height: 75%;
     background-color: gray;
     margin: 0 1em;
 }
+
 .SearchArea{
     display: flex;
     width: 100%;
     justify-content: center;
     /* border: 1px solid red; */
     align-items: center;
+    margin: 10px 0;
 }
+
 .TypeSearch{
     /* border: 1px solid rgb(156, 156, 156); */
     border-radius: 5px;
 }
+
 .TypeSearch:focus{
-    border: 1px solid yellow;
+    outline: red;
 }
+
 .width100{
     width: 100%;
     display: flex;
