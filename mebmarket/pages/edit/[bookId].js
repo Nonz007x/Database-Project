@@ -7,6 +7,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import CheckIcon from '@mui/icons-material/Check';
 import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
+import { requireAuthentication } from "@/utils/requireAuthentication";
 
 export default function EditBook() {
     const router = useRouter();
@@ -120,3 +121,11 @@ export default function EditBook() {
         </>
     )
 }
+
+export async function getServerSideProps(context) {
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { session },
+        };
+    })
+}   
