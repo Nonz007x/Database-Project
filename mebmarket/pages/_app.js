@@ -11,6 +11,7 @@ import "@/styles/searchbar.css"
 import "@/styles/addbook.css"
 import "@/styles/deletebook.css"
 import "@/styles/RecentComment.css"
+import "@/styles/loading.css"
 import "@/styles/footer.css"
 import Navbar from '@/components/Navbar'
 import Footer from "@/components/footer";

@@ -14,7 +14,7 @@ export default function Footer() {
                                 <GitHubIcon />
                             </div>
                             <div className="name-link">
-                                <p>ท์นน</p>
+                                <p>นน</p>
                             </div>
                         </Link>
                     </li>
@@ -24,7 +24,7 @@ export default function Footer() {
                                     <GitHubIcon />
                             </div>
                             <div className="name-link">
-                                <p>ส์ฟิว</p>
+                                <p>ฟูส</p>
                             </div>
                         </Link>
                     </li>
@@ -34,7 +34,7 @@ export default function Footer() {
                                     <GitHubIcon />
                             </div>
                             <div className="name-link">
-                                <p>อเสื</p>
+                                <p>วิศรุต</p>
                             </div>
                         </Link>
                     </li>
@@ -44,7 +44,7 @@ export default function Footer() {
                                     <GitHubIcon />
                             </div>
                             <div className="name-link">
-                                <p>อเสื</p>
+                                <p>เบส</p>
                             </div>
                         </Link>
                     </li>
