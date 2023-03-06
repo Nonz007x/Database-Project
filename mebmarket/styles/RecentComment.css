@@ -6,13 +6,13 @@
 
 .comment-buttom {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .username-rate {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .comment-profile {

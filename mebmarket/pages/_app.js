@@ -18,10 +18,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import { SessionProvider } from "next-auth/react";
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={pageProps.session}>
       <Navbar />

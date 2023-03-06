@@ -1,7 +1,7 @@
 .book_bookname_Container{
     max-width: 50%;
     /* border: solid 1px red; */
-    padding: 5rem 0;
+    /* padding: 5rem 0; */
     margin: auto auto;
     display: flex;
     flex-direction: column;
