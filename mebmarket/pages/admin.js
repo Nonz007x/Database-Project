@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
 import Deletebook from "@/components/deletebook";
 import { requireAuthentication } from "@/utils/requireAuthentication";
+import Loading from "@/components/Loading";
 
 export default function Adminpage() {
     const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ export default function Adminpage() {
     const DeletebookMemoized = React.memo(Deletebook);
 
     const fetchData = async () => {
-        const [data] = await Promise.all([fetcher("api/get")]);
+        const data = await fetcher("api/get")
         return data;
     };
 
@@ -28,29 +29,7 @@ export default function Adminpage() {
     }, [Data]);
 
     if (loading) {
-        return (
-            <>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-                <h1>Loading</h1>
-            </>
-        );
+        return <Loading />;
     }
     return (
         <>

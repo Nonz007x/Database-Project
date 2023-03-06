@@ -11,7 +11,7 @@ export default function trendingpage() {
     const [loading, setLoading] = useState(true);
 
     const fetchData = async () => {
-        const data = await Promise.all([fetcher("/api/getRecentAddedPage")]);
+        const data = await fetcher("/api/getRecentAddedPage")
         return data;
     }
 
