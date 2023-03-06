@@ -6,35 +6,35 @@ import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
 import Loading from "@/components/Loading";
 
-export default function newproductpage() {
+export default function trendingpage() {
     const { data: session, status } = useSession();
     const ItemSmallMemoized = React.memo(ItemSmall);
-    const [RecentItems, SetItems] = useState([]);
+    const [TrendingItems, SetTrending] = useState([])
     const loading = status === "loading";
 
     useEffect(() => {
-        Promise.all([fetcher("/api/getRecentAddedPage")]).then(
-        ([recentItems]) => {
-            SetItems(recentItems);
+        Promise.all([fetcher("/api/getBookByRatingPage")]).then(
+        ([TrendingItems]) => {
+            SetTrending(TrendingItems);
         }
         );
     }, []);
 
-    const RecentItemsMapped = useMemo(() => {
-        return RecentItems.map((property, index) => {
+    const TrendingItemsMapped = useMemo(() => {
+        return TrendingItems.map((property, index) => {
             return (
-            <ItemSmallMemoized
+                <ItemSmallMemoized
                 key={`${property.bookId}-${index}`}
                 property={property}
-            />
+                />
             );
-        });
-        }, [RecentItems]);
+            });
+        }, [TrendingItems]);
 
     if (loading) {
         return <Loading />;
         }
-
+        
     return (
         <>
             <Head>
@@ -49,9 +49,9 @@ export default function newproductpage() {
             </Head>
             <div className="sub-content-container">
                 <div className="header-recent-container">
-                <h2>สินค้ามาใหม่</h2>
+                <h2>สินค้ามาแรง</h2>
                 </div>
-                <div className="content-large-container">{ RecentItemsMapped }</div>
+                <div className="content-large-container">{ TrendingItemsMapped }</div>
             </div>
         </>
     )

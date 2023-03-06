@@ -16,6 +16,7 @@ export default function Home() {
   const ItemSmallMemoized = React.memo(ItemSmall);
   const [RecentItems, SetItems] = useState([]);
   const [Data, SetData] = useState([]);
+  const [TrendingItems, SetTrending] = useState([]);
   const [OpenAll, setOpenAll] = useState(false);
   const router = useRouter();
 
@@ -31,10 +32,11 @@ export default function Home() {
   }, [router.query]);
 
   useEffect(() => {
-    Promise.all([fetcher("/api/getRecentAdded"), fetcher("/api/get")]).then(
-      ([recentItems, data]) => {
+    Promise.all([fetcher("/api/getRecentAdded"), fetcher("/api/get"), fetcher("/api/getBookByRating")]).then(
+      ([recentItems, data, trendingItems]) => {
         SetItems(recentItems);
         SetData(data);
+        SetTrending(trendingItems)
       }
     );
   }, []);
@@ -61,6 +63,17 @@ export default function Home() {
     });
   }, [RecentItems]);
 
+  const TrendingItemsMapped = useMemo(() => {
+    return TrendingItems.map((property, index) => {
+      return (
+        <ItemSmallMemoized
+          key={`${property.bookId}-${index}`}
+          property={property}
+        />
+      );
+    });
+  }, [TrendingItems]);
+
   if (loading) {
     return <Loading />;
   }
@@ -84,7 +97,16 @@ export default function Home() {
             <Button className="view-recent-button">ดูทั้งหมด</Button>
           </Link>
         </div>
-        <div className="content-recent-container">{RecentItemsMapped}</div>
+        <div className="content-small-container">{RecentItemsMapped}</div>
+      </div>
+      <div className="sub-content-container">
+        <div className="header-recent-container">
+          <h2>สินค้ามาแรง</h2>
+          <Link href="/trendingpage">
+            <Button className="view-recent-button">ดูทั้งหมด</Button>
+          </Link>
+        </div>
+        <div className="content-small-container">{TrendingItemsMapped}</div>
       </div>
       <div className="AddWidthToShowAll">
         <Button

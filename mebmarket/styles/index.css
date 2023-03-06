@@ -31,15 +31,25 @@
     color: var(--main-color);
 }
 
-.content-recent-container {
+.content-small-container {
     display: flex;
     width: 100%;
+    height: 440px;
     justify-content: center;
     border-top: 2px solid grey;
     padding-top: 5px;
     flex-wrap: wrap;
     /* border: 1px solid blue; */
     overflow-y: hidden;
+}
+
+.content-large-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    border-top: 2px solid grey;
+    padding-top: 5px;
+    flex-wrap: wrap;
 }
 
 .AddWidthToShowAll{
