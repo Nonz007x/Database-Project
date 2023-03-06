@@ -43,11 +43,13 @@ export const authOptions = {
                         },
                     }
                 });
+                
                 const { username, email, role } = user[0];
 
                 if (!user[0]) {
                     return null;
                 }
+
                 // const isValid = await compare(password, user.password);
                 // if (!isValid) {
                 //     return null;
