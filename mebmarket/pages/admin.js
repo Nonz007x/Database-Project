@@ -84,9 +84,9 @@ export default function Adminpage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            <div className='CenterChild'>
-                <div className="App">
-                    <div className='ItemsBox'>
+            <div className='main-container'>
+                <div className="content-container">
+                    <div className="list-items">
                         {mapping}
                     </div>
                 </div>

@@ -1,23 +1,35 @@
 .FooterParent{
     width: 100%;
-    background-color: var(--font-color-gray);
+    background-color: #f6f6f6;
     min-height: 20vh;
     padding: 1em;
     display: flex;
     justify-content: center;
-    ;
-
 }
-.FooterChild{
+
+.FooterChild {
     /* width: 75%; */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--main-color);
+    color: var(--font-color-menu);
     flex-direction: column;
 }
-.FooterChild a{
-    color: var(--main-color);
-    font-weight: 500;
 
+.FooterChild ul {
+    list-style: none;
+}
+
+.FooterChild a{
+    color: #707070;
+    font-weight: 500;
+}
+
+.footerLink {
+    display: flex;
+    margin: 10px;
+}
+
+.icon-link {
+    margin-right: 10px;
 }
