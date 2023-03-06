@@ -34,7 +34,7 @@ export default function Page() {
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
             {(Data != null) ?
-                <div className="book_bookname_Container">
+                <div className="book_bookname_Container">   
                     <div className="book_bookname_PageAdjust">
                         <h1 className="book_bookname_Bookname">{Data.bookname}</h1>
                         <div className="book_book_ItemAndDetail">

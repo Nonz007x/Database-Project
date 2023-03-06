@@ -38,7 +38,8 @@
     border-top: 2px solid grey;
     padding-top: 5px;
     flex-wrap: wrap;
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
+    overflow-y: hidden;
 }
 
 .AddWidthToShowAll{
