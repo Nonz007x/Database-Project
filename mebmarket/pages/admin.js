@@ -1,23 +1,27 @@
 import Head from "next/head";
 import React, { useEffect, useState, useMemo } from "react";
 import { fetcher } from "./api/fetcher";
-import { useSession } from "next-auth/react";
 import Deletebook from "@/components/deletebook";
 import { requireAuthentication } from "@/utils/requireAuthentication";
 
 export default function Adminpage() {
     const [loading, setLoading] = useState(true);
-    const [Data, SetData] = useState([]);
+    const [Data, setData] = useState([]);
     const DeletebookMemoized = React.memo(Deletebook);
 
     const fetchData = async () => {
         const [data] = await Promise.all([fetcher("api/get")]);
-        SetData(data);
-        setLoading(false);
+        return data;
     };
 
+    useEffect(() => {
+        fetchData().then((data) => {
+            setData(data);
+            setLoading(false);
+        });
+    }, []);
+
     const mapping = useMemo(() => {
-        fetchData();
         return Data.map((property, index) => {
             return <DeletebookMemoized key={property.bookId} property={property} />;
         });
