@@ -17,7 +17,6 @@ function LoginPage() {
     }
     if (clientSession) {
       console.log(clientSession)
-      alert(clientSession.role)
     }
 
   };
