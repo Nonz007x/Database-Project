@@ -91,7 +91,7 @@ export default function Home() {
         />
       </Head>
       <div className="sub-content-container">
-        <div className="header-recent-container">
+        <div className="header-sub-content-container">
           <h2>สินค้ามาใหม่</h2>
           <Link href="/recentaddedpage">
             <Button className="view-recent-button">ดูทั้งหมด</Button>
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="content-small-container">{RecentItemsMapped}</div>
       </div>
       <div className="sub-content-container">
-        <div className="header-recent-container">
+        <div className="header-sub-content-container">
           <h2>สินค้ามาแรง</h2>
           <Link href="/trendingpage">
             <Button className="view-recent-button">ดูทั้งหมด</Button>

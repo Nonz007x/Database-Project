@@ -20,8 +20,9 @@
     /* border: 1px solid red; */
 }
 
-.header-recent-container {
+.header-sub-content-container {
     display: flex;
+    height: 46.5px;
     justify-content: space-between;
     padding-bottom: 10px;
     /* border: 1px solid blue; */
