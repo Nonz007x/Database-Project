@@ -16,7 +16,8 @@ function LoginPage() {
       setIsLoginFormVisible(!isLoginFormVisible);
     }
     if (clientSession) {
-      alert(clientSession.user.name)
+      console.log(clientSession)
+      alert(clientSession.role)
     }
 
   };
@@ -48,7 +49,9 @@ function LoginPage() {
 
   const handleSignOut = async (e) => {
     e.preventDefault();
-    signOut();
+    signOut({
+      redirect: false,
+    });
   }
 
   const handleFormSubmit = async (e) => {
@@ -71,10 +74,6 @@ function LoginPage() {
       console.error('Error:', error);
     };
   }
-
-  useEffect(() => {
-    console.log({ clientSession, loading })
-  }, [clientSession])
 
   return (
     <>
