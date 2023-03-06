@@ -1,6 +1,5 @@
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
-import "@fontsource/roboto/400.css";
 import { fetcher } from "./api/fetcher";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
@@ -8,6 +7,7 @@ import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
+import Link from "next/link";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -80,7 +80,9 @@ export default function Home() {
       <div className="sub-content-container">
         <div className="header-recent-container">
           <h2>สินค้ามาใหม่</h2>
-          <Button className="view-recent-button">ดูทั้งหมด</Button>
+          <Link href="/recentaddedpage">
+            <Button className="view-recent-button">ดูทั้งหมด</Button>
+          </Link>
         </div>
         <div className="content-recent-container">{RecentItemsMapped}</div>
       </div>
