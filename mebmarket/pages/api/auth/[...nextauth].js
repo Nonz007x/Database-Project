@@ -15,7 +15,7 @@ export const authOptions = {
         CredentialsProvider({
             type: "credentials",
             credentials: {
-                username: {
+                name: {
                     label: "Username",
                     type: "text",
                 },
@@ -43,11 +43,13 @@ export const authOptions = {
                         },
                     }
                 });
+                
                 const { username, email, role } = user[0];
 
                 if (!user[0]) {
                     return null;
                 }
+
                 // const isValid = await compare(password, user.password);
                 // if (!isValid) {
                 //     return null;
