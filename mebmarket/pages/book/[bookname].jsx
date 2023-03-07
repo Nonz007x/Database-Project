@@ -11,9 +11,13 @@ import CustomizedRating from "@/components/CustomRating";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import LoginPage from "@/components/Login.form";
+import { Snackbar } from "@mui/material";
+import { Alert } from "@mui/material";
+import Slide from "@mui/material";
 
 export default function Page() {
     const { data: clientSession, status } = useSession()
+    const [open, setOpen] = useState(false)
     const router = useRouter();
     const [Data, SetData] = useState(null);
     const [ratingGiven, setRatingGiven] = useState(0)
@@ -21,8 +25,14 @@ export default function Page() {
     const bookname = router.query.bookname;
 
     const UploadComment = () => {
-        
+        setOpen(true)
     }
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -128,7 +138,16 @@ export default function Page() {
                 </div>
                 : null
             }
-
+            <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                TransitionComponent="right"
+            >
+                <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    This is a success message!
+                </Alert>
+            </Snackbar>
             {/* {Data} */}
         </>
     )
