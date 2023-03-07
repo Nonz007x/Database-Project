@@ -23,19 +23,7 @@ export const authOptions = {
             },
             async authorize(credentials) {
                 const { name, password } = credentials
-                // if ( name === "admin" && password === "123") {
-                //     return {
-                //         id: 0,
-                //         name: "admin",
-                //         email: "nitid123@ex.com",
-                //         redirect: {
-                //             destination: "/",
-                //             permanent: false,
-                //         }
-                //     };
-                // }
-
-                const user = await prisma.user.findMany({
+                const user = await prisma.user.findFirst({
                     where: {
                         AND: {
                             username: name,
@@ -44,11 +32,11 @@ export const authOptions = {
                     }
                 });
                 
-                const { username, email, role } = user[0];
-
                 if (!user[0]) {
                     return null;
                 }
+
+                const { username, email, role } = user[0];
 
                 // const isValid = await compare(password, user.password);
                 // if (!isValid) {
