@@ -8,6 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { TextField } from "@mui/material";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
+import Link from "next/link";
 
 export default function Page() {
     const router = useRouter();
@@ -35,14 +36,17 @@ export default function Page() {
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
             {(Data != null) ?
-                <div className="book_bookname_Container">   
+                <div className="book_bookname_Container">
                     <div className="book_bookname_PageAdjust">
                         <h1 className="book_bookname_Bookname">{Data.bookname}</h1>
                         <div className="book_book_ItemAndDetail">
                             <img src={Data.cover} className="book_Img" />
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
-                                    <p>โดย <a href={"/search/author/" + Data.author}>{Data.author}</a></p>
+                                    <p>โดย<Link href={{
+                                        pathname: "/search/author/[author]",
+                                        query: { author: Data.author }
+                                    }}>{Data.author}</Link></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>
@@ -80,8 +84,8 @@ export default function Page() {
                                     <RatingAbleCustomizedRating rate={0} />
                                 </div>
                                 <div>
-                                    <TextField type="text" fullWidth className="comment-zone" 
-                                    multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
+                                    <TextField type="text" fullWidth className="comment-zone"
+                                        multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
                                 </div>
                             </div>
                             <div className="comment-button">
@@ -98,7 +102,8 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                : null}
+                : null
+            }
 
             {/* {Data} */}
         </>
