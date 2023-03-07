@@ -87,14 +87,14 @@ export default function Page() {
                                 <AccountCircleIcon fontSize="large" />
                                 <div className="comment-show-username">
                                     <p>{!!clientSession ? clientSession.user.name:null}</p>
-                                    {/* <Button
+                                    <Button
                                         className="login-register-button"
                                         variant="contained"
                                         size="small"
-                                        onClick={handleClick}
+                                        // onClick={handleClick}
                                     >
                                         {!clientSession ? ('ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก') : clientSession.user.name}
-                                    </Button> */}
+                                    </Button>
                                 </div>
                             </div>
                             <div className="rating-and-comment">
