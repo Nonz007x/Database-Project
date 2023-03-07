@@ -14,7 +14,7 @@ export default function RecentComment(props) {
                 <div className="comment-buttom">
                     <div className="username-rate">
                         {property.username}
-                        <CustomizedRating rate={property.rating||""} />
+                        <CustomizedRating rate={Number(property.rating)} />
                     </div>
                     <div className="comment-profile">
                         <AccountCircleIcon fontSize='large' />

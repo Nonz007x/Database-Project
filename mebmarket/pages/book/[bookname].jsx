@@ -23,13 +23,12 @@ export default function Page() {
     const [commentWriten, setcommentWriten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
-
     const fetchComment = async (bookId) => {
         const result = await fetcher("/api/getComments/" + bookId.toString());
         setCommentsData(result)
     }
 
-    const UploadComment = () => {
+    const UploadComment = async () => {
         fetch("/api/PostcommentAndRating", {
             method: "POST",
             headers: {
@@ -42,10 +41,9 @@ export default function Page() {
                 rating: ratingGiven,
             }),
         })
-        // fetchComment(Data.bookId);
         setOpen(true);
     }
-    
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -62,6 +60,7 @@ export default function Page() {
             fetchData();
         }
     }, [bookname]);
+
     return (
         <>
             <Head>
@@ -153,7 +152,6 @@ export default function Page() {
                                             />
                                         )
                                     }) : null}
-                                    {/* {mappedComments} */}
                                 </div>
                             </div>
                         </div>
