@@ -1,4 +1,4 @@
-.book_bookname_Container{
+.book_bookname_Container {
     max-width: 50%;
     /* border: solid 1px red; */
     /* padding: 5rem 0; */
@@ -8,21 +8,21 @@
     align-items: center;
 }
 
-.book_bookname_PageAdjust{
+.book_bookname_PageAdjust {
     /* border: solid 1px blue; */
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.book_bookname_Bookname{
+.book_bookname_Bookname {
     /* border: 1px solid red; */
     width: 100%;
     text-align: center;
     margin: 0.5rem 0;
 }
 
-.book_book_ItemAndDetail{
+.book_book_ItemAndDetail {
     /* border: 1px solid red; */
     width: 100%;
     display: flex;
@@ -30,12 +30,12 @@
     margin: 1.5rem 0;
 }
 
-.book_Img{
+.book_Img {
     height: 500px;
     box-shadow: 0 0 6px var(--font-color-gray);
 }
 
-#Detail{
+#Detail {
     /* border: 1px solid blue; */
     width: 100%;
     padding: 0 1rem;
@@ -50,17 +50,17 @@
     text-decoration: none;
 }
 
-    #data_author_publisher_category p {
-        color: var(--font-color-gray);
-        font-weight: bold;
-    }
-    #data_author_publisher_category a {
-        text-decoration: none;
-        font-weight: lighter;
-        color: var(--main-color);
-    }
+#data_author_publisher_category p {
+    color: var(--font-color-gray);
+    font-weight: bold;
+}
+#data_author_publisher_category a {
+    text-decoration: none;
+    font-weight: lighter;
+    color: var(--main-color);
+}
 
-#TryAndBuyDiv{
+#TryAndBuyDiv {
     /* border: 1px solid red; */
     margin: 1.5em 0;
     width: 100%;
@@ -68,7 +68,7 @@
     justify-content: center;
 }
 
-#Try_Button{
+#Try_Button {
     background-color: azure;
     color: var(--main-color);
     border: 1px solid var(--main-color);
@@ -80,38 +80,39 @@
     margin: 0 10px;
 }
 
-.Buy_Button{
+.Buy_Button {
     background-color: var(--main-color);
     font-weight: 600;
     border-radius: 30px;
     width: 200px;
     height: 50px;
 }
-.Buy_Button:hover,.Buy_Button:focus{
+.Buy_Button:hover,
+.Buy_Button:focus {
     background: rgb(61, 61, 61);
 }
-.Submit_Button{
+.Submit_Button {
     background-color: var(--main-color);
     font-weight: 600;
     border-radius: 30px;
     /* width: 200px; */
     height: 50px;
 }
-.Submit_Button:hover{
+.Submit_Button:hover {
     background-color: rgb(61, 61, 61);
 }
 
-#RatingZone{
+#RatingZone {
     /* border: 1px solid red; */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-    #RatingZone h5{
-        color: #ff3d47;
-        margin: 0 0.5rem;
-    }
+#RatingZone h5 {
+    color: #ff3d47;
+    margin: 0 0.5rem;
+}
 
 #release_date {
     display: flex;
@@ -119,9 +120,9 @@
     margin-top: 25px;
     /* border: 1px solid red; */
 }
-    #release_date p {
-        color: var(--font-color-gray);
-    }
+#release_date p {
+    color: var(--font-color-gray);
+}
 
 .synopsis {
     /* border: 1px solid red; */
@@ -130,10 +131,10 @@
     width: 100%;
     max-width: 60vw;
 }
-    .synopsis p {
-        color: var(--font-color-gray);
-        word-wrap: break-word;
-    }
+.synopsis p {
+    color: var(--font-color-gray);
+    word-wrap: break-word;
+}
 
 .comment-section {
     margin-top: 30px;
@@ -154,6 +155,29 @@
 .comment-show-username {
     padding-left: 10px;
     font-size: 18px;
+}
+.blur-if-not-login {
+    position: relative;
+}
+.blur-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+}
+.blur-effect h3{
+    color: white;
 }
 
 .give-rate-zone {
