@@ -13,7 +13,6 @@ import Link from "next/link";
 import LoginPage from "@/components/Login.form";
 import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
-import Slide from "@mui/material";
 
 export default function Page() {
     const { data: clientSession, status } = useSession()
@@ -33,7 +32,6 @@ export default function Page() {
         }
         setOpen(false);
     };
-
     useEffect(() => {
         const fetchData = async () => {
             const e = await fetcher('../api/getBookByName/' + bookname);
