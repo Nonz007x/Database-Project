@@ -29,7 +29,8 @@ export default function CustomizedRating(props) {
             {/* <Typography component="legend">Custom icon and color</Typography> */}
             <StyledRating
                 name="customized-color"
-                defaultValue={rate}
+                // defaultValue={rate}
+                value={rate}
                 getLabelText={(value) =>
                     `${value} Heart${value !== 1 ? "s" : ""}`
                 }

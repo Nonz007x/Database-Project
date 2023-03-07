@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetcher } from "../api/fetcher";
 import Head from 'next/head'
 import { Button } from "@mui/material";
@@ -22,10 +22,30 @@ export default function Page() {
     const [ratingGiven, setRatingGiven] = useState(0)
     const [commentWriten, setcommentWriten] = useState("")
     const bookname = router.query.bookname;
+    const [CommentsData, setCommentsData] = useState("")
+
+    const fetchComment = async (bookId) => {
+        const result = await fetcher("/api/getComments/" + bookId.toString());
+        setCommentsData(result)
+    }
 
     const UploadComment = () => {
-        setOpen(true)
+        fetch("/api/PostcommentAndRating", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                bookId: Data.bookId,
+                username: clientSession.user.name,
+                comment: commentWriten,
+                rating: ratingGiven,
+            }),
+        })
+        // fetchComment(Data.bookId);
+        setOpen(true);
     }
+    
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -36,15 +56,12 @@ export default function Page() {
         const fetchData = async () => {
             const e = await fetcher('../api/getBookByName/' + bookname);
             SetData(e);
-            console.log(e);
+            fetchComment(e.bookId)
         };
         if (bookname) {
             fetchData();
         }
     }, [bookname]);
-
-
-
     return (
         <>
             <Head>
@@ -128,7 +145,15 @@ export default function Page() {
                                     <h3>คอมเมนต์ทั้งหมด</h3>
                                 </div>
                                 <div className="recent-comment">
-                                    <RecentComment />
+                                    {CommentsData.length > 0 ? CommentsData.map((property, index) => {
+                                        return (
+                                            <RecentComment
+                                                property={property}
+                                                key={`${property.bookId}-${index}`}
+                                            />
+                                        )
+                                    }) : null}
+                                    {/* {mappedComments} */}
                                 </div>
                             </div>
                         </div>
@@ -140,7 +165,6 @@ export default function Page() {
                 open={open}
                 autoHideDuration={3000}
                 onClose={handleClose}
-                TransitionComponent="right"
             >
                 <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     This is a success message!
