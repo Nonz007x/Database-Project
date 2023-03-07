@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
 import Link from "next/link";
+import { redirect } from "next/dist/server/api-utils";
 
 export default function Home() {
     const { data: session, status } = useSession();
@@ -21,7 +22,9 @@ export default function Home() {
 
     const handleClick = () => {
         setOpenAll((prevState) => !prevState);
-        router.replace({ query: { openAll: !OpenAll } });
+        router.replace({ query: { openAll: !OpenAll } }, "/", {
+            shallow: true,
+        });
     };
 
     useEffect(() => {
