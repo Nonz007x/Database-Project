@@ -66,6 +66,7 @@
 .Flexrow {
     display: flex;
     flex-direction: row;
+    gap: 10px;
 }
 
 .login-register-button {

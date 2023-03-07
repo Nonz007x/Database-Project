@@ -5,12 +5,13 @@ export default async function handler(req, res) {
     const {comment} = req.body;
     const {rating} = req.body;
     const {username} = req.body;
+    const {bookId} = req.body
     
     const sqlSelect = await excuteQuery({
-        query: "SELECT * FROM user where username = ?;",
-        values: [id],
+        query: "insert into `comment` (`bookId`, `username`, `comment`,`rating`) values ([?],[?],[?],[?]);",
+        values: [bookId,username,comment,rating]
     });
-    //  if (response.status !== 200) {
+    //  if (res.status !== 200) {
     //     throw new Error(res.message);
     //   }
     res.send(sqlSelect);
