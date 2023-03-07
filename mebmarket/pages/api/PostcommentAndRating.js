@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     const {rating} = req.body;
     const {username} = req.body;
     const {bookId} = req.body
+    
     const sqlSelect = await excuteQuery({
         query: "insert into `comment` (`bookId`, `username`, `comment`,`rating`) values ([?],[?],[?],[?]);",
         values: [bookId,username,comment,rating]
