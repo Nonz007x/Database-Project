@@ -9,7 +9,7 @@ import { TextField } from "@mui/material";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
 import { useSession } from "next-auth/react";
-
+import Link from "next/link";
 
 
 export default function Page() {
@@ -53,7 +53,10 @@ export default function Page() {
                             <img src={Data.cover} className="book_Img" />
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
-                                    <p>โดย <a href={"/search/author/" + Data.author}>{Data.author}</a></p>
+                                    <p>โดย<Link href={{
+                                        pathname: "/search/author/[author]",
+                                        query: { author: Data.author }
+                                    }}>{Data.author}</Link></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>
@@ -121,7 +124,8 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                : null}
+                : null
+            }
 
             {/* {Data} */}
         </>
