@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import { compare } from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 import GithubProvider from "next-auth/providers/github"
+import excuteQuery from "@/shared/database";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 
@@ -22,36 +23,42 @@ export const authOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials) {
-                const { name, password } = credentials
-                const user = await prisma.user.findFirst({
-                    where: {
-                        AND: {
-                            username: name,
-                            password: password
-                        },
-                    }
+                const { name, password } = credentials;
+
+                // const user = await prisma.user.findOne({
+                //     where: {
+                //         AND: {
+                //             username: name,
+                //             password: password
+                //         },
+                //     }, take: 1,
+                // });
+                const user = await excuteQuery({
+                    query: "SELECT username,email,role FROM user where username = ?;",
+                    values: [name, password]
                 });
-                
-                if (!user[0]) {
-                    return null;
+
+                if (user) {
+                    const { username, email, role } = user[0];
+                    console.log(username)
+                    return {
+                        name: username,
+                        email: email,
+                        role: role,
+                        redirect: {
+                            destination: "/",
+                            permanent: false,
+                        }
+                    };
                 }
 
-                const { username, email, role } = user[0];
+                return null;
 
                 // const isValid = await compare(password, user.password);
                 // if (!isValid) {
                 //     return null;
                 // }
 
-                return {
-                    name: username,
-                    email: email,
-                    role: role,
-                    redirect: {
-                        destination: "/",
-                        permanent: false,
-                    }
-                };
 
             },
         })
@@ -77,8 +84,5 @@ export const authOptions = {
         secret: "test",
         encryption: true,
     }
-
-    // pages: {
-    // }
 }
 export default NextAuth(authOptions)  

@@ -4,8 +4,10 @@ import { fetcher } from "./api/fetcher";
 import Deletebook from "@/components/deletebook";
 import { requireAuthentication } from "@/utils/requireAuthentication";
 import Loading from "@/components/Loading";
+import { getSession } from "next-auth/react";
 
 export default function Adminpage() {
+    const clientSession = getSession();
     const [loading, setLoading] = useState(true);
     const [Data, setData] = useState([]);
     const DeletebookMemoized = React.memo(Deletebook);
