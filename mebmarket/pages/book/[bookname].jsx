@@ -13,12 +13,19 @@ import Link from "next/link";
 export default function Page() {
     const router = useRouter();
     const [Data, SetData] = useState(null);
+    const [ratingGiven, setRatingGiven] = useState(0)
+    const [commentWriten, setcommentWriten] = useState("")
     const bookname = router.query.bookname;
+
+    const UploadComment = () => {
+        
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             const e = await fetcher('../api/getBookByName/' + bookname);
             SetData(e);
+            console.log(e)
         };
         if (bookname) {
             fetchData();
@@ -81,15 +88,19 @@ export default function Page() {
                             </div>
                             <div className="rating-and-comment">
                                 <div className="give-rate-zone">
-                                    <RatingAbleCustomizedRating rate={0} />
+                                    <RatingAbleCustomizedRating rate={ratingGiven || ""} onChange={(e) => {
+                                        setRatingGiven(e)
+                                    }} />
                                 </div>
                                 <div>
-                                    <TextField type="text" fullWidth className="comment-zone"
+                                    <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWriten(e.target.value) }} fullWidth className="comment-zone"
                                         multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
                                 </div>
                             </div>
                             <div className="comment-button">
-                                <Button variant="contained" className="comment-submit">คอมเมนต์</Button>
+                                <Button onClick={() => {
+                                    UploadComment();
+                                }} variant="contained" className="comment-submit">คอมเมนต์</Button>
                             </div>
                             <div className="all-comment">
                                 <div className="all-comment-header">
