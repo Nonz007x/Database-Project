@@ -30,7 +30,7 @@ export default function Footer() {
                                     <GitHubIcon />
                                 </div>
                                 <div className="name-link">
-                                    <p>โฟเซ่</p>
+                                    <p>สุขวิทย์</p>
                                 </div>
                             </Link>
                         </li>
@@ -56,7 +56,7 @@ export default function Footer() {
                                     <GitHubIcon />
                                 </div>
                                 <div className="name-link">
-                                    <p>เบสห์</p>
+                                    <p>เจษฎา</p>
                                 </div>
                             </Link>
                         </li>

@@ -8,6 +8,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
+import Link from "next/link";
+
 function LoginPage(prop) {
     const { style } = prop;
     const { data: clientSession, status } = useSession();
@@ -18,8 +20,9 @@ function LoginPage(prop) {
             setIsLoginFormVisible(!isLoginFormVisible);
         }
         if (clientSession) {
-            // console.log(clientSession);
+            console.log(clientSession);
             // console.log(...userData);
+            console.log(clientSession.role);
         }
     };
 
@@ -65,7 +68,7 @@ function LoginPage(prop) {
     const handleSignOut = async (e) => {
         e.preventDefault();
         signOut({
-            redirect: false,
+            redirect: true,
         });
         setOpen(true);
     };
@@ -116,6 +119,15 @@ function LoginPage(prop) {
                             : clientSession.user.name}
                     </Button>
                 )}
+
+                {clientSession && (
+                    <>
+                        {clientSession.role !== 'admin'
+                            ? null
+                            : <Link href="./admin"><Button size="small" variant="contained" className="login-register-button">admin</Button></Link>}
+                    </>
+                )}
+
                 {clientSession && (
                     <Button
                         className="login-register-button"
