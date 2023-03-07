@@ -13,6 +13,7 @@ export default function RecentComment(props) {
                 </div>
                 <div className="comment-buttom">
                     <div className="username-rate">
+                        <p>{property.time}</p>
                         {property.username}
                         <CustomizedRating rate={Number(property.rating)} />
                     </div>

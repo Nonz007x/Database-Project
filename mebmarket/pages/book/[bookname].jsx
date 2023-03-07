@@ -40,6 +40,8 @@ export default function Page() {
                 comment: commentWriten,
                 rating: ratingGiven,
             }),
+        }).then(()=>{
+
         })
         setOpen(true);
     }
