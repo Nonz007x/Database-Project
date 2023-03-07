@@ -87,6 +87,9 @@
     width: 200px;
     height: 50px;
 }
+.Buy_Button:hover,.Buy_Button:focus{
+    background: rgb(61, 61, 61);
+}
 .Submit_Button{
     background-color: var(--main-color);
     font-weight: 600;
