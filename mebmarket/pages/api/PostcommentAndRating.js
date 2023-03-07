@@ -2,10 +2,10 @@
 import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
-    const { id } = req.body;
     const {comment} = req.body;
     const {rating} = req.body;
     const {username} = req.body;
+    
     const sqlSelect = await excuteQuery({
         query: "SELECT * FROM user where username = ?;",
         values: [id],

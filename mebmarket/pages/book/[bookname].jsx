@@ -8,11 +8,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { TextField } from "@mui/material";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
-
+import { useSession } from "next-auth/react";
 
 
 
 export default function Page() {
+    const { data: clientSession, status } = useSession()
     const router = useRouter();
     const [Data, SetData] = useState(null);
     const [ratingGiven, setRatingGiven] = useState(0)
@@ -27,7 +28,7 @@ export default function Page() {
         const fetchData = async () => {
             const e = await fetcher('../api/getBookByName/' + bookname);
             SetData(e);
-            console.log(e)
+            console.log(e);
         };
         if (bookname) {
             fetchData();
@@ -82,7 +83,15 @@ export default function Page() {
                             <div className="comment-profile-user">
                                 <AccountCircleIcon fontSize="large" />
                                 <div className="comment-show-username">
-                                    <p>username</p>
+                                    <p>{!!clientSession ? clientSession.user.name:null}</p>
+                                    {/* <Button
+                                        className="login-register-button"
+                                        variant="contained"
+                                        size="small"
+                                        onClick={handleClick}
+                                    >
+                                        {!clientSession ? ('ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก') : clientSession.user.name}
+                                    </Button> */}
                                 </div>
                             </div>
                             <div className="rating-and-comment">
