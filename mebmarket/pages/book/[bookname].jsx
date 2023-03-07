@@ -10,7 +10,7 @@ import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-
+import LoginPage from "@/components/Login.form";
 
 export default function Page() {
     const { data: clientSession, status } = useSession()
@@ -86,33 +86,35 @@ export default function Page() {
                             <div className="comment-profile-user">
                                 <AccountCircleIcon fontSize="large" />
                                 <div className="comment-show-username">
-                                    <p>{!!clientSession ? clientSession.user.name:null}</p>
-                                    {/* <Button
-                                        className="login-register-button"
-                                        variant="contained"
-                                        size="small"
-                                        onClick={handleClick}
-                                    >
-                                        {!clientSession ? ('ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก') : clientSession.user.name}
-                                    </Button> */}
+                                    <p>{!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}</p>
                                 </div>
                             </div>
-                            <div className="rating-and-comment">
-                                <div className="give-rate-zone">
-                                    <RatingAbleCustomizedRating rate={ratingGiven || ""} onChange={(e) => {
-                                        setRatingGiven(e)
-                                    }} />
+
+                            {/*here*/}
+                            <div className="blur-if-not-login">
+                                {!clientSession ? <div className="blur-effect"><h3>โปรดเข้าสู่ระบบเพื่อคอมเมนต์และเรตติ้ง</h3><LoginPage style="comment" /></div> : null}
+                                <div className="rating-and-comment">
+                                    <div className="give-rate-zone">
+                                        <RatingAbleCustomizedRating rate={ratingGiven || ""} onChange={(e) => {
+                                            setRatingGiven(e)
+                                        }} />
+                                    </div>
+                                    <div>
+                                        <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWriten(e.target.value) }} fullWidth className="comment-zone"
+                                            multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
+                                    </div>
                                 </div>
-                                <div>
-                                    <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWriten(e.target.value) }} fullWidth className="comment-zone"
-                                        multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
+                                <div className="comment-button">
+
+                                    <Button
+                                        disabled={ratingGiven == 0 ? true : false}
+                                        onClick={() => {
+                                            UploadComment();
+                                        }} variant="contained" className="comment-submit">คอมเมนต์
+                                    </Button>
                                 </div>
                             </div>
-                            <div className="comment-button">
-                                <Button onClick={() => {
-                                    UploadComment();
-                                }} variant="contained" className="comment-submit">คอมเมนต์</Button>
-                            </div>
+                            {/* end here */}
                             <div className="all-comment">
                                 <div className="all-comment-header">
                                     <h3>คอมเมนต์ทั้งหมด</h3>

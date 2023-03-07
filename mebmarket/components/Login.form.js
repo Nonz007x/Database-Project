@@ -7,7 +7,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-function LoginPage() {
+function LoginPage(prop) {
+  const {style} = prop;
   const { data: clientSession, status } = useSession()
   const loading = status === "loading"
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
@@ -79,7 +80,7 @@ function LoginPage() {
       <div className="Flexrow">
         {!loading && (
           <Button
-            className="login-register-button"
+            className={style==="comment"?"login-register-button-comment":"login-register-button"}
             variant="contained"
             size="small"
             onClick={handleClick}
