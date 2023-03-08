@@ -124,7 +124,7 @@ function LoginPage(prop) {
                     <>
                         {clientSession.role !== 'admin'
                             ? null
-                            : <Link href="./admin"><Button size="small" variant="contained" className="login-register-button">admin</Button></Link>}
+                            : <Link href="./admin"><Button size="small" variant="contained" className="login-register-button">จัดการหนังสือ</Button></Link>}
                     </>
                 )}
 
