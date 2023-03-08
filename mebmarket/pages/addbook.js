@@ -5,6 +5,7 @@ import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useRef, useState } from "react";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import CheckIcon from "@mui/icons-material/Check";
+import { requireAuthentication } from "@/utils/requireAuthentication";
 
 export default function addbook() {
     const [bookId, setBookId] = useState("");
@@ -152,4 +153,12 @@ export default function addbook() {
         </div>
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { session },
+        };
+    });
 }
