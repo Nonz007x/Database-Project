@@ -3,7 +3,7 @@ import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
     const newDate = new Date();
-    newDate.setHours(newDate.getHours() + 7);
+    newDate.setHours(newDate.getHours());
     const { comment } = req.body;
     const { rating } = req.body;
     const { username } = req.body;

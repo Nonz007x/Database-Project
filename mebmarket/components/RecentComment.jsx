@@ -9,7 +9,7 @@ export default function RecentComment(props) {
     
     useEffect(() => {
         const today = new Date();
-        today.setHours(today.getHours() + 7)
+        today.setHours(today.getHours())
         const dateTime = new Date(property.time);
         const millisecs = today - dateTime.getTime();
         const distanceInDays = Math.floor(millisecs / (1000 * 60 * 60 * 24));
@@ -37,14 +37,8 @@ export default function RecentComment(props) {
         else {
             setDate(`${distanceInYears} ปี`)
         }
-        // else {
-        //     setDate(`${years} ปี`)
-        // }
-
-        // console.log(`Distance: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`); // Output: Distance: 2 days, 17 hours, 53 minutes, 25 seconds
     }, [])
-    // console.log(today.sethourss(today.gethourss() + 7))
-    // console.log(today.getTime())
+
     return (
         <>
             <div className="comment-container">
