@@ -20,7 +20,7 @@ export default function Page() {
     const router = useRouter();
     const [Data, SetData] = useState(null);
     const [ratingGiven, setRatingGiven] = useState(0)
-    const [commentWriten, setcommentWriten] = useState("")
+    const [commentWriten, setcommentWritten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
     const fetchComment = async (bookId) => {
@@ -41,7 +41,7 @@ export default function Page() {
                 rating: ratingGiven,
             }),
         }).then(()=>{
-
+            location.reload()
         })
         setOpen(true);
     }
@@ -127,7 +127,7 @@ export default function Page() {
                                         }} />
                                     </div>
                                     <div>
-                                        <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWriten(e.target.value) }} fullWidth className="comment-zone"
+                                        <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWritten(e.target.value) }} fullWidth className="comment-zone"
                                             multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
                                     </div>
                                 </div>
