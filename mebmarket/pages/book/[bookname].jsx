@@ -56,6 +56,7 @@ export default function Page() {
         const fetchData = async () => {
             const e = await fetcher('../api/getBookByName/' + bookname);
             SetData(e);
+            console.log(e)
             fetchComment(e.bookId)
         };
         if (bookname) {
@@ -84,7 +85,7 @@ export default function Page() {
                                         query: { author: Data.author }
                                     }}> {Data.author}</Link></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
-                                    <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
+                                    <p>หมวดหมู่ <a href=""> {Data.categoryName}</a></p>
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
