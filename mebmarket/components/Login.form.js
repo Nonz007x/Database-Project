@@ -124,7 +124,12 @@ function LoginPage(prop) {
                     <>
                         {clientSession.role !== 'admin'
                             ? null
-                            : <Link href="./admin"><Button size="small" variant="contained" className="login-register-button">จัดการหนังสือ</Button></Link>}
+                            :
+                            <>
+                                <Link href="/admin"><Button size="small" variant="contained" className="login-register-button">จัดการหนังสือ</Button></Link>
+                                <Link href="/addbook"><Button size="small" variant="contained" className="login-register-button">เพิ่มหนังสือ</Button></Link>
+                            </>
+                        }
                     </>
                 )}
 
@@ -155,7 +160,7 @@ function LoginPage(prop) {
                                         type="text"
                                         size="small"
                                         label="Username"
-                                        value={userData.username||""}
+                                        value={userData.username || ""}
                                         onChange={(e) => {
                                             setUserData({
                                                 ...userData,
@@ -174,7 +179,7 @@ function LoginPage(prop) {
                                         }
                                         size="small"
                                         label="Password"
-                                        value={userData.password||""}
+                                        value={userData.password || ""}
                                         onChange={(e) => {
                                             setUserData({
                                                 ...userData,
