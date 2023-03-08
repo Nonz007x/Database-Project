@@ -82,7 +82,7 @@ export default function Page() {
                                     <p>โดย<Link href={{
                                         pathname: "/search/author/[author]",
                                         query: { author: Data.author }
-                                    }}>{Data.author}</Link></p>
+                                    }}> {Data.author}</Link></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
                                     <p>หมวดหมู่ <a href="">//ยังไม่มี Catagory</a></p>
                                 </div>
