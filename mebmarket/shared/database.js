@@ -14,6 +14,7 @@ const db = mysql({
 export default async function excuteQuery({ query, values }) {
   try {
     const results = await db.query(query, values);
+    db.end()
     return results;
   } catch (error) {
     return { error };
