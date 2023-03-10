@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const Sql = await excuteQuery({
         // query: "select * from book where bookId IN (SELECT bookId FROM favorite where username = ?)",
         query: "SELECT * FROM book  WHERE bookId IN (SELECT favorite.bookId FROM favorite WHERE favorite.username = ?) ORDER BY (SELECT favorite.favDate FROM favorite  WHERE favorite.username = ? AND favorite.bookId = book.bookId) DESC;",
-        values: [data],
+        values: [data,data],
     });
     res.send(Sql);
 }
