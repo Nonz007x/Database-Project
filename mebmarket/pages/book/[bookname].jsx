@@ -1,21 +1,21 @@
-import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
-import { fetcher } from "../api/fetcher";
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from "next/link";
+import { Alert } from "@mui/material";
 import { Button } from "@mui/material";
-import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useRouter } from "next/router";
+import { fetcher } from "../api/fetcher";
+import { Snackbar } from "@mui/material";
 import { TextField } from "@mui/material";
+import { useSession } from "next-auth/react";
+import LoginPage from "@/components/Login.form";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import LoginPage from "@/components/Login.form";
-import { Snackbar } from "@mui/material";
-import { Alert } from "@mui/material";
+import { useEffect, useCallback, useState } from "react";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
 
 export default function Page() {
-    const { data: clientSession, status } = useSession()
+    const { data: clientSession } = useSession()
     const [open, setOpen] = useState(false)
     const router = useRouter();
     const [Data, SetData] = useState(null);
@@ -23,28 +23,39 @@ export default function Page() {
     const [commentWriten, setcommentWritten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
+
     const fetchComment = async (bookId) => {
-        const result = await fetcher("/api/getComments/" + bookId.toString());
+        const result = await fetcher(`/api/getComments/${bookId}`);
         setCommentsData(result)
     }
 
     const UploadComment = async () => {
-        fetch("/api/PostcommentAndRating", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-                bookId: Data.bookId,
-                username: clientSession.user.name,
-                comment: commentWriten,
-                rating: ratingGiven,
-            }),
-        }).then(()=>{
-            location.reload()
-        })
-        setOpen(true);
-    }
+        try {
+            const response = await fetch("/api/PostcommentAndRating", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    bookId: Data.bookId,
+                    username: clientSession.user.name,
+                    comment: commentWriten,
+                    rating: ratingGiven,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error posting comment');
+            }
+
+            setOpen(true);
+            setcommentWritten("");
+            setRatingGiven(0);
+            await fetchComment(Data.bookId);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -52,17 +63,18 @@ export default function Page() {
         }
         setOpen(false);
     };
+
+    const fetchData = useCallback(async () => {
+        const e = await fetcher(`/api/getBookByName/${bookname}`);
+        SetData(e);
+        fetchComment(e.bookId)
+    }, [bookname]);
+
     useEffect(() => {
-        const fetchData = async () => {
-            const e = await fetcher('../api/getBookByName/' + bookname);
-            SetData(e);
-            console.log(e)
-            fetchComment(e.bookId)
-        };
         if (bookname) {
             fetchData();
         }
-    }, [bookname]);
+    }, [bookname, fetchData]);
 
     return (
         <>
@@ -92,7 +104,7 @@ export default function Page() {
                                     <Button variant="contained" size="large" className="Buy_Button">ซื้อ {Data.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
-                                    <h5>{Data.rating}</h5>
+                                    <h5>{Data.rating.toFixed(2)}</h5>
                                     <CustomizedRating size="large" rate={Data.rating} />
                                 </div>
                                 <div id="release_date">
