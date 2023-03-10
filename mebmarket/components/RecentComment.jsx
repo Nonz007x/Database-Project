@@ -18,7 +18,7 @@ export default function RecentComment(props) {
 
     useEffect(() => {
         const today = new Date();
-        today.setHours(today.getHours())
+        today.setHours(today.getHours());
         const dateTime = new Date(property.time);
         const millisecs = today - dateTime.getTime();
 
@@ -27,10 +27,18 @@ export default function RecentComment(props) {
             i++;
         }
 
-        const { unit, value } = timeUnits[i];
-        const distance = Math.floor(millisecs / value);
-        setDate(`${distance} ${unit}`);
-    }, []);
+        const unitValue = timeUnits[i];
+        if (unitValue) {
+            const { unit, value } = unitValue;
+            const distance = Math.floor(millisecs / value);
+            const newDate = `${distance} ${unit}`;
+            if (newDate !== date) {
+                setDate(newDate);
+            }
+        } else {
+            setDate("0 วินาที")
+        }
+    }, [property.time]);
 
     return (
         <>

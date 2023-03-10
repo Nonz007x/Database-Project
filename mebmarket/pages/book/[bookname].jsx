@@ -25,10 +25,6 @@ export default function Page() {
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
 
-    const fetchComment = async (bookId) => {
-        const result = await fetcher(`/api/getComments/${bookId}`);
-        setCommentsData(result)
-    }
     // start เพิ่มในของรักของข้า
     const addtoFavorite = (FavoriteValue) => {
         if (FavoriteValue) {
@@ -102,7 +98,7 @@ export default function Page() {
             setOpen(true);
             setcommentWritten("");
             setRatingGiven(0);
-            await fetchCommentData(bookData.bookId);
+            await fetchCommentData();
         } catch (error) {
             console.error(error);
         }
@@ -123,7 +119,7 @@ export default function Page() {
         } catch (error) {
             console.error(error);
         }
-    });
+    }, [bookname]);
 
     const fetchCommentData = useCallback(async () => {
         try {
@@ -133,16 +129,17 @@ export default function Page() {
         } catch (error) {
             console.error(error);
         }
-    });
+    },[bookData]);
+
+    
+    useEffect(() => {
+        fetchBookData();
+    }, [bookname]);
 
     useEffect(() => {
             fetchCommentData();
     }, [bookData]);
-
-    useEffect(() => {
-            fetchBookData();
-    }, [bookname]);
-
+    
     return (
         <>
             <Head>
