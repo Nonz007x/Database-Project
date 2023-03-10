@@ -13,6 +13,7 @@ import CustomizedRating from "@/components/CustomRating";
 import { useEffect, useCallback, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
+import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
     const { data: clientSession } = useSession()
@@ -24,7 +25,61 @@ export default function Page() {
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
 
-
+    const fetchComment = async (bookId) => {
+        const result = await fetcher(`/api/getComments/${bookId}`);
+        setCommentsData(result)
+    }
+    // start เพิ่มในของรักของข้า
+    const addtoFavorite = (FavoriteValue) => {
+        if (FavoriteValue) {
+            // delete
+            const FavoDel = async () => {
+                try {
+                    const response = await fetch("/api/favorite/delete", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams({
+                            username: clientSession.user.name,
+                            bookId: Data.bookId,
+                        }),
+                    });
+                    if (!response.ok) {
+                        throw new Error('Error posting comment');
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            FavoDel();
+            //end if 
+        }
+        else {
+            //add
+            const FavoAdd = async () => {
+                try {
+                    const response = await fetch("/api/favorite/add", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: new URLSearchParams({
+                            username: clientSession.user.name,
+                            bookId: Data.bookId,
+                        }),
+                    });
+                    if (!response.ok) {
+                        throw new Error('Error posting comment');
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            FavoAdd();
+        }
+    }
+    // end 
     const UploadComment = async () => {
         try {
             const response = await fetch("/api/PostcommentAndRating", {
@@ -119,6 +174,13 @@ export default function Page() {
                                     <h5>{bookData.rating.toFixed(2)}</h5>
                                     <CustomizedRating size="large" rate={bookData.rating} />
                                 </div>
+                                {/* here */}
+                                {!!clientSession ? <div id="favorite-zone">
+                                    <ClickableFavoriteIcon onClick={(e)=>{
+                                        addtoFavorite(e.target.value)
+                                    }} value={0} />
+                                </div> : null}
+
                                 <div id="release_date">
                                     <p>วันที่วางขาย</p>
                                     <p>{bookData.date.substring(0, 10)}</p>
@@ -140,8 +202,6 @@ export default function Page() {
                                     <p>{!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}</p>
                                 </div>
                             </div>
-
-                            {/*here*/}
                             <div className="blur-if-not-login">
                                 {!clientSession ? <div className="blur-effect"><h3>โปรดเข้าสู่ระบบเพื่อคอมเมนต์และเรตติ้ง</h3><LoginPage style="comment" /></div> : null}
                                 <div className="rating-and-comment">

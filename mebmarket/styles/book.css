@@ -114,6 +114,31 @@
     margin: 0 0.5rem;
 }
 
+#favorite-zone {
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.favorite-zone-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    /* background-color: red; */
+}
+.favorite-zone-element:hover {
+    cursor: pointer;
+}
+
+.favorite-zone-element p {
+    color: var(--main-color);
+}
+.color-var-maincolor-in-ClickableFavoriteIcon {
+    color: var(--main-color);
+}
+
 #release_date {
     display: flex;
     justify-content: space-between;
@@ -176,7 +201,7 @@
     flex-direction: column;
     gap: 1em;
 }
-.blur-effect h3{
+.blur-effect h3 {
     color: white;
 }
 
