@@ -6,38 +6,31 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export default function RecentComment(props) {
     const { property } = props
     const [date, setDate] = useState('');
-    
+
+    const timeUnits = [
+        { unit: 'ปี', value: 31557600000 },
+        { unit: 'เดือน', value: 2629800000 },
+        { unit: 'วัน', value: 86400000 },
+        { unit: 'ชั่วโมง', value: 3600000 },
+        { unit: 'นาที', value: 60000 },
+        { unit: 'วินาที', value: 1000 },
+    ];
+
     useEffect(() => {
         const today = new Date();
         today.setHours(today.getHours())
         const dateTime = new Date(property.time);
         const millisecs = today - dateTime.getTime();
-        const distanceInDays = Math.floor(millisecs / (1000 * 60 * 60 * 24));
-        const distanceInMonths = Math.floor(distanceInDays / 30);
-        const distanceInYears = Math.floor(distanceInMonths / 12);
-        
-        if (millisecs < 60000) {
-            const distanceInSeconds = Math.floor((millisecs % (1000 * 60)) / 1000);
-            setDate(`${distanceInSeconds} วินาที`)
+
+        let i = 0;
+        while (i < timeUnits.length && millisecs < timeUnits[i].value) {
+            i++;
         }
-        else if (millisecs < 3600000) {
-            const distanceInMinutes = Math.floor((millisecs % (1000 * 60 * 60)) / (1000 * 60));
-            setDate(`${distanceInMinutes} นาที`)
-        }
-        else if (millisecs < 86400000) {
-            const distanceInHours = Math.floor((millisecs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            setDate(`${distanceInHours} ชั่วโมง`)
-        }
-        else if (millisecs < 604800016.56) {
-            setDate(`${distanceInDays} วัน`)
-        }
-        else if (millisecs < 31557600000) {
-            setDate(`${distanceInMonths} เดือน`)
-        }
-        else {
-            setDate(`${distanceInYears} ปี`)
-        }
-    }, [])
+
+        const { unit, value } = timeUnits[i];
+        const distance = Math.floor(millisecs / value);
+        setDate(`${distance} ${unit}`);
+    }, []);
 
     return (
         <>
