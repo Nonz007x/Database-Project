@@ -21,6 +21,4 @@ export default async function handler(req, res) {
     //     throw new Error(res.message);
     //   }
     console.log(sqlSelect);
-    console.log(sqlUpdate)
-    res.status(200).json("hi");
 }
