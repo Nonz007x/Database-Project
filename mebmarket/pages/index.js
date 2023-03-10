@@ -10,13 +10,14 @@ import Loading from "@/components/Loading";
 import Link from "next/link";
 import { redirect } from "next/dist/server/api-utils";
 
-export default function Home() {
+export default function Home({ recentItems, data, trendingItems }) {
     const { data: session, status } = useSession();
     const loading = status === "loading";
     const ItemSmallMemoized = React.memo(ItemSmall);
-    const [RecentItems, SetItems] = useState([]);
-    const [Data, SetData] = useState([]);
-    const [TrendingItems, SetTrending] = useState([]);
+    const { recentItems: RecentItems, data: Data, trendingItems: TrendingItems } = { recentItems, data, trendingItems};
+    // const [RecentItems, SetItems] = useState([]);
+    // const [Data, SetData] = useState([]);
+    // const [TrendingItems, SetTrending] = useState([]);
     const [OpenAll, setOpenAll] = useState(false);
     const router = useRouter();
 
@@ -33,17 +34,17 @@ export default function Home() {
         }
     }, [router.query]);
 
-    useEffect(() => {
-        Promise.all([
-            fetcher("/api/getRecentAdded"),
-            fetcher("/api/get"),
-            fetcher("/api/getBookByRating"),
-        ]).then(([recentItems, data, trendingItems]) => {
-            SetItems(recentItems);
-            SetData(data);
-            SetTrending(trendingItems);
-        });
-    }, []);
+    // useEffect(() => {
+    //     Promise.all([
+    //         fetcher("/api/getRecentAdded"),
+    //         fetcher("/api/get"),
+    //         fetcher("/api/getBookByRating"),
+    //     ]).then(([recentItems, data, trendingItems]) => {
+    //         SetItems(recentItems);
+    //         SetData(data);
+    //         SetTrending(trendingItems);
+    //     });
+    // }, []);
 
     const mapping = useMemo(() => {
         return Data.map((property, index) => {
@@ -141,3 +142,20 @@ export default function Home() {
         </>
     );
 }
+
+
+export async function getServerSideProps() {
+    const [recentItems, data, trendingItems] = await Promise.all([
+        fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
+        fetch("http://localhost:3000/api/get").then(res => res.json()),
+        fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
+    ]);
+
+    return {
+        props: {
+            recentItems,
+            data,
+            trendingItems,
+        },
+    };
+};
