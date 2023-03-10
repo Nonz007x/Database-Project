@@ -33,7 +33,7 @@ export default function Page() {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: new URLSearchParams({
-                    bookId: Data.bookId,
+                    bookId: bookData.bookId,
                     username: clientSession.user.name,
                     comment: commentWriten,
                     rating: ratingGiven,
@@ -47,7 +47,7 @@ export default function Page() {
             setOpen(true);
             setcommentWritten("");
             setRatingGiven(0);
-            await fetchCommentData(Data.bookId);
+            await fetchCommentData(bookData.bookId);
         } catch (error) {
             console.error(error);
         }
