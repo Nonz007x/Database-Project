@@ -11,7 +11,7 @@ export default function ItemSmall(props) {
                 query: { bookname: property.bookname}
                 }}>
                     <div className="book-cover">
-                        <img src={property.cover} title={property.bookname} />
+                        <img src={property.cover} title={property.bookname} loading="lazy"/>
                     </div>
                     <div className="bookname-container">
                         <h5>{property.bookname}</h5>

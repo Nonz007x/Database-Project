@@ -1,83 +1,68 @@
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
-import { fetcher } from "./api/fetcher";
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 import { Button } from "@mui/material";
 import React, { useMemo } from "react";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
 import Link from "next/link";
 import { redirect } from "next/dist/server/api-utils";
 
+export async function getServerSideProps() {
+    const [recentItems, data, trendingItems] = await Promise.all([
+        fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
+        fetch("http://localhost:3000/api/get").then(res => res.json()),
+        fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
+    ]);
+
+    return {
+        props: {
+            recentItems,
+            data,
+            trendingItems,
+        },
+    };
+};
+
 export default function Home({ recentItems, data, trendingItems }) {
-    const { data: session, status } = useSession();
+    const { data: status } = useSession();
     const loading = status === "loading";
     const ItemSmallMemoized = React.memo(ItemSmall);
-    const { recentItems: RecentItems, data: Data, trendingItems: TrendingItems } = { recentItems, data, trendingItems};
-    // const [RecentItems, SetItems] = useState([]);
-    // const [Data, SetData] = useState([]);
-    // const [TrendingItems, SetTrending] = useState([]);
     const [OpenAll, setOpenAll] = useState(false);
-    const router = useRouter();
 
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         setOpenAll((prevState) => !prevState);
-        router.replace({ query: { openAll: !OpenAll } }, "/", {
-            shallow: true,
-        });
-    };
+    }, []);
 
-    useEffect(() => {
-        if (router.query.openAll === "true") {
-            setOpenAll(true);
-        }
-    }, [router.query]);
+    const mapping = useMemo(
+        () =>
+            Array.from(data).map((property, index) => (
+                <React.Fragment key={`${property.bookId}-${index}`}>
+                    <ItemSmallMemoized property={property} />
+                </React.Fragment>
+            )),
+        [data, ItemSmallMemoized]
+    );
 
-    // useEffect(() => {
-    //     Promise.all([
-    //         fetcher("/api/getRecentAdded"),
-    //         fetcher("/api/get"),
-    //         fetcher("/api/getBookByRating"),
-    //     ]).then(([recentItems, data, trendingItems]) => {
-    //         SetItems(recentItems);
-    //         SetData(data);
-    //         SetTrending(trendingItems);
-    //     });
-    // }, []);
+    const RecentItemsMapped = useMemo(
+        () =>
+            Array.from(recentItems).map((property, index) => (
+                <React.Fragment key={`${property.bookId}-${index}`}>
+                    <ItemSmallMemoized property={property} />
+                </React.Fragment>
+            )),
+        [recentItems, ItemSmallMemoized]
+    );
 
-    const mapping = useMemo(() => {
-        return Data.map((property, index) => {
-            return (
-                <ItemSmallMemoized
-                    key={`${property.bookId}-${index}`}
-                    property={property}
-                />
-            );
-        });
-    }, [Data]);
-
-    const RecentItemsMapped = useMemo(() => {
-        return RecentItems.map((property, index) => {
-            return (
-                <ItemSmallMemoized
-                    key={`${property.bookId}-${index}`}
-                    property={property}
-                />
-            );
-        });
-    }, [RecentItems]);
-
-    const TrendingItemsMapped = useMemo(() => {
-        return TrendingItems.map((property, index) => {
-            return (
-                <ItemSmallMemoized
-                    key={`${property.bookId}-${index}`}
-                    property={property}
-                />
-            );
-        });
-    }, [TrendingItems]);
+    const TrendingItemsMapped = useMemo(
+        () =>
+            Array.from(trendingItems).map((property, index) => (
+                <React.Fragment key={`${property.bookId}-${index}`}>
+                    <ItemSmallMemoized property={property} />
+                </React.Fragment>
+            )),
+        [trendingItems, ItemSmallMemoized]
+    );
 
     if (loading) {
         return <Loading />;
@@ -142,20 +127,3 @@ export default function Home({ recentItems, data, trendingItems }) {
         </>
     );
 }
-
-
-export async function getServerSideProps() {
-    const [recentItems, data, trendingItems] = await Promise.all([
-        fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
-        fetch("http://localhost:3000/api/get").then(res => res.json()),
-        fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
-    ]);
-
-    return {
-        props: {
-            recentItems,
-            data,
-            trendingItems,
-        },
-    };
-};
