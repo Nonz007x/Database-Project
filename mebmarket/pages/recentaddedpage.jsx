@@ -1,58 +1,46 @@
 import React, { useMemo } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { fetcher } from "./api/fetcher";
 import Loading from "@/components/Loading";
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
 import { Pagination } from "@mui/material";
-export default function recentaddedpage() {
+
+export async function getStaticProps() {
+    const initialBooks = await fetch(`http://localhost:3000/api/SortByRating/1`).then(res => res.json());
+    const count = await fetch("http://localhost:3000/api/getcount").then(res => res.json());
+    return {
+        props: {
+            initialBooks,
+            count: Math.ceil(count * 0.1),
+        },
+    };
+}
+
+export default function recentaddedpage({ initialBooks, count }) {
+    const [books, setBooks] = useState(initialBooks);
     const ItemSmallMemoized = React.memo(ItemSmall);
-    const [newProduct, setNewProduct] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [Count, setCount] = useState([]);
     const [Page, setPage] = useState(1)
 
-    const fetchData = async () => {
-        const books = await fetcher("/api/SortByRating/" + Page.toString());
-        return [books];
-    }
-    const fetchCount = async () => {
-        const count = await fetcher("/api/getcount");
-        return count;
-    }
-    const handleChange = (event, value) => {
-        window.scrollTo(0, 0)
+    const handleChange = useCallback((event, value) => {
+        window.scrollTo(0, 0);
         setPage(value);
-    };
-
-    useEffect(() => {
-        Promise.all([
-            fetchCount(),
-            fetchData(),
-        ]).then(([count, [books]]) => {
-            setCount(Math.ceil(count * 0.1))
-            setNewProduct(books);
-            setLoading(false)
-        })
     }, []);
 
-    const newProductMapped = useMemo(() => {
-        return newProduct.map((property, index) => {
-            return (
-                <ItemSmallMemoized key={`${property.bookId}-${index}`} property={property} />
-            );
-        });
-    }, [newProduct]);
-
     useEffect(() => {
-        fetchData().then(([data]) => {
-            setNewProduct(data);
-        })
-    }, [Page])
+        async function fetchData() {
+            setLoading(true);
+            const newBooks = await fetcher(`/api/SortByRating/${Page}`);
+            setBooks(newBooks);
+            setLoading(false);
+        }
+        fetchData();
+    }, [Page]);
 
-    if (loading) {
-        return <Loading />;
-    }
+    const bookElements = books.map((book, index) => (
+        <ItemSmallMemoized key={`${book.bookId}-${index}`} property={book} />
+    ));
 
     return (
         <>
@@ -70,9 +58,17 @@ export default function recentaddedpage() {
                 <div className="header-sub-content-container">
                     <h2>สินค้ามาใหม่</h2>
                 </div>
-                <div className="ImPagination"><Pagination size="large" count={Count} page={Page || ""} onChange={handleChange} /></div>
-                <div className="content-large-container">{newProductMapped}</div>
-                <div className="ImPagination"><Pagination size="large" count={Count} page={Page || ""} onChange={handleChange} /></div>
+                <div className="ImPagination"><Pagination size="large" count={count} page={Page || ""} onChange={handleChange} /></div>
+                {loading ? (
+                    <>
+                        <Loading />
+                    </>
+                ) : (
+                    <>
+                        <div className="content-large-container">{bookElements}</div>
+                        <div className="ImPagination"><Pagination size="large" count={count} page={Page || ""} onChange={handleChange} /></div>
+                    </>
+                )}
             </div>
         </>
     )

@@ -1,71 +1,79 @@
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
-import { useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@mui/material";
 import React, { useMemo } from "react";
-import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
 import Link from "next/link";
 import { redirect } from "next/dist/server/api-utils";
 
 export async function getServerSideProps() {
-    const [recentItems, data, trendingItems] = await Promise.all([
-        fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
-        fetch("http://localhost:3000/api/get").then(res => res.json()),
-        fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
-    ]);
-
-    return {
-        props: {
-            recentItems,
-            data,
-            trendingItems,
-        },
-    };
+    try {
+        const [recentItems, data, trendingItems] = await Promise.all([
+            fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
+            fetch("http://localhost:3000/api/get").then(res => res.json()),
+            fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
+        ]);
+        return {
+            props: {
+                recentItems,
+                data,
+                trendingItems,
+            },
+        };
+    } catch (error) {
+        return {
+            props: {
+                recentItems: [],
+                data: [],
+                trendingItems: [],
+            }
+        }
+    }
 };
 
 export default function Home({ recentItems, data, trendingItems }) {
-    const { data: status } = useSession();
-    const loading = status === "loading";
     const ItemSmallMemoized = React.memo(ItemSmall);
     const [OpenAll, setOpenAll] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const handleClick = useCallback(() => {
         setOpenAll((prevState) => !prevState);
     }, []);
 
-    const mapping = useMemo(
-        () =>
-            Array.from(data).map((property, index) => (
-                <React.Fragment key={`${property.bookId}-${index}`}>
-                    <ItemSmallMemoized property={property} />
-                </React.Fragment>
-            )),
+    const mapping = useMemo(() =>
+        data.map((property, index) => (
+            <React.Fragment key={`${property.bookId}-${index}`}>
+                <ItemSmallMemoized property={property} />
+            </React.Fragment>
+        )),
         [data, ItemSmallMemoized]
     );
 
-    const RecentItemsMapped = useMemo(
-        () =>
-            Array.from(recentItems).map((property, index) => (
-                <React.Fragment key={`${property.bookId}-${index}`}>
-                    <ItemSmallMemoized property={property} />
-                </React.Fragment>
-            )),
+    const RecentItemsMapped = useMemo(() =>
+        recentItems.map((property, index) => (
+            <React.Fragment key={`${property.bookId}-${index}`}>
+                <ItemSmallMemoized property={property} />
+            </React.Fragment>
+        )),
         [recentItems, ItemSmallMemoized]
     );
 
-    const TrendingItemsMapped = useMemo(
-        () =>
-            Array.from(trendingItems).map((property, index) => (
-                <React.Fragment key={`${property.bookId}-${index}`}>
-                    <ItemSmallMemoized property={property} />
-                </React.Fragment>
-            )),
+    const TrendingItemsMapped = useMemo(() =>
+        trendingItems.map((property, index) => (
+            <React.Fragment key={`${property.bookId}-${index}`}>
+                <ItemSmallMemoized property={property} />
+            </React.Fragment>
+        )),
         [trendingItems, ItemSmallMemoized]
     );
 
+    useEffect(() => {
+        setLoading(false);
+    }, []);
+    
     if (loading) {
-        return <Loading />;
+        return <Loading />
     }
 
     return (
@@ -95,9 +103,9 @@ export default function Home({ recentItems, data, trendingItems }) {
                         </Button>
                     </Link>
                 </div>
-                <div className="content-small-container">
-                    {RecentItemsMapped}
-                </div>
+                    <div className="content-small-container">
+                        {RecentItemsMapped}
+                    </div>
             </div>
             <div className="sub-content-container">
                 <div className="header-sub-content-container">
@@ -108,9 +116,9 @@ export default function Home({ recentItems, data, trendingItems }) {
                         </Button>
                     </Link>
                 </div>
-                <div className="content-small-container">
-                    {TrendingItemsMapped}
-                </div>
+                    <div className="content-small-container">
+                        {TrendingItemsMapped}
+                    </div>
             </div>
             <div className="AddWidthToShowAll">
                 <Button
