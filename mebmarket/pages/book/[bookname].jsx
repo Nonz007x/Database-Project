@@ -18,16 +18,12 @@ export default function Page() {
     const { data: clientSession } = useSession()
     const [open, setOpen] = useState(false)
     const router = useRouter();
-    const [Data, SetData] = useState(null);
+    const [bookData, setBookData] = useState(null);
     const [ratingGiven, setRatingGiven] = useState(0)
     const [commentWriten, setcommentWritten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
 
-    const fetchComment = async (bookId) => {
-        const result = await fetcher(`/api/getComments/${bookId}`);
-        setCommentsData(result)
-    }
 
     const UploadComment = async () => {
         try {
@@ -51,7 +47,7 @@ export default function Page() {
             setOpen(true);
             setcommentWritten("");
             setRatingGiven(0);
-            await fetchComment(Data.bookId);
+            await fetchCommentData(Data.bookId);
         } catch (error) {
             console.error(error);
         }
@@ -64,17 +60,33 @@ export default function Page() {
         setOpen(false);
     };
 
-    const fetchData = useCallback(async () => {
-        const e = await fetcher(`/api/getBookByName/${bookname}`);
-        SetData(e);
-        fetchComment(e.bookId)
-    }, [bookname]);
+    const fetchBookData = useCallback(async () => {
+        try {
+            const response = await fetch(`/api/getBookByName/${bookname}`);
+            const data = await response.json();
+            setBookData(data);
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    const fetchCommentData = useCallback(async () => {
+        try {
+            const response = await fetch(`/api/getComments/${bookData.bookId}`);
+            const data = await response.json();
+            setCommentsData(data);
+        } catch (error) {
+            console.error(error);
+        }
+    });
 
     useEffect(() => {
-        if (bookname) {
-            fetchData();
-        }
-    }, [bookname, fetchData]);
+            fetchCommentData();
+    }, [bookData]);
+
+    useEffect(() => {
+            fetchBookData();
+    }, [bookname]);
 
     return (
         <>
@@ -84,38 +96,38 @@ export default function Page() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-            {(Data != null) ?
+            {(bookData != null) ?
                 <div className="book_bookname_Container">
                     <div className="book_bookname_PageAdjust">
-                        <h1 className="book_bookname_Bookname">{Data.bookname}</h1>
+                        <h1 className="book_bookname_Bookname">{bookData.bookname}</h1>
                         <div className="book_book_ItemAndDetail">
-                            <img src={Data.cover} className="book_Img" />
+                            <img src={bookData.cover} className="book_Img" />
                             <div id="Detail">
                                 <div id="data_author_publisher_category">
                                     <p>โดย<Link href={{
                                         pathname: "/search/author/[author]",
-                                        query: { author: Data.author }
-                                    }}> {Data.author}</Link></p>
+                                        query: { author: bookData.author }
+                                    }}> {bookData.author}</Link></p>
                                     <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
-                                    <p>หมวดหมู่ <a href=""> {Data.categoryName}</a></p>
+                                    <p>หมวดหมู่ <a href=""> {bookData.categoryName}</a></p>
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" className="Buy_Button">ซื้อ {Data.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button">ซื้อ {bookData.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
-                                    <h5>{Data.rating.toFixed(2)}</h5>
-                                    <CustomizedRating size="large" rate={Data.rating} />
+                                    <h5>{bookData.rating.toFixed(2)}</h5>
+                                    <CustomizedRating size="large" rate={bookData.rating} />
                                 </div>
                                 <div id="release_date">
                                     <p>วันที่วางขาย</p>
-                                    <p>{Data.date.substring(0, 10)}</p>
+                                    <p>{bookData.date.substring(0, 10)}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="synopsis">
                             <p>
-                                {Data.synopsis}
+                                {bookData.synopsis}
                             </p>
                         </div>
                         <div className="comment-section">
