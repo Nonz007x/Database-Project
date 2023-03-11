@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     try {
         const data = req.query;
         const book = await excuteQuery({
-            query: 'SELECT book.bookId, book.bookname, book.author, book.price, book.cover, book.rating, book.date,  book.synopsis, category.categoryName FROM book LEFT JOIN categorized ON book.bookId = categorized.bookId LEFT JOIN category ON categorized.categoryId = category.categoryId WHERE book.bookname = ?',
+            query: 'SELECT * FROM `book` LEFT JOIN category ON book.category = category.categoryId WHERE bookname = ?',
             values: [data.name]
         });
         res.send(book[0]);
