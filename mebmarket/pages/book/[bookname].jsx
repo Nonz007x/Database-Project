@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 import { Snackbar } from "@mui/material";
 import { TextField } from "@mui/material";
-import { useSession,getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import LoginPage from "@/components/Login.form";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
@@ -17,7 +17,7 @@ import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
     const { data: clientSession } = useSession()
-    console.log(clientSession)
+    // console.log(clientSession)
     const [open, setOpen] = useState(false)
     const router = useRouter();
     const [bookData, setBookData] = useState(null);
@@ -26,58 +26,48 @@ export default function Page() {
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
     const [isFavorited, setIsFavorited] = useState("")
+    const handleFavoStatusChange = () => {
+        setIsFavorited(!isFavorited)
+        if (isFavorited) {
+            FavoDel()
 
-    // start เพิ่มในของรักของข้า
-    const addtoFavorite = (FavoriteValue) => {
-        if (FavoriteValue) {
-            // delete
-            const FavoDel = async () => {
-                try {
-                    const response = await fetch("/api/favorite/delete", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        body: new URLSearchParams({
-                            username: clientSession.user.name,
-                            bookId: bookData.bookId,
-                        }),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Error posting comment');
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            FavoDel();
-            //end if 
         }
         else {
-            //add
-            const FavoAdd = async () => {
-                try {
-                    const response = await fetch("/api/favorite/add", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        body: new URLSearchParams({
-                            username: clientSession.user.name,
-                            bookId: bookData.bookId,
-                        }),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Error posting comment');
-                    }
-                } catch (error) {
-                    console.error(error);
-                }
-            }
-            FavoAdd();
+            FavoAdd()
         }
     }
-    // end 
+    const FavoAdd = async () => {
+        const response = await fetch("/api/favorite/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                username: clientSession.user.name,
+                bookId: bookData.bookId,
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Error posting comment');
+        }
+    }
+    const FavoDel = async () => {
+        console.log(bookData.bookId)
+        const response = await fetch("/api/favorite/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                username: clientSession.user.name,
+                bookId: bookData.bookId,
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Error posting comment');
+        }
+    }
+
     const UploadComment = async () => {
         try {
             const response = await fetch("/api/PostcommentAndRating", {
@@ -125,22 +115,25 @@ export default function Page() {
 
     const fetchIsAlreadyFavorited = async () => {
         try {
-                const res = await fetch("/api/favorite/check", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams({
-                        username: clientSession?.user?.name,
-                        bookId: bookData?.bookId,
-                    }),
-                });
-                if (!res.ok) {
-                    throw new Error('Error posting comment');
-                }
-                const data = await res.json();
-                // console.log(data[0].rowExists)
-                setIsFavorited(!!data[0].rowExists)
+            const res = await fetch("/api/favorite/check", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: clientSession?.user?.name,
+                    bookId: bookData?.bookId,
+                }),
+            });
+            if (!res.ok) {
+                throw new Error('Error posting comment');
+            }
+            const data = await res.json();
+            console.log("data[0].rowExists =", data[0].rowExists)
+            // console.log(data[0].rowExists)
+            console.log(data[0]?.rowExists)
+            setIsFavorited(data[0]?.rowExists)
+
         } catch (error) {
             console.error(error)
         }
@@ -195,19 +188,17 @@ export default function Page() {
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" className="Buy_Button" onClick={() => {console.log("Buy")}}>ซื้อ {bookData.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button" onClick={() => { console.log("Buy") }}>ซื้อ {bookData.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{bookData.rating.toFixed(2)}</h5>
                                     <CustomizedRating size="large" rate={bookData.rating} />
                                 </div>
-                                {/* here */}
                                 {!!clientSession ?
                                     <div id="favorite-zone">
                                         <ClickableFavoriteIcon value={isFavorited} onChange={() => {
-                                            setIsFavorited(!isFavorited)
+                                            handleFavoStatusChange()
                                         }} />
-                                        {isFavorited.toString()}
                                     </div> : null}
 
                                 <div id="release_date">
@@ -254,7 +245,6 @@ export default function Page() {
                                     </Button>
                                 </div>
                             </div>
-                            {/* end here */}
                             <div className="all-comment">
                                 <div className="all-comment-header">
                                     <h3>คอมเมนต์ทั้งหมด</h3>
