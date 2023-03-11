@@ -1,0 +1,29 @@
+.Cart-Items-container {
+    width: 70%;
+}
+.center-cart-items {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Items-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.totalPrice-wrap {
+    margin: 2em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.display-totalPrice {
+    width: 70%;
+    aspect-ratio: 8/1;
+    /* height: 150px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+}

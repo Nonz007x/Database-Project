@@ -17,6 +17,8 @@ import "@/styles/deletebook.css";
 import "@/styles/RecentComment.css";
 import "@/styles/loading.css";
 import "@/styles/footer.css";
+import "@/styles/cart.css"
+import "@/styles/cartItem.css"
 
 // import componets
 import { useRouter } from "next/router";
