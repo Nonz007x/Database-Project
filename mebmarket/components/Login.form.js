@@ -4,14 +4,15 @@ import { TextField } from "@mui/material";
 import RegisterPage from "./Register.form";
 import CloseIcon from "@mui/icons-material/Close";
 import { signIn, signOut, useSession } from "next-auth/react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
 import Link from "next/link";
 
-function LoginPage(prop) {
-    const { style } = prop;
+function LoginPage(props) {
+    const { style } = props;
     const { data: clientSession, status } = useSession();
     const loading = status === "loading";
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
@@ -29,6 +30,7 @@ function LoginPage(prop) {
     const [showPassword, setShowPassword] = useState(false);
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({
         username: null,
         password: null,
@@ -40,7 +42,6 @@ function LoginPage(prop) {
 
     const handleSignIn = async (e) => {
         e.preventDefault();
-        console.log(userData.username, userData.password);
         if (
             (userData.password ?? "") !== "" &&
             (userData.username ?? "") !== ""
@@ -73,50 +74,45 @@ function LoginPage(prop) {
         setOpen(true);
     };
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const result = await signIn("credentials", {
-                username: UserName,
-                password: password,
-                redirect: false,
-            });
-
-            if (result.error) {
-                setUsernameError(result.error);
-            } else {
-                setUsernameError("");
-                setIsLoginFormVisible(false);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
-    const [open, setOpen] = useState(false);
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
         }
         setOpen(false);
     };
+
+    const getButtonLabel = () => {
+        if (style === "favorite") {
+            return <FavoriteIcon />;
+        } else if (!clientSession) {
+            return "ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก";
+        } else {
+            return clientSession.user.name;
+        }
+    };
+
+    const getButtonClassName = () => {
+        switch (style) {
+            case "comment":
+                return "login-register-button-comment";
+            case "favorite":
+                return "favoriteButton-navbar";
+            default:
+                return "login-register-button";
+        }
+    };
+
     return (
         <>
             <div className="Flexrow">
                 {!loading && (
                     <Button
-                        className={
-                            style === "comment"
-                                ? "login-register-button-comment"
-                                : "login-register-button"
-                        }
+                        className={getButtonClassName()}
                         variant="contained"
                         size="small"
                         onClick={handleClick}
                     >
-                        {!clientSession
-                            ? "ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก"
-                            : clientSession.user.name}
+                        {getButtonLabel()}
                     </Button>
                 )}
 
@@ -145,7 +141,7 @@ function LoginPage(prop) {
                 )}
             </div>
 
-            {isLoginFormVisible ? (
+            {(isLoginFormVisible) ? (
                 <div id="TransparentBg">
                     <div id="GotoMiddleOfTheScreen">
                         <div id="CloseLogin">
