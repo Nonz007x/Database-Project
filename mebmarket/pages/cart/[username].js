@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import CartItem from "@/components/CartItems";
 import { CheckBox } from "@mui/icons-material";
+
 export default function Cart() {
     const router = useRouter();
     const username = router.query.username;
@@ -19,10 +20,14 @@ export default function Cart() {
         },
     ];
     const [checkedItems, setCheckedItems] = useState(
-        Array(tempData.length).fill(false)
+        Array(tempData.length).fill(true)
     );
     const [itemPrices, setItemPrices] = useState(
-        Array(tempData.length).fill(0)
+        Array(tempData.length)
+            .fill(0)
+            .map((price, index) => {
+                return checkedItems[index] ? tempData[index].price : 0;
+            })
     );
 
     const handleCheckboxChange = (index) => {
