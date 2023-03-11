@@ -7,5 +7,5 @@ export default async function handle(req, res) {
         values: [data.username, data.bookId],
     });
     console.log(Sql);
-    res.send(req.body);
+    res.send(Sql);
 }

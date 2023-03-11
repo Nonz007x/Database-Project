@@ -3,7 +3,7 @@ import excuteQuery from "@/shared/database";
 export default async function handler(req, res) {
     try {
         const { item } = req.body;
-        const addtocart = excuteQuery({ 
+        const addtocart = await excuteQuery({ 
             query: "INSERT INTO `cart_inventory` (username, bookId, price, createDate) VALUES (?,?,?,?)",
             values: [], 
     });
