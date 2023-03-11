@@ -1,6 +1,5 @@
 .CartItem-container{
-    border-top:1px solid gray;
-    border-bottom:1px solid gray;
+    
     padding: 0.5em;
     display: flex;
     flex-direction: row;
@@ -20,5 +19,5 @@
     flex-direction: row;
 }
 .CartItem-Delete-Delete-button{
-    
+
 }
