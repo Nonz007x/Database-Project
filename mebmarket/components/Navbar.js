@@ -9,7 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useSession } from "next-auth/react";
 
 export default function Navbar() {
-    const {data: clientSession} = useSession();
+    const { data: clientSession } = useSession();
     const router = useRouter();
     const picUrl =
         "https://www.mebmarket.com/web/dist/assets/images/logo_store.png?1687";
@@ -39,18 +39,21 @@ export default function Navbar() {
                     </div>
 
                     <div id="nav-right">
-                        แก้ใน navbar 
+                        แก้ใน navbar
                         {/* หน้า login เกิดอาการขยายตัว คาดว่าเกิดจาก css ใน id nav-right เพราะย้ายไปที่อื่นแล้วไม่เป็น -Nonz007x */}
-                        {/* <Link href="/favorite"> */}
-                            {/* <Button
-                                variant="contained"
-                                size="small"
-                                className="favoriteButton-navbar" 
+                        {clientSession ? (
+                            <Link href="/favorite">
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    className="favoriteButton-navbar"
                                 >
-                                <FavoriteIcon />
-                            </Button> */}
-                        {/* </Link> */}
-                            <LoginPage style="favorite" />
+                                    <FavoriteIcon />
+                                </Button>
+                            </Link>
+                        )
+                            : <LoginPage style="favorite" />
+                        }
                         <Button
                             variant="contained"
                             size="small"
