@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 import { Snackbar } from "@mui/material";
 import { TextField } from "@mui/material";
-import { useSession } from "next-auth/react";
+import { useSession,getSession } from "next-auth/react";
 import LoginPage from "@/components/Login.form";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
@@ -17,6 +17,7 @@ import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
     const { data: clientSession } = useSession()
+    console.log(clientSession)
     const [open, setOpen] = useState(false)
     const router = useRouter();
     const [bookData, setBookData] = useState(null);
@@ -24,6 +25,7 @@ export default function Page() {
     const [commentWriten, setcommentWritten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
+    const [isFavorited, setIsFavorited] = useState("")
 
     // start เพิ่มในของรักของข้า
     const addtoFavorite = (FavoriteValue) => {
@@ -121,6 +123,33 @@ export default function Page() {
         }
     }, [bookname]);
 
+    const fetchIsAlreadyFavorited = async () => {
+        try {
+            if (!loading) {
+                const res = await fetch("/api/favorite/check", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        username: clientSession.user.name,
+                        bookId: bookData.bookId,
+                    }),
+                });
+                if (!res.ok) {
+                    throw new Error('Error posting comment');
+                }
+                const data = await res.json();
+                // console.log(data[0].rowExists)
+                setIsFavorited(!!data[0].rowExists)
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
     const fetchCommentData = useCallback(async () => {
         try {
             const response = await fetch(`/api/getComments/${bookData.bookId}`);
@@ -129,7 +158,7 @@ export default function Page() {
         } catch (error) {
             console.error(error);
         }
-    },[bookData]);
+    }, [bookData]);
 
     useEffect(() => {
         if (bookname) {
@@ -141,8 +170,9 @@ export default function Page() {
         if (bookData) {
             fetchCommentData();
         }
+        fetchIsAlreadyFavorited();
     }, [bookData]);
-    
+
     return (
         <>
             <Head>
@@ -175,11 +205,13 @@ export default function Page() {
                                     <CustomizedRating size="large" rate={bookData.rating} />
                                 </div>
                                 {/* here */}
-                                {!!clientSession ? <div id="favorite-zone">
-                                    <ClickableFavoriteIcon onClick={(e)=>{
-                                        addtoFavorite(e.target.value)
-                                    }} value={0} />
-                                </div> : null}
+                                {!!clientSession ?
+                                    <div id="favorite-zone">
+                                        <ClickableFavoriteIcon value={isFavorited} onChange={() => {
+                                            setIsFavorited(!isFavorited)
+                                        }} />
+                                        {isFavorited.toString()}
+                                    </div> : null}
 
                                 <div id="release_date">
                                     <p>วันที่วางขาย</p>

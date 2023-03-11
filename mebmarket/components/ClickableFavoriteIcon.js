@@ -19,32 +19,28 @@
 //     );
 // }
 
-
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import { useState } from "react";
 
 export default function ClickableFavoriteIcon({ value, onChange }) {
-  const [isFavorite, setIsFavorite] = useState(value);
+    // const [isFavorite, setIsFavorite] = useState(value);
 
-  const handleFavoriteClick = () => {
-    const newFavoriteState = !isFavorite;
-    setIsFavorite(newFavoriteState);
+    const handleFavoriteClick = () => {
+        value = !value;
+        if (onChange) {
+            onChange(value);
+        }
+    };
 
-    if (onChange) {
-      onChange(newFavoriteState);
-    }
-  };
-
-  return (
-    <div className="favorite-zone-element" onClick={handleFavoriteClick}>
-      {isFavorite ? (
-        <BookmarkAddedIcon className="color-var-maincolor-in-ClickableFavoriteIcon" />
-      ) : (
-        <BookmarkAddOutlinedIcon className="color-var-maincolor-in-ClickableFavoriteIcon" />
-      )}
-      <p>อยากได้</p>
-    </div>
-  );
+    return (
+        <div className="favorite-zone-element" onClick={handleFavoriteClick}>
+            {value ? (
+                <BookmarkAddedIcon className="color-var-maincolor-in-ClickableFavoriteIcon" />
+            ) : (
+                <BookmarkAddOutlinedIcon className="color-var-maincolor-in-ClickableFavoriteIcon" />
+            )}
+            <p>{value.toString()} อยากได้</p>
+        </div>
+    );
 }
-
