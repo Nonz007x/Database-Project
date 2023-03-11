@@ -12,7 +12,7 @@ import { Alert } from "@mui/material";
 import Link from "next/link";
 
 function LoginPage(props) {
-    const { style, popup } = props;
+    const { style } = props;
     const { data: clientSession, status } = useSession();
     const loading = status === "loading";
     const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
@@ -105,96 +105,6 @@ function LoginPage(props) {
         }
     };
 
-    if (popup && isLoginFormVisible) {
-        return (
-            <>
-                    <div id="TransparentBg">
-                        <div id="GotoMiddleOfTheScreen">
-                            <div id="CloseLogin">
-                                <CloseIcon onClick={handlePopupClose} />
-                            </div>
-                            <h2 id="HeadLogin">Login</h2>
-                            <div>
-                                <form onSubmit={handleSignIn}>
-                                    <div id="UsernameZone">
-                                        <TextField
-                                            className="TextField"
-                                            type="text"
-                                            size="small"
-                                            label="Username"
-                                            value={userData.username || ""}
-                                            onChange={(e) => {
-                                                setUserData({
-                                                    ...userData,
-                                                    username: e.target.value,
-                                                });
-                                            }}
-                                            error={Boolean(usernameError)}
-                                            helperText={usernameError}
-                                        />
-                                    </div>
-                                    <div id="PasswordZone">
-                                        <TextField
-                                            className="TextField"
-                                            type={
-                                                showPassword ? "text" : "password"
-                                            }
-                                            size="small"
-                                            label="Password"
-                                            value={userData.password || ""}
-                                            onChange={(e) => {
-                                                setUserData({
-                                                    ...userData,
-                                                    password: e.target.value,
-                                                });
-                                            }}
-                                            error={Boolean(passwordError)}
-                                            helperText={passwordError}
-                                        />
-                                        {!showPassword ? (
-                                            <VisibilityIcon
-                                                className="eye"
-                                                onClick={handleClickPassword}
-                                            />
-                                        ) : (
-                                            <VisibilityOffIcon
-                                                className="eye"
-                                                onClick={handleClickPassword}
-                                            />
-                                        )}
-                                    </div>
-                                    <div className="LoginButtonZone">
-                                        <Button
-                                            className="GoDoit"
-                                            variant="contained"
-                                            size="small"
-                                            type="submit"
-                                        >
-                                            Login
-                                        </Button>
-                                    </div>
-                                </form>
-                                <RegisterPage className="PleaseGoToCenter" />
-                            </div>
-                        </div>
-                    </div>
-                <Snackbar
-                    open={open}
-                    autoHideDuration={3000}
-                    onClose={handleClose}
-                >
-                    <Alert
-                        variant="filled"
-                        onClose={handleClose}
-                        severity="success"
-                        sx={{ width: "100%" }}
-                    >
-                        คุณได้ออกจากระบบ
-                    </Alert>
-                </Snackbar>
-            </>
-        )
-    }
     return (
         <>
             <div className="Flexrow">
@@ -249,7 +159,7 @@ function LoginPage(props) {
                                         type="text"
                                         size="small"
                                         label="Username"
-                                        value={userData.username || ""}
+                                        value={userData?.username}
                                         onChange={(e) => {
                                             setUserData({
                                                 ...userData,
@@ -268,7 +178,7 @@ function LoginPage(props) {
                                         }
                                         size="small"
                                         label="Password"
-                                        value={userData.password || ""}
+                                        value={userData?.password || ""}
                                         onChange={(e) => {
                                             setUserData({
                                                 ...userData,

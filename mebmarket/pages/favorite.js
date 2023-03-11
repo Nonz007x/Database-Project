@@ -2,16 +2,23 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import ItemSmall from "@/components/ItemSmall";
 import Loading from "@/components/Loading";
-import LoginPage from "@/components/Login.form";
 import { useRouter } from "next/router";
+
 export default function FavoritePage() {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
-    const { data: clientSession } = useSession();
+    const { data: clientSession, status } = useSession();
+
     useEffect(() => {
-        funcStart();
-        setLoading(false);
-    }, []);
+        if (status === 'authenticated') {
+            funcStart();
+            setLoading(false);
+        } else if (status === 'loading') {
+            // do nothing
+        } else {
+            router.push('/pleaselogin');
+        }
+    }, [status, router]);
 
     const [FavoriteBook, setFavoriteBook] = useState([]);
 
@@ -29,14 +36,6 @@ export default function FavoritePage() {
         setFavoriteBook(posts);
         // console.log(posts);
     };
-
-    if (!clientSession) {
-        return (
-            <>
-                <LoginPage popup={true}/>
-            </>
-        );
-    }
 
     if (loading) {
         return <Loading />;

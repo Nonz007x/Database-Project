@@ -19,21 +19,24 @@ import "@/styles/loading.css";
 import "@/styles/footer.css";
 
 // import componets
+import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import { SessionProvider } from "next-auth/react";
-
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
-  
+  const router = useRouter();
+
+  const hideComponentsUrls = ['/pleaselogi'];
+  const hideComponents = hideComponentsUrls.some(url => router.asPath.includes(url));
   return (
     <SessionProvider session={pageProps.session}>
-      <Navbar />
+      {!hideComponents && <Navbar />}
       <div className="main-container">
         <div className="content-container">
           <Component {...pageProps} />
         </div>
       </div>
-      <Footer />
+      {!hideComponents && <Footer />}
     </SessionProvider>
   );
 }
