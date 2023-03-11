@@ -1,10 +1,13 @@
-import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import ItemSmall from "@/components/ItemSmall";
 import Loading from "@/components/Loading";
+import LoginPage from "@/components/Login.form";
+import { useRouter } from "next/router";
 export default function FavoritePage() {
+    const router = useRouter();
     const [loading, setLoading] = useState(true);
-
+    const { data: clientSession } = useSession();
     useEffect(() => {
         funcStart();
         setLoading(false);
@@ -13,25 +16,32 @@ export default function FavoritePage() {
     const [FavoriteBook, setFavoriteBook] = useState([]);
 
     const funcStart = async () => {
-        const clientSession = await getSession();
-        // console.log(clientSession.user.name);
         const res = await fetch("/api/favorite/get", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: new URLSearchParams({
-                username: clientSession.user.name,
+                username: clientSession?.user?.name,
             }),
         });
         const posts = await res.json();
         setFavoriteBook(posts);
-        console.log(posts);
+        // console.log(posts);
     };
+
+    if (!clientSession) {
+        return (
+            <>
+                <LoginPage popup={true}/>
+            </>
+        );
+    }
 
     if (loading) {
         return <Loading />;
     }
+
     return (
         <>
             <>
