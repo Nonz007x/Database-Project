@@ -168,7 +168,7 @@ export default function Page() {
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" className="Buy_Button">ซื้อ {bookData.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button" onClick={() => {console.log("Buy")}}>ซื้อ {bookData.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{bookData.rating.toFixed(2)}</h5>
