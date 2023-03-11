@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import CartItem from "@/components/CartItems";
 import { CheckBox } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import Link from "next/link";
 
 export default function Cart() {
     const router = useRouter();
@@ -60,7 +62,7 @@ export default function Cart() {
                     href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png"
                 />
             </Head>
-            <h1 className="book_bookname_Bookname">ตะกร้า</h1>
+            <h1 className="cart-header">ตะกร้า</h1>
             <div className="center-cart-items">
                 <div className="Cart-Items-container">
                     {Object.values(tempData).map((property, index) => {
@@ -74,16 +76,21 @@ export default function Cart() {
                                     }}
                                 />
                                 {/* <CheckBox value={property.price}/> */}
-
                                 <CartItem property={property} />
                             </li>
                         );
                     })}
                 </div>
+                <Link href="/">
+                    <h5 className="select-other-book">เลือกหนังสือเล่มอื่นต่อ</h5>
+                </Link>
             </div>
             <div className="totalPrice-wrap">
                 <div className="display-totalPrice">
-                    totalPrice: {totalPrice}
+                    <h3>ยอดชำระ ฿{totalPrice}</h3>
+                    <Button variant="contained" size="medium" className="purchase">
+                        ชำระเงิน
+                    </Button>
                 </div>
             </div>
         </>
