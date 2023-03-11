@@ -39,28 +39,28 @@ export default function Navbar() {
                     </div>
 
                     <div id="nav-right">
-                        แก้ใน navbar
-                        {/* หน้า login เกิดอาการขยายตัว คาดว่าเกิดจาก css ใน id nav-right เพราะย้ายไปที่อื่นแล้วไม่เป็น -Nonz007x */}
                         {clientSession ? (
-                            <Link href="/favorite">
+                            <>
+                                <Link href="/favorite">
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        className="favoriteButton-navbar"
+                                    >
+                                        <FavoriteIcon />
+                                    </Button>
+                                </Link>
                                 <Button
                                     variant="contained"
                                     size="small"
-                                    className="favoriteButton-navbar"
+                                    className="shoppingCart-navbar"
                                 >
-                                    <FavoriteIcon />
+                                    <ShoppingCartIcon />
                                 </Button>
-                            </Link>
+                            </>
                         )
-                            : <LoginPage style="favorite" />
+                            : null
                         }
-                        <Button
-                            variant="contained"
-                            size="small"
-                            className="shoppingCart-navbar"
-                        >
-                            <ShoppingCartIcon />
-                        </Button>
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
