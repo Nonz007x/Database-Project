@@ -125,15 +125,14 @@ export default function Page() {
 
     const fetchIsAlreadyFavorited = async () => {
         try {
-            if (!loading) {
                 const res = await fetch("/api/favorite/check", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                     },
                     body: new URLSearchParams({
-                        username: clientSession.user.name,
-                        bookId: bookData.bookId,
+                        username: clientSession?.user?.name,
+                        bookId: bookData?.bookId,
                     }),
                 });
                 if (!res.ok) {
@@ -142,8 +141,6 @@ export default function Page() {
                 const data = await res.json();
                 // console.log(data[0].rowExists)
                 setIsFavorited(!!data[0].rowExists)
-            }
-
         } catch (error) {
             console.error(error)
         }

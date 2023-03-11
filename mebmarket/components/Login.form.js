@@ -31,7 +31,6 @@ function LoginPage(props) {
         }
         if (clientSession) {
             console.log(clientSession);
-            console.log(clientSession.role);
         }
     };
 
