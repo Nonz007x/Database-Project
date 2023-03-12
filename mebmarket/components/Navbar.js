@@ -51,7 +51,7 @@ export default function Navbar() {
                                     </Button>
                                 </Link>
                                 <Link href={{
-                                    pathname: "/cart/[username]",
+                                    pathname: "/cart",
                                     query: { username: clientSession.user.name }
                                 }}>
                                     <Button
