@@ -1,59 +1,51 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import CartItem from "@/components/CartItems";
-import { CheckBox } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Link from "next/link";
-// need security!
-export default function Cart() {
-    const router = useRouter();
-    const username = router.query.username;
-    const tempData = [
-        {
-            bookname: "Poon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 60,
-        },
-        {
-            bookname: "notPoon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 56,
-        },
-        {
-            bookname: "isPoon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 560,
-        },
-    ];
+import { getSession } from "next-auth/react";
+import { useState,useEffect } from "react";
+
+export default function Cart({ CartData, username }) {
+    const SSRdata = CartData;
+
     const [checkedItems, setCheckedItems] = useState(
-        Array(tempData.length).fill(true)
+        Array(SSRdata.length).fill(true)
     );
     const [itemPrices, setItemPrices] = useState(
-        Array(tempData.length)
+        Array(SSRdata.length)
             .fill(0)
             .map((price, index) => {
-                return checkedItems[index] ? tempData[index].price : 0;
+                return checkedItems[index] ? SSRdata[index].price : 0;
             })
     );
-
+    const [SelectedItem, setSelectedItem] = useState(
+        Array(SSRdata.length)
+            .fill("")
+            .map((data, index) => {
+                return checkedItems[index] ? SSRdata[index] : "";
+            })
+    );
     const handleCheckboxChange = (index) => {
         const newCheckedItems = [...checkedItems];
         newCheckedItems[index] = !newCheckedItems[index];
         setCheckedItems(newCheckedItems);
 
+
         const newItemPrices = [...itemPrices];
         newItemPrices[index] = newCheckedItems[index]
-            ? tempData[index].price
+            ? SSRdata[index].price
             : 0;
         setItemPrices(newItemPrices);
     };
-    // useEffect( async () => {
-    //     const response = await fetch('/api/cart/');
-    //     const data = await response.json();
-        
-    // },[])
+    useEffect(() => {
+        const newItem = checkedItems.map((isChecked, index) =>
+            isChecked ? SSRdata[index] : ""
+        );
+        console.log(newItem)
+        setSelectedItem(newItem);
+    }, [checkedItems, SSRdata]);
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
+
     return (
         <>
             <Head>
@@ -75,7 +67,7 @@ export default function Cart() {
             <h1 className="cart-header">ตะกร้า</h1>
             <div className="center-cart-items">
                 <div className="Cart-Items-container">
-                    {Object.values(tempData).map((property, index) => {
+                    {Object.values(SSRdata).map((property, index) => {
                         return (
                             <li className="Items-row" key={index}>
                                 <input
@@ -86,23 +78,55 @@ export default function Cart() {
                                     }}
                                 />
                                 {/* <CheckBox value={property.price}/> */}
-                                <CartItem property={property} />
+                                <CartItem
+                                    property={property}
+                                    username={username}
+                                />
                             </li>
                         );
                     })}
                 </div>
                 <Link href="/">
-                    <h5 className="select-other-book">เลือกหนังสือเล่มอื่นต่อ</h5>
+                    <h5 className="select-other-book">
+                        เลือกหนังสือเล่มอื่นต่อ
+                    </h5>
                 </Link>
             </div>
             <div className="totalPrice-wrap">
                 <div className="display-totalPrice">
                     <h3>ยอดชำระ ฿{totalPrice}</h3>
-                    <Button variant="contained" size="medium" className="purchase">
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        className="purchase"
+                    >
                         ชำระเงิน
                     </Button>
                 </div>
             </div>
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    const res = await getSession(context);
+    const username = res.user.name;
+    // const CartData = fetchData();
+    const CartData = await fetchData(username);
+    return {
+        props: { CartData, username },
+    };
+}
+export async function fetchData(username) {
+    const res = await fetch("http://localhost:3000/api/cart/getcart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            username: username,
+        }),
+    });
+    const data = await res.json();
+    return data;
 }

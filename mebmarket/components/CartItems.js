@@ -2,7 +2,21 @@ import { Button } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 export default function CartItem(props) {
-    const { property } = props;
+    const { property, username } = props;
+    const handleDelete = async () => {
+        const res = await fetch("http://localhost:3000/api/cart/cartdel", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                bookId: property.bookId,
+                username: username,
+            }),
+        });
+        const resJson = await res.json();
+        console.log(resJson);
+    };
     return (
         <>
             <div className="CartItem-container">
@@ -18,6 +32,7 @@ export default function CartItem(props) {
                         size="small"
                         variant="outlined"
                         className="CartItem-Delete-Delete-button"
+                        onClick={handleDelete}
                     >
                         <DeleteOutlineOutlinedIcon />
                         ลบ
