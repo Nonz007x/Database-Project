@@ -172,7 +172,7 @@ export default function Page() {
         } catch (error) {
             console.error(error)
         }
-    };b
+    };
 
     useEffect(() => {
         if (bookname) {
