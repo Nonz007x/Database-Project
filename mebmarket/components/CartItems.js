@@ -10,12 +10,12 @@ export default function CartItem(props) {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: new URLSearchParams({
-                bookId : property.bookId,
+                bookId: property.bookId,
                 username: username,
             }),
         });
         const resJson = await res.json();
-        console.log(resJson)
+        console.log(resJson);
     };
     return (
         <>
