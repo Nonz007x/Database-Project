@@ -55,13 +55,13 @@ export default async function handler(req, res) {
             values: [username.toLowerCase(), email.toLowerCase()],
         },
         {
-            query: "INSERT INTO user (uesrname, password, email) VALUES (?,?,?)",
+            query: "INSERT INTO user (username, password, email) VALUES (?,?,?)",
             values: [username.toLowerCase(), email.toLowerCase(), password]
         },
     ]
     try {
         const registerCheck = await excuteQuery({ query: queries[0].query, values: queries[0].values })
-
+        
         if (registerCheck.length > 0) {
             if (registerCheck[0].username.toLowerCase() === username.toLowerCase()) {
                 return res.status(409).json(0) // Username นี้ถูกใช้งานแล้ว
