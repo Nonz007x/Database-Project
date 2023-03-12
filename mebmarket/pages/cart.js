@@ -1,16 +1,12 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import CartItem from "@/components/CartItems";
-import { CheckBox } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
-// need security!
+import { useState,useEffect } from "react";
+
 export default function Cart({ CartData, username }) {
     const SSRdata = CartData;
-    console.log(username);
-    console.log(SSRdata);
 
     const [checkedItems, setCheckedItems] = useState(
         Array(SSRdata.length).fill(true)
@@ -22,11 +18,18 @@ export default function Cart({ CartData, username }) {
                 return checkedItems[index] ? SSRdata[index].price : 0;
             })
     );
-
+    const [SelectedItem, setSelectedItem] = useState(
+        Array(SSRdata.length)
+            .fill("")
+            .map((data, index) => {
+                return checkedItems[index] ? SSRdata[index] : "";
+            })
+    );
     const handleCheckboxChange = (index) => {
         const newCheckedItems = [...checkedItems];
         newCheckedItems[index] = !newCheckedItems[index];
         setCheckedItems(newCheckedItems);
+
 
         const newItemPrices = [...itemPrices];
         newItemPrices[index] = newCheckedItems[index]
@@ -34,7 +37,13 @@ export default function Cart({ CartData, username }) {
             : 0;
         setItemPrices(newItemPrices);
     };
-
+    useEffect(() => {
+        const newItem = checkedItems.map((isChecked, index) =>
+            isChecked ? SSRdata[index] : ""
+        );
+        console.log(newItem)
+        setSelectedItem(newItem);
+    }, [checkedItems, SSRdata]);
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
 
     return (
