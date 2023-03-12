@@ -7,28 +7,11 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
 // need security!
-export default function Cart({ CartData,username }) {
+export default function Cart({ CartData, username }) {
     const SSRdata = CartData;
-    console.log(username)
+    console.log(username);
     console.log(SSRdata);
 
-    const tempData = [
-        {
-            bookname: "Poon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 60,
-        },
-        {
-            bookname: "notPoon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 56,
-        },
-        {
-            bookname: "isPoon",
-            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
-            price: 560,
-        },
-    ];
     const [checkedItems, setCheckedItems] = useState(
         Array(SSRdata.length).fill(true)
     );
@@ -51,12 +34,9 @@ export default function Cart({ CartData,username }) {
             : 0;
         setItemPrices(newItemPrices);
     };
-    // useEffect( async () => {
-    //     const response = await fetch('/api/cart/');
-    //     const data = await response.json();
 
-    // },[])
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
+
     return (
         <>
             <Head>
@@ -89,7 +69,10 @@ export default function Cart({ CartData,username }) {
                                     }}
                                 />
                                 {/* <CheckBox value={property.price}/> */}
-                                <CartItem property={property} username={username} />
+                                <CartItem
+                                    property={property}
+                                    username={username}
+                                />
                             </li>
                         );
                     })}
@@ -119,7 +102,14 @@ export default function Cart({ CartData,username }) {
 export async function getServerSideProps(context) {
     const res = await getSession(context);
     const username = res.user.name;
-    const fetchRes = await fetch("http://localhost:3000/api/cart/getcart", {
+    // const CartData = fetchData();
+    const CartData = await fetchData(username);
+    return {
+        props: { CartData, username },
+    };
+}
+export async function fetchData(username) {
+    const res = await fetch("http://localhost:3000/api/cart/getcart", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -128,8 +118,6 @@ export async function getServerSideProps(context) {
             username: username,
         }),
     });
-    const CartData = await fetchRes.json();
-    return {
-        props: { CartData, username },
-    };
+    const data = await res.json();
+    return data;
 }
