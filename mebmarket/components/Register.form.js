@@ -38,40 +38,49 @@ export default function RegisterPage() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (usernameError || emailError || passwordError){
+    if (usernameError || emailError || passwordError) {
       return;
     }
-    
+
     if (!acceptTnC) {
       alert('Please accept the terms and conditions');
       return;
     }
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          username: UserName,
+          password: password,
+          email: email,
+          repassword: repassword,
+          acceptTnC: acceptTnC,
+        })
+      });
 
-    const response = await fetch('/api/insert', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        username: UserName,
-        password: password,
-        email: email,
-        repassword: repassword,
-        acceptTnC: acceptTnC,
-      })
-    });
+      const data = await response.json();
+      JSON.stringify(data);
 
-    const data = await response.json();
-    JSON.stringify(data);
-
-    if (data === 0) {
-      setUsernameError('Username นี้ถูกใช้งานแล้ว');
-      return;
-    } else if (data === 1) {
-      setEmailError('Email นี้ถูกใช้งานแล้ว');
-      return;
+      if (response.ok) {
+        alert("สมัครสมาชิกสำเร็จ");
+      } else {
+        if (data === 0) {
+          setUsernameError('Username นี้ถูกใช้งานแล้ว');
+          return;
+        } else if (data === 1) {
+          setEmailError('Email นี้ถูกใช้งานแล้ว');
+          return;
+        } else {
+          alert(data);
+          return
+        }
+      }
+    } catch (error) {
+      alert(error)
     }
-    alert(data)
   }
 
   useEffect(() => {
