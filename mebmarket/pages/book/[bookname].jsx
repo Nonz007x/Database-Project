@@ -152,7 +152,7 @@ export default function Page() {
 
     const addToCart = async () => {
         try {
-            const res = await fetch("/api/cart/addtocart", {
+            const response = await fetch("/api/cart/addtocart", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -163,13 +163,16 @@ export default function Page() {
                     price: bookData?.price,
                 }),
             });
-            if (!res.ok) {
-                throw new Error('Error posting comment');
+            const data = await response.json();
+            if (response.ok) {
+                alert("เพิ่มหนังสือในตะกร้าสำเร็จ");
+            } else {
+                alert(JSON.stringify(data));
             }
         } catch (error) {
             console.error(error)
         }
-    }
+    };b
 
     useEffect(() => {
         if (bookname) {

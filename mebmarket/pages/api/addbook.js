@@ -11,7 +11,7 @@ export default async function handler(req, res) {
             query: "SELECT bookId FROM `book` WHERE bookId = ?",
             values: [bookId],
         })
-        if (existingBook[0]) {
+        if (existingBook.length > 0) {
             return res.status(401).json('หนังสือมีอยู่แล้ว');
         }
         const createBook = await excuteQuery({
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         })
         res.json(createBook)
     } catch (error) {
-        return res.status(500).json(`Something's wrong. please try again `)
+        return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`)
     }
 }
 
