@@ -5,10 +5,13 @@ import CartItem from "@/components/CartItems";
 import { CheckBox } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { getSession } from "next-auth/react";
 // need security!
-export default function Cart() {
-    const router = useRouter();
-    const username = router.query.username;
+export default function Cart({ CartData,username }) {
+    const SSRdata = CartData;
+    console.log(username)
+    console.log(SSRdata);
+
     const tempData = [
         {
             bookname: "Poon",
@@ -27,13 +30,13 @@ export default function Cart() {
         },
     ];
     const [checkedItems, setCheckedItems] = useState(
-        Array(tempData.length).fill(true)
+        Array(SSRdata.length).fill(true)
     );
     const [itemPrices, setItemPrices] = useState(
-        Array(tempData.length)
+        Array(SSRdata.length)
             .fill(0)
             .map((price, index) => {
-                return checkedItems[index] ? tempData[index].price : 0;
+                return checkedItems[index] ? SSRdata[index].price : 0;
             })
     );
 
@@ -44,14 +47,14 @@ export default function Cart() {
 
         const newItemPrices = [...itemPrices];
         newItemPrices[index] = newCheckedItems[index]
-            ? tempData[index].price
+            ? SSRdata[index].price
             : 0;
         setItemPrices(newItemPrices);
     };
     // useEffect( async () => {
     //     const response = await fetch('/api/cart/');
     //     const data = await response.json();
-        
+
     // },[])
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
     return (
@@ -75,7 +78,7 @@ export default function Cart() {
             <h1 className="cart-header">ตะกร้า</h1>
             <div className="center-cart-items">
                 <div className="Cart-Items-container">
-                    {Object.values(tempData).map((property, index) => {
+                    {Object.values(SSRdata).map((property, index) => {
                         return (
                             <li className="Items-row" key={index}>
                                 <input
@@ -86,23 +89,47 @@ export default function Cart() {
                                     }}
                                 />
                                 {/* <CheckBox value={property.price}/> */}
-                                <CartItem property={property} />
+                                <CartItem property={property} username={username} />
                             </li>
                         );
                     })}
                 </div>
                 <Link href="/">
-                    <h5 className="select-other-book">เลือกหนังสือเล่มอื่นต่อ</h5>
+                    <h5 className="select-other-book">
+                        เลือกหนังสือเล่มอื่นต่อ
+                    </h5>
                 </Link>
             </div>
             <div className="totalPrice-wrap">
                 <div className="display-totalPrice">
                     <h3>ยอดชำระ ฿{totalPrice}</h3>
-                    <Button variant="contained" size="medium" className="purchase">
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        className="purchase"
+                    >
                         ชำระเงิน
                     </Button>
                 </div>
             </div>
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    const res = await getSession(context);
+    const username = res.user.name;
+    const fetchRes = await fetch("http://localhost:3000/api/cart/getcart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            username: username,
+        }),
+    });
+    const CartData = await fetchRes.json();
+    return {
+        props: { CartData, username },
+    };
 }
