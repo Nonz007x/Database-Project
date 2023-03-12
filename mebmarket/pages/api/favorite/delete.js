@@ -5,6 +5,5 @@ export default async function handle(req, res) {
         query: "delete from favorite where username = ? and bookId = ? ",
         values: [data.username, data.bookId],
     });
-    console.log(Sql);
     res.send(Sql);
 }

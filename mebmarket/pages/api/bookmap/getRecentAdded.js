@@ -11,11 +11,12 @@
 //             //     cover: true,
 //             //     rating: true,
 //             //     price: true,
+//             //     category: true,
 //             // },
 //             orderBy: {
 //                 date: 'desc',
 //             },
-//             take: 30,
+//             take: 6,
 //         })
 //         res.json(books)
 //     } catch (error) {
@@ -27,10 +28,9 @@
 import excuteQuery from '@/shared/database'
 
 export default async function handler(req, res) {
-    const { pageUrl } = req.headers;
     try {
         const book = await excuteQuery({
-            query: "SELECT bookname, author, cover, rating, price, category.categoryName FROM `book` LEFT JOIN `category` ON book.category = category.categoryId ORDER BY date DESC;"
+            query: "SELECT bookname, author, cover, rating, price, category.categoryName FROM `book` LEFT JOIN `category` ON book.category = category.categoryId ORDER BY date DESC LIMIT 6;"
         })
         res.json(book)
     } catch (error) {
