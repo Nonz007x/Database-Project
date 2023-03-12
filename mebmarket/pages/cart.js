@@ -3,11 +3,12 @@ import CartItem from "@/components/CartItems";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { getSession } from "next-auth/react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 export default function Cart({ CartData, username }) {
     const SSRdata = CartData;
-
+    // const [BookData, setBookData] = useState(CartData);
     const [checkedItems, setCheckedItems] = useState(
         Array(SSRdata.length).fill(true)
     );
@@ -30,18 +31,31 @@ export default function Cart({ CartData, username }) {
         newCheckedItems[index] = !newCheckedItems[index];
         setCheckedItems(newCheckedItems);
 
-
         const newItemPrices = [...itemPrices];
         newItemPrices[index] = newCheckedItems[index]
             ? SSRdata[index].price
             : 0;
         setItemPrices(newItemPrices);
     };
+    const handleDelete = async (bookId) => {
+        const res = await fetch("http://localhost:3000/api/cart/cartdel", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                bookId: bookId,
+                username: username,
+            }),
+        });
+    
+    };
+
     useEffect(() => {
         const newItem = checkedItems.map((isChecked, index) =>
             isChecked ? SSRdata[index] : ""
         );
-        console.log(newItem)
+        console.log(newItem);
         setSelectedItem(newItem);
     }, [checkedItems, SSRdata]);
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
@@ -80,8 +94,20 @@ export default function Cart({ CartData, username }) {
                                 {/* <CheckBox value={property.price}/> */}
                                 <CartItem
                                     property={property}
-                                    username={username}
                                 />
+                                <div className="CartItem-Delete">
+                                    <Button
+                                        size="small"
+                                        variant="outlined"
+                                        className="CartItem-Delete-Delete-button"
+                                        onClick={() => {
+                                            handleDelete(property.bookId);
+                                        }}
+                                    >
+                                        <DeleteOutlineOutlinedIcon />
+                                        ลบ
+                                    </Button>
+                                </div>
                             </li>
                         );
                     })}
