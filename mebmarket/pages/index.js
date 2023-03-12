@@ -5,14 +5,13 @@ import { Button } from "@mui/material";
 import React, { useMemo } from "react";
 import Loading from "@/components/Loading";
 import Link from "next/link";
-import { redirect } from "next/dist/server/api-utils";
 
 export async function getServerSideProps() {
     try {
         const [recentItems, data, trendingItems] = await Promise.all([
-            fetch("http://localhost:3000/api/getRecentAdded").then(res => res.json()),
-            fetch("http://localhost:3000/api/get").then(res => res.json()),
-            fetch("http://localhost:3000/api/getBookByRating").then(res => res.json())
+            fetch("http://localhost:3000/api/bookmap/getRecentAdded").then(res => res.json()),
+            fetch("http://localhost:3000/api/bookmap/get").then(res => res.json()),
+            fetch("http://localhost:3000/api/bookmap/getBookByRating").then(res => res.json())
         ]);
         return {
             props: {

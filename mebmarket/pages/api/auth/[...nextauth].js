@@ -40,7 +40,6 @@ export const authOptions = {
 
                 if (user) {
                     const { username, email, role } = user[0];
-                    console.log(username)
                     return {
                         name: username,
                         email: email,

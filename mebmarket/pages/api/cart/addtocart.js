@@ -36,7 +36,7 @@ export default async function handler(req, res) {
             {
                 query: 'INSERT INTO `cart_inventory` (username, bookId, price, createDate) VALUES (?,?,?,?)',
                 values: [username, bookId, price, newDate],
-            },
+            }
         ]
 
         const cartCheck = await excuteQuery({ query: queries[0].query, values: queries[0].values });

@@ -83,9 +83,7 @@ export default function Navbar() {
                                 className="searchBar-navbar"
                                 placeholder="ค้นหาหนังสือ"
                                 value={Search}
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                }}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </form>
                     </div>

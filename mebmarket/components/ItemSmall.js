@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export default function ItemSmall(props) {
     const { property } = props;
+    console.log(props)
     return (
         <>
             <Link className="book-list-container" href={{
@@ -17,7 +18,7 @@ export default function ItemSmall(props) {
                         <h5>{property.bookname}</h5>
                     </div>
                     <div className="category-container">
-                        <h6>category</h6>
+                        <h6>{property.categoryName}</h6>
                     </div>
                     <div className="buttom-section">
                         <div className="author-rating">
