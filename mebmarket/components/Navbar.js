@@ -51,8 +51,7 @@ export default function Navbar() {
                                     </Button>
                                 </Link>
                                 <Link href={{
-                                    pathname: "/cart/[username]",
-                                    query: { username: clientSession.user.name }
+                                    pathname: "/cart"
                                 }}>
                                     <Button
                                         variant="contained"
