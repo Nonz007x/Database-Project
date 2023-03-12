@@ -34,7 +34,6 @@ export default function FavoritePage() {
         });
         const posts = await res.json();
         setFavoriteBook(posts);
-        // console.log(posts);
     };
 
     if (loading) {

@@ -21,8 +21,8 @@ function LoginPage(props) {
     const [passwordError, setPasswordError] = useState("");
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState({
-        username: null,
-        password: null,
+        username: "",
+        password: "",
     });
 
     const handleClick = () => {
@@ -30,7 +30,7 @@ function LoginPage(props) {
             setIsLoginFormVisible(true);
         }
         if (clientSession) {
-            console.log(clientSession);
+            alert("add dropdown please");
         }
     };
 
@@ -48,7 +48,6 @@ function LoginPage(props) {
             (userData.password ?? "") !== "" &&
             (userData.username ?? "") !== ""
         ) {
-            console.log("username is :", userData.username);
             const result = await signIn("credentials", {
                 name: userData.username,
                 password: userData.password,
@@ -172,9 +171,7 @@ function LoginPage(props) {
                                 <div id="PasswordZone">
                                     <TextField
                                         className="TextField"
-                                        type={
-                                            showPassword ? "text" : "password"
-                                        }
+                                        type={showPassword ? "text" : "password"}
                                         size="small"
                                         label="Password"
                                         value={userData?.password || ""}
