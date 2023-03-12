@@ -50,13 +50,18 @@ export default function Navbar() {
                                         <FavoriteIcon />
                                     </Button>
                                 </Link>
-                                <Button
-                                    variant="contained"
-                                    size="small"
-                                    className="shoppingCart-navbar"
-                                >
-                                    <ShoppingCartIcon />
-                                </Button>
+                                <Link href={{
+                                    pathname: "/cart/[username]",
+                                    query: { username: clientSession.user.name }
+                                }}>
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        className="shoppingCart-navbar"
+                                    >
+                                        <ShoppingCartIcon />
+                                    </Button>
+                                </Link>
                             </>
                         )
                             : null

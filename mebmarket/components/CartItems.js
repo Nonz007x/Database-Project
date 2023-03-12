@@ -11,14 +11,13 @@ export default function CartItem(props) {
                 </div>
                 <div className="CartItem-Name">
                     <h5>{property.bookname}</h5>
-                    <h6>{property.price}</h6>
+                    <h6>฿ {property.price}</h6>
                 </div>
                 <div className="CartItem-Delete">
                     <Button
                         size="small"
                         variant="outlined"
                         className="CartItem-Delete-Delete-button"
-
                     >
                         <DeleteOutlineOutlinedIcon />
                         ลบ

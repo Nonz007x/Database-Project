@@ -39,7 +39,7 @@ export default function addbook() {
             if (response.ok) {
                 alert("เพิ่มหนังสือสำเร็จ");
             } else {
-                alert(data)
+                alert(JSON.stringify(data))
             }
         } catch (error) {
             console.error(error);

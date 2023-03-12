@@ -1,11 +1,27 @@
 .Cart-Items-container {
     width: 70%;
 }
+
+.cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
 .center-cart-items {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
+
+.select-other-book {
+    margin-top: 20px;
+    color: var(--main-color);
+}
+
 .Items-row {
     display: flex;
     flex-direction: row;
@@ -13,13 +29,15 @@
     border-top:1px solid gray;
     border-bottom:1px solid gray;
 }
+
 .totalPrice-wrap {
-    margin: 2em;
+    margin: 2em 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .display-totalPrice {
     width: 70%;
     aspect-ratio: 8/1;
@@ -27,5 +45,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    background-color: #f6f6f6;
+    line-height: 40px;
+}
+
+.purchase {
     background-color: var(--main-color);
+	overflow: hidden;
+	white-space: nowrap;
+	width: 160px;
+	height: 40px;
+    border-radius: 30px;
+}
+
+.purchase:hover {
+    background-color: rgb(61, 61, 61);
 }
