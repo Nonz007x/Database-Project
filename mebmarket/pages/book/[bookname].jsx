@@ -240,6 +240,7 @@ export default function Page() {
                                     <Button
                                         disabled={ratingGiven == 0 ? true : false}
                                         onClick={() => {
+                                            fetchBookData();
                                             UploadComment();
                                         }} variant="contained" className="comment-submit">คอมเมนต์
                                     </Button>
