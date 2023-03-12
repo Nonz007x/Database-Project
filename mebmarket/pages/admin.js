@@ -13,7 +13,7 @@ export default function Adminpage() {
     const DeletebookMemoized = React.memo(Deletebook);
 
     const fetchData = async () => {
-        const data = await fetcher("api/get")
+        const data = await fetcher("/api/bookmap/get")
         return data;
     };
 
