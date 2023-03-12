@@ -96,6 +96,32 @@ export default function Page() {
         }
     };
 
+    const fetchIsAlreadyFavorited = async () => {
+        try {
+            const res = await fetch("/api/favorite/check", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: clientSession?.user?.name,
+                    bookId: bookData?.bookId,
+                }),
+            });
+            if (!res.ok) {
+                throw new Error('Error adding to wishlist');
+            }
+            const data = await res.json();
+            console.log("data[0].rowExists =", data[0].rowExists)
+            console.log(data[0]?.rowExists)
+            setIsFavorited(data[0]?.rowExists)
+
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -112,33 +138,7 @@ export default function Page() {
             console.error(error);
         }
     }, [bookname]);
-
-    const fetchIsAlreadyFavorited = async () => {
-        try {
-            const res = await fetch("/api/favorite/check", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: new URLSearchParams({
-                    username: clientSession?.user?.name,
-                    bookId: bookData?.bookId,
-                }),
-            });
-            if (!res.ok) {
-                throw new Error('Error posting comment');
-            }
-            const data = await res.json();
-            console.log("data[0].rowExists =", data[0].rowExists)
-            // console.log(data[0].rowExists)
-            console.log(data[0]?.rowExists)
-            setIsFavorited(data[0]?.rowExists)
-
-        } catch (error) {
-            console.error(error)
-        }
-
-    }
+    
 
     const fetchCommentData = useCallback(async () => {
         try {
@@ -149,6 +149,27 @@ export default function Page() {
             console.error(error);
         }
     }, [bookData]);
+
+    const addToCart = async () => {
+        try {
+            const res = await fetch("/api/cart/addtocart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: clientSession?.user?.name,
+                    bookId: bookData?.bookId,
+                    price: bookData?.price,
+                }),
+            });
+            if (!res.ok) {
+                throw new Error('Error posting comment');
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     useEffect(() => {
         if (bookname) {
@@ -188,7 +209,7 @@ export default function Page() {
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" className="Buy_Button" onClick={() => { console.log("Buy") }}>ซื้อ {bookData.price} บาท</Button>
+                                    <Button variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{bookData.rating.toFixed(2)}</h5>

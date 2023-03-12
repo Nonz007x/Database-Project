@@ -5,7 +5,7 @@ import CartItem from "@/components/CartItems";
 import { CheckBox } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Link from "next/link";
-
+// need security!
 export default function Cart() {
     const router = useRouter();
     const username = router.query.username;
@@ -19,6 +19,11 @@ export default function Cart() {
             bookname: "notPoon",
             cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
             price: 56,
+        },
+        {
+            bookname: "isPoon",
+            cover: "https://pbs.twimg.com/media/FdMNYFkWAAAxu4k.jpg",
+            price: 560,
         },
     ];
     const [checkedItems, setCheckedItems] = useState(
@@ -43,6 +48,11 @@ export default function Cart() {
             : 0;
         setItemPrices(newItemPrices);
     };
+    // useEffect( async () => {
+    //     const response = await fetch('/api/cart/');
+    //     const data = await response.json();
+        
+    // },[])
     const totalPrice = itemPrices.reduce((acc, cur) => acc + cur, 0);
     return (
         <>
