@@ -7,10 +7,14 @@ export default async function handler(req, res) {
         if (!bookId || !bookname || !author || !price || !cover) {
             return res.status(400).json("กรุณากรอกข้อมูลให้ครบ");
         }
+        if (!Number.isInteger(parseInt(bookId)) || isNaN(price)) { //isNaN = is NOT an integer
+            return res.status(400).json("กรุณากรอกข้อมูลให้ถูกต้อง");
+        }
         const existingBook = await excuteQuery({
             query: "SELECT bookId FROM `book` WHERE bookId = ?",
             values: [bookId],
         })
+        console.log(existingBook)
         if (existingBook.length > 0) {
             return res.status(401).json('หนังสือมีอยู่แล้ว');
         }
