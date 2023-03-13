@@ -51,7 +51,7 @@ export default function RecentComment(props) {
                     <div className="username-rate">
                         <p>โพสต์เมื่อ {date} ที่แล้ว</p>
                         {property.username}
-                        <CustomizedRating rate={Number(property.rating)} />
+                        <CustomizedRating rate={(property.rating)} />
                     </div>
                     <div className="comment-profile">
                         <AccountCircleIcon fontSize='large' />
