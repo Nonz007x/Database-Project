@@ -136,6 +136,14 @@ export default function Cart({ CartData, username }) {
 
 export async function getServerSideProps(context) {
     const res = await getSession(context);
+    if (res === "" || res === null) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        }
+    }
     const username = res.user.name;
     // const CartData = fetchData();
     const CartData = await fetchData(username);
