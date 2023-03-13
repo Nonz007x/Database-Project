@@ -5,12 +5,12 @@ export default async function (req, res) {
     const createDate = new Date();
     try {
         const checkExisting = await excuteQuery({
-            query: "SELECT cardnumber FROM `creditcard` WHERE cardnumber = ?",
-            values: [cardNumber],
+            query: "SELECT username FROM `creditcard` WHERE username = ?",
+            values: [username],
         })
 
         if (checkExisting.length > 0) {
-            return res.status(409).json("มีบัตรนี้อยู่แล้ว");
+            return res.status(409).json("เพิ่มบัตรไปแล้ว");
         }
         const addCard = await excuteQuery({
             query: "INSERT INTO `creditcard` (username, cardNumber, cardHolderName, expiry_month, expiry_year, cvv, billingAddress, createDate, updatedDate) VALUES(?,?,?,?,?,?,?,?,?)",

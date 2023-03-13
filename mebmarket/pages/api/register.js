@@ -55,7 +55,7 @@ export default async function handler(req, res) {
             values: [username.toLowerCase(), email.toLowerCase()],
         },
         {
-            query: "INSERT INTO user (username, password, email) VALUES (?,?,?)",
+            query: "INSERT INTO user (username, email, password) VALUES (?,?,?)",
             values: [username.toLowerCase(), email.toLowerCase(), password]
         },
     ]
