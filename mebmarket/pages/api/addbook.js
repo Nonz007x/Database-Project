@@ -1,30 +1,73 @@
 import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
-    const { bookId, bookname, author, price, cover, synopsis} = req.body;
+    const {
+        bookId,
+        bookname,
+        author,
+        price,
+        cover,
+        synopsis,
+        categoryId,
+        categoryName,
+    } = req.body;
     const newDate = new Date();
     try {
-        if (!bookId || !bookname || !author || !price || !cover) {
+        if (
+            !bookId ||
+            !bookname ||
+            !author ||
+            !price ||
+            !cover ||
+            !categoryId ||
+            !categoryName
+        ) {
             return res.status(400).json("กรุณากรอกข้อมูลให้ครบ");
         }
-        if (!Number.isInteger(parseInt(bookId)) || isNaN(price) || bookId < 0 || price < 0) { //isNaN = is NOT an integer
+        if (
+            !Number.isInteger(parseInt(bookId)) ||
+            isNaN(price) ||
+            bookId < 0 ||
+            price < 0
+        ) {
+            //isNaN = is NOT an integer
             return res.status(400).json("กรุณากรอกข้อมูลให้ถูกต้อง");
         }
         const existingBook = await excuteQuery({
             query: "SELECT bookId FROM `book` WHERE bookId = ?",
             values: [bookId],
-        })
-        console.log(existingBook)
+        });
+        console.log(existingBook);
         if (existingBook.length > 0) {
-            return res.status(401).json('หนังสือมีอยู่แล้ว');
+            return res.status(401).json("หนังสือมีอยู่แล้ว");
         }
+        const existingCategory = await excuteQuery({
+            query: "select * from category where categoryId = ?",
+            values: [categoryId],
+        });
+        if (existingCategory.length <= 0) {
+            await excuteQuery({
+                query: "INSERT INTO `category`(`categoryId`, `categoryName`) VALUES (?,?)",
+                values: [Number(categoryId), categoryName],
+            });
+        }
+
         const createBook = await excuteQuery({
-            query: "INSERT INTO book ( bookId, bookname, author, price, cover, synopsis, date) VALUES(?,?,?,?,?,?,?)",
-            values: [ bookId, bookname, author, price, cover, synopsis,newDate],
-        })
-        res.json(createBook)
+            query: "INSERT INTO book ( bookId, bookname, author, price, cover, synopsis, date,categoryId) VALUES(?,?,?,?,?,?,?,?)",
+            values: [
+                bookId,
+                bookname,
+                author,
+                price,
+                cover,
+                synopsis,
+                newDate,
+                categoryId,
+            ],
+        });
+        res.json(createBook);
     } catch (error) {
-        return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`)
+        return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`);
     }
 }
 

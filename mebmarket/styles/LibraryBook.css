@@ -5,17 +5,18 @@
     flex-wrap: wrap;
     gap: 1em;
     justify-content: center;
+    align-items: center;
 }
 .library-item-wrap {
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 6px var(--font-color-gray);
     border-radius: 5px;
+    transition: transform .25s ease-out;
 }
-.library-item-wrap:hover{
+.library-item-wrap:hover {
     box-shadow: 0 0 10px var(--main-color);
-    transition-duration: 4s;
-    transform: translate(0,-10.25em);
+    transform: translateY(-0.5em);
 }
 
 .library-book-image {
