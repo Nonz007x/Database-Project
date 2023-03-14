@@ -2,11 +2,121 @@ import Head from "next/head";
 import CartItem from "@/components/CartItems";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 export default function Cart({ CartData, username }) {
+    const { data: clientSession } = useSession();
+    // card
+    const [cards, setCards] = useState([{}]);
+    const [cardnumber, setCardnumber] = useState("");
+    const [cardHolderName, setCardHolderName] = useState("");
+    const [expiry_month, setExpiry_month] = useState("");
+    const [expiry_year, setExpiry_year] = useState("");
+    const [billingAddress, setBillingAddress] = useState("");
+    const [cvv, setCvv] = useState("");
+
+    const handleSaveCard = async (e) => {
+        e.preventDefault();
+        const isValid = validateCreditCardNumber(cardnumber);
+        if (isValid) {
+            try {
+                const response = await fetch("/api/cards/addcard", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({
+                        username: clientSession.user.name,
+                        cardNumber: cardnumber,
+                        cardHolderName: cardHolderName,
+                        expiry_month: expiry_month,
+                        expiry_year: expiry_year,
+                        billingAddress: billingAddress,
+                        cvv: cvv,
+                    }),
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    alert("เพิ่มบัตรสำเร็จ");
+                } else {
+                    alert(data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    const handleCheckout = async (e) => {
+        e.preventDefault();
+        // console.log(JSON.stringify(SelectedItem))
+        // const isValid = validateCreditCardNumber(cardnumber);
+        // if (!isValid) {
+        // try {
+        const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                SelectedItem,
+                username: clientSession.user.name,
+                totalPrice: totalPrice,
+            }),
+        });
+
+        //     const data = await response.json();
+        //     if (response.ok) {
+        //         alert("ซื้อสำเร็จ");
+        //     } else {
+        //         alert(data);
+        //     }
+        // } catch (error) {
+        //     console.error(error);
+        // }
+        // }
+    }
+
+    const validateCreditCardNumber = (cardNumber) => {
+        // cardNumber = cardNumber.replace(/[^\d]/g, '');
+        const d = new Date();
+        const expiry = { year: d.getFullYear(), month: d.getMonth() };
+        if (cardNumber.length !== 16) {
+            alert("ARE YOU FUCKING GAY??")
+            return false;
+        } else if (expiry_month < expiry.month || expiry_year < expiry.year) {
+            console.log(expiry_month, "<", expiry.month)
+            console.log(expiry_year, "<", expiry.year)
+            alert("บัตรหมดอายุ")
+            return false;
+        } else if (cvv.length !== 4) {
+            alert("โคตร E3")
+            return false;
+        }
+        alert("YOU ARE ราชา")
+        return true;
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch("/api/cards/getcard", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: clientSession.user.name,
+                }),
+            });
+            const data = await response.json();
+            setCards(data);
+        }
+        if (clientSession) {
+            fetchData();
+        }
+    }, [clientSession]);
+    // card end
+
     const [SSRdata, setSSRdata] = useState(CartData);
     const [BookData, setBookData] = useState(CartData);
     const [checkedItems, setCheckedItems] = useState(
@@ -130,6 +240,56 @@ export default function Cart({ CartData, username }) {
                     </Button>
                 </div>
             </div>
+
+            //card
+            <center>
+                <h1>ENTER CREDIT CARD NUMBER</h1>
+                <h1>{cardnumber.length}</h1>
+                <form onSubmit={handleSaveCard}>
+                    <input type="number" placeholder="cardnumber" value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
+                    <br />
+                    <input type="text" placeholder="name" value={cardHolderName} onChange={e => setCardHolderName(e.target.value)} />
+                    <br />
+                    <input type="text" placeholder="address" value={billingAddress} onChange={e => setBillingAddress(e.target.value)} />
+                    <br />
+                    <input type="number" placeholder="cvv" value={cvv} onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} />
+                    <br />
+
+                    <select id="expirySelect" value={expiry_month} onChange={(e) => {
+                        setExpiry_month(e.target.value);
+                    }}>
+                        <option value="">--Select--</option>
+                        {[...Array(12)].map((_, i) => {
+                            const month = (i + 1).toString().padStart(2, '0');
+                            return <option key={month} value={month}>{month}</option>;
+                        })}
+                    </select>
+
+                    <select value={expiry_year} onChange={(e) => { setExpiry_year(e.target.value) }}>
+                        <option value="">--Select--</option>
+                        {[...Array(10)].map((_, i) => {
+                            const year = (new Date().getFullYear() + i).toString().substring(-2);
+                            return <option key={year} value={year}>{year}</option>;
+                        })}
+                    </select>
+
+                    <select id="dropdown" onChange={e => setIssuers(e.target.value)}>
+                        <option value="">--Select--</option>
+                        <option value="Mastergay">Mastergay</option>
+                        <option value="Visus">Visus</option>
+                        <option value="Samuthprakarn Express">Samuthprakarn Express</option>
+                    </select>
+                    <br />
+                    <button type="submit">Submit</button>
+                    <button onClick={handleCheckout}>Checkout</button>
+                </form>
+                <select onChange={e => { setCardnumber(e.target.value) }}>
+                    <option value="">--Select Card--</option>
+                    {cards.map((card) => (
+                        <option key={card.id} value={card.id}>{card.cardnumber}</option>
+                    ))}
+                </select>
+            </center>
         </>
     );
 }

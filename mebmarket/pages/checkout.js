@@ -131,13 +131,6 @@ export default function Checkout() {
                     <option key={card.id} value={card.id}>{card.cardnumber}</option>
                 ))}
             </select>
-            {/* <h2>{cards[0]}</h2> */}
-            <h1>{cardnumber}</h1>
-            <h1>{cardHolderName}</h1>
-            <h1>{billingAddress}</h1>
-            <h1>{cvv}</h1>
-            <h1>{expiry_month}/{expiry_year}</h1>
-            <h1>{issuers}</h1>
         </center>
     );
 }
