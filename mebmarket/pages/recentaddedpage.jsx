@@ -26,7 +26,7 @@ export default function recentaddedpage({ initialBooks, count }) {
     const handleChange = useCallback((event, value) => {
         window.scrollTo(0, 0);
         setPage(value);
-    }, []);
+    }, []); 
 
     useEffect(() => {
         async function fetchData() {

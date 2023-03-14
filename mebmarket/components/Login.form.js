@@ -110,34 +110,6 @@ function LoginPage(props) {
                         {getButtonLabel()}
                     </Button>
                 )}
-
-                {clientSession && (
-                    <>
-                        {clientSession.role !== "admin" ? null : (
-                            <>
-                                <Link href="/admin">
-                                    <Button
-                                        size="small"
-                                        variant="contained"
-                                        className="login-register-button"
-                                    >
-                                        จัดการหนังสือ
-                                    </Button>
-                                </Link>
-                                <Link href="/addbook">
-                                    <Button
-                                        size="small"
-                                        variant="contained"
-                                        className="login-register-button"
-                                    >
-                                        เพิ่มหนังสือ
-                                    </Button>
-                                </Link>
-                            </>
-                        )}
-                    </>
-                )}
-
             </div>
 
             {isLoginFormVisible ? (
