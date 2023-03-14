@@ -1,6 +1,4 @@
 import excuteQuery from "@/shared/database";
-import { executeCheckout } from "@/shared/executetransaction";
-import { max } from "moment";
 import mysql from 'serverless-mysql';
 
 const db = mysql({
@@ -14,7 +12,6 @@ const db = mysql({
 });
 
 export default async function handler(req, res) {
-    // const { orderId, username, dateOrdered, totalAmount } = req.body;
     const { SelectedItem, username, totalPrice } = req.body;
     const date = new Date();
     const length = SelectedItem.length
@@ -32,14 +29,14 @@ export default async function handler(req, res) {
     })
     let maxOrderId = sql[0]['MAX(orderId)'];
     if (maxOrderId === null) {
-        maxOrderId = 0;
+        maxOrderId = 1;
     }
     let results = db.transaction().query(queries[0].query, queries[0].values)
     try {
 
         for (let i = 0; i < length; i++) {
             if(SelectedItem[i] !== null && SelectedItem[i] !== '' && SelectedItem[i] !== undefined) {
-                results = results.query(queries[1].query, [maxOrderId, SelectedItem[i].bookId, SelectedItem[i].price]);
+                results = results.query(queries[1].query, [maxOrderId+1, SelectedItem[i].bookId, SelectedItem[i].price]);
             }
         }
         await results.commit();
@@ -49,5 +46,6 @@ export default async function handler(req, res) {
     } finally {
         await db.end();
     }
+    res.json(results)
 
 }
