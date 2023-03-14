@@ -1,0 +1,41 @@
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cardbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+
+.cardbox:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.dashboard-icon {
+    transform: scale(3);
+    color: var(--main-color);
+}
+
+.dashboard-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.dashboard-comment-header {
+    display: flex;
+    align-items: center;
+    /* color: var(--main-color); */
+}
+
+.commentbox-icon {
+    color: var(--main-color);
+}
