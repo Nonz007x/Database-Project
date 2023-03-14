@@ -5,6 +5,7 @@ import "@/styles/index.css";
 import "@/styles/admin.css";
 import "@/styles/book.css";
 import "@/styles/addbook.css";
+import "@/styles/admindashboard.css"
 
 // compoents styling
 import "@/styles/ItemSmall.css";
