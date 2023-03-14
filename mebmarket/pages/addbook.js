@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import CheckIcon from "@mui/icons-material/Check";
 import { requireAuthentication } from "@/utils/requireAuthentication";
-
+import CategoryAutocomplete from "@/components/CategoryAutocomplete";
 export default function addbook() {
     const [bookId, setBookId] = useState("");
     const [bookname, setBookname] = useState("");
@@ -17,8 +17,9 @@ export default function addbook() {
     const [price, setPrice] = useState("");
     const [synopsis, setSynopsis] = useState("");
     const tempImg = useRef(0);
-    const [category,setCategory] = useState("");
-
+    const [category, setCategory] = useState("");
+    const [CategoryId, setCategoryId] = useState("");
+    const [CategoryName, setCategoryName] = useState("");
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -34,7 +35,8 @@ export default function addbook() {
                     author: author,
                     price: price,
                     synopsis: synopsis,
-                    // category:
+                    categoryId: CategoryId,
+                    categoryName: CategoryName,
                 }),
             });
             const data = await response.json();
@@ -46,6 +48,11 @@ export default function addbook() {
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleCategoryChange = (id, name) => {
+        setCategoryId(id);
+        setCategoryName(name);
     };
 
     return (
@@ -134,6 +141,13 @@ export default function addbook() {
                                     onChange={(e) => setAuthor(e)}
                                 />
                                 {author && 1 ? <CheckIcon /> : <div />}
+                            </div>
+                            <p>หมวดหมู่</p>
+                            <div className="author_verify">
+                                <CategoryAutocomplete
+                                    onChange={(e) => setCategoryName(e)}
+                                />
+                                {CategoryName && 1 ? <CheckIcon /> : <div />}
                             </div>
                             <p>ราคา</p>
                             <TextField

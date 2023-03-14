@@ -160,7 +160,7 @@ export default function Cart({ CartData, username }) {
             }),
         });
         const temp = await fetchData(username);
-        console.log(temp)
+        // console.log(temp)
         location.reload();
     };
 

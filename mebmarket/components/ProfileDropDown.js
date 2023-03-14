@@ -14,7 +14,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 
-
 export default function MenuListComposition({ username, clientSession }) {
     const { role } = clientSession;
     const [open, setOpen] = React.useState(false);
@@ -98,73 +97,60 @@ export default function MenuListComposition({ username, clientSession }) {
                                     onKeyDown={handleListKeyDown}
                                 >
                                     <MenuItem onClick={handleClose}>
-                                        <Button
-                                            className="dropdown-button"
-                                            variant="contained"
-                                            size="small"
+                                        <Link
+                                            className="Link-flex-row"
+                                            href="/library"
                                         >
-                                            <Link
-                                                className="Link-flex-row"
-                                                href="/library"
-                                            >
-                                                <LocalLibraryIcon/>
-                                                <h5>ชั้นหนังสือ</h5>
-                                            </Link>
-                                        </Button>
+                                            <LocalLibraryIcon />
+                                            <h5>ชั้นหนังสือ</h5>
+                                        </Link>
                                     </MenuItem>
                                     {role != "admin" ? null : (
-                                        <>
+                                        <div>
                                             <MenuItem
                                                 className="MenuItems100"
                                                 onClick={handleClose}
                                             >
-                                                <Button
-                                                    className="dropdown-button"
-                                                    variant="contained"
-                                                    size="small"
+                                                <Link
+                                                    className="Link-flex-row"
+                                                    href="/admin"
                                                 >
-                                                    <Link
-                                                        className="Link-flex-row"
-                                                        href="/admin"
-                                                    >
-                                                        <EditIcon />
-                                                        <h5>จัดการหนังสือ</h5>
-                                                    </Link>
-                                                </Button>
+                                                    <EditIcon />
+                                                    <h5>จัดการหนังสือ</h5>
+                                                </Link>
                                             </MenuItem>
                                             <MenuItem
                                                 className="MenuItems100"
                                                 onClick={handleClose}
                                             >
-                                                <Button
-                                                    className="dropdown-button"
-                                                    variant="contained"
-                                                    size="small"
+                                                <Link
+                                                    className="Link-flex-row"
+                                                    href="/addbook"
                                                 >
-                                                    <Link
-                                                        className="Link-flex-row"
-                                                        href="/addbook"
-                                                    >
-                                                        <AddCircleOutlineIcon />
-                                                        <h5>เพิ่มหนังสือ</h5>
-                                                    </Link>
-                                                </Button>
+                                                    <AddCircleOutlineIcon />
+                                                    <h5>เพิ่มหนังสือ</h5>
+                                                </Link>
                                             </MenuItem>
-                                        </>
+                                            <MenuItem
+                                                className="MenuItems100"
+                                                onClick={handleClose}
+                                            >
+                                                <Link
+                                                    className="Link-flex-row"
+                                                    href="/admindashboard"
+                                                >
+                                                    <AddCircleOutlineIcon />
+                                                    <h5>Dash Board</h5>
+                                                </Link>
+                                            </MenuItem>
+                                        </div>
                                     )}
                                     <MenuItem onClick={handleClose}>
                                         My account
                                     </MenuItem>
                                     <MenuItem onClick={handleClose}>
-                                        <Button
-                                            className="dropdown-button"
-                                            variant="contained"
-                                            size="small"
-                                            onClick={handleSignOut}
-                                        >
-                                            <LogoutIcon />
-                                            <h5>Sign out</h5>
-                                        </Button>
+                                        <LogoutIcon />
+                                        <h5>Sign out</h5>
                                     </MenuItem>
                                 </MenuList>
                             </ClickAwayListener>

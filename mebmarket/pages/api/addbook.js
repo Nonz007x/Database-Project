@@ -8,7 +8,6 @@ export default async function handler(req, res) {
         price,
         cover,
         synopsis,
-        categoryId,
         categoryName,
     } = req.body;
     const newDate = new Date();
@@ -19,7 +18,6 @@ export default async function handler(req, res) {
             !author ||
             !price ||
             !cover ||
-            !categoryId ||
             !categoryName
         ) {
             return res.status(400).json("กรุณากรอกข้อมูลให้ครบ");
@@ -37,23 +35,22 @@ export default async function handler(req, res) {
             query: "SELECT bookId FROM `book` WHERE bookId = ?",
             values: [bookId],
         });
-        console.log(existingBook);
+        // console.log(existingBook);
         if (existingBook.length > 0) {
             return res.status(401).json("หนังสือมีอยู่แล้ว");
         }
-        const existingCategory = await excuteQuery({
-            query: "select * from category where categoryId = ?",
-            values: [categoryId],
+        const existingCate = await excuteQuery({
+            query: "select categoryId from category where categoryName = ?",
+            values: [categoryName],
         });
-        if (existingCategory.length <= 0) {
+        if (existingCate.length === 0) {
             await excuteQuery({
-                query: "INSERT INTO `category`(`categoryId`, `categoryName`) VALUES (?,?)",
-                values: [Number(categoryId), categoryName],
+                query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
+                values: [categoryName],
             });
         }
-
         const createBook = await excuteQuery({
-            query: "INSERT INTO book ( bookId, bookname, author, price, cover, synopsis, date,categoryId) VALUES(?,?,?,?,?,?,?,?)",
+            query: "INSERT INTO book ( bookId, bookname, author, price, cover, synopsis, date, category ) VALUES(?,?,?,?,?,?,?,(SELECT categoryId FROM category WHERE categoryName = ?))",
             values: [
                 bookId,
                 bookname,
@@ -62,9 +59,10 @@ export default async function handler(req, res) {
                 cover,
                 synopsis,
                 newDate,
-                categoryId,
+                categoryName,
             ],
         });
+        // console.log(createBook);
         res.json(createBook);
     } catch (error) {
         return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`);
