@@ -2,27 +2,26 @@ import { useEffect, useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
 import { fetcher } from "../pages/api/fetcher";
 
-export default function AuthorAutocomplete(props) {
+export default function CategoryAutocomplete(props) {
     const [Option, setOption] = useState([]);
     const [SelectedValue, setSelectedValue] = useState(null);
+
     useEffect(() => {
-        fetcher("/api/get").then((e) => {
-            const authorNameMapped = e.map((Obj) => Obj.author);
-            const authorFilter = [...new Set(authorNameMapped)];
-            setOption(authorFilter);
+        fetcher("/api/getcategory").then((data) => {
+            setOption(data.map((obj) => obj.categoryName));
+            console.log(data.map((obj) => obj.categoryName));
         });
     }, []);
+
     return (
         <>
             <Autocomplete
-                id="testAutocomplete"
                 className="fix-width-field"
-                // sx={{width:300}}
                 options={Option}
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        label="นักเขียน"
+                        label="ประเภท"
                         size="small"
                         onChange={(e) => {
                             props.onChange(e.target.value);
