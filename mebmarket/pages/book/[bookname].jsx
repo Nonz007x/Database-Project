@@ -210,7 +210,7 @@ export default function Page() {
                                         pathname: "/search/author/[author]",
                                         query: { author: bookData.author }
                                     }}> {bookData.author}</Link></p>
-                                    <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p>
+                                    {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p> */}
                                     <p>หมวดหมู่ <a href=""> {bookData.categoryName}</a></p>
                                 </div>
                                 <div id="TryAndBuyDiv">
