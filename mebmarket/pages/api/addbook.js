@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         if (!bookId || !bookname || !author || !price || !cover) {
             return res.status(400).json("กรุณากรอกข้อมูลให้ครบ");
         }
-        if (!Number.isInteger(parseInt(bookId)) || isNaN(price)) { //isNaN = is NOT an integer
+        if (!Number.isInteger(parseInt(bookId)) || isNaN(price) || bookId < 0 || price < 0) { //isNaN = is NOT an integer
             return res.status(400).json("กรุณากรอกข้อมูลให้ถูกต้อง");
         }
         const existingBook = await excuteQuery({
