@@ -57,6 +57,5 @@ export default async function (req, res) {
         ],
     });
     console.log(Sql);
-    res.status(200).json("
-    ");
+    res.status(200).json("done");
 }
