@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ItemSmall(props) {
     const { property } = props;
-    console.log(props)
+    // console.log(props)
     return (
         <>
             <Link className="book-list-container" href={{
