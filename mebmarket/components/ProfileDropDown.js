@@ -12,6 +12,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+
+
 export default function MenuListComposition({ username, clientSession }) {
     const { role } = clientSession;
     const [open, setOpen] = React.useState(false);
@@ -95,7 +98,19 @@ export default function MenuListComposition({ username, clientSession }) {
                                     onKeyDown={handleListKeyDown}
                                 >
                                     <MenuItem onClick={handleClose}>
-                                        Profile
+                                        <Button
+                                            className="dropdown-button"
+                                            variant="contained"
+                                            size="small"
+                                        >
+                                            <Link
+                                                className="Link-flex-row"
+                                                href="/library"
+                                            >
+                                                <LocalLibraryIcon/>
+                                                <h5>ชั้นหนังสือ</h5>
+                                            </Link>
+                                        </Button>
                                     </MenuItem>
                                     {role != "admin" ? null : (
                                         <>

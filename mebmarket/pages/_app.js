@@ -21,6 +21,7 @@ import "@/styles/footer.css";
 import "@/styles/cart.css"
 import "@/styles/cartItem.css"
 import "@/styles/dropdown.css"
+import "@/styles/LibraryBook.css"
 
 // import componets
 import { useRouter } from "next/router";
