@@ -10,7 +10,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Snackbar } from "@mui/material";
 import { Alert } from "@mui/material";
 import Link from "next/link";
-
+import ProfileDropDown from "./ProfileDropDown";
 function LoginPage(props) {
     const { style } = props;
     const { data: clientSession, status } = useSession();
@@ -20,6 +20,8 @@ function LoginPage(props) {
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [open, setOpen] = useState(false);
+    const [SendClick, setSendClick] = useState("");
+
     const [userData, setUserData] = useState({
         username: "",
         password: "",
@@ -30,13 +32,13 @@ function LoginPage(props) {
             setIsLoginFormVisible(true);
         }
         if (clientSession) {
-            alert("add dropdown please");
+            // alert("add dropdown please");
         }
     };
 
     const handlePopupClose = () => {
-        setIsLoginFormVisible(false)
-    }
+        setIsLoginFormVisible(false);
+    };
 
     const handleClickPassword = () => {
         setShowPassword(!showPassword);
@@ -67,14 +69,6 @@ function LoginPage(props) {
         setUserData("");
     };
 
-    const handleSignOut = async (e) => {
-        e.preventDefault();
-        signOut({
-            redirect: true,
-        });
-        setOpen(true);
-    };
-
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
             return;
@@ -88,7 +82,7 @@ function LoginPage(props) {
         } else if (!clientSession) {
             return "ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก";
         } else {
-            return clientSession.user.name;
+            return <ProfileDropDown username={clientSession.user.name} clientSession={clientSession}/>;
         }
     };
 
@@ -119,30 +113,34 @@ function LoginPage(props) {
 
                 {clientSession && (
                     <>
-                        {clientSession.role !== 'admin'
-                            ? null
-                            :
+                        {clientSession.role !== "admin" ? null : (
                             <>
-                                <Link href="/admin"><Button size="small" variant="contained" className="login-register-button">จัดการหนังสือ</Button></Link>
-                                <Link href="/addbook"><Button size="small" variant="contained" className="login-register-button">เพิ่มหนังสือ</Button></Link>
+                                <Link href="/admin">
+                                    <Button
+                                        size="small"
+                                        variant="contained"
+                                        className="login-register-button"
+                                    >
+                                        จัดการหนังสือ
+                                    </Button>
+                                </Link>
+                                <Link href="/addbook">
+                                    <Button
+                                        size="small"
+                                        variant="contained"
+                                        className="login-register-button"
+                                    >
+                                        เพิ่มหนังสือ
+                                    </Button>
+                                </Link>
                             </>
-                        }
+                        )}
                     </>
                 )}
 
-                {clientSession && (
-                    <Button
-                        className="login-register-button"
-                        variant="contained"
-                        size="small"
-                        onClick={handleSignOut}
-                    >
-                        Sign out
-                    </Button>
-                )}
             </div>
 
-            {(isLoginFormVisible) ? (
+            {isLoginFormVisible ? (
                 <div id="TransparentBg">
                     <div id="GotoMiddleOfTheScreen">
                         <div id="CloseLogin">
@@ -171,7 +169,9 @@ function LoginPage(props) {
                                 <div id="PasswordZone">
                                     <TextField
                                         className="TextField"
-                                        type={showPassword ? "text" : "password"}
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
                                         size="small"
                                         label="Password"
                                         value={userData?.password || ""}
@@ -212,11 +212,7 @@ function LoginPage(props) {
                     </div>
                 </div>
             ) : null}
-            <Snackbar
-                open={open}
-                autoHideDuration={3000}
-                onClose={handleClose}
-            >
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                 <Alert
                     variant="filled"
                     onClose={handleClose}

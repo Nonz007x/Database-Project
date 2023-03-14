@@ -26,7 +26,7 @@ export default function ItemSmall(props) {
                             <div><h6><CustomizedRating rate={property.rating} /></h6></div>
                         </div>
                         <div className="buy-button">
-                            <Button variant="contained" size="small">
+                            <Button className="small-buy-button" variant="contained" size="small">
                                 <h6>฿ {property.price}</h6>
                             </Button>
                         </div>
