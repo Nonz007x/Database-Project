@@ -5,6 +5,9 @@ import Link from "next/link";
 import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { TextField } from "@mui/material";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function Cart({ CartData, username }) {
     const { data: clientSession } = useSession();
@@ -240,20 +243,19 @@ export default function Cart({ CartData, username }) {
                     </Button>
                 </div>
             </div>
-
-            //card
+            
             <center>
                 <h1>ENTER CREDIT CARD NUMBER</h1>
-                <h1>{cardnumber.length}</h1>
-                <form onSubmit={handleSaveCard}>
-                    <input type="number" placeholder="cardnumber" value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
-                    <br />
-                    <input type="text" placeholder="name" value={cardHolderName} onChange={e => setCardHolderName(e.target.value)} />
-                    <br />
-                    <input type="text" placeholder="address" value={billingAddress} onChange={e => setBillingAddress(e.target.value)} />
-                    <br />
-                    <input type="number" placeholder="cvv" value={cvv} onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} />
-                    <br />
+                {/* <h1>{cardnumber.length}</h1> */}
+                <form onSubmit={handleSaveCard} className="credit-card-form">
+                    <TextField className="credit-card-input-field" variant="outlined" type="number" placeholder="card number" label="card number" value={ cardnumber } onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
+                    <TextField className="credit-card-input-field" variant="outlined" type="text" placeholder="name" label="name" value={ cardHolderName } onChange={e => setCardHolderName(e.target.value)} />
+                    <TextField className="credit-card-input-field" variant="outlined" type="text" placeholder="address" label="address" value={ billingAddress } onChange={e => setBillingAddress(e.target.value)} />
+                    <TextField className="credit-card-input-field" variant="outlined" type="number" placeholder="cvv" label="cvv" value={ cvv } onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} />
+                    {/* <input className="credit-card-input-field" type="number" placeholder="cardnumber" value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
+                    <input className="credit-card-input-field" type="text" placeholder="name" value={cardHolderName} onChange={e => setCardHolderName(e.target.value)} />
+                    <input className="credit-card-input-field" type="text" placeholder="address" value={billingAddress} onChange={e => setBillingAddress(e.target.value)} />
+                    <input className="credit-card-input-field" type="number" placeholder="cvv" value={cvv} onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} /> */}
 
                     <select id="expirySelect" value={expiry_month} onChange={(e) => {
                         setExpiry_month(e.target.value);
@@ -273,15 +275,28 @@ export default function Cart({ CartData, username }) {
                         })}
                     </select>
 
-                    <select id="dropdown" onChange={e => setIssuers(e.target.value)}>
+                    {/* <select id="dropdown" onChange={e => setIssuers(e.target.value)}>
                         <option value="">--Select--</option>
-                        <option value="Mastergay">Mastergay</option>
-                        <option value="Visus">Visus</option>
-                        <option value="Samuthprakarn Express">Samuthprakarn Express</option>
-                    </select>
-                    <br />
-                    <button type="submit">Submit</button>
-                    <button onClick={handleCheckout}>Checkout</button>
+                        <option value="Mastercard">Mastercard</option>
+                        <option value="Visa">Visa</option>
+                    </select> */}
+                    <Select
+                        labelId="selectcard"
+                        className="select-card-type"
+                        defaultValue="SELECT"
+                        label="card type"
+                        onChange={e => setIssuers(e.target.value)}
+                    >
+                        <MenuItem value="SELECT">SELECT</MenuItem>
+                        <MenuItem value="Mastercard">Mastercard</MenuItem>
+                        <MenuItem value="Visa">Visa</MenuItem>
+                    </Select>
+                    <div className="credit-card-button-zone">
+                        <Button className="credit-card-button" variant="contained" type="submit">Submit</Button>
+                        <Button className="credit-card-button" variant="contained" onClick={handleCheckout}>Checkout</Button>
+                    </div>
+                    {/* <button type="submit">Submit</button>
+                    <button onClick={handleCheckout}>Checkout</button> */}
                 </form>
                 <select onChange={e => { setCardnumber(e.target.value) }}>
                     <option value="">--Select Card--</option>

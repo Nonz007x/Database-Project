@@ -60,6 +60,10 @@
     margin-left: 10px;
 }
 
+.add_cover_submit:hover {
+    background-color: rgb(61, 61, 61);
+}
+
 .addbook_detail {
     /* border: 1px solid red; */
     height: 100%;

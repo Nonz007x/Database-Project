@@ -106,8 +106,8 @@ export default function EditBook() {
                                     TempImg.current && 1
                                         ? setImgLink(TempImg.current)
                                         : setImgLink(
-                                              "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
-                                          );
+                                            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
+                                            );
                                 }}
                             >
                                 <TextField

@@ -1,18 +1,17 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import Stack from "@mui/material/Stack";
 import { signIn, signOut, useSession } from "next-auth/react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export default function MenuListComposition({ username, clientSession }) {
     const { role } = clientSession;
@@ -113,6 +112,18 @@ export default function MenuListComposition({ username, clientSession }) {
                                             >
                                                 <Link
                                                     className="Link-flex-row"
+                                                    href="/admindashboard"
+                                                >
+                                                    <DashboardIcon />
+                                                    <h5>Dashboard</h5>
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem
+                                                className="MenuItems100"
+                                                onClick={handleClose}
+                                            >
+                                                <Link
+                                                    className="Link-flex-row"
                                                     href="/admin"
                                                 >
                                                     <EditIcon />
@@ -129,18 +140,6 @@ export default function MenuListComposition({ username, clientSession }) {
                                                 >
                                                     <AddCircleOutlineIcon />
                                                     <h5>เพิ่มหนังสือ</h5>
-                                                </Link>
-                                            </MenuItem>
-                                            <MenuItem
-                                                className="MenuItems100"
-                                                onClick={handleClose}
-                                            >
-                                                <Link
-                                                    className="Link-flex-row"
-                                                    href="/admindashboard"
-                                                >
-                                                    <AddCircleOutlineIcon />
-                                                    <h5>Dash Board</h5>
                                                 </Link>
                                             </MenuItem>
                                         </div>
