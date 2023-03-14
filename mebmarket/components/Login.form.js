@@ -106,10 +106,15 @@ function LoginPage(props) {
                             {getButtonLabel()}
                         </Button>
                     ) : (
-                        <Button>
+                        <Button
+                            variant="contained"
+                            size="small"
+                            className="shoppingCart-navbar"
+                        >
                             <ProfileDropDown
                                 username={clientSession.user.name}
-                                clientSession={clientSession}/>
+                                clientSession={clientSession}
+                            />
                         </Button>
                     ))}
             </div>
