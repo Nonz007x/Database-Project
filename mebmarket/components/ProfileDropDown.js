@@ -113,7 +113,7 @@ export default function MenuListComposition({ username, clientSession }) {
                                         </Button>
                                     </MenuItem>
                                     {role != "admin" ? null : (
-                                        <>
+                                        <div>
                                             <MenuItem
                                                 className="MenuItems100"
                                                 onClick={handleClose}
@@ -150,7 +150,7 @@ export default function MenuListComposition({ username, clientSession }) {
                                                     </Link>
                                                 </Button>
                                             </MenuItem>
-                                        </>
+                                        </div>
                                     )}
                                     <MenuItem onClick={handleClose}>
                                         My account

@@ -31,9 +31,6 @@ function LoginPage(props) {
         if (!clientSession) {
             setIsLoginFormVisible(true);
         }
-        if (clientSession) {
-            // alert("add dropdown please");
-        }
     };
 
     const handlePopupClose = () => {
@@ -81,8 +78,6 @@ function LoginPage(props) {
             return <FavoriteIcon />;
         } else if (!clientSession) {
             return "ล็อคอินเข้าสู่ระบบ / สมัครสมาชิก";
-        } else {
-            return <ProfileDropDown username={clientSession.user.name} clientSession={clientSession}/>;
         }
     };
 
@@ -100,16 +95,23 @@ function LoginPage(props) {
     return (
         <>
             <div className="Flexrow">
-                {!loading && (
-                    <Button
-                        className={getButtonClassName()}
-                        variant="contained"
-                        size="small"
-                        onClick={handleClick}
-                    >
-                        {getButtonLabel()}
-                    </Button>
-                )}
+                {!loading &&
+                    (!clientSession ? (
+                        <Button
+                            className={getButtonClassName()}
+                            variant="contained"
+                            size="small"
+                            onClick={handleClick}
+                        >
+                            {getButtonLabel()}
+                        </Button>
+                    ) : (
+                        <Button>
+                            <ProfileDropDown
+                                username={clientSession.user.name}
+                                clientSession={clientSession}/>
+                        </Button>
+                    ))}
             </div>
 
             {isLoginFormVisible ? (

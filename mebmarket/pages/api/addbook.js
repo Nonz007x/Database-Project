@@ -35,7 +35,7 @@ export default async function handler(req, res) {
             query: "SELECT bookId FROM `book` WHERE bookId = ?",
             values: [bookId],
         });
-        console.log(existingBook);
+        // console.log(existingBook);
         if (existingBook.length > 0) {
             return res.status(401).json("หนังสือมีอยู่แล้ว");
         }
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
                 categoryName,
             ],
         });
-        console.log(createBook);
+        // console.log(createBook);
         res.json(createBook);
     } catch (error) {
         return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`);

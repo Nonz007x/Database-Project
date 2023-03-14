@@ -56,6 +56,6 @@ export default async function (req, res) {
             bookId,
         ],
     });
-    console.log(Sql);
+    // console.log(Sql);
     res.status(200).json("done");
 }

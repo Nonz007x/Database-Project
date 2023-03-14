@@ -9,7 +9,7 @@ export default function CategoryAutocomplete(props) {
     useEffect(() => {
         fetcher("/api/getcategory").then((data) => {
             setOption(data.map((obj) => obj.categoryName));
-            console.log(data.map((obj) => obj.categoryName));
+            // console.log(data.map((obj) => obj.categoryName));
         });
     }, []);
 

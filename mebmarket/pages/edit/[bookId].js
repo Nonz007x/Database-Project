@@ -32,7 +32,7 @@ export default function EditBook() {
             setSynopsis(data.synopsis);
             setprevAuthor(data.author);
             setPrevCate(data.categoryName);
-            console.log(data)
+            // console.log(data)
         };
         if (router.query.bookId) {
             fetchData();

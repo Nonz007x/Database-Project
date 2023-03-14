@@ -52,7 +52,7 @@ export default function Page() {
         }
     }
     const FavoDel = async () => {
-        console.log(bookData.bookId)
+        // console.log(bookData.bookId)
         const response = await fetch("/api/favorite/delete", {
             method: "POST",
             headers: {
@@ -97,7 +97,7 @@ export default function Page() {
     };
 
     const fetchIsAlreadyFavorited = async () => {
-        console.log(clientSession?.user?.name, bookData?.bookId);
+        // console.log(clientSession?.user?.name, bookData?.bookId);
         try {
             const res = await fetch("/api/favorite/check", {
                 method: "POST",
@@ -113,8 +113,8 @@ export default function Page() {
                 throw new Error('Error adding to wishlist');
             }
             const data = await res.json();
-            console.log("data[0].rowExists =", data[0].rowExists)
-            console.log(data[0]?.rowExists)
+            // console.log("data[0].rowExists =", data[0].rowExists)
+            // console.log(data[0]?.rowExists)
             setIsFavorited(data[0]?.rowExists)
 
         } catch (error) {
@@ -246,7 +246,7 @@ export default function Page() {
                             <div className="comment-profile-user">
                                 <AccountCircleIcon fontSize="large" />
                                 <div className="comment-show-username">
-                                    <p>{!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}</p>
+                                    {!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}
                                 </div>
                             </div>
                             <div className="blur-if-not-login">

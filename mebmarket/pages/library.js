@@ -31,8 +31,8 @@ export async function getServerSideProps(context) {
     };
 }
 export default function name({ username, bookData }) {
-    console.log(username);
-    console.log(bookData);
+    // console.log(username);
+    // console.log(bookData);
     const mapping = Object.values(bookData).map((data, index) => {
         return <LibraryBook property={data} key={index} />;
     });
