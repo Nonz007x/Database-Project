@@ -13,7 +13,7 @@ export default function addbook() {
     const [imgLink, setImgLink] = useState(
         "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
     );
-    const [author, setAuthor] = useState(null);
+    const [author, setAuthor] = useState("");
     const [price, setPrice] = useState("");
     const [synopsis, setSynopsis] = useState("");
     const tempImg = useRef(0);

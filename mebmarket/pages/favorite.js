@@ -16,7 +16,7 @@ export default function FavoritePage() {
         } else if (status === 'loading') {
             // do nothing
         } else {
-            router.push('/pleaselogin');
+            router.push('/');
         }
     }, [status, router]);
 

@@ -34,7 +34,7 @@ export const authOptions = {
                 //     }, take: 1,
                 // });
                 const user = await excuteQuery({
-                    query: "SELECT username,email,role FROM user where username = ?;",
+                    query: "SELECT username,email,role FROM user WHERE username = ? AND password = ?;",
                     values: [name, password]
                 });
 

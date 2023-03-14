@@ -28,7 +28,7 @@ import { SessionProvider } from "next-auth/react";
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const router = useRouter();
 
-  const hideComponentsUrls = ['/pleaselogi'];
+  const hideComponentsUrls = ['/pleaselogin', 'checkout'];
   const hideComponents = hideComponentsUrls.some(url => router.asPath.includes(url));
   return (
     <SessionProvider session={pageProps.session}>
