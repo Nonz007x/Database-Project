@@ -25,7 +25,7 @@ export default function Page() {
     const [commentWriten, setcommentWritten] = useState("")
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
-    const [isFavorited, setIsFavorited] = useState("")
+    const [isFavorited, setIsFavorited] = useState(true)
     const handleFavoStatusChange = () => {
         setIsFavorited(!isFavorited)
         if (isFavorited) {
@@ -97,6 +97,7 @@ export default function Page() {
     };
 
     const fetchIsAlreadyFavorited = async () => {
+        console.log(clientSession?.user?.name, bookData?.bookId);
         try {
             const res = await fetch("/api/favorite/check", {
                 method: "POST",
@@ -181,10 +182,12 @@ export default function Page() {
     }, [bookname]);
 
     useEffect(() => {
+        
         if (bookData) {
+            fetchIsAlreadyFavorited();
             fetchCommentData();
         }
-        fetchIsAlreadyFavorited();
+        
     }, [bookData]);
 
     return (
@@ -296,7 +299,7 @@ export default function Page() {
                 onClose={handleClose}
             >
                 <Alert variant="filled" onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    This is a success message!
+                    เพิ่มคอมเมนต์สำเร็จ
                 </Alert>
             </Snackbar>
             {/* {Data} */}
