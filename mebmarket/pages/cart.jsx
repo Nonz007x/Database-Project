@@ -273,7 +273,8 @@ export default function Cart({ CartData, username }) {
                 <h1>เลือก Credit card</h1>
                 <select onChange={handleSelectCard}>
                     <option value="">--Select Card--</option>
-                    <option key={1} value={cards[0]?.cardNumber}>{cards[0]?.cardNumber}</option>
+                    {cards[0] ? <option key={1} value={cards[0]?.cardNumber}>{cards[0]?.cardNumber}</option>
+                    :null}
                     {/* {cards.map((card) => (
                         <option key={card.id} value={card[0].cardnumber}>{card[0].cardnumber}</option>
                     ))} */}

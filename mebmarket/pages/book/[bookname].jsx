@@ -189,7 +189,7 @@ export default function Page() {
             }),
         })
         const data = await respones.json();
-        if (data.length === 0) {
+        if (data.length == 0) {
             setPaid(false)
         }
         console.log(data);
