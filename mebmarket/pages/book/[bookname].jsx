@@ -174,21 +174,23 @@ export default function Page() {
             console.error(error)
         }
     };
-
+    // here
     const getPaidBooks = async () => {
-        const respones = await fetch("http://localhost:3000/api/getPaidBook", {
+        const respones = await fetch("http://localhost:3000/api/Checkpaidbook", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: new URLSearchParams({
                 username: clientSession.user.name,
+                bookId: bookData?.bookId,
             }),
         })
         const data = await respones.json();
         console.log(data);
     }
 
+    // endhere
     useEffect(() => {
         if (bookname) {
             fetchBookData();
