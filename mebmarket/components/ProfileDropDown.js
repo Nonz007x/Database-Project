@@ -11,7 +11,7 @@ import Link from "next/link";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function MenuListComposition({ username, clientSession }) {
     const { role } = clientSession;
@@ -144,10 +144,12 @@ export default function MenuListComposition({ username, clientSession }) {
                                             </MenuItem>
                                         </div>
                                     )}
-                                    <MenuItem onClick={handleClose}>
-                                        My account
-                                    </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem
+                                        onClick={(e) => {
+                                            handleClose(e);
+                                            handleSignOut(e);
+                                        }}
+                                    >
                                         <LogoutIcon />
                                         <h5>Sign out</h5>
                                     </MenuItem>
