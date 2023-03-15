@@ -22,6 +22,9 @@ export default async function handler(req, res) {
     {
         query: 'INSERT INTO order_items_table (orderId, bookId, price) VALUES (?,?,?)',
     },
+    {
+        query: 'DELETE FROM `cart_inventory` WHERE bookId = ? AND username = ?',
+    },
     ];
 
     const sql = await excuteQuery({
@@ -36,12 +39,13 @@ export default async function handler(req, res) {
 
         for (let i = 0; i < length; i++) {
             if(SelectedItem[i] !== null && SelectedItem[i] !== '' && SelectedItem[i] !== undefined) {
-                results = results.query(queries[1].query, [maxOrderId+1, SelectedItem[i].bookId, SelectedItem[i].price]);
+                results = results.query(queries[1].query, [maxOrderId+1, SelectedItem[i].bookId, SelectedItem[i].price]).query(queries[2].query, [SelectedItem[i].bookId, username]);
             }
         }
         await results.commit();
     } catch (error) {
         results.rollback();
+        res.status(500).json("Something went wrong")
         throw error;
     } finally {
         await db.end();

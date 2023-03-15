@@ -10,7 +10,11 @@ export default async function (req, res) {
         })
 
         if (checkExisting.length > 0) {
-            return res.status(409).json("เพิ่มบัตรไปแล้ว");
+            const updateCard = await excuteQuery({
+                query: "UPDATE `creditcard` SET  cardNumber = ? , cardHolderName = ? , expiry_month = ?, expiry_year = ?, cvv = ?, billingAddress = ?, updatedDate = ?",
+                values: [ cardNumber, cardHolderName, expiry_month, expiry_year, cvv, billingAddress, createDate],
+            })
+            return res.status(200).json(updateCard);
         }
         const addCard = await excuteQuery({
             query: "INSERT INTO `creditcard` (username, cardNumber, cardHolderName, expiry_month, expiry_year, cvv, billingAddress, createDate, updatedDate) VALUES(?,?,?,?,?,?,?,?,?)",
