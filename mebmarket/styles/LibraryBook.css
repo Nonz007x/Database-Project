@@ -7,8 +7,15 @@
     justify-content: center;
     align-items: center;
 }
+.library-book-image-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .library-item-wrap {
     display: flex;
+    /* height: 330px; */
+    aspect-ratio: 16/9;
     flex-direction: column;
     box-shadow: 0 0 6px var(--font-color-gray);
     border-radius: 5px;
@@ -18,10 +25,15 @@
     box-shadow: 0 0 10px var(--main-color);
     transform: translateY(-0.5em);
 }
-
+.library-wrap-name{
+    margin: 0;
+    width: calc(208px - 1em);
+    text-overflow: ellipsis;
+}
 .library-book-image {
     height: 300px;
 }
 .name-and-author {
     padding: 0.5em;
+    gap: 1em;
 }
