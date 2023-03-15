@@ -59,27 +59,25 @@ export default function Cart({ CartData, username }) {
         // console.log(JSON.stringify(SelectedItem))
         // const isValid = validateCreditCardNumber(cardnumber);
         // if (!isValid) {
-        // try {
-        const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                SelectedItem,
-                username: clientSession.user.name,
-                totalPrice: totalPrice,
-            }),
-        });
-
-        //     const data = await response.json();
-        //     if (response.ok) {
-        //         alert("ซื้อสำเร็จ");
-        //     } else {
-        //         alert(data);
-        //     }
-        // } catch (error) {
-        //     console.error(error);
-        // }
-        // }
+        try {
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    SelectedItem,
+                    username: clientSession.user.name,
+                    totalPrice: totalPrice,
+                }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("ซื้อสำเร็จ");
+            } else {
+                alert(data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const validateCreditCardNumber = (cardNumber) => {

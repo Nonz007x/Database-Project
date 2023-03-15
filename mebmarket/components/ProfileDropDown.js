@@ -147,7 +147,7 @@ export default function MenuListComposition({ username, clientSession }) {
                                     <MenuItem onClick={handleClose}>
                                         My account
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={handleSignOut}>
                                         <LogoutIcon />
                                         <h5>Sign out</h5>
                                     </MenuItem>
