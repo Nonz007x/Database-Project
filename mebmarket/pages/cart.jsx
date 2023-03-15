@@ -54,11 +54,23 @@ export default function Cart({ CartData, username }) {
         }
     }
 
+    const handleSelectCard = async (e) => {
+        e.preventDefault();
+        const card = cards[0]
+        setCardnumber(card.cardNumber)
+        setCardHolderName(card.cardHolderName)
+        setExpiry_month(card.expiry_month)
+        setExpiry_year(card.expiry_year)
+        setBillingAddress(card.billingAddress)
+        setCvv(card.cvv)
+    }
+
     const handleCheckout = async (e) => {
         e.preventDefault();
-        // console.log(JSON.stringify(SelectedItem))
-        // const isValid = validateCreditCardNumber(cardnumber);
-        // if (!isValid) {
+        const isValid = validateCreditCardNumber(cardnumber);
+        if (!isValid) {
+            return false;
+        }
         try {
             const response = await fetch('/api/checkout', {
                 method: 'POST',
@@ -72,6 +84,7 @@ export default function Cart({ CartData, username }) {
             const data = await response.json();
             if (response.ok) {
                 alert("ซื้อสำเร็จ");
+                location.reload();
             } else {
                 alert(data);
             }
@@ -85,18 +98,15 @@ export default function Cart({ CartData, username }) {
         const d = new Date();
         const expiry = { year: d.getFullYear(), month: d.getMonth() };
         if (cardNumber.length !== 16) {
-            alert("ARE YOU FUCKING GAY??")
+            alert("กรุณากรอกเลขบัตรให้ครบ")
             return false;
         } else if (expiry_month < expiry.month || expiry_year < expiry.year) {
-            console.log(expiry_month, "<", expiry.month)
-            console.log(expiry_year, "<", expiry.year)
             alert("บัตรหมดอายุ")
             return false;
         } else if (cvv.length !== 4) {
-            alert("โคตร E3")
+            alert("กรุณากรอกเลขบัตรให้ครบ")
             return false;
         }
-        alert("YOU ARE ราชา")
         return true;
     }
 
@@ -234,28 +244,45 @@ export default function Cart({ CartData, username }) {
             <div className="totalPrice-wrap">
                 <div className="display-totalPrice">
                     <h3>ยอดชำระ ฿{totalPrice}</h3>
-                    <Button
-                        variant="contained"
-                        size="medium"
-                        className="purchase"
-                    >
-                        ชำระเงิน
-                    </Button>
+                    {SelectedItem.length < 1 ?
+                        (
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                className="purchase"
+                                disabled
+                            >
+                                ชำระเงิน
+                            </Button>
+                        )
+                        : (
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                className="purchase"
+                                onClick={handleCheckout}
+                            >
+                                ชำระเงิน
+                            </Button>
+                        )
+                    }
                 </div>
             </div>
             {/* start here */}
             <center>
                 <h1>เลือก Credit card</h1>
-                {/* <select onChange={e => { setCardnumber(e.target.value) }}>
+                <select onChange={handleSelectCard}>
                     <option value="">--Select Card--</option>
-                    {cards.map((card) => (
-                        <option key={card.id} value={card.id}>{card.cardnumber}</option>
-                    ))}
-                </select> */}
-                <FormControl className="cardtypeform"><InputLabel>Selecte exist card</InputLabel>
+                    <option key={1} value={cards[0].cardNumber}>{cards[0].cardNumber}</option>
+                    {/* {cards.map((card) => (
+                        <option key={card.id} value={card[0].cardnumber}>{card[0].cardnumber}</option>
+                    ))} */}
+                </select>
+                {/* <FormControl className="cardtypeform"><InputLabel>Selecte exist card</InputLabel>
                     <Select
-                        // value={cardnumber}
-                        onChange={e => { setCardnumber(e.target.value) }}
+                        value={cardnumber}
+                        onChange={e => { setCardnumber(e.target.value) 
+                        console.log(e.target.value)}}
                         label="Selecte exist card"
                     >
                         {cards.length > 0 ?
@@ -265,12 +292,12 @@ export default function Cart({ CartData, username }) {
                         } :
 
 
-                        {/* <MenuItem value={"Mastercard"}>Mastercard</MenuItem>
+                        <MenuItem value={"Mastercard"}>Mastercard</MenuItem>
                         <MenuItem value={"Visa"}>Visa</MenuItem>
-                        <MenuItem value={"Union Pay"}>Union Pay</MenuItem> */}
+                        <MenuItem value={"Union Pay"}>Union Pay</MenuItem>
 
                     </Select>
-                </FormControl>
+                </FormControl> */}
                 <h2>or</h2>
                 <Button sx={{ margin: 1 }} onClick={e => {
                     setAddcardCollapse(!addcardCollapse);
@@ -349,8 +376,7 @@ export default function Cart({ CartData, username }) {
                             </Select>
                         </FormControl>
                         <div className="credit-card-button-zone">
-                            <Button className="credit-card-button" variant="contained" type="submit">Submit</Button>
-                            <Button className="credit-card-button" variant="contained" onClick={handleCheckout}>Checkout</Button>
+                            <Button className="credit-card-button" variant="contained" type="submit">Save</Button>
                         </div>
                         {/* <button type="submit">Submit</button>
                     <button onClick={handleCheckout}>Checkout</button> */}
