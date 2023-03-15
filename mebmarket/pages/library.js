@@ -6,26 +6,6 @@ import LibraryBook from "@/components/LibraryBook";
 export async function getServerSideProps(context) {
     const res = await getSession(context);
     const username = res.user.name;
-    // const bookData = [
-    //     {
-    //         bookname: "Poon",
-    //         bookId: 15,
-    //         author: "retid",
-    //         cover: "https://pbs.twimg.com/media/FqahQU_aUAAsVT7?format=jpg&name=4096x4096",
-    //     },
-    //     {
-    //         bookname: "ไรเดนทวินเทล",
-    //         bookId: "21",
-    //         author: 20,
-    //         cover: "https://pbs.twimg.com/media/Fq-_1WMaMAAjLfJ?format=jpg&name=small",
-    //     },
-    //     {
-    //         bookname: "ลูแมว",
-    //         bookId: "31",
-    //         author: "Repoon",
-    //         cover: "https://pbs.twimg.com/media/FpiO4nmaEAAti8l?format=jpg&name=small",
-    //     },
-    // ];
     const bookData = await fetch("http://localhost:3000/api/getPaidBook", {
         method: "POST",
         headers: {
