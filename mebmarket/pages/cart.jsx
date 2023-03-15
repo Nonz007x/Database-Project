@@ -289,7 +289,7 @@ export default function Cart({ CartData, username }) {
                         <TextField className="credit-card-input-field"
                             variant="outlined"
                             type="number"
-                            label="hi"
+                            label="card number"
                             value={cardnumber}
                             onChange={e => setCardnumber(e.target.value.length > 16 ? cardnumber : e.target.value)}
                         />
