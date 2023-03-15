@@ -16,7 +16,7 @@ import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating"
 import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
-    const { data: clientSession, status} = useSession()
+    const { data: clientSession, status } = useSession()
     // console.log(clientSession)
     const [open, setOpen] = useState(false)
     const router = useRouter();
@@ -26,6 +26,8 @@ export default function Page() {
     const bookname = router.query.bookname;
     const [CommentsData, setCommentsData] = useState("")
     const [isFavorited, setIsFavorited] = useState(true)
+    const [Paid, setPaid] = useState(true)
+
     const handleFavoStatusChange = () => {
         setIsFavorited(!isFavorited)
         if (isFavorited) {
@@ -183,10 +185,13 @@ export default function Page() {
             },
             body: new URLSearchParams({
                 username: clientSession.user.name,
-                bookId: bookData?.bookId,
+                bookId: bookData.bookId,
             }),
         })
         const data = await respones.json();
+        if (data.length === 0) {
+            setPaid(false)
+        }
         console.log(data);
     }
 
@@ -196,12 +201,12 @@ export default function Page() {
             fetchBookData();
         }
     }, [bookname]);
-    
+
     useEffect(() => {
-        if (clientSession) {
-            getPaidBooks(); 
+        if (clientSession && bookData?.bookId) {
+            getPaidBooks();
         }
-    }, [clientSession])
+    }, [bookData?.bookId])
 
     useEffect(() => {
         if (bookData) {
@@ -235,7 +240,9 @@ export default function Page() {
                                 </div>
                                 <div id="TryAndBuyDiv">
                                     <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    <Button variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                    {Paid ? <Button disabled variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                        : <Button variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                    }
                                 </div>
                                 <div id="RatingZone" >
                                     <h5>{bookData.rating.toFixed(2)}</h5>
