@@ -16,7 +16,7 @@ import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating"
 import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
-    const { data: clientSession } = useSession()
+    const { data: clientSession, status} = useSession()
     // console.log(clientSession)
     const [open, setOpen] = useState(false)
     const router = useRouter();
@@ -194,9 +194,14 @@ export default function Page() {
     useEffect(() => {
         if (bookname) {
             fetchBookData();
-            getPaidBooks();
         }
     }, [bookname]);
+    
+    useEffect(() => {
+        if (clientSession) {
+            getPaidBooks(); 
+        }
+    }, [clientSession])
 
     useEffect(() => {
         if (bookData) {
