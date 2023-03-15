@@ -1,6 +1,6 @@
 import Head from "next/head";
 import CartItem from "@/components/CartItems";
-import { Button } from "@mui/material";
+import { Button, Collapse, FormControl, InputLabel, Menu } from "@mui/material";
 import Link from "next/link";
 import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
@@ -8,7 +8,6 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import { TextField } from "@mui/material";
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
 export default function Cart({ CartData, username }) {
     const { data: clientSession } = useSession();
     // card
@@ -19,6 +18,9 @@ export default function Cart({ CartData, username }) {
     const [expiry_year, setExpiry_year] = useState("");
     const [billingAddress, setBillingAddress] = useState("");
     const [cvv, setCvv] = useState("");
+    const [issuers, setIssuers] = useState("")
+
+    const [addcardCollapse, setAddcardCollapse] = useState(false)
 
     const handleSaveCard = async (e) => {
         e.preventDefault();
@@ -243,68 +245,121 @@ export default function Cart({ CartData, username }) {
                     </Button>
                 </div>
             </div>
-            
+            {/* start here */}
             <center>
-                <h1>ENTER CREDIT CARD NUMBER</h1>
-                {/* <h1>{cardnumber.length}</h1> */}
-                <form onSubmit={handleSaveCard} className="credit-card-form">
-                    <TextField className="credit-card-input-field" variant="outlined" type="number" placeholder="card number" label="card number" value={ cardnumber } onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
-                    <TextField className="credit-card-input-field" variant="outlined" type="text" placeholder="name" label="name" value={ cardHolderName } onChange={e => setCardHolderName(e.target.value)} />
-                    <TextField className="credit-card-input-field" variant="outlined" type="text" placeholder="address" label="address" value={ billingAddress } onChange={e => setBillingAddress(e.target.value)} />
-                    <TextField className="credit-card-input-field" variant="outlined" type="number" placeholder="cvv" label="cvv" value={ cvv } onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} />
-                    {/* <input className="credit-card-input-field" type="number" placeholder="cardnumber" value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
+                <h1>เลือก Credit card</h1>
+                {/* <select onChange={e => { setCardnumber(e.target.value) }}>
+                    <option value="">--Select Card--</option>
+                    {cards.map((card) => (
+                        <option key={card.id} value={card.id}>{card.cardnumber}</option>
+                    ))}
+                </select> */}
+                <FormControl className="cardtypeform"><InputLabel>Selecte exist card</InputLabel>
+                    <Select
+                        // value={cardnumber}
+                        onChange={e => { setCardnumber(e.target.value) }}
+                        label="Selecte exist card"
+                    >
+                        {cards.length > 0 ?
+                            Object.values(cards).map((data, index) => {
+                                return <MenuItem value={data.id} key={index}>{data.cardnumber}</MenuItem>
+                            }) : <MenuItem>--ไม่พบข้อมูลบัตร--</MenuItem>
+                        } :
+
+
+                        {/* <MenuItem value={"Mastercard"}>Mastercard</MenuItem>
+                        <MenuItem value={"Visa"}>Visa</MenuItem>
+                        <MenuItem value={"Union Pay"}>Union Pay</MenuItem> */}
+
+                    </Select>
+                </FormControl>
+                <h2>or</h2>
+                <Button sx={{ margin: 1 }} onClick={e => {
+                    setAddcardCollapse(!addcardCollapse);
+                }} className="purchase" variant="contained">{addcardCollapse ? "ปิดหน้าเพิ่มบัตร" : "เพิ่มบัตรเครดิต"}</Button>
+            </center>
+            {/*end here */}
+            <Collapse in={addcardCollapse}>
+
+
+                <center>
+                    <h1>ENTER CREDIT CARD NUMBER</h1>
+                    {/* <h1>{cardnumber.length}</h1> */}
+                    <form onSubmit={handleSaveCard} className="credit-card-form">
+                        {/* <TextField className="credit-card-input-field" variant="outlined" type="number" label="card number" 
+                        value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} /> */}
+                        <TextField className="credit-card-input-field"
+                            variant="outlined"
+                            type="number"
+                            label="hi"
+                            value={cardnumber}
+                            onChange={e => setCardnumber(e.target.value.length > 16 ? cardnumber : e.target.value)}
+                        />
+                        <TextField className="credit-card-input-field" variant="outlined" type="text" label="name" value={cardHolderName} onChange={e => setCardHolderName(e.target.value)} />
+                        <TextField className="credit-card-input-field" variant="outlined" type="text" label="address" value={billingAddress} onChange={e => setBillingAddress(e.target.value)} />
+                        <TextField className="credit-card-input-field" variant="outlined" type="number" label="cvv" value={cvv} onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} />
+                        {/* <input className="credit-card-input-field" type="number" placeholder="cardnumber" value={cardnumber} onChange={e => { if (e.target.value.length <= 16) { setCardnumber(e.target.value) } }} />
                     <input className="credit-card-input-field" type="text" placeholder="name" value={cardHolderName} onChange={e => setCardHolderName(e.target.value)} />
                     <input className="credit-card-input-field" type="text" placeholder="address" value={billingAddress} onChange={e => setBillingAddress(e.target.value)} />
                     <input className="credit-card-input-field" type="number" placeholder="cvv" value={cvv} onChange={e => { if (e.target.value.length <= 4) { setCvv(e.target.value) } }} /> */}
+                        <div>
+                            <Select id="expirySelect" value={expiry_month} onChange={(e) => {
+                                setExpiry_month(e.target.value);
+                            }}>
+                                {/* <option value="">--Select--</option> */}
+                                {[...Array(12)].map((_, i) => {
+                                    const month = (i + 1).toString().padStart(2, '0');
+                                    return <MenuItem key={month} value={month}>{month}</MenuItem>;
+                                })}
+                            </Select>/
+                            <Select value={expiry_year} onChange={(e) => { setExpiry_year(e.target.value) }}>
+                                {/* <option value="">--Select--</option> */}
+                                {[...Array(10)].map((_, i) => {
+                                    const year = (new Date().getFullYear() + i).toString().substring(-2);
+                                    return <MenuItem key={year} value={year}>{year}</MenuItem>;
+                                })}
+                            </Select>
+                        </div>
 
-                    <select id="expirySelect" value={expiry_month} onChange={(e) => {
-                        setExpiry_month(e.target.value);
-                    }}>
-                        <option value="">--Select--</option>
-                        {[...Array(12)].map((_, i) => {
-                            const month = (i + 1).toString().padStart(2, '0');
-                            return <option key={month} value={month}>{month}</option>;
-                        })}
-                    </select>
 
-                    <select value={expiry_year} onChange={(e) => { setExpiry_year(e.target.value) }}>
-                        <option value="">--Select--</option>
-                        {[...Array(10)].map((_, i) => {
-                            const year = (new Date().getFullYear() + i).toString().substring(-2);
-                            return <option key={year} value={year}>{year}</option>;
-                        })}
-                    </select>
-
-                    {/* <select id="dropdown" onChange={e => setIssuers(e.target.value)}>
+                        {/* <select id="dropdown" onChange={e => setIssuers(e.target.value)}>
                         <option value="">--Select--</option>
                         <option value="Mastercard">Mastercard</option>
                         <option value="Visa">Visa</option>
                     </select> */}
-                    <Select
+
+                        {/* <Select
                         labelId="selectcard"
                         className="select-card-type"
-                        defaultValue="SELECT"
-                        label="card type"
+                        // defaultValue="SELECT"
+                        label="hi"
                         onChange={e => setIssuers(e.target.value)}
                     >
                         <MenuItem value="SELECT">SELECT</MenuItem>
                         <MenuItem value="Mastercard">Mastercard</MenuItem>
                         <MenuItem value="Visa">Visa</MenuItem>
-                    </Select>
-                    <div className="credit-card-button-zone">
-                        <Button className="credit-card-button" variant="contained" type="submit">Submit</Button>
-                        <Button className="credit-card-button" variant="contained" onClick={handleCheckout}>Checkout</Button>
-                    </div>
-                    {/* <button type="submit">Submit</button>
+                    </Select> */}
+                        <FormControl className="cardtypeform"><InputLabel>Card type</InputLabel>
+                            <Select
+                                value={issuers}
+                                onChange={e => { setIssuers(e.target.value) }}
+                                label="Card type"
+                            >
+                                <MenuItem value={"Mastercard"}>Mastercard</MenuItem>
+                                <MenuItem value={"Visa"}>Visa</MenuItem>
+                                <MenuItem value={"Union Pay"}>Union Pay</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <div className="credit-card-button-zone">
+                            <Button className="credit-card-button" variant="contained" type="submit">Submit</Button>
+                            <Button className="credit-card-button" variant="contained" onClick={handleCheckout}>Checkout</Button>
+                        </div>
+                        {/* <button type="submit">Submit</button>
                     <button onClick={handleCheckout}>Checkout</button> */}
-                </form>
-                <select onChange={e => { setCardnumber(e.target.value) }}>
-                    <option value="">--Select Card--</option>
-                    {cards.map((card) => (
-                        <option key={card.id} value={card.id}>{card.cardnumber}</option>
-                    ))}
-                </select>
-            </center>
+                    </form>
+
+                </center>
+            </Collapse>
         </>
     );
 }
