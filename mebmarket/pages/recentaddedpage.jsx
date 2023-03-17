@@ -7,7 +7,7 @@ import ItemSmall from "@/components/ItemSmall";
 import { Pagination } from "@mui/material";
 
 export async function getStaticProps() {
-    const initialBooks = await fetch(`http://localhost:3000/api/SortByRating/1`).then(res => res.json());
+    const initialBooks = await fetch(`http://localhost:3000/api/SortByRecent/1`).then(res => res.json());
     const count = await fetch("http://localhost:3000/api/getcount").then(res => res.json());
     return {
         props: {
@@ -31,7 +31,7 @@ export default function recentaddedpage({ initialBooks, count }) {
     useEffect(() => {
         async function fetchData() {
             setLoading(true);
-            const newBooks = await fetcher(`/api/SortByRating/${Page}`);
+            const newBooks = await fetcher(`/api/SortByRecent/${Page}`);
             setBooks(newBooks);
             setLoading(false);
         }
