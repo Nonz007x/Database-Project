@@ -16,7 +16,7 @@
 //     const date = new Date();
 //     const length = SelectedItem.length
 //     const queries = [{
-//         query: 'INSERT INTO order_table (username, dateOrdered, totalAmount) VALUES (?, ?, ?);',
+//         query: 'INSERT INTO invoices (username, dateOrdered, totalAmount) VALUES (?, ?, ?);',
 //         values: [username, date, totalPrice],
 //     },
 //     {
@@ -28,7 +28,7 @@
 //     ];
 
 //     const sql = await excuteQuery({
-//         query: 'SELECT MAX(orderId) FROM order_table',
+//         query: 'SELECT MAX(orderId) FROM invoices',
 //     })
 //     let maxOrderId = sql[0]['MAX(orderId)'];
 //     if (maxOrderId === null) {
@@ -70,11 +70,11 @@ export default async function handler(req, res) {
     const { SelectedItem, username, totalPrice } = req.body;
     const date = new Date();
     const length = SelectedItem.length;
-    const getOrderId = await db.query('SELECT MAX(orderId) FROM order_table')
+    const getOrderId = await db.query('SELECT MAX(orderId) FROM invoices')
     let maxOrderId = getOrderId[0]['MAX(orderId)'];
     if (maxOrderId === null) {
         maxOrderId = 1;
-        await db.query('ALTER TABLE order_table AUTO_INCREMENT = 1')
+        await db.query('ALTER TABLE invoices AUTO_INCREMENT = 1')
     } else {
         maxOrderId++;
     }
@@ -90,7 +90,7 @@ export default async function handler(req, res) {
 
     try {
         var result = db.transaction()
-            .query('INSERT INTO order_table (username, dateOrdered, totalAmount) VALUES (?, ?, ?)', [username, date, totalPrice])
+            .query('INSERT INTO invoices (username, dateOrdered, totalAmount) VALUES (?, ?, ?)', [username, date, totalPrice])
             .query('INSERT INTO order_items_table (orderId, bookId, price) VALUES ?', [orderItems])
             .query('DELETE FROM `cart_inventory` WHERE (bookId, username) IN (?)', [cartItemsToDelete]);
         await result.commit();
