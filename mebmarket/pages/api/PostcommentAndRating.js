@@ -1,4 +1,3 @@
-import excuteQuery from "@/shared/database";
 import executeTransaction from "@/shared/executetransaction";
 
 export default async function handler(req, res) {
