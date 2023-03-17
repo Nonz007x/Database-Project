@@ -1,14 +1,9 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
-export default async function handler(req, res) {
+import excuteQuery from '@/shared/database';
+export default async function handler(req , res) {
     const { bookId } = req.body;
-    const deletedBook = await prisma.book.delete({
-        where: {
-            bookId: parseInt(bookId)
-        }
-    });
-
+    const deletedBook = await excuteQuery({
+        query: "DELETE FROM `book` WHERE bookid = ?",
+        values: [bookId],
+    })
     res.json(deletedBook);
 }
