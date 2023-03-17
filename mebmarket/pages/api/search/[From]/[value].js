@@ -1,20 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
     const { From, value } = req.query;
-
     try {
-        const books = await prisma.book.findMany({
-            where: {
-                [From]: {
-                    contains: value,
-                },
-            },
-        });
+        console.log(From)
+        console.log(value)
+        const books = await excuteQuery({
+            query: `SELECT * FROM book WHERE ?? LIKE CONCAT('%', ?, '%')`,
+            values: [From, value],
+        })
+        console.log(books)
         res.status(200).json(books);
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.status(500).json("Internal Server Error");
     }
 }

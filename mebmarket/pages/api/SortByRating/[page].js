@@ -1,28 +1,18 @@
-import { PrismaClient } from "@prisma/client";
+import excuteQuery from "@/shared/database";
 
-const prisma = new PrismaClient();
-
-export default async function handler(req, res) {
+export default async function handler(req ,res) {
     const { page } = req.query;
     const itemsPerPage = 10;
+    const itemStart = itemsPerPage * ( page - 1);
+    const columns = ['bookname', 'author', 'cover', 'rating', 'price'];
     try {
-        const books = await prisma.book.findMany({
-            select: {
-                bookname: true,
-                author: true,
-                cover: true,
-                rating: true,
-                price: true,
-            },
-            orderBy: {
-                date: "desc",
-            },
-            skip: itemsPerPage * (page - 1),
-            take: itemsPerPage,
-        });
-        res.json(books);
+        const books = await excuteQuery({
+            query: `SELECT ?? FROM book ORDER BY date DESC LIMIT ${itemStart}, ${itemsPerPage}`,
+            values: [columns],
+        })
+        res.status(200).json(books);
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
+        console.log(error);
+        res.status(500).send("Internal Server Error")
     }
 }
