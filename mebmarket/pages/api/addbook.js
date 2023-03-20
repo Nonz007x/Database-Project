@@ -1,15 +1,8 @@
 import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
-    const {
-        bookId,
-        bookname,
-        author,
-        price,
-        cover,
-        synopsis,
-        categoryName,
-    } = req.body;
+    const { bookId, bookname, author, price, cover, synopsis, categoryName } =
+        req.body;
     const newDate = new Date();
     try {
         if (
@@ -44,8 +37,8 @@ export default async function handler(req, res) {
             values: [categoryName],
         });
         if (existingCate.length === 0) {
-            await excuteQuery({
-                query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
+            var addCat = await excuteQuery({
+                query: "INSERT INTO `category` (`categoryName`) VALUES (?)",
                 values: [categoryName],
             });
         }
@@ -62,8 +55,12 @@ export default async function handler(req, res) {
                 categoryName,
             ],
         });
-        // console.log(createBook);
-        res.json(createBook);
+
+           const respond = {
+               addCat: addCat,
+                createBook: createBook,
+            };
+        res.json(respond);
     } catch (error) {
         return res.status(500).json(`เกิดข้อผิดพลาด โปรดลองใหม่อีกครั้ง`);
     }

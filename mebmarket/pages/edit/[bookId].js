@@ -3,28 +3,30 @@ import Head from "next/head";
 import { Button } from "@mui/material";
 import AuthorAutocomplete from "@/components/AuthorAutocomplete";
 import { useEffect, useRef, useState } from "react";
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import CheckIcon from '@mui/icons-material/Check';
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import CheckIcon from "@mui/icons-material/Check";
 import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 import { requireAuthentication } from "@/utils/requireAuthentication";
 import CategoryAutocomplete from "@/components/CategoryAutocomplete";
 export default function EditBook() {
     const router = useRouter();
-    const [Bookname, setBookname] = useState()
-    const [ImgLink, setImgLink] = useState("https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png")
-    const [Author, setAuthor] = useState(0)
-    const [Price, setPrice] = useState([])
-    const [Synopsis, setSynopsis] = useState([])
+    const [Bookname, setBookname] = useState();
+    const [ImgLink, setImgLink] = useState(
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
+    );
+    const [Author, setAuthor] = useState(0);
+    const [Price, setPrice] = useState([]);
+    const [Synopsis, setSynopsis] = useState([]);
     const [prevAuthor, setprevAuthor] = useState([]);
-    const [prevCate,setPrevCate] = useState([]);
-    const [Cate,setCate] = useState([])
-    const TempImg = useRef(0)
+    const [prevCate, setPrevCate] = useState([]);
+    const [Cate, setCate] = useState([]);
+    const TempImg = useRef(0);
     useEffect(() => {
         const fetchData = async () => {
-            const e = await fetcher('/api/getBookById/' + router.query.bookId);
+            const e = await fetcher("/api/getBookById/" + router.query.bookId);
             const data = e[0];
-            
+
             setBookname(data.bookname);
             setAuthor(data.author);
             setImgLink(data.cover);
@@ -39,28 +41,35 @@ export default function EditBook() {
         }
     }, [router.query.bookId]);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        fetch('/api/editbook', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                bookname: Bookname,
-                cover: ImgLink,
-                author: Author,
-                price: Price,
-                synopsis: Synopsis,
-                date: Date,
-                bookId: router.query.bookId,
-                category:Cate,
-            })
-        }).then(e => e.json()).then(data => {
-            alert(JSON.stringify(data.message));
-        });
-    }
-
+        try {
+            const response = await fetch("/api/editbook", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    bookname: Bookname,
+                    cover: ImgLink,
+                    author: Author,
+                    price: Price,
+                    synopsis: Synopsis,
+                    date: Date,
+                    bookId: router.query.bookId,
+                    category: Cate,
+                }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("แก้ไขสำเร็จ");
+            } else {
+                alert(data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
         <>
@@ -106,8 +115,8 @@ export default function EditBook() {
                                     TempImg.current && 1
                                         ? setImgLink(TempImg.current)
                                         : setImgLink(
-                                            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
-                                            );
+                                              "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
+                                          );
                                 }}
                             >
                                 <TextField
@@ -147,10 +156,7 @@ export default function EditBook() {
                             <p>ประเภท</p>
                             <p>
                                 เดิม :{" "}
-                                <a
-                                    className="AnchorAuthor"
-                                    href={"/"}
-                                >
+                                <a className="AnchorAuthor" href={"/"}>
                                     {prevCate}
                                 </a>
                             </p>

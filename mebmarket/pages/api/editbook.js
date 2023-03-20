@@ -30,32 +30,39 @@
 
 import excuteQuery from "@/shared/database";
 export default async function (req, res) {
-    const { bookId, bookname, author, price, cover, synopsis, date, category } =
-        req.body;
+    const { bookId, bookname, author, price, cover, synopsis, date, category } = req.body;
     const newDate = new Date();
-    const existingCate = await excuteQuery({
-        query: "select categoryId from category where categoryName = ?",
-        values: [category],
-    });
-    if (existingCate.length === 0) {
-        await excuteQuery({
-            query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
+    try {
+        const existingCate = await excuteQuery({
+            query: "select categoryId from category where categoryName = ?",
             values: [category],
         });
+        if (existingCate.length === 0) {
+            var addCat = await excuteQuery({
+                query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
+                values: [category],
+            });
+        }
+        const Sql = await excuteQuery({
+            query: "UPDATE book SET bookname = ?, author = ?, price = ?, cover = ?, synopsis = ?, date = ?, category = (SELECT categoryId FROM category WHERE categoryName = ?) where bookId = ?",
+            values: [
+                bookname,
+                author,
+                Number(price),
+                cover,
+                synopsis,
+                newDate,
+                category,
+                bookId,
+            ],
+        });
+
+        const responseData = {
+            addCat: addCat,
+            Sql: Sql,
+        };
+        res.status(200).json(responseData);
+    } catch (error) {
+        res.status(500).json("Something went wrong")
     }
-    const Sql = await excuteQuery({
-        query: "UPDATE book SET bookname = ?, author = ?, price = ?, cover = ?, synopsis = ?, date = ?, category = (SELECT categoryId FROM category WHERE categoryName = ?) where bookId = ?",
-        values: [
-            bookname,
-            author,
-            Number(price),
-            cover,
-            synopsis,
-            newDate,
-            category,
-            bookId,
-        ],
-    });
-    // console.log(Sql);
-    res.status(200).json("done");
 }
