@@ -1,7 +1,7 @@
 import excuteQuery from "@/shared/database";
 
 export default async function handler(req, res) {
-    const { username, password, email } = req.body;
+    const { username, password, email, firstname, lastname } = req.body;
     const forbiddenNames = ["undefined", "admin", "example"];
 
     if (forbiddenNames.includes(username)) {
@@ -13,8 +13,8 @@ export default async function handler(req, res) {
             values: [username.toLowerCase(), email.toLowerCase()],
         },
         {
-            query: "INSERT INTO user (username, email, password) VALUES (?,?,?)",
-            values: [username.toLowerCase(), email.toLowerCase(), password]
+            query: "INSERT INTO user (username, email, password, firstname, lastname) VALUES (?,?,?,?,?)",
+            values: [username.toLowerCase(), email.toLowerCase(), password, firstname, lastname]
         },
     ]
     try {

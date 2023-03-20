@@ -62,6 +62,8 @@ export default function RegisterPage() {
           password: password,
           email: email,
           repassword: repassword,
+          firstname: firstName,
+          lastname: lastName, 
           acceptTnC: acceptTnC,
         })
       });
