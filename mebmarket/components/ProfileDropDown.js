@@ -12,7 +12,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 export default function MenuListComposition({ username, clientSession }) {
     const { role } = clientSession;
     const [open, setOpen] = React.useState(false);
@@ -124,10 +124,22 @@ export default function MenuListComposition({ username, clientSession }) {
                                             >
                                                 <Link
                                                     className="Link-flex-row"
-                                                    href="/admin"
+                                                    href="/admin/book"
                                                 >
                                                     <EditIcon />
                                                     <h5>จัดการหนังสือ</h5>
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem
+                                                className="MenuItems100"
+                                                onClick={handleClose}
+                                            >
+                                                <Link
+                                                    className="Link-flex-row"
+                                                    href="/admin/user"
+                                                >
+                                                    <ManageAccountsIcon />
+                                                    <h5>จัดการผู้ใช้</h5>
                                                 </Link>
                                             </MenuItem>
                                             <MenuItem

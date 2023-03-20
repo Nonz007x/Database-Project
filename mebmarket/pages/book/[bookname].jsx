@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from "next/link";
-import { Alert } from "@mui/material";
+import { Alert, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";

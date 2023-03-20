@@ -7,6 +7,7 @@ import { fetcher } from './api/fetcher';
 import RecentCommentAllbook from '@/components/RecentCommentAllbook';
 import PersonIcon from '@mui/icons-material/Person';
 import Head from 'next/head';
+import Link from 'next/link';
 
 export async function getStaticProps(context) {
     const BookCount = await fetcher("http://localhost:3000/api/getcount");
@@ -37,26 +38,30 @@ export default function admindashboard({ BookCount, UsersCount, RecentComment })
                 />
             </Head>
             <div className="dashboard-container">
-                <Card sx={{ height: 250, width: 450 }} className="cardbox">
-                    <CardContent>
-                        <MenuBookIcon className='dashboard-icon' />
-                    </CardContent>
-                    <div className="dashboard-text">
-                        <h2>หนังสือ</h2>
-                        <h4>จำนวนหนังสือทั้งหมด</h4>
-                        <h3>{BookCount}</h3>
-                    </div>
-                </Card>
-                <Card sx={{ height: 250, width: 450 }} className="cardbox">
-                    <CardContent>
-                        <PersonIcon className='dashboard-icon' />
-                    </CardContent>
-                    <div className="dashboard-text">
-                        <h2>User</h2>
-                        <h4>จำนวน User ทั้งหมด</h4>
-                        <h3>{UsersCount}</h3>
-                    </div>
-                </Card>
+                <Link href="./admin/book">
+                    <Card sx={{ height: 250, width: 450 }} className="cardbox">
+                        <CardContent>
+                            <MenuBookIcon className='dashboard-icon' />
+                        </CardContent>
+                        <div className="dashboard-text">
+                            <h2>หนังสือ</h2>
+                            <h4>จำนวนหนังสือทั้งหมด</h4>
+                            <h3>{BookCount}</h3>
+                        </div>
+                    </Card>
+                </Link>
+                <Link href="./admin/user">
+                    <Card sx={{ height: 250, width: 450 }} className="cardbox">
+                        <CardContent>
+                            <PersonIcon className='dashboard-icon' />
+                        </CardContent>
+                        <div className="dashboard-text">
+                            <h2>User</h2>
+                            <h4>จำนวน User ทั้งหมด</h4>
+                            <h3>{UsersCount}</h3>
+                        </div>
+                    </Card>
+                </Link>
                 <Card sx={{ width: 1000 }} className="cardbox dashboard-comment">
                     <CardContent className="dashboard-comment-header">
                         <CommentIcon fontSize='large' className='commentbox-icon' />
