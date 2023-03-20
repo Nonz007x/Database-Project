@@ -7,33 +7,60 @@
     justify-content: center;
     align-items: center;
 }
+
 .library-book-image-wrap{
     width: 100%;
+    height: 70%;
     display: flex;
     justify-content: center;
 }
+
+.library-book-image-wrap {
+    height: 100%;
+}
+
 .library-item-wrap {
     display: flex;
-    /* height: 330px; */
-    aspect-ratio: 16/9;
+    width: 220px;
+	height: 400px;
+    overflow: hidden;
     flex-direction: column;
     box-shadow: 0 0 6px var(--font-color-gray);
     border-radius: 5px;
     transition: transform .25s ease-out;
 }
+
 .library-item-wrap:hover {
     box-shadow: 0 0 10px var(--main-color);
     transform: translateY(-0.5em);
 }
+
 .library-wrap-name{
-    margin: 0;
-    width: calc(208px - 1em);
-    text-overflow: ellipsis;
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	white-space: pre-wrap;
+    height: 80%;
 }
+
 .library-book-image {
-    height: 300px;
+    object-fit: cover;
+	aspect-ratio: 1/1.414;
 }
+
 .name-and-author {
+    height: 30%;
     padding: 0.5em;
     gap: 1em;
+}
+
+.libray-author-name {
+    height: 30%;
+    width: 100%;
+    display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow: hidden;
+	white-space: pre-wrap;
 }

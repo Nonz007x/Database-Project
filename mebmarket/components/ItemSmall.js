@@ -4,51 +4,51 @@ import Link from "next/link";
 
 export default function ItemSmall(props) {
     const { property } = props;
-    // console.log(props)
+
     return (
         <>
-            <Link
-                className="book-list-container"
-                href={{
-                    pathname: "/book/[bookname]",
-                    query: { bookname: property.bookname },
-                }}
-            >
-                <div className="book-cover">
-                    <img
-                        src={property.cover}
-                        title={property.bookname}
-                        loading="lazy"
-                    />
+            <div className="book-list-container">
+                <Link
+                    className="click-to-bookpage"
+                    href={{
+                        pathname: "/book/[bookname]",
+                        query: { bookname: property.bookname}
+                    }}
+                >
+                    <div className="book-cover">
+                        <img
+                            src={property.cover}
+                            title={property.bookname}
+                            loading="lazy"
+                        />
+                    </div>
+                    <div className="bookname-container">
+                        <h5>{property.bookname}</h5>
+                    </div>
+                </Link>
+                <div className="author-publisher-container">
+                    <h6>{ property.author }</h6>
                 </div>
-                <div className="bookname-container">
-                    <h5>{property.bookname}</h5>
-                </div>
-                <div className="category-container">
-                    <h6>{property.categoryName}</h6>
-                </div>
-                <div className="buttom-section">
-                    <div className="author-rating">
-                        <div>
-                            <h6>{property.author}</h6>
+                <div className="item-small-buttom-section">
+                    <div className="rating-category-container">
+                        <div className="category-container">
+                            <h6>{ property.categoryName }</h6>
                         </div>
-                        <div>
-                            <h6>
-                                <CustomizedRating rate={property.rating} />
-                            </h6>
+                        <div className="rating-container">
+                            <CustomizedRating rate={property.rating} />
                         </div>
                     </div>
-                    <div className="buy-button">
+                    <div className="button-container">
                         <Button
                             className="small-buy-button"
                             variant="contained"
-                            size="small"
+                            onClick={() => alert("add to cart button")}
                         >
-                            <h6>฿ {property.price}</h6>
+                            <h3>฿ { property.price }</h3>
                         </Button>
                     </div>
                 </div>
-            </Link>
+            </div>
         </>
     );
 }
