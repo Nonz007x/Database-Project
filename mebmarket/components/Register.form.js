@@ -15,12 +15,17 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setShowrePassword] = useState(false);
   const [UserName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setrePassword] = useState("");
   const [acceptTnC, setacceptTnC] = useState(false);
 
   const [usernameError, setUsernameError] = useState("");
+  const [formValid, setFormValid] = useState(false);
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -38,7 +43,7 @@ export default function RegisterPage() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (usernameError || emailError || passwordError) {
+    if (usernameError || emailError || passwordError || firstNameError) {
       return;
     }
 
@@ -95,17 +100,33 @@ export default function RegisterPage() {
   useEffect(() => {
     const containRestricted = /\W/.test(UserName);
     if (UserName && containRestricted) {
-      setUsernameError("Username must not contain special characters");
+      setUsernameError("ห้ามใช้ตัวอักษรพิเศษ");
     } else {
       setUsernameError("");
     }
   }, [UserName]);
 
   useEffect(() => {
+    if (!usernameError && !emailError && !passwordError && !firstNameError) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  }, [firstName, UserName, email, lastName, password, repassword]);
+  useEffect(() => {
+    const containRestricted = /\W/.test(firstName);
+    if (firstName && containRestricted) {
+      setFirstNameError("ห้ามใช้ตัวอักษรพิเศษ");
+    } else {
+      setFirstNameError("");
+    }
+  }, [firstName]);
+
+  useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail = emailRegex.test(email)
     if (!isValidEmail && email) {
-      setEmailError("Invalid email format");
+      setEmailError("อีเมลไม่ถูกต้อง");
     } else {
       setEmailError("");
     }
@@ -142,7 +163,7 @@ export default function RegisterPage() {
                   required
                   type="text"
                   size="small"
-                  label="User name"
+                  label="Username"
                   value={UserName}
                   onChange={(e) => { setUserName(e.target.value) }}
                   error={Boolean(usernameError)}
@@ -158,6 +179,30 @@ export default function RegisterPage() {
                   onChange={(e) => { setEmail(e.target.value) }}
                   error={Boolean(emailError)}
                   helperText={emailError}
+                />
+              </div>
+              <div>
+                <TextField className="TextField"
+                  required
+                  type="text"
+                  size="small"
+                  label="Firstname"
+                  value={firstName}
+                  onChange={(e) => { setFirstName(e.target.value) }}
+                  error={Boolean(firstNameError)}
+                  helperText={firstNameError}
+                />
+              </div>
+              <div>
+                <TextField className="TextField"
+                  required
+                  type="text"
+                  size="small"
+                  label="Lastname"
+                  value={lastName}
+                  onChange={(e) => { setLastName(e.target.value) }}
+                  error={Boolean(usernameError)}
+                  helperText={usernameError}
                 />
               </div>
               <div id="PasswordZone">
@@ -206,7 +251,7 @@ export default function RegisterPage() {
                 <label htmlFor="Accept">{" I accept term and condition"}</label>
               </div>
               <div className="LoginButtonZone">
-                <Button className="GoDoit" variant="contained" size="small" type="submit">Register</Button>
+                <Button className="GoDoit" variant="contained" size="small" type="submit" disabled={Boolean(!formValid)} >Register</Button>
               </div>
             </form>
           </div>
