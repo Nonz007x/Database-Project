@@ -1,4 +1,4 @@
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,7 +12,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { signOut } from "next-auth/react";
 
 export default function ProfileEditPage({ sessionData }) {
-    console.log(sessionData);
 
     const AvatarUpdate = async () => {
         const response = await fetch("/api/profile/avatarUpdate", {
@@ -129,5 +128,13 @@ export default function ProfileEditPage({ sessionData }) {
 export async function getServerSideProps(context) {
     const res = await getSession(context);
     const sessionData = res;
+    if (res === "" || res === null) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        }
+    }
     return { props: { sessionData } };
 }
