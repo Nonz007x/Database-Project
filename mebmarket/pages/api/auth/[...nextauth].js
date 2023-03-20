@@ -1,12 +1,9 @@
 import NextAuth from "next-auth"
-import { compare } from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
 import GithubProvider from "next-auth/providers/github"
 import excuteQuery from "@/shared/database";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 
-const prisma = new PrismaClient();
 export const authOptions = {
     providers: [
         GithubProvider({
@@ -25,25 +22,18 @@ export const authOptions = {
             async authorize(credentials) {
                 const { name, password } = credentials;
 
-                // const user = await prisma.user.findOne({
-                //     where: {
-                //         AND: {
-                //             username: name,
-                //             password: password
-                //         },
-                //     }, take: 1,
-                // });
                 const user = await excuteQuery({
-                    query: "SELECT username,email,role FROM user WHERE username = ? AND password = ?;",
+                    query: "SELECT username,email,role,avatar FROM user WHERE username = ? AND password = ?;",
                     values: [name, password]
                 });
 
                 if (user) {
-                    const { username, email, role } = user[0];
+                    const { username, email, role, avatar } = user[0];
                     return {
                         name: username,
                         email: email,
                         role: role,
+                        avatar: avatar,
                         redirect: {
                             destination: "/",
                             permanent: false,
@@ -52,13 +42,6 @@ export const authOptions = {
                 }
 
                 return null;
-
-                // const isValid = await compare(password, user.password);
-                // if (!isValid) {
-                //     return null;
-                // }
-
-
             },
         })
     ],
@@ -67,6 +50,7 @@ export const authOptions = {
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
+                token.avatar = user.avatar;
             }
             return token;
         },
@@ -74,6 +58,7 @@ export const authOptions = {
             if (token) {
                 session.id = token.id;
                 session.role = token.role;
+                session.avatar = token.avatar;
             }
             return session;
         }
