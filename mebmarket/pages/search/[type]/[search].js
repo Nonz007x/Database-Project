@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { fetcher } from "../../api/fetcher";
 import ItemSmall from "@/components/ItemSmall";
+import { TextField } from "@mui/material";
 
 export default function SearchPage() {
     const router = useRouter();
@@ -45,39 +46,40 @@ export default function SearchPage() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
-                        <div className="heading-search-page">
-                            <h2>
-                                ค้นหาในร้านหนังสือ
-                            </h2>
-                        </div>
-                        <div className="SearchArea">
-                            <FormControl sx={{ maxWidth: 250 }} fullWidth size="small" className="TypeSearch">
-                                {/* <InputLabel id="demo-simple-select-label" size="small">hello</InputLabel> */}
-                                <Select
-                                    // variant="standard"
-                                    defaultValue="bookname"
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    value={SelectTab}
-                                    onChange={handleChange}
-                                >
-                                    <MenuItem value={"bookname"}>ชื่อหนังสือ</MenuItem>
-                                    <MenuItem value={"author"}>นักเขียน</MenuItem>
-                                    <MenuItem value={"publisher"}>สำนักพิมพ์</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <div className="Searchline" />
-                            <form onSubmit={(e) => {
-                                e.preventDefault();
-                                setSearchword(TempInput.current)
-                            }}>
-                                <input type="text" placeholder="ค้นหา" onChange={e => { TempInput.current = e.target.value }} id="SearchInput" className="SearchBarInSearchPage" />
-                            </form>
-                        </div>
-                        <div className="width100">
-                            {ResultElement.length? ResultElement : <h3>ไม่มีผลการค้นหา</h3>}
-                        </div>
-                        {/* add here */}
+            <div className="search-page-container">
+                <div className="heading-search-page">
+                    <h2>
+                        ค้นหาในร้านหนังสือ
+                    </h2>
+                </div>
+                <div className="search-area">
+                    <FormControl sx={{ width: 250}}>
+                        <Select
+                            defaultValue="bookname"
+                            value={SelectTab}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"bookname"}>ชื่อหนังสือ</MenuItem>
+                            <MenuItem value={"author"}>นักเขียน</MenuItem>
+                            <MenuItem value={"publisher"}>สำนักพิมพ์</MenuItem>
+                        </Select>
+                    </FormControl>
+                    <div className="Searchline" />
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        setSearchword(TempInput.current)
+                    }}>
+                        <TextField type="text" placeholder="ค้นหา" onKeyDown={e => { 
+                            if(e.key === 'Enter') {
+                                TempInput.current = e.target.value;
+                            }
+                            }} />
+                    </form>
+                </div>
+                <div className="search-page-result">
+                    {ResultElement.length? ResultElement : <h3>ไม่มีผลการค้นหา</h3>}
+                </div>
+            </div>
         </>
     );
 }
