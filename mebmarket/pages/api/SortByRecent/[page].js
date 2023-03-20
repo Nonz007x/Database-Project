@@ -7,7 +7,7 @@ export default async function handler(req ,res) {
     const columns = ['bookname', 'author', 'cover', 'rating', 'price'];
     try {
         const books = await excuteQuery({
-            query: `SELECT ?? FROM book ORDER BY rating DESC LIMIT ${itemStart}, ${itemsPerPage}`,
+            query: `SELECT ?? FROM book ORDER BY date DESC LIMIT ${itemStart}, ${itemsPerPage}`,
             values: [columns],
         })
         res.status(200).json(books);

@@ -66,6 +66,15 @@ export default function RegisterPage() {
 
       if (response.ok) {
         alert("สมัครสมาชิกสำเร็จ");
+        setIsLoginFormVisible(!isLoginFormVisible)
+        setShowPassword('');
+        setShowrePassword('');
+        setUserName('');
+        setEmail('');
+        setPassword('');
+        setrePassword('');
+        setacceptTnC('');
+
       } else {
         if (data === 0) {
           setUsernameError('Username นี้ถูกใช้งานแล้ว');

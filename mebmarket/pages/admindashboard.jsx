@@ -18,9 +18,6 @@ export async function getStaticProps(context) {
 }
 
 export default function admindashboard({ BookCount, UsersCount, RecentComment }) {
-    console.log(UsersCount)
-    console.log(BookCount)
-    console.log(RecentComment)
     return (
         <>
             <Head>

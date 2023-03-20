@@ -1,68 +1,44 @@
-// import { PrismaClient } from "@prisma/client";
-
-// const prisma = new PrismaClient();
-
-// export default async function handler(req, res) {
-//     const { bookId, bookname, author, price, cover, synopsis, date, category } =
-//         req.body;
-//     const newDate = new Date();
-//     newDate.setHours(newDate.getHours() + 7);
-//     try {
-//         const updatedBook = await prisma.book.update({
-//             where: {
-//                 bookId: parseInt(bookId),
-//             },
-//             data: {
-//                 bookname: bookname,
-//                 author: author,
-//                 price: parseFloat(price),
-//                 cover: cover,
-//                 synopsis: synopsis,
-//                 date: newDate,
-//                 category: category,
-//             },
-//         });
-//         res.send({ success: true, message: "แก้ไขสำเร็จ", updatedBook });
-//     } catch (error) {
-//         res.send({ success: false, message: "query error", error: error });
-//     }
-// }
-
 import excuteQuery from "@/shared/database";
+
+export async function getCategoryByName(category) {
+    const result = await excuteQuery({
+        query: "SELECT categoryId FROM category WHERE categoryName = ?",
+        values: [category]
+    });
+    return result;
+}
+
+export async function addCategory(category) {
+    const result = await excuteQuery({
+        query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
+        values: [category],
+    });
+    return result;
+}
+
 export default async function (req, res) {
-    const { bookId, bookname, author, price, cover, synopsis, date, category } = req.body;
+    const { bookId, bookname, author, price, cover, synopsis, category } = req.body;
     const newDate = new Date();
+    const values = [bookname, author, price, cover, synopsis, newDate, category, bookId]
+
     try {
-        const existingCate = await excuteQuery({
-            query: "select categoryId from category where categoryName = ?",
-            values: [category],
-        });
+        const existingCate = await getCategoryByName(category);
         if (existingCate.length === 0) {
-            var addCat = await excuteQuery({
-                query: "INSERT INTO `category`(`categoryName`) VALUES (?)",
-                values: [category],
-            });
+            var addCategoryResult = await addCategory(category);
         }
-        const Sql = await excuteQuery({
+
+        const editBook = await excuteQuery({
             query: "UPDATE book SET bookname = ?, author = ?, price = ?, cover = ?, synopsis = ?, date = ?, category = (SELECT categoryId FROM category WHERE categoryName = ?) where bookId = ?",
-            values: [
-                bookname,
-                author,
-                Number(price),
-                cover,
-                synopsis,
-                newDate,
-                category,
-                bookId,
-            ],
+            values: values,
         });
 
-        const responseData = {
-            addCat: addCat,
-            Sql: Sql,
+        const response = {
+            res1: addCategoryResult,
+            res2: editBook
         };
-        res.status(200).json(responseData);
-    } catch (error) {
-        res.status(500).json("Something went wrong")
+        res.status(200).json(response);
+    }
+    catch (error) {
+        res.status(500).json("Internal Server Error");
     }
 }

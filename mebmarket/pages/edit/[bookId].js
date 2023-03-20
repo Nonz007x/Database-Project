@@ -20,8 +20,8 @@ export default function EditBook() {
     const [Synopsis, setSynopsis] = useState([]);
     const [prevAuthor, setprevAuthor] = useState([]);
     const [prevCate, setPrevCate] = useState([]);
-    const [Cate, setCate] = useState([]);
-    const TempImg = useRef(0);
+    const [Cate, setCate] = useState([])
+    const TempImg = useRef(0)
     useEffect(() => {
         const fetchData = async () => {
             const e = await fetcher("/api/getBookById/" + router.query.bookId);
@@ -34,7 +34,6 @@ export default function EditBook() {
             setSynopsis(data.synopsis);
             setprevAuthor(data.author);
             setPrevCate(data.categoryName);
-            // console.log(data)
         };
         if (router.query.bookId) {
             fetchData();
@@ -44,10 +43,10 @@ export default function EditBook() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("/api/editbook", {
-                method: "POST",
+            const response = await fetch('/api/editbook', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
                 body: new URLSearchParams({
                     bookname: Bookname,
@@ -58,16 +57,16 @@ export default function EditBook() {
                     date: Date,
                     bookId: router.query.bookId,
                     category: Cate,
-                }),
-            });
+                })
+            })
             const data = await response.json();
             if (response.ok) {
                 alert("แก้ไขสำเร็จ");
             } else {
-                alert(data)
+                alert(data);
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     };
 
@@ -115,8 +114,8 @@ export default function EditBook() {
                                     TempImg.current && 1
                                         ? setImgLink(TempImg.current)
                                         : setImgLink(
-                                              "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
-                                          );
+                                            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
+                                        );
                                 }}
                             >
                                 <TextField

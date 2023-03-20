@@ -7,7 +7,7 @@ export default function CategoryAutocomplete(props) {
     const [SelectedValue, setSelectedValue] = useState(null);
 
     useEffect(() => {
-        fetcher("/api/getcategory").then((data) => {
+        fetcher("/api/getcategories").then((data) => {
             setOption(data.map((obj) => obj.categoryName));
             // console.log(data.map((obj) => obj.categoryName));
         });

@@ -10,7 +10,7 @@ const db = mysql({
     }
 });
 
-export async function executeTransaction(queries) {
+export default async function executeTransaction(queries) {
     let results = null;
     try {
         results = db.transaction().query(queries[0].query, queries[0].values);
@@ -18,24 +18,6 @@ export async function executeTransaction(queries) {
             results = results.query(queries[i].query, queries[i].values);
         }
 
-        await results.commit();
-    } catch (error) {
-        results.rollback();
-        throw error;
-    } finally {
-        await db.end();
-    }
-    return results;
-}
-
-export async function executeCheckout(queries) {
-    let results = db.transaction().query(queries[0].query, queries[0].values);
-    try {
-        const lastInsertId = results[0][0]['LAST_INSERT_ID()'];
-
-        for (let i = 0; i < length; i++) {
-            results = results.query(queries[i].query, [lastInsertId, SelectedItem[i].bookId, SelectedItem[i].price]);
-        }
         await results.commit();
     } catch (error) {
         results.rollback();
