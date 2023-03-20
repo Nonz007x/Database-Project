@@ -146,10 +146,22 @@ export default function MenuListComposition({
                                             >
                                                 <Link
                                                     className="Link-flex-row"
-                                                    href="/admin"
+                                                    href="/admin/book"
                                                 >
                                                     <EditIcon />
                                                     <h5>จัดการหนังสือ</h5>
+                                                </Link>
+                                            </MenuItem>
+                                            <MenuItem
+                                                className="MenuItems100"
+                                                onClick={handleClose}
+                                            >
+                                                <Link
+                                                    className="Link-flex-row"
+                                                    href="/admin/user"
+                                                >
+                                                    <ManageAccountsIcon />
+                                                    <h5>จัดการผู้ใช้</h5>
                                                 </Link>
                                             </MenuItem>
                                             <MenuItem
@@ -183,4 +195,12 @@ export default function MenuListComposition({
             </Popper>
         </>
     );
+}
+
+export async function getServerSideProps(context) {
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { session },
+        };
+    });
 }
