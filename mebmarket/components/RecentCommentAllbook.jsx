@@ -44,9 +44,8 @@ export default function RecentCommentAllbook(props) {
         <>
             <div className="comment-container">
                 <div className="content-comment">
-                    <h4>{property.bookname}</h4>
-                    {property.comment}
-                    {/* for query comment from database */}
+                    <h4>จากหนังสือ: {property.bookname}</h4>
+                    <p>{property.comment}</p>
                 </div>
                 <div className="comment-buttom">
                     <div className="username-rate">

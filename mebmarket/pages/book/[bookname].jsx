@@ -224,96 +224,97 @@ export default function Page() {
                 <link rel="icon" type="image/png" href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png" />
             </Head>
             {(bookData != null) ?
-                <div className="book_bookname_Container">
-                    <div className="book_bookname_PageAdjust">
-                        <h1 className="book_bookname_Bookname">{bookData.bookname}</h1>
-                        <div className="book_book_ItemAndDetail">
-                            <img src={bookData.cover} className="book_Img" />
-                            <div id="Detail">
-                                <div id="data_author_publisher_category">
-                                    <p>โดย<Link href={{
-                                        pathname: "/search/author/[author]",
-                                        query: { author: bookData.author }
-                                    }}> {bookData.author}</Link></p>
-                                    {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p> */}
-                                    <p>หมวดหมู่ <a href=""> {bookData.categoryName}</a></p>
-                                </div>
-                                <div id="TryAndBuyDiv">
-                                    <Button variant="contained" size="large" id="Try_Button">ทดลองอ่าน</Button>
-                                    {Paid ? <Button disabled variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
-                                        : <Button variant="contained" size="large" className="Buy_Button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
-                                    }
-                                </div>
-                                <div id="RatingZone" >
-                                    <h5>{bookData.rating.toFixed(2)}</h5>
-                                    <CustomizedRating size="large" rate={bookData.rating} />
-                                </div>
-                                {!!clientSession ?
-                                    <div id="favorite-zone">
-                                        <ClickableFavoriteIcon value={isFavorited} onChange={() => {
-                                            handleFavoStatusChange()
-                                        }} />
-                                    </div> : null}
+                <div className="bookpage_container">
+                    <div className="bookpage_bookname_container">
+                        <h1>{bookData.bookname}</h1>
+                    </div>
+                    <div className="bookpage_cover_detail">
+                        <div className="bookpage_book_cover">
+                            <img src={bookData.cover}/>
+                        </div>
+                        <div className="bookpage_book_detail">
+                            <div className="author_publisher_category">
+                                <p>โดย<Link href={{
+                                    pathname: "/search/author/[author]",
+                                    query: { author: bookData.author }
+                                }}> {bookData.author}</Link></p>
+                                {/* <p>สำนักพิมพ์ <a href="">//ยังไม่มีสำนักพิมพ์</a></p> */}
+                                <p>หมวดหมู่ <a href="#">{bookData.categoryName}</a></p>
+                            </div>
+                            <div className="try_buy_container">
+                                <Button variant="contained" size="large" className="try_button">ทดลองอ่าน</Button>
+                                {Paid ? <Button disabled variant="contained" size="large" className="buy_button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                    : <Button variant="contained" size="large" className="buy_button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                }
+                            </div>
+                            <div className="bookpage_rating_zone" >
+                                <h5>{bookData.rating.toFixed(2)}</h5>
+                                <CustomizedRating size="large" rate={bookData.rating} />
+                            </div>
+                            {!!clientSession ?
+                                <div className="bookpage_favorite_zone">
+                                    <ClickableFavoriteIcon value={isFavorited} onChange={() => {
+                                        handleFavoStatusChange()
+                                    }} />
+                                </div> : null}
 
-                                <div id="release_date">
-                                    <p>วันที่วางขาย</p>
-                                    <p>{bookData.date.substring(0, 10)}</p>
-                                </div>
+                            <div className="bookpage_release_date">
+                                <p>วันที่วางขาย</p>
+                                <p>{bookData.date.substring(0, 10)}</p>
                             </div>
                         </div>
-                        <div className="synopsis">
-                            <p>
-                                {bookData.synopsis}
-                            </p>
+                    </div>
+                    <div className="synopsis">
+                        <p>
+                            {bookData.synopsis}
+                        </p>
+                    </div>
+                    <div className="comment-section">
+                        <div>
+                            <h3>คอมเมนต์และให้เรตติ้ง</h3>
                         </div>
-                        <div className="comment-section">
-                            <div>
-                                <h3>คอมเมนต์และให้เรตติ้ง</h3>
+                        <div className="comment-profile-user">
+                            <AccountCircleIcon fontSize="large" />
+                            <div className="comment-show-username">
+                                {!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}
                             </div>
-                            <div className="comment-profile-user">
-                                <AccountCircleIcon fontSize="large" />
-                                <div className="comment-show-username">
-                                    {!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}
+                        </div>
+                        <div className="blur-if-not-login">
+                            {!clientSession ? <div className="blur-effect"><h3>โปรดเข้าสู่ระบบเพื่อคอมเมนต์และเรตติ้ง</h3><LoginPage style="comment" /></div> : null}
+                            <div className="rating-and-comment">
+                                <div className="give-rate-zone">
+                                    <RatingAbleCustomizedRating rate={ratingGiven || ""} onChange={(e) => {
+                                        setRatingGiven(e)
+                                    }} />
                                 </div>
-                            </div>
-                            <div className="blur-if-not-login">
-                                {!clientSession ? <div className="blur-effect"><h3>โปรดเข้าสู่ระบบเพื่อคอมเมนต์และเรตติ้ง</h3><LoginPage style="comment" /></div> : null}
-                                <div className="rating-and-comment">
-                                    <div className="give-rate-zone">
-                                        <RatingAbleCustomizedRating rate={ratingGiven || ""} onChange={(e) => {
-                                            setRatingGiven(e)
-                                        }} />
-                                    </div>
-                                    <div>
-                                        <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWritten(e.target.value) }} fullWidth className="comment-zone"
-                                            multiline minRows={4} maxRows={4} placeholder="เขียนคอมเมนต์" />
-                                    </div>
-                                </div>
-                                <div className="comment-button">
-
-                                    <Button
-                                        disabled={ratingGiven == 0 ? true : false}
-                                        onClick={() => {
-                                            fetchBookData();
-                                            UploadComment();
-                                        }} variant="contained" className="comment-submit">คอมเมนต์
-                                    </Button>
+                                <div>
+                                    <TextField type="text" value={commentWriten} onChange={(e) => { setcommentWritten(e.target.value) }} fullWidth
+                                        multiline rows={4} placeholder="เขียนคอมเมนต์" />
                                 </div>
                             </div>
-                            <div className="all-comment">
-                                <div className="all-comment-header">
-                                    <h3>คอมเมนต์ทั้งหมด</h3>
-                                </div>
-                                <div className="recent-comment">
-                                    {CommentsData.length > 0 ? CommentsData.map((property, index) => {
-                                        return (
-                                            <RecentComment
-                                                property={property}
-                                                key={`${property.bookId}-${index}`}
-                                            />
-                                        )
-                                    }) : null}
-                                </div>
+                            <div className="comment-button">
+                                <Button
+                                    disabled={ratingGiven == 0 ? true : false}
+                                    onClick={() => {
+                                        fetchBookData();
+                                        UploadComment();
+                                    }} variant="contained" className="comment-submit">คอมเมนต์
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="all-comment">
+                            <div className="all-comment-header">
+                                <h3>คอมเมนต์ทั้งหมด</h3>
+                            </div>
+                            <div className="recent-comment">
+                                {CommentsData.length > 0 ? CommentsData.map((property, index) => {
+                                    return (
+                                        <RecentComment
+                                            property={property}
+                                            key={`${property.bookId}-${index}`}
+                                        />
+                                    )
+                                }) : null}
                             </div>
                         </div>
                     </div>

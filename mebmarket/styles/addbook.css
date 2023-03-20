@@ -73,11 +73,11 @@
     justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
     .addbook_img_and_detail {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center;                
         align-items: center;
     }
 }

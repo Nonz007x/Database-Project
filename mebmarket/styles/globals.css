@@ -1,10 +1,31 @@
 :root {
-  --main-bg-color: linear-gradient(to bottom, #00af70, #37c13d);
-  --main-color: #00bf6c;
-  --font-color-menu: #5a5a5a;
-  --font-color: #1d6548;
-  --font-color-gray: #5a5a5a;
-  --link-color: #00bf6c;
+    --main-bg-color: linear-gradient(to bottom, #00af70, #37c13d);
+    --main-color: #00bf6c;
+    --font-color-menu: #5a5a5a;
+    --font-color: #1d6548;
+    --font-color-gray: #5a5a5a;
+    --link-color: #00bf6c;
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
 }
 
 html,
@@ -15,25 +36,25 @@ body {
 }
 
 * {
-  box-sizing: border-box;
-  line-height: 1.6;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
 }
 
 a:link, a:hover, a:visited, a:active {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 img {
-  max-width: 100%;
-  display: block;
+    max-width: 100%;
+    display: block;
 }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
