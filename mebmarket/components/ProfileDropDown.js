@@ -13,7 +13,14 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-export default function MenuListComposition({ username, clientSession }) {
+import { Avatar } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+export default function MenuListComposition({
+    username,
+    clientSession,
+    avatar,
+}) {
     const { role } = clientSession;
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -59,14 +66,20 @@ export default function MenuListComposition({ username, clientSession }) {
     return (
         <>
             <div
-                className="Bigger-than-you-thought"
+                className="warp-button"
                 ref={anchorRef}
                 aria-controls={open ? "composition-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
             >
-                {username}
+                <Avatar
+                    src={avatar || ""}
+                    alt={username || ""}
+                    sx={{ height: 24, width: 24 }}
+                    sizes="small"
+                />
+                <div> {username}</div>
             </div>
             <Popper
                 className="Popper"
@@ -102,6 +115,15 @@ export default function MenuListComposition({ username, clientSession }) {
                                         >
                                             <LocalLibraryIcon />
                                             <h5>ชั้นหนังสือ</h5>
+                                        </Link>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <Link
+                                            className="Link-flex-row"
+                                            href="/profileEdit"
+                                        >
+                                            <AccountCircleIcon />
+                                            <h5>จัดการบัญชี</h5>
                                         </Link>
                                     </MenuItem>
                                     {role != "admin" ? null : (
