@@ -7,17 +7,28 @@
   --link-color: #00bf6c;
 }
 
+html,
+body {
+    font-family: roboto;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
+  line-height: 1.6;
   padding: 0;
   margin: 0;
-  font-family: roboto;
-  scroll-behavior: smooth;
 }
 
 a:link, a:hover, a:visited, a:active {
   color: inherit;
   text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* Chrome, Safari, Edge, Opera */

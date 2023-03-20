@@ -270,11 +270,9 @@ export default function Page() {
                             <div>
                                 <h3>คอมเมนต์และให้เรตติ้ง</h3>
                             </div>
-                            <div className="comment-profile-user">
-                                <AccountCircleIcon fontSize="large" />
-                                <div className="comment-show-username">
-                                    {!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}
-                                </div>
+                            <div className="comment-show-username">
+                                {!!clientSession ? <div className='comment-profile-user'><Avatar src={clientSession.avatar || ""} />{clientSession.user.name}</div> : null}
+                                {/* {!!clientSession ? <div className='comment-profile-user'><Avatar src={clientSession.Avatar || ""} />{clientSession.user.name}</div> : <LoginPage style="comment" />} */}
                             </div>
                             <div className="blur-if-not-login">
                                 {!clientSession ? <div className="blur-effect"><h3>โปรดเข้าสู่ระบบเพื่อคอมเมนต์และเรตติ้ง</h3><LoginPage style="comment" /></div> : null}

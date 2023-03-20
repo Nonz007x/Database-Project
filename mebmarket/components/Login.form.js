@@ -112,6 +112,7 @@ function LoginPage(props) {
                             className="shoppingCart-navbar"
                         >
                             <ProfileDropDown
+                                avatar={clientSession.avatar}
                                 username={clientSession.user.name}
                                 clientSession={clientSession}
                             />

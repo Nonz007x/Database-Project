@@ -99,9 +99,10 @@ export default function addbook() {
                                     tempImg.current && 1
                                         ? setImgLink(tempImg.current)
                                         : setImgLink(
-                                              "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
-                                          );
+                                            "https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png"
+                                        );
                                 }}
+                                className="add_cover_form"
                             >
                                 <TextField
                                     size="small"
@@ -121,7 +122,6 @@ export default function addbook() {
                             </form>
                         </div>
                         <div className="addbook_detail">
-                            <p>รหัสหนังสือ</p>
                             <TextField
                                 size="small"
                                 inputProps={{
@@ -135,21 +135,20 @@ export default function addbook() {
                                     setBookId(e.target.value);
                                 }}
                             />
-                            <p>นักเขียน</p>
-                            <div className="author_verify">
-                                <AuthorAutocomplete
-                                    onChange={(e) => setAuthor(e)}
-                                />
-                                {author && 1 ? <CheckIcon /> : <div />}
-                            </div>
-                            <p>หมวดหมู่</p>
-                            <div className="author_verify">
-                                <CategoryAutocomplete
-                                    onChange={(e) => setCategoryName(e)}
-                                />
-                                {CategoryName && 1 ? <CheckIcon /> : <div />}
-                            </div>
-                            <p>ราคา</p>
+                        </div>
+                        <div className="addbook_detail">
+                            <AuthorAutocomplete
+                                onChange={(e) => setAuthor(e)}
+                            />
+                            {author && 1 ? <CheckIcon /> : <div />}
+                        </div>
+                        <div className="addbook_detail">
+                            <CategoryAutocomplete
+                                onChange={(e) => setCategoryName(e)}
+                            />
+                            {CategoryName && 1 ? <CheckIcon /> : <div />}
+                        </div>
+                        <div className="addbook_detail">
                             <TextField
                                 size="small"
                                 className="fix-width-field"
@@ -170,7 +169,7 @@ export default function addbook() {
                     className="add_synopsis"
                     label="เนื้อเรื่องย่อ"
                     multiline
-                    maxRows={3}
+                    rows={7}
                     value={synopsis}
                     onChange={(e) => {
                         setSynopsis(e.target.value);
