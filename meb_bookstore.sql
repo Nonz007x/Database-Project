@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2023 at 03:35 AM
+-- Generation Time: Mar 20, 2023 at 09:12 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -45,7 +45,6 @@ CREATE TABLE `book` (
 --
 
 INSERT INTO `book` (`bookId`, `bookname`, `author`, `cover`, `rating`, `date`, `synopsis`, `category`, `price`) VALUES
-(0, 'คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1', 'ซันซันซัน', 'https://cdn-local.mebmarket.com/meb/server1/174544/Thumbnail/book_detail_large.gif?7', 0, '2023-03-01 03:28:19', 'คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย\nArya Sometimes Hides Her Feelings in Russian\nTokidoki Bosotto Russia-go de Dereru Tonari no Aalya-san\n\n\n“หา? พูดว่าไง?”\n“เปล่านี่? ก็แค่บอกว่า 【หมอนี่โง่จริงๆเลย】 แค่นั้นเอง”\n“เลิกด่าเป็นภาษารัสเซียได้มั้ย!?” คุณอารยา สาวสวยผมเงินไม่เป็นสองรองใครที่นั่งข้างผมผุดยิ้มกระหยิ่ม\n\n…แต่ความจริงมันไม่ใช่อย่างนั้น ภาษารัสเซียเมื่อกี้ เธอพูดว่า 【สนใจฉันหน่อย】 ต่างหาก!', 0, 249),
 (1, 'คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 2', 'ซันซันซัน', 'https://cdn-local.mebmarket.com/meb/server1/184347/Thumbnail/book_detail_large.gif?2', 0, '2023-03-01 03:29:04', 'คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย\nArya Sometimes Hides Her Feelings in Russian\nTokidoki Bosotto Russia-go de Dereru Tonari no Aalya-san\n\n\n“ชะ...ชอบ? ชอบเหรอ เอ๊ะ? ไม่ใช่สักหน่อย ไม่ใช่น้าาาา～!”\n“ทำมาเป็น～ ‘ฉันจะเป็นกำลังให้เอง’ โอ๊ย～เรานี่มันน่าขนลุก สะเหล่อ!”\nจากเหตุการณ์ลับที่รู้กันสองคนซึ่งเกิดขึ้นในสวนโรงเรียนยามอาทิตย์อัสดง\nทั้งอาเรียและมาซาจิกะต่างกลุ้มใจกันทั้งคู่\nแต่ทั้งสองก็ได้สัญญาแล้วว่าจะจับคู่กันเพื่อลงชิงชัยในสนามเลือกตั้งประธานนักเรียน\n\nอาเรียและมาซาจิกะจึงเริ่มประชุมวางแผนเพื่อเผชิญหน้ากับสุโอ ยูกิ\nตัวเก็งผู้ลงสมัครเลือกตั้งประธานนักเรียนสมัยหน้า ซึ่งมีเสน่ห์ดึงดูดใจมหาศาล แต่ทว่า—\n“เอาละ...งั้นก็ เรื่องเลือกตั้งประธานน่ะนะ”\n“…Круто♡”\n‘อ๊อก!’ เสียงกระซิบหวานๆภาษารัสเซียทำเอาใจเต้นซะได้!?\nนึกว่าจะประณามหยาดเหยียดกัน แต่ดันหวานใส่เฉย\nเรื่องราวเลิฟคอเมดี้วัยใส\nกับนักเรียนสาวมัธยมปลายชาวรัสเซียผู้สวยเลิศเลอ\nที่ทำให้ต้องยิ้มแก้มปริ เล่ม 2!\n', 0, 269),
 (2, 'SPY x FAMILY เล่ม 01', 'Tatsuya Endo', 'https://cdn-local.mebmarket.com/meb/server1/114476/Thumbnail/book_detail_large.gif?2', 1.5, '2023-03-01 03:30:30', 'สุดยอดสปาย <สนธยา> ได้รับคำสั่งให้สร้าง \"ครอบครัว\" เพื่อลอบเข้าไปในโรงเรียนชื่อดัง แต่ \"ลูกสาว\" ที่เขาได้พบ ดันเป็นผู้มีพลังจิตอ่านใจคน! \"ภรรยา\" เป็นมือสังหาร!?\nโฮมคอเมดี้สุดฮาของครอบครัวปลอมๆ ที่ต่างฝ่ายต่างปกปิดตัวจริงของกันและกัน ที่ต้องเผชิญหน้ากับการสอบเข้าและปกป้องโลก!!', 0, 69),
 (3, 'ไอดอลสาวสุดปังกับผมแต่งงานกันในเกมออนไลน์ เล่ม 1', 'อาโบน', 'https://cdn-local.mebmarket.com/meb/server1/218293/Thumbnail/book_detail_large.gif?2', 0, '2023-03-01 03:32:05', 'อายาโนะโคจิ คาซึโตะ หนุ่มนักเรียนมัธยมปลายธรรมดาๆ มีภรรยาแล้ว แต่เธอก็เป็นแค่ภรรยาในเกมออนไลน์เท่านั้นและในวันนี้ พอได้เล่นเกมกับภรรยาในเกมออนไลน์คนนั้น…ก็พิสูจน์ได้ว่าเธอคือไอดอลชื่อดังผู้เป็นที่ใฝ่ฝัน “มิซึกิ รินกะ”! แถมคาซึโตะกับรินกะยังเป็นเพื่อนร่วมชั้นกันอีกด้วย ว่ากันว่า ไอดอลสาวควบตำแหน่งภรรยาในเกมออนไลน์\nซึ่งเรียนอยู่ห้องเดียวกันคนนี้ “เกลียดผู้ชาย” แต่เธอกลับพูดว่า “…หลังจากนี้ แม้แต่ในชีวิตจริงก็อยู่ด้วยกันได้แล้วนะ” และเริ่มทำตัวเป็นภรรยาของคาซึโตะกระทั่งในโลกความเป็นจริงด้วย!? ทั้งทำข้าวกล่องให้ และบางครั้งก็ยังหึงเพื่อน (หนุ่ม) ในเกมออนไลน์อีก…\n\nเลิฟคอเมดี้วัยรุ่นชวนหน้ามืดตามัว ที่ตีแผ่การใช้เวลากับ “ภรรยา” สุดคูลแต่คลั่งรัก!', 0, 250),
@@ -85,7 +84,8 @@ INSERT INTO `book` (`bookId`, `bookname`, `author`, `cover`, `rating`, `date`, `
 (37, 'ขาดคุณนางฟ้าข้างห้องไป ผมคงมีชีวิตต่อไปไม่ได้อีกแล้ว เล่ม 4', 'ซาเอกิซัง', 'https://cdn-local.mebmarket.com/meb/server1/218299/Thumbnail/book_detail_large.gif?2', 4, '2023-03-01 04:06:47', 'ขาดคุณนางฟ้าข้างห้องไป ผมคงมีชีวิตต่อไปไม่ได้อีกแล้ว\nOtonari no Tenshi-sama ni Itsu no Ma ni ka Dame Ningen ni Sareteita Ken\nThe Angel Next Door Spoils Me Rotten\n\n“สำหรับฉันแล้ว...เขาคือคนที่สำคัญที่สุดค่ะ” ในห้องเรียนตกอยู่ในความอลหม่านทันทีที่มาฮิรุเอ่ยคำพูดทิ้งระเบิด อามาเนะซึ่งกำลังดิ้นรนเพื่อเข้าใจความรู้สึกของเธอ ตัดสินใจจะเป็นคนที่เหมาะสมเพื่อยืนเคียงข้างมาฮิรุ เขาตั้งใจเรียนไปพร้อม ๆ กับฝึกฝนร่างกาย เพื่อไล่ตามความเชื่อใจของมาฮิรุผู้หน้าตาดี ฉลาดเฉลียว ไร้ข้อเสียโดยสิ้นเชิง ไม่รู้ว่ามาฮิรุเข้าใจความรู้สึกของอามาเนะหรือไม่ แต่เธอเองก็มีความคิดจะก้าวไปสู่การตั้งใจเปลี่ยนแปลงความสัมพันธ์เช่นกัน—\n\nเรื่องราวความรักอันแสนหวานกับเพื่อนบ้านสุดน่ารัก ซึ่งได้รับการสนับสนุนอย่างมากบนเว็บ ได้มาถึงเล่มที่สี่แล้ว', 0, 250),
 (38, 'มหาศึกคนชนเทพ 1 - Shumatsu no Walkure', 'อาจิจิกะ', 'https://cdn-local.mebmarket.com/meb/server1/112386/Thumbnail/book_detail_large.gif?4', 1, '2023-03-01 04:08:17', 'มหาศึกคนชนเทพ\nShumatsu no Walkure\nRecord Of Ragnarok\n\n\nแนว : การ์ตูนแอ็กชัน\n\n\nในที่สุดก็เจอศัตรูที่ทำให้ข้าต้องสู้แบบพลีกายถวายชีวิต!!\n\nใน ‘การประชุมชี้ชะตามนุษยชาติ’ ซึ่งจัดขึ้นบนสวรรค์พันปีครั้ง เหล่าทวยเทพต่างลงมติให้ล้างบางเผ่าพันธุ์มนุษย์ ทำให้ 13 คนที่แข็งแกร่งที่สุดในประวัติศาสตร์มนุษยชาติต้องลุกขึ้นต่อต้านมติที่ว่า โดยการเผชิญหน้ากับ 13 เทพที่แข็งแกร่งที่สุดในสวรรค์ สงครามที่เดิมพันด้วยความเป็นความตายของมนุษย์กำลังจะเริ่มต้นขึ้น ณ บัดนี้—!!!\n\nเหล่าทวยเทพ VS ยอดคนและยอดนักรบจากทั่วโลก!!!\n\n\nสารบัญ : มหาศึกคนชนเทพ 1 - Shumatsu no Walkure (ฉบับการ์ตูน)\nตอนที่ 1 ‘ศึกสุดท้ายระหว่างเทพ vs มนุษย์’\nตอนที่ 2 ‘สุดยอดเทพ vs สุดยอดคน’\nตอนที่ 3 ‘คู่ปรับ’\nตอนที่ 4 ‘13 เทพ กับ 13 มนุษย์’', 0, 129),
 (39, 'เกิดชาตินี้พี่ต้องเทพ เล่ม 5 - (Mushoku Tensei)', 'Rifujin na Magonote', 'https://cdn-local.mebmarket.com/meb/server1/92889/Thumbnail/book_detail_large.gif?5', 5, '2023-03-01 04:09:08', '\"ในที่สุดพวกรูเดียสก็เดินทางมาถึง ‘ทวีปมิลิส’ อันเป็นแผ่นดินของมนุษย์และจุดเชื่อมสู่ทวีปกลาง ที่นั่นรูเดียสได้พบกับ ‘เปาโล’ พ่อของเขาหลังจากไม่ได้พบหน้ากันถึงห้าปี แต่เปาโลในเวลานี้กลับเปลี่ยนไปราวกับคนละคน เกิดอะไรขึ้นในช่วงที่ไม่ได้พบกัน? หนำซ้ำพวกเขายังมีเรื่องทะเลาะกันใหญ่โตแบบนี้แล้วความสัมพันธ์ของสองพ่อลูกจะกลับมาเป็นเหมือนเดิมได้หรือไม่...\nเรื่องราวของชายหนุ่มวัย 34 ผู้ไม่เอาไหนซึ่งกลับชาติมาเกิดใหม่ในโลกแห่งเวทมนตร์และคมดาบ มาถึงเล่มที่ 5 แล้ว!\"', 0, 259),
-(40, 'The Deep', 'อาโบน', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png', 0, '2023-03-14 00:22:31', '', 0, 100.75);
+(40, 'TEST EDIT 6', 'Tatsuya Endo', 'https://pbs.twimg.com/media/FrX4X42aIAAL3iw?format=jpg&name=small', 5, '2023-03-17 15:40:58', 'HINA', 4, 69420),
+(41, 'TEST 1', 'TEN', 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/387928/book%20placeholder.png', 0.5, '2023-03-17 16:04:11', '', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -106,14 +106,7 @@ CREATE TABLE `cart_inventory` (
 --
 
 INSERT INTO `cart_inventory` (`cartId`, `username`, `bookId`, `price`, `createDate`) VALUES
-(5, 'adray', 37, 250, '2023-03-12 13:54:24'),
-(16, 'adray', 34, 180, '2023-03-12 16:29:45'),
-(17, 'adray', 39, 259, '2023-03-12 16:47:10'),
-(18, 'adray', 36, 250, '2023-03-12 16:47:14'),
-(19, 'nitid', 36, 250, '2023-03-12 16:47:25'),
-(20, 'nitid', 38, 129, '2023-03-12 18:04:46'),
-(21, 'adray', 38, 129, '2023-03-14 00:22:03'),
-(25, 'nitid', 25, 200, '2023-03-15 00:00:00');
+(29, 'nitid', 38, 129, '2023-03-15 12:17:57');
 
 -- --------------------------------------------------------
 
@@ -132,7 +125,8 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`categoryId`, `categoryName`) VALUES
 (0, 'ไลท์โนเวล'),
-(1, 'การ์ตูนทั่วไป');
+(1, 'การ์ตูนทั่วไป'),
+(2, 'TEST1');
 
 -- --------------------------------------------------------
 
@@ -154,7 +148,10 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`bookId`, `username`, `comment`, `rating`, `time`) VALUES
 (2, 'nitid', 'asd', 1.5, '2023-03-14 00:08:16'),
-(38, 'nitid', 'ฟหก', 1, '2023-03-10 20:03:04');
+(38, 'nitid', 'ฟหก', 1, '2023-03-10 20:03:04'),
+(40, 'adray', 'ดีมากๆๆ', 5, '2023-03-17 15:56:46'),
+(40, 'nonz007x', 'รักนะ', 5, '2023-03-17 16:32:00'),
+(41, 'adray', 'd', 0.5, '2023-03-17 16:01:19');
 
 -- --------------------------------------------------------
 
@@ -166,7 +163,7 @@ CREATE TABLE `creditcard` (
   `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `cardNumber` varchar(16) NOT NULL,
   `cardHolderName` varchar(255) NOT NULL,
-  `expiry_month` int(11) NOT NULL,
+  `expiry_month` enum('01','02','03','04','05','06','07','08','09','10','11','12') NOT NULL,
   `expiry_year` int(11) NOT NULL,
   `cvv` varchar(4) NOT NULL,
   `billingAddress` varchar(255) NOT NULL,
@@ -179,7 +176,9 @@ CREATE TABLE `creditcard` (
 --
 
 INSERT INTO `creditcard` (`username`, `cardNumber`, `cardHolderName`, `expiry_month`, `expiry_year`, `cvv`, `billingAddress`, `createDate`, `updatedDate`) VALUES
-('nitid', '1234123412341234', 'Nitid Dews', 2, 2024, '2415', 'a f35 563/ 21s', '2023-03-13', '2023-03-13');
+('adray', '1231231231231232', 'ADMIN RAY', '10', 2032, '4222', '123 HOME', '2023-03-17', '2023-03-17'),
+('nitid', '1234123412341234', 'Nitid Dewsurin', '09', 2032, '2415', 'DEWSURIN', '2023-03-13', '2023-03-15'),
+('nonz007x', '1231231231231231', 'Non', '08', 2026, '4444', 'Bnagyai', '2023-03-17', '2023-03-17');
 
 -- --------------------------------------------------------
 
@@ -199,12 +198,35 @@ CREATE TABLE `favorite` (
 
 INSERT INTO `favorite` (`username`, `bookId`, `favDate`) VALUES
 ('adray', 21, NULL),
-('adray', 34, NULL),
 ('adray', 36, NULL),
 ('adray', 37, NULL),
 ('adray', 38, NULL),
-('adray', 39, NULL),
-('adray', 40, NULL);
+('adray', 40, NULL),
+('nonz007x', 40, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `orderId` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `dateOrdered` datetime NOT NULL,
+  `totalAmount` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`orderId`, `username`, `dateOrdered`, `totalAmount`) VALUES
+(1, 'adray', '2023-03-17 14:20:42', 512424000000),
+(2, 'adray', '2023-03-17 14:20:56', 4314.75),
+(3, 'adray', '2023-03-17 14:22:09', 69),
+(4, 'adray', '2023-03-17 14:29:36', 259),
+(5, 'nonz007x', '2023-03-17 16:32:34', 69420);
 
 -- --------------------------------------------------------
 
@@ -218,25 +240,14 @@ CREATE TABLE `order_items_table` (
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `order_table`
+-- Dumping data for table `order_items_table`
 --
 
-CREATE TABLE `order_table` (
-  `orderId` int(11) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `dateOrdered` datetime NOT NULL,
-  `totalAmount` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `order_table`
---
-
-INSERT INTO `order_table` (`orderId`, `username`, `dateOrdered`, `totalAmount`) VALUES
-(1, 'adray', '1000-01-01 00:00:00', 0);
+INSERT INTO `order_items_table` (`orderId`, `bookId`, `price`) VALUES
+(3, 2, 69),
+(4, 39, 259),
+(5, 40, 69420);
 
 -- --------------------------------------------------------
 
@@ -251,6 +262,7 @@ CREATE TABLE `user` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `role` enum('admin','user') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'user',
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '0',
   `valid` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -258,10 +270,13 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `email`, `password`, `firstname`, `lastname`, `role`, `valid`) VALUES
-('adray', 'adray@hentai.com', '123', 'adray', 'adray', 'admin', 1),
-('nitid', 'nitid1987@gmail.com', '123', '', '', 'user', 1),
-('undefined', 'undefined@mail.com', '123', '', '', 'user', 1);
+INSERT INTO `user` (`username`, `email`, `password`, `firstname`, `lastname`, `role`, `avatar`, `valid`) VALUES
+('adray', 'adray@hentai.com', '123', 'adray', 'adray', 'admin', 'https://pbs.twimg.com/media/FroaZ2LacAI_nTs?format=jpg&name=900x900', 1),
+('dre', 'dre@gmail.com', '123', '', '', 'user', '0', 1),
+('nitid', 'nitid1987@gmail.com', '123', '', '', 'user', '0', 1),
+('nonlnwza', 'nathanon969@gmail.com', '123', '', '', 'user', '0', 1),
+('nonz007x', 'comandor969@gmail.com', '123', '', '', 'user', '0', 1),
+('undefined', 'undefined@mail.com', '123', '', '', 'user', '0', 1);
 
 --
 -- Indexes for dumped tables
@@ -309,18 +324,18 @@ ALTER TABLE `favorite`
   ADD KEY `fk_bookId` (`bookId`);
 
 --
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`orderId`),
+  ADD KEY `order_table_ibfk_1` (`username`);
+
+--
 -- Indexes for table `order_items_table`
 --
 ALTER TABLE `order_items_table`
   ADD PRIMARY KEY (`orderId`,`bookId`),
   ADD KEY `bookId` (`bookId`);
-
---
--- Indexes for table `order_table`
---
-ALTER TABLE `order_table`
-  ADD PRIMARY KEY (`orderId`),
-  ADD KEY `order_table_ibfk_1` (`username`);
 
 --
 -- Indexes for table `user`
@@ -337,13 +352,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_inventory`
 --
 ALTER TABLE `cart_inventory`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
--- AUTO_INCREMENT for table `order_table`
+-- AUTO_INCREMENT for table `category`
 --
-ALTER TABLE `order_table`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `category`
+  MODIFY `categoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -370,17 +391,23 @@ ALTER TABLE `creditcard`
   ADD CONSTRAINT `creditcard_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `favorite`
+--
+ALTER TABLE `favorite`
+  ADD CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`bookId`) REFERENCES `book` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `order_items_table`
 --
 ALTER TABLE `order_items_table`
-  ADD CONSTRAINT `order_items_table_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `order_table` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_items_table_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `invoices` (`orderId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_items_table_ibfk_2` FOREIGN KEY (`bookId`) REFERENCES `book` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `order_table`
---
-ALTER TABLE `order_table`
-  ADD CONSTRAINT `order_table_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
