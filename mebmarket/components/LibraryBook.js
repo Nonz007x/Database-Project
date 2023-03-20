@@ -3,7 +3,7 @@ export default function LibraryBook(props) {
     const { property } = props;
     return (
         <>
-            <Link  href={property.cover} target="_blank">
+            <Link  href={property.cover||""} target="_blank">
                 <div className="library-item-wrap">
                     <div className="library-book-image-wrap">
                         <img

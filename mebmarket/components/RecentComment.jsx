@@ -6,7 +6,7 @@ import { Avatar } from '@mui/material';
 export default function RecentComment(props) {
     const { property } = props
     const [date, setDate] = useState('');
-
+    console.log(property)
     const timeUnits = [
         { unit: 'ปี', value: 31557600000 },
         { unit: 'เดือน', value: 2629800000 },
@@ -45,7 +45,6 @@ export default function RecentComment(props) {
             <div className="comment-container">
                 <div className="content-comment">
                     {property.comment}
-                    {/* for query comment from database */}
                 </div>
                 <div className="comment-buttom">
                     <div className="username-rate">
@@ -54,7 +53,6 @@ export default function RecentComment(props) {
                         <CustomizedRating rate={(property.rating)} />
                     </div>
                     <div className="comment-profile">
-                        {/* <AccountCircleIcon fontSize='large' /> */}
                         <Avatar alt={property.username} src={property.avatar || ""} />
                     </div>
                 </div>

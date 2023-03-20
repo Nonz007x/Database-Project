@@ -63,7 +63,7 @@ export default function RegisterPage() {
           email: email,
           repassword: repassword,
           firstname: firstName,
-          lastname: lastName, 
+          lastname: lastName,
           acceptTnC: acceptTnC,
         })
       });
@@ -109,12 +109,15 @@ export default function RegisterPage() {
   }, [UserName]);
 
   useEffect(() => {
-    if (!usernameError && !emailError && !passwordError && !firstNameError) {
+    if (!usernameError && !emailError && !passwordError && !firstNameError && acceptTnC) {
+      console.log("setForm True")
       setFormValid(true);
     } else {
+      console.log("setForm False")
       setFormValid(false);
     }
-  }, [firstName, UserName, email, lastName, password, repassword]);
+  }, [usernameError, emailError, passwordError, firstNameError, acceptTnC]);
+
   useEffect(() => {
     const containRestricted = /\W/.test(firstName);
     if (firstName && containRestricted) {

@@ -274,9 +274,8 @@ export default function Page() {
                             <h3>คอมเมนต์และให้เรตติ้ง</h3>
                         </div>
                         <div className="comment-profile-user">
-                            <AccountCircleIcon fontSize="large" />
                             <div className="comment-show-username">
-                                {!!clientSession ? clientSession.user.name : <LoginPage style="comment" />}
+                            {!!clientSession ? <div className='comment-profile-user'><Avatar src={clientSession.avatar || ""} />{clientSession.user.name}</div> : null}
                             </div>
                         </div>
                         <div className="blur-if-not-login">

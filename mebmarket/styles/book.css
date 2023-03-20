@@ -130,7 +130,7 @@
 .comment-profile-user {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin: 15px 0;
     gap:1em;
 }
 
