@@ -8,17 +8,65 @@ import RecentCommentAllbook from '@/components/RecentCommentAllbook';
 import PersonIcon from '@mui/icons-material/Person';
 import Head from 'next/head';
 import Link from 'next/link';
+import { TextField } from '@mui/material';
+import { Pagination } from '@mui/material';
+
+export async function CommentPageFetch(amount, page) {
+    const res = await fetch("http://localhost:3000/api/getComments/getrecentComment", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            amount: amount,
+            page: page,
+        }),
+    });
+    const data = await res.json()
+    return data
+}
 
 export async function getStaticProps(context) {
     const BookCount = await fetcher("http://localhost:3000/api/getcount");
     const UsersCount = await fetcher("http://localhost:3000/api/getcountuser")
-    const RecentComment = await fetcher("http://localhost:3000/api/getrecentComment")
+    const RecentComment = await CommentPageFetch(5, 1);
+    const Commentcount = await fetcher("http://localhost:3000/api/getComments/getAllcommentCount")
     return {
-        props: { BookCount, UsersCount, RecentComment }, // will be passed to the page component as props
+        props: { BookCount, UsersCount, RecentComment, Commentcount }, // will be passed to the page component as props
     }
 }
 
-export default function admindashboard({ BookCount, UsersCount, RecentComment }) {
+export default function admindashboard({ BookCount, UsersCount, RecentComment, Commentcount }) {
+    const [recentComment, setRecentComment] = React.useState(RecentComment)
+    const [contenPerPage, setContenPerPage] = React.useState(5)
+    const [page, setPage] = React.useState(1)
+    const [pageAmount, setPageAmount] = React.useState(Math.ceil(Commentcount / contenPerPage))
+    const getPageAmount = async () => {
+        const res = await fetcher("http://localhost:3000/api/getComments/getAllcommentCount")
+            .then(e => setPageAmount(Math.ceil(e / contenPerPage)))
+    }
+
+    const fetchPage = async () => {
+        const res = await fetch("http://localhost:3000/api/getComments/getrecentComment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                amount: contenPerPage,
+                page: page,
+            }),
+        }).then(e => e.json()).then(data => setRecentComment(data))
+    }
+
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
+
+    React.useEffect(() => {
+        fetchPage()
+        getPageAmount()
+    }, [contenPerPage, page])
     return (
         <>
             <Head>
@@ -68,9 +116,21 @@ export default function admindashboard({ BookCount, UsersCount, RecentComment })
                         <h2>คอมเมนต์ล่าสุด</h2>
                     </CardContent>
                     <div className="dashboard-text-comment">
-                        {Object.values(RecentComment).map((property, index) => {
+                        <div className='comment-page-wrap'>
+                            <div className='comment-page-input'>
+                                <TextField label="จำนวนต่อหน้า" value={contenPerPage || ""} onChange={e => setContenPerPage(e.target.value)} />
+                                <Pagination size='large' className='comment-pagination' count={pageAmount || ""} page={page || ""} onChange={handleChange} />
+                            </div>
+                        </div>
+                        {Object.values(recentComment).map((property, index) => {
                             return (<RecentCommentAllbook className="dashboard-comment-items" key={index} property={property} />)
                         })}
+                        <div className='comment-page-wrap'>
+                            <div className='comment-page-input'>
+                                <TextField label="จำนวนต่อหน้า" value={contenPerPage || ""} onChange={e => setContenPerPage(e.target.value)} />
+                                <Pagination size='large' className='comment-pagination' count={pageAmount || ""} page={page || ""} onChange={handleChange} />
+                            </div>
+                        </div>
                     </div>
                 </Card>
             </div>

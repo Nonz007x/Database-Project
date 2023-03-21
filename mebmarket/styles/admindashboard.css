@@ -46,3 +46,20 @@
 .commentbox-icon {
     color: var(--main-color);
 }
+.comment-page-wrap{
+    /* width: 70%; */
+    display: flex;
+    justify-content: center;
+    
+}
+.comment-pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.comment-page-input{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

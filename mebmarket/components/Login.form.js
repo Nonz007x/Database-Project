@@ -21,7 +21,6 @@ function LoginPage(props) {
     const [passwordError, setPasswordError] = useState("");
     const [open, setOpen] = useState(false);
     const [SendClick, setSendClick] = useState("");
-
     const [userData, setUserData] = useState({
         username: "",
         password: "",

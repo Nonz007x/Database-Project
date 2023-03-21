@@ -2,6 +2,7 @@ import React from 'react';
 import CustomizedRating from './CustomRating';
 import { useState, useEffect } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Avatar } from '@mui/material';
 
 export default function RecentCommentAllbook(props) {
     const { property } = props
@@ -54,7 +55,8 @@ export default function RecentCommentAllbook(props) {
                         <CustomizedRating rate={(property.rating)} />
                     </div>
                     <div className="comment-profile">
-                        <AccountCircleIcon fontSize='large' />
+                        {/* <AccountCircleIcon fontSize='large' /> */}
+                        <Avatar src={property.avatar||""}/>
                     </div>
                 </div>
             </div>
