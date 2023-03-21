@@ -6,7 +6,6 @@ import { Avatar } from '@mui/material';
 export default function RecentComment(props) {
     const { property } = props
     const [date, setDate] = useState('');
-    console.log(property)
     const timeUnits = [
         { unit: 'ปี', value: 31557600000 },
         { unit: 'เดือน', value: 2629800000 },
