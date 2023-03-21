@@ -28,7 +28,7 @@ export async function CommentPageFetch(amount, page) {
 
 export async function getStaticProps(context) {
     const BookCount = await fetcher("http://localhost:3000/api/getcount");
-    const UsersCount = await fetcher("http://localhost:3000/api/getcountuser")
+    const UsersCount = await fetcher("http://localhost:3000/api/user/getcountuser")
     const RecentComment = await CommentPageFetch(5, 1);
     const Commentcount = await fetcher("http://localhost:3000/api/getComments/getAllcommentCount")
     return {

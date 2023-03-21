@@ -2,9 +2,28 @@ import { requireAuthentication } from "@/utils/requireAuthentication";
 import Head from "next/head";
 import UserEdit from "@/components/UserEdit";
 import { fetcher } from "../api/fetcher";
-export default function UserEditPage({ data }) {
-    const userdata = data;
-    console.log(userdata);
+import { useEffect, useState } from "react";
+import { Pagination, TextField } from "@mui/material";
+
+export default function UserEditPage({ data, userCount }) {
+    console.log(userCount);
+    const [page, setPage] = useState(1);
+    const [amount, setAmount] = useState(5);
+    const [pageCount, setPageCount] = useState(Math.ceil(userCount / amount));
+    const [userdata, setUserdata] = useState(data);
+    // const userdata = data;
+    useEffect(() => {
+        setPageCount(Math.ceil(userCount / amount));
+    }, [amount]);
+    useEffect(() => {
+        fetchUser(amount, page)
+            .then((e) => e.json())
+            .then((e) => setUserdata(e));
+    }, [page, amount]);
+
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
 
     const mapped = Object.values(userdata).map((property, index) => {
         return <UserEdit property={property} key={index} />;
@@ -30,27 +49,62 @@ export default function UserEditPage({ data }) {
             </Head>
             <h1>test</h1>
             <div className="user-edit-wrap">
-                <div className="user-edit-container">{mapped}</div>
+                <div className="user-edit-container">
+                    <div className="page-controll">
+                        <TextField
+                            label="จำนวนต่อหน้า"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                        />
+                        <Pagination
+                            size="large"
+                            onChange={handleChange}
+                            page={page}
+                            count={pageCount}
+                        />
+                    </div>
+                    {mapped}
+                    <div className="page-controll">
+                        <TextField
+                            label="จำนวนต่อหน้า"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                        />
+                        <Pagination
+                            size="large"
+                            onChange={handleChange}
+                            page={page}
+                            count={pageCount}
+                        />
+                    </div>
+                </div>
             </div>
         </>
     );
 }
 
 export async function getServerSideProps(context) {
+    const response = await fetchUser(5, 1);
+    const data = await response.json();
+    const userCount = await fetcher(
+        "http://localhost:3000/api/user/getcountuser"
+    );
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { session, data, userCount },
+        };
+    });
+}
+const fetchUser = async (amount, page) => {
     const response = await fetch("http://localhost:3000/api/user/getUser", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-            amount: 5,
-            page: 1,
+            amount: amount,
+            page: page,
         }),
     });
-    const data = await response.json();
-    return requireAuthentication(context, ({ session }) => {
-        return {
-            props: { session, data },
-        };
-    });
-}
+    return response;
+};

@@ -6,10 +6,29 @@
     padding: 0.5em;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
 }
 .user-edit-flex-wrap {
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 1em;
+    align-items: center;
+}
+.user-edit-text{
+    display: flex;
+    flex-direction: column;
+}
+.reactive-user{
+    background-color: var(--main-color);
+}
+.reactive-user:hover{
+    background-color: rgb(81, 81, 81);
+}
+.active-text{
+    color:var(--main-color);
+}
+.deactive-text{
+    color: red;
 }
