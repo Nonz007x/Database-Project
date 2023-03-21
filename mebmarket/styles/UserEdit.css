@@ -1,0 +1,15 @@
+.user-edit-card-bg {
+    /* background-color: red; */
+    width: 100%;
+    border-radius: 0.5em;
+    border: 1px solid gray;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+.user-edit-flex-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1em;
+}

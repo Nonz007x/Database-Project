@@ -1,13 +1,15 @@
 import { requireAuthentication } from "@/utils/requireAuthentication";
 import Head from "next/head";
 import UserEdit from "@/components/UserEdit";
-
+import { fetcher } from "../api/fetcher";
 export default function UserEditPage({ data }) {
     const userdata = data;
     console.log(userdata);
+
     const mapped = Object.values(userdata).map((property, index) => {
         return <UserEdit property={property} key={index} />;
     });
+
     return (
         <>
             <Head>
@@ -27,17 +29,25 @@ export default function UserEditPage({ data }) {
                 />
             </Head>
             <h1>test</h1>
-            {mapped}
+            <div className="user-edit-wrap">
+                <div className="user-edit-container">{mapped}</div>
+            </div>
         </>
     );
 }
 
 export async function getServerSideProps(context) {
-    const data = [
-        { username: "adray", email: "adray@hentai.com" },
-        { username: "fuse", email: "fuse@gmail.com" },
-        { username: "poon", email: "poon@gay.com" },
-    ];
+    const response = await fetch("http://localhost:3000/api/user/getUser", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+            amount: 5,
+            page: 1,
+        }),
+    });
+    const data = await response.json();
     return requireAuthentication(context, ({ session }) => {
         return {
             props: { session, data },
