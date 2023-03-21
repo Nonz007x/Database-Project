@@ -1,0 +1,10 @@
+.user-edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 75%;
+}
+.user-edit-wrap {
+    display: flex;
+    justify-content: center;
+}

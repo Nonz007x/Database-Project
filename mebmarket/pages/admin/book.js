@@ -7,7 +7,6 @@ import Loading from "@/components/Loading";
 import { getSession } from "next-auth/react";
 import { TextField } from "@mui/material";
 import { Pagination } from "@mui/material";
-import { useCallback } from "react";
 
 export default function Adminpage() {
     const clientSession = getSession();
