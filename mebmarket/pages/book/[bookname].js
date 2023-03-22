@@ -208,7 +208,7 @@ export default function Page() {
                             </div>
                             <div className="try_buy_container">
                                 <Button variant="contained" size="large" className="try_button">ทดลองอ่าน</Button>
-                                {Paid ? <Button disabled variant="contained" size="large" className="buy_button" >ซื้อไปแล้ว</Button>
+                                {Paid ? <Button disabled variant="contained" size="large" className="buy_button" >ซื้อ {bookData.price} บาท</Button>
                                     : <Button variant="contained" size="large" className="buy_button" onClick={handleBuy}>ซื้อ {bookData.price} บาท</Button>
                                 }
                             </div>
