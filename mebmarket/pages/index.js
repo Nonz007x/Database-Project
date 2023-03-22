@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import React, { useMemo } from "react";
 import Loading from "@/components/Loading";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export async function getServerSideProps() {
     try {
@@ -32,9 +33,35 @@ export async function getServerSideProps() {
 };
 
 export default function Home({ recentItems, data, trendingItems }) {
+    const { data: clientSession } = useSession();
     const ItemSmallMemoized = React.memo(ItemSmall);
     const [OpenAll, setOpenAll] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    const addToCart = async (bookId, price) => {
+        try {
+            console.log(bookId, price);
+            const response = await fetch("/api/cart/addtocart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({
+                    username: clientSession?.user?.name,
+                    bookId: bookId,
+                    price: price,
+                }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("เพิ่มหนังสือในตะกร้าสำเร็จ");
+            } else {
+                alert(JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
     const handleClick = useCallback(() => {
         setOpenAll((prevState) => !prevState);
@@ -43,7 +70,7 @@ export default function Home({ recentItems, data, trendingItems }) {
     const mapping = useMemo(() =>
         data.map((property, index) => (
             <React.Fragment key={`${property.bookId}-${index}`}>
-                <ItemSmallMemoized property={property} />
+                <ItemSmallMemoized property={property} addToCart={addToCart} />
             </React.Fragment>
         )),
         [data, ItemSmallMemoized]
@@ -52,7 +79,7 @@ export default function Home({ recentItems, data, trendingItems }) {
     const RecentItemsMapped = useMemo(() =>
         recentItems.map((property, index) => (
             <React.Fragment key={`${property.bookId}-${index}`}>
-                <ItemSmallMemoized property={property} />
+                <ItemSmallMemoized property={property} addToCart={addToCart} />
             </React.Fragment>
         )),
         [recentItems, ItemSmallMemoized]
@@ -61,7 +88,7 @@ export default function Home({ recentItems, data, trendingItems }) {
     const TrendingItemsMapped = useMemo(() =>
         trendingItems.map((property, index) => (
             <React.Fragment key={`${property.bookId}-${index}`}>
-                <ItemSmallMemoized property={property} />
+                <ItemSmallMemoized property={property} addToCart={addToCart} />
             </React.Fragment>
         )),
         [trendingItems, ItemSmallMemoized]
@@ -70,7 +97,7 @@ export default function Home({ recentItems, data, trendingItems }) {
     useEffect(() => {
         setLoading(false);
     }, []);
-    
+
     if (loading) {
         return <Loading />
     }
@@ -102,9 +129,9 @@ export default function Home({ recentItems, data, trendingItems }) {
                         </Button>
                     </Link>
                 </div>
-                    <div className="content-small-container">
-                        {RecentItemsMapped}
-                    </div>
+                <div className="content-small-container">
+                    {RecentItemsMapped}
+                </div>
             </div>
             <div className="sub-content-container">
                 <div className="header-sub-content-container">
@@ -115,9 +142,9 @@ export default function Home({ recentItems, data, trendingItems }) {
                         </Button>
                     </Link>
                 </div>
-                    <div className="content-small-container">
-                        {TrendingItemsMapped}
-                    </div>
+                <div className="content-small-container">
+                    {TrendingItemsMapped}
+                </div>
             </div>
             <div className="AddWidthToShowAll">
                 <Button

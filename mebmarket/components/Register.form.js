@@ -119,16 +119,16 @@ export default function RegisterPage() {
   }, [usernameError, emailError, passwordError, firstNameError, acceptTnC]);
 
   useEffect(() => {
-    const containRestricted = /\W/.test(firstName);
+    const containRestricted = /[^A-Za-z]/.test(firstName)
     if (firstName && containRestricted) {
-      setFirstNameError("ห้ามใช้ตัวอักษรพิเศษ");
+      setFirstNameError("โปรดใส่อักษรภาษาอังกฤษ");
     } else {
       setFirstNameError("");
     }
-  }, [firstName]);
+  }, [firstName, lastName]);
 
   useEffect(() => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9]+([._-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-][a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/;
     const isValidEmail = emailRegex.test(email)
     if (!isValidEmail && email) {
       setEmailError("อีเมลไม่ถูกต้อง");
@@ -206,8 +206,8 @@ export default function RegisterPage() {
                   label="Lastname"
                   value={lastName}
                   onChange={(e) => { setLastName(e.target.value) }}
-                  error={Boolean(usernameError)}
-                  helperText={usernameError}
+                  error={Boolean(firstNameError)}
+                  helperText={firstNameError}
                 />
               </div>
               <div id="PasswordZone">

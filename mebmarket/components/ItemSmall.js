@@ -3,8 +3,10 @@ import CustomizedRating from "@/components/CustomRating";
 import Link from "next/link";
 
 export default function ItemSmall(props) {
-    const { property } = props;
-
+    const { property, addToCart } = props;
+    const handleClick = async () => {
+        await addToCart(property.bookId, property.price);
+    };
     return (
         <>
             <div className="book-list-container">
@@ -12,7 +14,7 @@ export default function ItemSmall(props) {
                     className="click-to-bookpage"
                     href={{
                         pathname: "/book/[bookname]",
-                        query: { bookname: property.bookname}
+                        query: { bookname: property.bookname }
                     }}
                 >
                     <div className="book-cover">
@@ -27,12 +29,12 @@ export default function ItemSmall(props) {
                     </div>
                 </Link>
                 <div className="author-publisher-container">
-                    <h6>{ property.author }</h6>
+                    <h6>{property.author}</h6>
                 </div>
                 <div className="item-small-buttom-section">
                     <div className="rating-category-container">
                         <div className="category-container">
-                            <h6>{ property.categoryName }</h6>
+                            <h6>{property.categoryName}</h6>
                         </div>
                         <div className="rating-container">
                             <CustomizedRating rate={property.rating} />
@@ -42,9 +44,9 @@ export default function ItemSmall(props) {
                         <Button
                             className="small-buy-button"
                             variant="contained"
-                            onClick={() => alert("add to cart button")}
+                            onClick={handleClick}
                         >
-                            <h3>฿ { property.price }</h3>
+                            <h3>฿ {property.price}</h3>
                         </Button>
                     </div>
                 </div>

@@ -5,6 +5,14 @@ import LibraryBook from "@/components/LibraryBook";
 
 export async function getServerSideProps(context) {
     const res = await getSession(context);
+    if (res === "" || res === null) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        }
+    }
     const username = res.user.name;
     const bookData = await fetch("http://localhost:3000/api/getPaidBook", {
         method: "POST",
@@ -20,8 +28,6 @@ export async function getServerSideProps(context) {
     };
 }
 export default function name({ username, bookData }) {
-    // console.log(username);
-    // console.log(bookData);
     const mapping = Object.values(bookData).map((data, index) => {
         return <LibraryBook property={data} key={index} />;
     });
