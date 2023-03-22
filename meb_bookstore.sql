@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2023 at 01:20 PM
+-- Generation Time: Mar 22, 2023 at 02:18 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -96,7 +96,6 @@ CREATE TABLE `cart_inventory` (
   `cartId` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `bookId` int(11) NOT NULL,
-  `price` float NOT NULL,
   `createDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -104,8 +103,8 @@ CREATE TABLE `cart_inventory` (
 -- Dumping data for table `cart_inventory`
 --
 
-INSERT INTO `cart_inventory` (`cartId`, `username`, `bookId`, `price`, `createDate`) VALUES
-(29, 'nitid', 38, 129, '2023-03-15 12:17:57');
+INSERT INTO `cart_inventory` (`cartId`, `username`, `bookId`, `createDate`) VALUES
+(29, 'nitid', 38, '2023-03-15 12:17:57');
 
 -- --------------------------------------------------------
 
@@ -188,7 +187,7 @@ INSERT INTO `creditcard` (`username`, `cardNumber`, `cardHolderName`, `expiry_mo
 CREATE TABLE `favorite` (
   `username` varchar(30) NOT NULL,
   `bookId` int(11) NOT NULL,
-  `favDate` datetime DEFAULT NULL
+  `favDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -196,8 +195,7 @@ CREATE TABLE `favorite` (
 --
 
 INSERT INTO `favorite` (`username`, `bookId`, `favDate`) VALUES
-('test1', 38, NULL),
-('test1', 42, NULL);
+('adray', 39, '2023-03-22 14:11:56');
 
 -- --------------------------------------------------------
 
@@ -219,7 +217,9 @@ CREATE TABLE `invoices` (
 INSERT INTO `invoices` (`orderId`, `username`, `dateOrdered`, `totalAmount`) VALUES
 (1, 'test1', '2023-03-22 14:37:18', 1119),
 (2, 'adray', '2023-03-22 17:51:05', 180),
-(3, 'adray', '2023-03-22 17:51:16', 180);
+(3, 'adray', '2023-03-22 17:51:16', 180),
+(4, 'adray', '2023-03-22 20:50:50', 250),
+(5, 'adray', '2023-03-22 21:14:30', 1059);
 
 -- --------------------------------------------------------
 
@@ -241,7 +241,10 @@ INSERT INTO `order_items_table` (`orderId`, `bookId`, `price`) VALUES
 (1, 38, 129),
 (1, 42, 990),
 (2, 34, 180),
-(3, 34, 180);
+(3, 34, 180),
+(4, 36, 250),
+(5, 27, 69),
+(5, 42, 990);
 
 -- --------------------------------------------------------
 
@@ -347,7 +350,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart_inventory`
 --
 ALTER TABLE `cart_inventory`
-  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -359,7 +362,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
