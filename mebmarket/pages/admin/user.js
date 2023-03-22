@@ -46,7 +46,6 @@ export default function UserEditPage({ data, userCount }) {
                     href="https://www.mebmarket.com/web/assets/images/ico/favicon-32x32.png"
                 />
             </Head>
-            <h1>test</h1>
             <div className="user-edit-wrap">
                 <div className="user-edit-container">
                     <div className="page-controll">
