@@ -1,10 +1,9 @@
-import { Button, Card, InputLabel } from "@mui/material";
-import { CardContent } from "@mui/material";
+import { Button, InputLabel } from "@mui/material";
 import { Avatar } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { MenuItem } from "@mui/material";
 import { FormControl } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
@@ -23,7 +22,7 @@ export default function UserEdit(props) {
                 username: property.username,
             }),
         });
-        setActive(!active);
+        setActive(0);
     };
     const reactiveAccount = async () => {
         const response = await fetch("/api/user/reactiveUser", {
@@ -35,7 +34,7 @@ export default function UserEdit(props) {
                 username: property.username,
             }),
         });
-        setActive(!active);
+        setActive(1);
     };
 
     const handleChange = async (event) => {
@@ -53,6 +52,15 @@ export default function UserEdit(props) {
         console.log(response);
         setRole(event.target.value);
     };
+
+    useEffect(() => {
+        setActive(property.valid)
+    },[property.valid])
+
+    useEffect(() => {
+        setRole(property.role)
+    },[property.role])
+
     return (
         <div>
             <div className="user-edit-card-bg">

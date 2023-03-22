@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { Pagination, TextField } from "@mui/material";
 
 export default function UserEditPage({ data, userCount }) {
-    console.log(userCount);
     const [page, setPage] = useState(1);
     const [amount, setAmount] = useState(5);
     const [pageCount, setPageCount] = useState(Math.ceil(userCount / amount));
