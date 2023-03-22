@@ -26,6 +26,7 @@
 }
 
 .search-page-result {
+    flex-wrap: wrap;
     padding-top: 30px;
     display: flex;
     align-items: center;

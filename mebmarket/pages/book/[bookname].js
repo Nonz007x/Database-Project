@@ -1,16 +1,17 @@
 import Head from 'next/head';
 import Link from "next/link";
-import { Alert, Avatar } from "@mui/material";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 import { Snackbar } from "@mui/material";
 import { TextField } from "@mui/material";
-import { useSession, getSession } from "next-auth/react";
+import addToCart from '@/shared/addtocart';
+import { Alert, Avatar } from "@mui/material";
 import LoginPage from "@/components/Login.form";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
 import { useEffect, useCallback, useState } from "react";
+import { useSession, getSession } from "next-auth/react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
 import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
@@ -153,30 +154,10 @@ export default function Page() {
         }
     }, [bookData]);
 
-    const addToCart = async () => {
-        try {
-            const response = await fetch("/api/cart/addtocart", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: new URLSearchParams({
-                    username: clientSession?.user?.name,
-                    bookId: bookData?.bookId,
-                    price: bookData?.price,
-                }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                alert("เพิ่มหนังสือในตะกร้าสำเร็จ");
-            } else {
-                alert(JSON.stringify(data));
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    };
-    // here
+    const handleBuy = async () => {
+        await addToCart(bookData.bookId, bookData.price)
+    }
+
     const getPaidBooks = async () => {
         const respones = await fetch("http://localhost:3000/api/Checkpaidbook", {
             method: "POST",
@@ -242,8 +223,8 @@ export default function Page() {
                             </div>
                             <div className="try_buy_container">
                                 <Button variant="contained" size="large" className="try_button">ทดลองอ่าน</Button>
-                                {Paid ? <Button disabled variant="contained" size="large" className="buy_button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
-                                    : <Button variant="contained" size="large" className="buy_button" onClick={addToCart}>ซื้อ {bookData.price} บาท</Button>
+                                {Paid ? <Button disabled variant="contained" size="large" className="buy_button" >ซื้อไปแล้ว</Button>
+                                    : <Button variant="contained" size="large" className="buy_button" onClick={handleBuy}>ซื้อ {bookData.price} บาท</Button>
                                 }
                             </div>
                             <div className="bookpage_rating_zone" >

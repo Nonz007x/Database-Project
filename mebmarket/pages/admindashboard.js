@@ -5,6 +5,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CommentIcon from '@mui/icons-material/Comment';
 import { fetcher } from './api/fetcher';
 import RecentCommentAllbook from '@/components/RecentCommentAllbook';
+import { requireAuthentication } from "@/utils/requireAuthentication";
 import PersonIcon from '@mui/icons-material/Person';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -26,16 +27,17 @@ export async function CommentPageFetch(amount, page) {
     return data
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const BookCount = await fetcher("http://localhost:3000/api/getcount");
     const UsersCount = await fetcher("http://localhost:3000/api/user/getcountuser")
     const RecentComment = await CommentPageFetch(5, 1);
     const Commentcount = await fetcher("http://localhost:3000/api/getComments/getAllcommentCount")
-    return {
-        props: { BookCount, UsersCount, RecentComment, Commentcount }, // will be passed to the page component as props
-    }
+    return requireAuthentication(context, ({ session }) => {
+        return {
+            props: { BookCount, UsersCount, RecentComment, Commentcount }, // will be passed to the page component as props
+        };
+    });
 }
-
 export default function admindashboard({ BookCount, UsersCount, RecentComment, Commentcount }) {
     const [recentComment, setRecentComment] = React.useState(RecentComment)
     const [contenPerPage, setContenPerPage] = React.useState(5)

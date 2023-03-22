@@ -7,6 +7,8 @@ import Select from '@mui/material/Select';
 import { fetcher } from "../../api/fetcher";
 import ItemSmall from "@/components/ItemSmall";
 import { TextField } from "@mui/material";
+import { useSession } from "next-auth/react";
+import addToCart from "@/shared/addtocart";
 
 export default function SearchPage() {
     const router = useRouter();
@@ -26,10 +28,10 @@ export default function SearchPage() {
             setResult(e)
         })
     }, [Searchword])
-    
+
     useEffect(() => {
         const temp = Result.map((property, index) => {
-            return <ItemSmall key={`${property.bookId}-${index}`} property={property} />
+            return <ItemSmall key={`${property.bookId}-${index}`} property={property} addToCart={addToCart} />
         })
         setResultElement(temp)
 
@@ -53,7 +55,7 @@ export default function SearchPage() {
                     </h2>
                 </div>
                 <div className="search-area">
-                    <FormControl sx={{ width: 250}}>
+                    <FormControl sx={{ width: 250 }}>
                         <Select
                             defaultValue="bookname"
                             value={SelectTab}
@@ -68,15 +70,15 @@ export default function SearchPage() {
                         e.preventDefault();
                         setSearchword(TempInput.current)
                     }}>
-                        <TextField type="text" placeholder="ค้นหา" onKeyDown={e => { 
-                            if(e.key === 'Enter') {
+                        <TextField type="text" placeholder="ค้นหา" onKeyDown={e => {
+                            if (e.key === 'Enter') {
                                 TempInput.current = e.target.value;
                             }
-                            }} />
+                        }} />
                     </form>
                 </div>
                 <div className="search-page-result">
-                    {ResultElement.length? ResultElement : <h3>ไม่มีผลการค้นหา</h3>}
+                    {ResultElement.length ? ResultElement : <h3>ไม่มีผลการค้นหา</h3>}
                 </div>
             </div>
         </>
