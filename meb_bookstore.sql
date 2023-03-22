@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2023 at 01:14 PM
+-- Generation Time: Mar 22, 2023 at 01:20 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -395,7 +395,8 @@ ALTER TABLE `creditcard`
 -- Constraints for table `favorite`
 --
 ALTER TABLE `favorite`
-  ADD CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`bookId`) REFERENCES `book` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`bookId`) REFERENCES `book` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `invoices`
