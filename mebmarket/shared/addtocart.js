@@ -11,7 +11,6 @@ export default async function addToCart (bookId, price) {
             body: new URLSearchParams({
                 username: session.user.name,
                 bookId: bookId,
-                price: price,
             }),
         });
         const data = await response.json();

@@ -14,8 +14,8 @@ export default async function handler(req, res) {
                 values: [username, bookId]
             },
             {
-                query: 'INSERT INTO `cart_inventory` (username, bookId, price, createDate) VALUES (?,?,?,?)',
-                values: [username, bookId, price, newDate],
+                query: 'INSERT INTO `cart_inventory` (username, bookId, createDate) VALUES (?,?,?)',
+                values: [username, bookId, newDate],
             }
         ]
 
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
             return res.status(409).json("เพิ่มหนังสือไปแล้ว");
         }
         const result = await excuteQuery({ query: queries[1].query, values: queries[1].values });
-
+        console.log(result)
         return res.status(200).json(result);
     } catch (error) {
         console.error(error);
