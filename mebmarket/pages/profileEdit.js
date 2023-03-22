@@ -49,7 +49,6 @@ export default function ProfileEditPage({ sessionData }) {
         e.preventDefault();
         AvatarUpdate();
         setAvatarPic(imgLink);
-        setImgLink("");
     };
 
     return (
