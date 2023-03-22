@@ -69,8 +69,10 @@ export default function Home({ recentItems, data, trendingItems }) {
     );
 
     useEffect(() => {
-        setLoading(false);
-    }, []);
+        if (mapping.length && RecentItemsMapped.length && TrendingItemsMapped.length) {
+            setLoading(false);
+        }
+    }, [mapping, RecentItemsMapped, TrendingItemsMapped]);
 
     if (loading) {
         return <Loading />

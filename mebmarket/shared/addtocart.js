@@ -3,7 +3,6 @@ import { getSession } from "next-auth/react";
 export default async function addToCart (bookId, price) {
     const session = await getSession();
     try {
-        console.log(bookId, price)
         const response = await fetch("/api/cart/addtocart", {
             method: "POST",
             headers: {

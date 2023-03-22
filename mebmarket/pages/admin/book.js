@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useEffect, useState, useMemo } from "react";
-import { fetcher } from "../api/fetcher";
 import Deletebook from "@/components/deletebook";
 import { requireAuthentication } from "@/utils/requireAuthentication";
 import Loading from "@/components/Loading";
@@ -9,7 +8,6 @@ import { TextField } from "@mui/material";
 import { Pagination } from "@mui/material";
 
 export default function Adminpage() {
-    const clientSession = getSession();
     const [loading, setLoading] = useState(true);
     const [Data, setData] = useState([]);
 

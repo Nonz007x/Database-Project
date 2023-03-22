@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { fetcher } from "../api/fetcher";
 import { requireAuthentication } from "@/utils/requireAuthentication";
 import CategoryAutocomplete from "@/components/CategoryAutocomplete";
+
 export default function EditBook() {
     const router = useRouter();
     const [Bookname, setBookname] = useState();

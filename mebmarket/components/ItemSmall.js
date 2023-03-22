@@ -1,12 +1,31 @@
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import CustomizedRating from "@/components/CustomRating";
 import Link from "next/link";
+import checkPaidBook from "@/shared/checkpaidbook";
+
+async function checkPaidStatus(bookId) {
+    const isPaid = await checkPaidBook(bookId);
+    return isPaid;
+}
 
 export default function ItemSmall(props) {
     const { property, addToCart } = props;
+    const [isPaid, setIsPaid] = useState(null);
+
+    async function fetchPaidStatus() {
+        const status = await checkPaidStatus(property.bookId);
+        setIsPaid(status);
+    }
+
+    useEffect(() => {
+        fetchPaidStatus();
+    }, []);
+
     const handleClick = async () => {
         await addToCart(property.bookId, property.price);
     };
+
     return (
         <>
             <div className="book-list-container">
@@ -14,15 +33,11 @@ export default function ItemSmall(props) {
                     className="click-to-bookpage"
                     href={{
                         pathname: "/book/[bookname]",
-                        query: { bookname: property.bookname }
+                        query: { bookname: property.bookname },
                     }}
                 >
                     <div className="book-cover">
-                        <img
-                            src={property.cover}
-                            title={property.bookname}
-                            loading="lazy"
-                        />
+                        <img src={property.cover} title={property.bookname} loading="lazy" />
                     </div>
                     <div className="bookname-container">
                         <h5>{property.bookname}</h5>
@@ -41,13 +56,15 @@ export default function ItemSmall(props) {
                         </div>
                     </div>
                     <div className="button-container">
-                        <Button
-                            className="small-buy-button"
-                            variant="contained"
-                            onClick={handleClick}
-                        >
-                            <h3>฿ {property.price}</h3>
-                        </Button>
+                        {isPaid ? (
+                            <Button className="small-buy-button" variant="contained" disabled>
+                                <h3>฿ {property.price}</h3>
+                            </Button>
+                        ) : (
+                            <Button className="small-buy-button" variant="contained" onClick={handleClick}>
+                                <h3>฿ {property.price}</h3>
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from "next/link";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
-import { fetcher } from "../api/fetcher";
 import { Snackbar } from "@mui/material";
 import { TextField } from "@mui/material";
 import addToCart from '@/shared/addtocart';
@@ -11,14 +10,13 @@ import LoginPage from "@/components/Login.form";
 import RecentComment from "@/components/RecentComment";
 import CustomizedRating from "@/components/CustomRating";
 import { useEffect, useCallback, useState } from "react";
-import { useSession, getSession } from "next-auth/react";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useSession} from "next-auth/react";
+import checkPaidBook from '@/shared/checkpaidbook';
 import RatingAbleCustomizedRating from "@/components/RatingAbleCustomizedRating";
 import ClickableFavoriteIcon from '@/components/ClickableFavoriteIcon';
 
 export default function Page() {
-    const { data: clientSession, status } = useSession()
-    // console.log(clientSession)
+    const { data: clientSession } = useSession()
     const [open, setOpen] = useState(false)
     const router = useRouter();
     const [bookData, setBookData] = useState(null);
@@ -159,24 +157,11 @@ export default function Page() {
     }
 
     const getPaidBooks = async () => {
-        const respones = await fetch("http://localhost:3000/api/Checkpaidbook", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-                username: clientSession.user.name,
-                bookId: bookData.bookId,
-            }),
-        })
-        const data = await respones.json();
-        if (data.length == 0) {
-            setPaid(false)
-        }
-        console.log(data);
+        const response = await checkPaidBook(bookData.bookId);
+        setPaid(response)
     }
-
     // endhere
+
     useEffect(() => {
         if (bookname) {
             fetchBookData();
