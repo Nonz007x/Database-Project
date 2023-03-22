@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ItemSmall from "@/components/ItemSmall";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
+import addToCart from "@/shared/addtocart";
 
 export default function FavoritePage() {
     const router = useRouter();
@@ -46,7 +47,7 @@ export default function FavoritePage() {
                 <h1 className="book_bookname_Bookname">รายการสิ่งที่อยากได้</h1>
                 <div className="CollapseWidth">
                     {Object.values(FavoriteBook).map((property, index) => {
-                        return <ItemSmall key={index} property={property} />;
+                        return <ItemSmall key={index} property={property} addToCart={addToCart}/>;
                     })}
                 </div>
             </>

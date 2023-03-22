@@ -4,10 +4,10 @@ export default async function handler(req ,res) {
     const { page } = req.query;
     const itemsPerPage = 10;
     const itemStart = itemsPerPage * ( page - 1);
-    const columns = ['bookname', 'author', 'cover', 'rating', 'price'];
+    const columns = ['bookname', 'author', 'cover', 'rating', 'price', 'category.categoryName'];
     try {
         const books = await excuteQuery({
-            query: `SELECT ?? FROM book ORDER BY date DESC LIMIT ${itemStart}, ${itemsPerPage}`,
+            query: `SELECT ?? FROM book LEFT JOIN category ON book.category = category.categoryId ORDER BY date DESC LIMIT ${itemStart}, ${itemsPerPage}`,
             values: [columns],
         })
         res.status(200).json(books);
