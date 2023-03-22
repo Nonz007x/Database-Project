@@ -17,7 +17,7 @@ export default function Footer() {
                                     <GitHubIcon />
                                 </div>
                                 <div className="name-link">
-                                    <p>นนz007x</p>
+                                    <p>ณฐนน</p>
                                 </div>
                             </Link>
                         </li>

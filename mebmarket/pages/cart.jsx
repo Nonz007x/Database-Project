@@ -96,7 +96,7 @@ export default function Cart({ CartData, username }) {
     const validateCreditCardNumber = (cardNumber) => {
         // cardNumber = cardNumber.replace(/[^\d]/g, '');
         const d = new Date();
-        const expiry = { year: d.getFullYear(), month: d.getMonth() };
+        const expiry = { year: d.getFullYear(), month: d.getMonth()+1 };
         if (cardNumber.length !== 16) {
             alert("กรุณากรอกเลขบัตรให้ครบ")
             return false;

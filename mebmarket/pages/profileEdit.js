@@ -48,7 +48,8 @@ export default function ProfileEditPage({ sessionData }) {
     const handlePicUpload = async (e) => {
         e.preventDefault();
         AvatarUpdate();
-        setAvatarPic(imgLink);
+        await setAvatarPic(imgLink);
+        alert("กรุณาเข้าสู่ระบบใหม่อีกครั้งเพื่อเห็นการเปลี่ยนแปลง")
     };
 
     return (

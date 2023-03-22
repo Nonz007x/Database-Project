@@ -61,7 +61,6 @@ export default function SearchPage() {
                         >
                             <MenuItem value={"bookname"}>ชื่อหนังสือ</MenuItem>
                             <MenuItem value={"author"}>นักเขียน</MenuItem>
-                            <MenuItem value={"publisher"}>สำนักพิมพ์</MenuItem>
                         </Select>
                     </FormControl>
                     <div className="Searchline" />
