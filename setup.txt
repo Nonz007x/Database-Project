@@ -1,0 +1,5 @@
+ขั้นตอนการ setup
+1.เปิด directory mebmarket ใน terminal
+2.พิมพ์ npm i
+3.รอ
+4.โหลดเสร็จแล้วพิมพ์ npm run dev
