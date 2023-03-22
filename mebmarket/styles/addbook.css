@@ -24,6 +24,10 @@
     height: 450px;
 }
 
+.book_bookname_Bookname {
+    text-align: center;
+}
+
 .cover_preview {
     height: 100%;
 	object-fit: cover;
@@ -57,7 +61,6 @@
 }
 
 .addbook_detail {
-    display: flex;
     align-items: center;
     width: 100%;
 }
