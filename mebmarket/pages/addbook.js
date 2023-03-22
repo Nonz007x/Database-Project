@@ -167,7 +167,7 @@ export default function addbook() {
                 </div>
                 <TextField
                     className="add_synopsis"
-                    label="เนื้อเรื่องย่อ"
+                    label="คำอธิบาย"
                     multiline
                     rows={7}
                     value={synopsis}
@@ -179,7 +179,7 @@ export default function addbook() {
                     <Button
                         onClick={handleFormSubmit}
                         variant="contained"
-                        className="Submit_Button"
+                        className="submit_button"
                     >
                         <LocalLibraryIcon />
                         เพิ่มหนังสือ

@@ -108,7 +108,7 @@ export default function EditBook() {
                         <div className="addbook_cover_container">
                             <p>ภาพหน้าปก</p>
                             <form
-                                className=""
+                                className="add_cover_form"
                                 onSubmit={(e) => {
                                     e.preventDefault();
                                     TempImg.current && 1
@@ -135,8 +135,6 @@ export default function EditBook() {
                                 </Button>
                             </form>
                         </div>
-                        <div className="addbook_detail">
-                            <p>นักเขียน</p>
                             <p>
                                 เดิม :{" "}
                                 <a
@@ -146,26 +144,24 @@ export default function EditBook() {
                                     {prevAuthor}
                                 </a>
                             </p>
-                            <div className="author_verify">
+                        <div className="addbook_detail">
                                 <AuthorAutocomplete
                                     onChange={(e) => setAuthor(e)}
-                                />
+                                    />
                                 {Author && 1 ? <CheckIcon /> : <div />}
-                            </div>
-                            <p>ประเภท</p>
+                        </div>
                             <p>
                                 เดิม :{" "}
                                 <a className="AnchorAuthor" href={"/"}>
                                     {prevCate}
                                 </a>
                             </p>
-                            <div className="author_verify">
+                            <div className="addbook_detail">
                                 <CategoryAutocomplete
                                     onChange={(e) => setCate(e)}
                                 />
                                 {Author && 1 ? <CheckIcon /> : <div />}
                             </div>
-                            <p>ราคา</p>
                             <TextField
                                 size="small"
                                 className="fix-width-field"
@@ -179,14 +175,13 @@ export default function EditBook() {
                                     setPrice(e.target.value);
                                 }}
                             />
-                        </div>
                     </div>
                 </div>
                 <TextField
                     className="add_synopsis"
-                    label="เนื้อเรื่องย่อ"
+                    label="คำอธิบาย"
                     multiline
-                    maxRows={3}
+                    rows={7}
                     value={Synopsis}
                     onChange={(e) => {
                         setSynopsis(e.target.value);
@@ -196,7 +191,7 @@ export default function EditBook() {
                     <Button
                         onClick={handleFormSubmit}
                         variant="contained"
-                        className="Submit_Button"
+                        className="submit_button"
                     >
                         <LocalLibraryIcon />
                         แก้ไข

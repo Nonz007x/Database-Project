@@ -1,9 +1,11 @@
 .addbook_container {
     width: 100%;
     min-height: 100vh;
+    /* border: 1px solid red; */
 }
 
 .addbook_name_container {
+    /* border: 1px solid red; */
     height: 10%;
     display: flex;
     justify-content: center;
@@ -71,6 +73,18 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.addbook_input_field p{
+    margin-left: 15px;
+}
+
+.submit_button {
+    background-color: var(--main-color);
+}
+
+.submit_button:hover {
+    background-color: rgb(61, 61, 61);
 }
 
 @media screen and (max-width: 640px) {
