@@ -4,6 +4,7 @@ import { fetcher } from "./api/fetcher";
 import Loading from "@/components/Loading";
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
+import addToCart from "@/shared/addtocart";
 import { Pagination } from "@mui/material";
 export default function recentaddedpage() {
     const ItemSmallMemoized = React.memo(ItemSmall);
@@ -39,7 +40,7 @@ export default function recentaddedpage() {
     const newProductMapped = useMemo(() => {
         return newProduct.map((property, index) => {
             return (
-                <ItemSmallMemoized key={`${property.bookId}-${index}`} property={property} />
+                <ItemSmallMemoized key={`${property.bookId}-${index}`} property={property} addToCart={addToCart}/>
             );
         });
     }, [newProduct]);

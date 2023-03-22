@@ -4,6 +4,7 @@ import { fetcher } from "./api/fetcher";
 import Loading from "@/components/Loading";
 import Head from "next/head";
 import ItemSmall from "@/components/ItemSmall";
+import addToCart from "@/shared/addtocart";
 import { Pagination } from "@mui/material";
 
 export async function getStaticProps() {
@@ -39,7 +40,7 @@ export default function recentaddedpage({ initialBooks, count }) {
     }, [Page]);
 
     const bookElements = books.map((book, index) => (
-        <ItemSmallMemoized key={`${book.bookId}-${index}`} property={book} />
+        <ItemSmallMemoized key={`${book.bookId}-${index}`} property={book} addToCart={addToCart}/>
     ));
 
     return (
