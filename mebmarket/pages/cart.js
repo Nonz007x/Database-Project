@@ -93,20 +93,31 @@ export default function Cart({ CartData, username }) {
         }
     }
 
-    const validateCreditCardNumber = (cardNumber) => {
-        // cardNumber = cardNumber.replace(/[^\d]/g, '');
-        const d = new Date();
-        const expiry = { year: d.getFullYear(), month: d.getMonth()+1 };
-        if (cardNumber.length !== 16) {
-            alert("กรุณากรอกเลขบัตรให้ครบ")
-            return false;
-        } else if (expiry_month < expiry.month || expiry_year < expiry.year) {
-            alert("บัตรหมดอายุ")
-            return false;
-        } else if (cvv.length !== 4) {
-            alert("กรุณากรอกเลขบัตรให้ครบ")
+    const validateCreditCardNumber = () => {
+        const cleanedCardNumber = cardnumber.replace(/[^\d]/g, '');
+    
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1;
+    
+        if (cleanedCardNumber.length !== 16) {
+            alert("กรุณากรอกเลขบัตรให้ครบ 16 หลัก");
             return false;
         }
+    
+        const parsedExpiryMonth = parseInt(expiry_month, 10);
+        const parsedExpiryYear = parseInt(expiry_year, 10);
+    
+        if (parsedExpiryYear < currentYear || (parsedExpiryYear === currentYear && parsedExpiryMonth < currentMonth)) {
+            alert("บัตรหมดอายุ");
+            return false;
+        }
+    
+        if (cvv.length !== 4) {
+            alert("กรุณากรอกเลขบัตรให้ครบ 4 หลัก");
+            return false;
+        }
+    
         return true;
     }
 
